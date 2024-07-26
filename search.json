@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "兜率宫",
     "section": "",
-    "text": "几何布朗运动(Brownian motion)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJun 24, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJun 21, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "随机漫步\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJun 24, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJun 21, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -30,21 +30,21 @@
   {
     "objectID": "posts/2024-07-25-random-walk.html",
     "href": "posts/2024-07-25-random-walk.html",
-    "title": "兜率宫",
+    "title": "随机漫步",
     "section": "",
-    "text": "title: “随机漫步” author: “王一刀” date: “2024-07-25” categories: [量化交易]"
+    "text": "author: 王一刀\ncategories: [量化交易]\ndate: 2024-07-25"
   },
   {
     "objectID": "posts/2024-07-25-random-walk.html#几何布朗运动brownian-motion",
     "href": "posts/2024-07-25-random-walk.html#几何布朗运动brownian-motion",
-    "title": "兜率宫",
+    "title": "随机漫步",
     "section": "几何布朗运动(Brownian motion)",
     "text": "几何布朗运动(Brownian motion)\n布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）\n即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。"
   },
   {
     "objectID": "posts/2024-07-25-random-walk.html#随机游走",
     "href": "posts/2024-07-25-random-walk.html#随机游走",
-    "title": "兜率宫",
+    "title": "随机漫步",
     "section": "随机游走",
     "text": "随机游走\n其概念接近于布朗运动，是布朗运动的理想数学状态。任何分子所带的守恒量都各自对应着一个扩散运输定律。\n随机游走过程\\(S_t\\)​遵循几何布朗运动，满足微分方程：\n\\(dS_t​=uS_t​d_t+σS_t​dW_t\\)\n\\(​dS_t​/S_t​=ud_t+σdW_t\\)\n​设定初试状态\\(S_0\\)，根据伊藤积分，可以解出：\n\\(S_t​=S_0​exp((u−σ^2/2)t+σW_t​)\\)\n在数学领域，函数exp(x)代表自然指数函数，即以实数e（e≈2.71828）为底的指数函数。其表达式为exp(x)=\\(e^x\\)\n所以上面的式子也可以写成：\n\\(S_t​=S_0​e^{(u−σ^2/2)t+σW_t​}\\)\n其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。\n漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势\n波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n#rect=[0.1,5.0,0.1,0.1]\nfig=plt.figure()\n\n #time span\nT=2\n#drift factor飘移率\nmu=0.1 \n#volatility波动率\nsigma=0.04 \n#t=0初试价\nS0=20 \n#length of steps\ndt=0.01 \nN=round(T/dt)\nt=np.linspace(0,T,N)\n\n#布朗运动\nW=np.random.standard_normal(size=N)\nW=np.cumsum(W)*np.sqrt(dt)\n\nX=(mu-0.5*sigma**2)*t+sigma*W\n\nS=S0*np.exp(X)\n\nplt.plot(t,S,lw=2)\nplt.show()"
   }

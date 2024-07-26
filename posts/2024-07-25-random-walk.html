@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>random-walk – 兜率宫</title>
+<title>随机漫步 – 兜率宫</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -173,7 +173,23 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">随机漫步</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -183,7 +199,12 @@ window.Quarto = {
 
 
 
-<p>title: “随机漫步” author: “王一刀” date: “2024-07-25” categories: [量化交易]</p>
+
+<ul>
+<li>author: 王一刀</li>
+<li>categories: [量化交易]</li>
+<li>date: 2024-07-25</li>
+</ul>
 <section id="几何布朗运动brownian-motion" class="level2">
 <h2 class="anchored" data-anchor-id="几何布朗运动brownian-motion">几何布朗运动(Brownian motion)</h2>
 <p>布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）</p>
@@ -203,7 +224,7 @@ window.Quarto = {
 <p>其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。</p>
 <p>漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势</p>
 <p>波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。</p>
-<div id="cell-2" class="cell" data-execution_count="4">
+<div id="cell-3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
