@@ -2,9 +2,6 @@
 title: CH5-交易执行系统
 description: Executions Systems
 author: 王一刀
-layout: post
-toc: true
-comments: true
 categories: [量化交易]
 ---
 

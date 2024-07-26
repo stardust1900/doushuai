@@ -2,7 +2,6 @@
 title: CH2-捕获点子
 description: fishing of ideas
 author: 王一刀
-layout: post
 categories: [量化交易]
 ---
 

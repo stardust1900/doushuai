@@ -2,7 +2,6 @@
 title: CH1-量化交易简介
 description: 量化交易是什么，谁参与量化交易，为什么要量化交易
 author: 王一刀
-layout: post
 categories: [量化交易]
 ---
 
