@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "兜率宫",
     "section": "",
-    "text": "随机漫步\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJun 24, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJun 21, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "随机漫步\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 25, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJun 24, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJun 21, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -32,14 +32,14 @@
     "href": "posts/2024-07-25-random-walk.html",
     "title": "随机漫步",
     "section": "",
-    "text": "author: 王一刀\ncategories: [量化交易]\ndate: 2024-07-25"
+    "text": "布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）\n即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。"
   },
   {
     "objectID": "posts/2024-07-25-random-walk.html#几何布朗运动brownian-motion",
     "href": "posts/2024-07-25-random-walk.html#几何布朗运动brownian-motion",
     "title": "随机漫步",
-    "section": "几何布朗运动(Brownian motion)",
-    "text": "几何布朗运动(Brownian motion)\n布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）\n即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。"
+    "section": "",
+    "text": "布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）\n即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。"
   },
   {
     "objectID": "posts/2024-07-25-random-walk.html#随机游走",
