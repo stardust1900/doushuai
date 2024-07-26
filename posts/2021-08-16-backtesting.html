@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="王一刀">
-<meta name="dcterms.date" content="2024-07-25">
+<meta name="description" content="Backtesting">
 
-<title>随机漫步 – 王君敕的炼丹房</title>
+<title>CH3-回测 – 王君敕的炼丹房</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -183,8 +183,13 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">随机漫步</h1>
-                                <div class="quarto-categories">
+      <h1 class="title">CH3-回测</h1>
+                  <div>
+        <div class="description">
+          Backtesting
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">量化交易</div>
               </div>
                   </div>
@@ -200,12 +205,6 @@ window.Quarto = {
             </div>
     </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">July 25, 2024</p>
-      </div>
-    </div>
     
       
     </div>
@@ -222,61 +221,90 @@ window.Quarto = {
 
 
 
-<section id="几何布朗运动brownian-motion" class="level2">
-<h2 class="anchored" data-anchor-id="几何布朗运动brownian-motion">几何布朗运动(Brownian motion)</h2>
-<p>布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）</p>
-<p>即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。</p>
+<blockquote class="blockquote">
+<p>A key difference between a traditional investment management process and a quantitative investment process is the possibility of backtesting a quantitative investment strategy to see how it would have performed in the past</p>
+</blockquote>
+<p>量化投资流程和传统投资管理流程最重要的区别是：量化投资策略可以进行回测以观察它在过去的表现。</p>
+<section id="常用的回测工具" class="level2">
+<h2 class="anchored" data-anchor-id="常用的回测工具">常用的回测工具</h2>
+<ul>
+<li>Excel &gt; The major disadvantage of Excel is that it can be used to backtest only fairly simple models.But, as I explained in the previous chapter, simple models are often the best!</li>
+</ul>
+<p>Excel的主要缺点是只能用于简单模型的回测。但是，简单模型往往是最好的。</p>
+<ul>
+<li>MATLAB</li>
+</ul>
+<p>MATLAB优点很多，功能强大，但是价格昂贵。有一些替代品:</p>
+<p><a href="http://www.omatrix.com">O-Matrix</a></p>
+<p><a href="http://www.gnu.org/software/octave">Octave</a></p>
+<p><a href="http://www.scilab.org">Scilab</a></p>
+<ul>
+<li><p>TradeStation</p></li>
+<li><p>High-End Backtesting Platforms</p></li>
+</ul>
 </section>
-<section id="随机游走" class="level2">
-<h2 class="anchored" data-anchor-id="随机游走">随机游走</h2>
-<p>其概念接近于布朗运动，是布朗运动的理想数学状态。任何分子所带的守恒量都各自对应着一个扩散运输定律。</p>
-<p>随机游走过程<span class="math inline">\(S_t\)</span>​遵循几何布朗运动，满足微分方程：<br>
-<span class="math inline">\(dS_t​=uS_t​d_t+σS_t​dW_t\)</span><br>
-<span class="math inline">\(​dS_t​/S_t​=ud_t+σdW_t\)</span></p>
-<p>​设定初试状态<span class="math inline">\(S_0\)</span>，根据伊藤积分，可以解出：</p>
-<p><span class="math inline">\(S_t​=S_0​exp((u−σ^2/2)t+σW_t​)\)</span></p>
-<p>在数学领域，函数exp(x)代表自然指数函数，即以实数e（e≈2.71828）为底的指数函数。其表达式为exp(x)=<span class="math inline">\(e^x\)</span></p>
-<p>所以上面的式子也可以写成：</p>
-<p><span class="math inline">\(S_t​=S_0​e^{(u−σ^2/2)t+σW_t​}\)</span></p>
-<p>其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。</p>
-<p>漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势</p>
-<p>波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。</p>
-<div id="cell-2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<section id="寻找并使用历史数据库" class="level2">
+<h2 class="anchored" data-anchor-id="寻找并使用历史数据库">寻找并使用历史数据库</h2>
+<blockquote class="blockquote">
+<p>While finding sources of data on the Internet is even easier than finding prospective strategies, there are a number of issues and pitfalls with many of these databases that I will discuss later in this section. These issues apply mostly to stock and exchange-traded fund (ETF) data only. Here are the most important ones.</p>
+</blockquote>
+<p>虽然在互联网上寻找数据源比寻找有效的策略容易，但这些数据中存在问题和陷阱。下面是最主要的问题，这些问题仅适用股票和交易基金数据。</p>
+<ul>
+<li>数据是否已经过分拆和股息调整？</li>
+<li>是否剔除了幸存偏差数据？</li>
+<li>你的策略用最高最低价吗？</li>
+</ul>
+<blockquote class="blockquote">
+<p>使用最高最低价的回测没有使用开盘收盘价的回测可靠。</p>
+</blockquote>
+<ul>
+<li>业绩度量</li>
+</ul>
+<p><strong>夏普比率</strong></p>
+<p><img src="images/2021/08/sharp.jpg" class="img-fluid"></p>
+<p>年化夏普比率的计算：一般而言，假设每个交易时段的长度为T，T可以是1个月、1天、1小时等，若要计算平均收益率、标准差以及相应的年化指标，就必须先算出一年的交易时段数<span class="math inline">\(N_T\)</span></p>
+<p><span class="math inline">\(年化夏普比率= \sqrt {N_T} * 基于T的夏普比率\)</span></p>
+<p>年化标准差和日标准差的关系推理：</p>
+<p><img src="images/2021/08/variance.jpg" class="img-fluid"></p>
+<p>其中cov是指协方差。</p>
+<p><strong>最大挫跌和最长挫跌期</strong></p>
+<p><img src="images/2021/08/drawdown.jpg" class="img-fluid"></p>
+<p>这个指标算起来挺麻烦，从图中看的话，倒是挺直观。</p>
+</section>
+<section id="避免常见的回测陷阱" class="level2">
+<h2 class="anchored" data-anchor-id="避免常见的回测陷阱">避免常见的回测陷阱</h2>
+<ul>
+<li>前视偏差</li>
+</ul>
+<p>例如，“在日最低价的1%之内买入股票”的交易规则，就有前视偏差，因为在当日市场收盘前，是不可能知道日最低价的。</p>
+<ul>
+<li>数据迁就偏差</li>
+</ul>
+<p>因迁就历史数据的噪声而过度优化模型参数，造成策略的回测业绩高于未来业绩，即为数据迁就偏差。</p>
+</section>
+<section id="交易成本" class="level2">
+<h2 class="anchored" data-anchor-id="交易成本">交易成本</h2>
+<p>没有考虑交易成本的回测业绩是不真实的。</p>
+</section>
+<section id="策略改进" class="level2">
+<h2 class="anchored" data-anchor-id="策略改进">策略改进</h2>
+<p>对基本策略进行微小调整，来提升收益。策略的改进，最好基于经济学基本原理，或者透彻研究过的市场现象，而不是依据一些主观的试错法则。否则，就有可能产生数据迁就偏差。</p>
+<div id="cell-2" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#rect=[0.1,5.0,0.1,0.1]</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>plt.figure()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="co">#time span</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>T<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#drift factor飘移率</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mu<span class="op">=</span><span class="fl">0.1</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#volatility波动率</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>sigma<span class="op">=</span><span class="fl">0.04</span> </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#t=0初试价</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>S0<span class="op">=</span><span class="dv">20</span> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#length of steps</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>dt<span class="op">=</span><span class="fl">0.01</span> </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>N<span class="op">=</span><span class="bu">round</span>(T<span class="op">/</span>dt)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>t<span class="op">=</span>np.linspace(<span class="dv">0</span>,T,N)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#布朗运动</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>W<span class="op">=</span>np.random.standard_normal(size<span class="op">=</span>N)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>W<span class="op">=</span>np.cumsum(W)<span class="op">*</span>np.sqrt(dt)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>(mu<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t<span class="op">+</span>sigma<span class="op">*</span>W</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>S<span class="op">=</span>S0<span class="op">*</span>np.exp(X)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.plot(t,S,lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2024-07-25-random-walk_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>xlsx <span class="op">=</span> pd.ExcelFile(<span class="st">"datas/example3_4.xls"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_excel(xlsx,<span class="st">"table"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算每日收益率：</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'daily_ret'</span>] <span class="op">=</span> df[<span class="st">'Adj Close'</span>].pct_change()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#假设年化收益率为4%，每年252个交易日 计算每日超额收益</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'excess_daily_ret'</span>] <span class="op">=</span> df[<span class="st">'daily_ret'</span>] <span class="op">-</span> <span class="fl">0.04</span><span class="op">/</span><span class="dv">252</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sharp_ratio <span class="op">=</span> np.sqrt(<span class="dv">252</span>) <span class="op">*</span> df[<span class="st">'excess_daily_ret'</span>].mean() <span class="op">/</span> df[<span class="st">'excess_daily_ret'</span>].std()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sharp_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.7889300350874483</code></pre>
 </div>
 </div>
 

@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tristan O’Malley">
-<meta name="dcterms.date" content="2022-06-21">
+<meta name="author" content="王一刀">
+<meta name="description" content="Executions Systems">
 
-<title>Welcome To My Blog – 兜率宫</title>
+<title>CH5-交易执行系统 – 王君敕的炼丹房</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,22 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -80,8 +80,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">兜率宫</span>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">王君敕的炼丹房</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -90,9 +90,14 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://wangxuan.me"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">关于</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/stardust1900"> <i class="bi bi-github" role="img">
@@ -100,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/halfg0d"> <i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://weibo.com/halfg0d"> <i class="bi bi-sina-weibo" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -115,9 +120,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Welcome To My Blog</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">news</div>
+      <h1 class="title">CH5-交易执行系统</h1>
+                  <div>
+        <div class="description">
+          Executions Systems
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">量化交易</div>
               </div>
                   </div>
   </div>
@@ -128,16 +138,10 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Tristan O’Malley </p>
+               <p>王一刀 </p>
             </div>
     </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">June 21, 2022</p>
-      </div>
-    </div>
     
       
     </div>
@@ -154,11 +158,48 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is the first post in a Quarto blog. Welcome!</p>
-<p><img src="thumbnail.jpg" class="img-fluid"></p>
-<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+<section id="自动交易系统能为你做什么" class="level2">
+<h2 class="anchored" data-anchor-id="自动交易系统能为你做什么">自动交易系统能为你做什么</h2>
+<blockquote class="blockquote">
+<p>An automated trading system will retrieve up-to-date market data from your brokerage or other data vendors, run a trading algorithm to generate orders, and submit those orders to your brokerage for execution.</p>
+</blockquote>
+<p>自动交易系统从经纪商或其他供应商获取市场数据，运行交易算法形成指令，提交指令给经纪商执行。</p>
+<p>全自动交易系统代价高昂，对于低频量化交易策略，半自动交易系统即可。</p>
+<ul>
+<li>半自动交易系统</li>
+<li>全自动交易系统</li>
+</ul>
+</section>
+<section id="雇佣编程顾问" class="level2">
+<h2 class="anchored" data-anchor-id="雇佣编程顾问">雇佣编程顾问</h2>
+<p>这里有个策略保密的问题，其他的讨论不值一提，但是有个方法挺好的，就是把策略拆分雇佣不同的程序员，没人实现一部分，最后再合并。</p>
+</section>
+<section id="最小化交易成本" class="level2">
+<h2 class="anchored" data-anchor-id="最小化交易成本">最小化交易成本</h2>
+<ul>
+<li><p>可以通过避免交易低价股票来降低佣金</p></li>
+<li><p>根据股票的流动性来限制指令规模以减小市场冲击成本。警惕成交量小的股票，购买量不要超过其每日成交量的1%。</p></li>
+<li><p>根据股票市值来调整下单量也是减少市场冲击的方法</p>
+<p>但是不要按线性比率来调整下单量，因为公司市值差别巨大，按照固定比例会让下公司的下单量为0</p></li>
+<li><p>如果是超大单，分批次下单，以减少市场冲击。独立交易者通常不需要。</p></li>
+</ul>
+</section>
+<section id="用仿真交易测试交易系统" class="level2">
+<h2 class="anchored" data-anchor-id="用仿真交易测试交易系统">用仿真交易测试交易系统</h2>
+</section>
+<section id="为什么实际业绩偏离预期" class="level2">
+<h2 class="anchored" data-anchor-id="为什么实际业绩偏离预期">为什么实际业绩偏离预期</h2>
+<ul>
+<li>自动交易软件是否有bug</li>
+<li>自动交易系统产生的交易和回测程序产生的交易是否一致</li>
+<li>交易成本是否比预期的高很多</li>
+<li>是否交易了流动性差的股票产生了市场冲击</li>
+<li>数据迁就偏差</li>
+<li>状态变更影响，市场结构和宏观经济环境发生巨变</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

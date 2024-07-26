@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="王一刀">
-<meta name="dcterms.date" content="2024-07-25">
+<meta name="description" content="backtrader">
 
-<title>随机漫步 – 王君敕的炼丹房</title>
+<title>backtrader回测系统 – 王君敕的炼丹房</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,35 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -183,8 +154,13 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">随机漫步</h1>
-                                <div class="quarto-categories">
+      <h1 class="title">backtrader回测系统</h1>
+                  <div>
+        <div class="description">
+          backtrader
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">量化交易</div>
               </div>
                   </div>
@@ -200,12 +176,6 @@ window.Quarto = {
             </div>
     </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">July 25, 2024</p>
-      </div>
-    </div>
     
       
     </div>
@@ -222,66 +192,110 @@ window.Quarto = {
 
 
 
-<section id="几何布朗运动brownian-motion" class="level2">
-<h2 class="anchored" data-anchor-id="几何布朗运动brownian-motion">几何布朗运动(Brownian motion)</h2>
-<p>布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）</p>
-<p>即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。</p>
-</section>
-<section id="随机游走" class="level2">
-<h2 class="anchored" data-anchor-id="随机游走">随机游走</h2>
-<p>其概念接近于布朗运动，是布朗运动的理想数学状态。任何分子所带的守恒量都各自对应着一个扩散运输定律。</p>
-<p>随机游走过程<span class="math inline">\(S_t\)</span>​遵循几何布朗运动，满足微分方程：<br>
-<span class="math inline">\(dS_t​=uS_t​d_t+σS_t​dW_t\)</span><br>
-<span class="math inline">\(​dS_t​/S_t​=ud_t+σdW_t\)</span></p>
-<p>​设定初试状态<span class="math inline">\(S_0\)</span>，根据伊藤积分，可以解出：</p>
-<p><span class="math inline">\(S_t​=S_0​exp((u−σ^2/2)t+σW_t​)\)</span></p>
-<p>在数学领域，函数exp(x)代表自然指数函数，即以实数e（e≈2.71828）为底的指数函数。其表达式为exp(x)=<span class="math inline">\(e^x\)</span></p>
-<p>所以上面的式子也可以写成：</p>
-<p><span class="math inline">\(S_t​=S_0​e^{(u−σ^2/2)t+σW_t​}\)</span></p>
-<p>其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。</p>
-<p>漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势</p>
-<p>波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。</p>
-<div id="cell-2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div id="cell-1" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> backtrader <span class="im">as</span> bt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#rect=[0.1,5.0,0.1,0.1]</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>plt.figure()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="co">#time span</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>T<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#drift factor飘移率</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mu<span class="op">=</span><span class="fl">0.1</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#volatility波动率</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>sigma<span class="op">=</span><span class="fl">0.04</span> </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#t=0初试价</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>S0<span class="op">=</span><span class="dv">20</span> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#length of steps</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>dt<span class="op">=</span><span class="fl">0.01</span> </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>N<span class="op">=</span><span class="bu">round</span>(T<span class="op">/</span>dt)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>t<span class="op">=</span>np.linspace(<span class="dv">0</span>,T,N)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#布朗运动</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>W<span class="op">=</span>np.random.standard_normal(size<span class="op">=</span>N)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>W<span class="op">=</span>np.cumsum(W)<span class="op">*</span>np.sqrt(dt)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>(mu<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t<span class="op">+</span>sigma<span class="op">*</span>W</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>S<span class="op">=</span>S0<span class="op">*</span>np.exp(X)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.plot(t,S,lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2024-07-25-random-walk_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestStrategy(bt.Strategy):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> (</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'maperiod'</span>, <span class="dv">15</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> log(<span class="va">self</span>, txt, dt<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        dt <span class="op">=</span> dt <span class="kw">or</span> <span class="va">self</span>.datas[<span class="dv">0</span>].datetime.date(<span class="dv">0</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'</span><span class="sc">%s</span><span class="st">, </span><span class="sc">%s</span><span class="st">'</span> <span class="op">%</span> (dt.isoformat(), txt))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.dataclose <span class="op">=</span> <span class="va">self</span>.datas[<span class="dv">0</span>].close</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'buflen </span><span class="sc">%d</span><span class="st">'</span> <span class="op">%</span> <span class="va">self</span>.dataclose.buflen())</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.order <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.buyprice <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.buycomm <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a MovingAverageSimple indicator</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sma <span class="op">=</span> bt.indicators.SimpleMovingAverage(</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.datas[<span class="dv">0</span>], period<span class="op">=</span><span class="va">self</span>.params.maperiod)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Indicators for the plotting show</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        bt.indicators.ExponentialMovingAverage(<span class="va">self</span>.datas[<span class="dv">0</span>], period<span class="op">=</span><span class="dv">25</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        bt.indicators.WeightedMovingAverage(<span class="va">self</span>.datas[<span class="dv">0</span>], period<span class="op">=</span><span class="dv">25</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                                            subplot<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        bt.indicators.StochasticSlow(<span class="va">self</span>.datas[<span class="dv">0</span>])</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        bt.indicators.MACDHisto(<span class="va">self</span>.datas[<span class="dv">0</span>])</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        rsi <span class="op">=</span> bt.indicators.RSI(<span class="va">self</span>.datas[<span class="dv">0</span>])</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        bt.indicators.SmoothedMovingAverage(rsi, period<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        bt.indicators.ATR(<span class="va">self</span>.datas[<span class="dv">0</span>], plot<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> notify_order(<span class="va">self</span>, order):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> order.status <span class="kw">in</span> [order.Submitted, order.Accepted]:</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> order.status <span class="kw">in</span> [order.Completed]:</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> order.isbuy():</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.log(<span class="st">'BUY EXECUTED, Price: </span><span class="sc">%.2f</span><span class="st">, Cost: </span><span class="sc">%.2f</span><span class="st">, Comm </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                        (order.executed.price,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                        order.executed.value,</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                        order.executed.comm))</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.buyprice <span class="op">=</span> order.executed.price</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.buycomm <span class="op">=</span> order.executed.comm</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> order.issell():</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.log(<span class="st">'SELL EXECUTED, Price: </span><span class="sc">%.2f</span><span class="st">, Cost: </span><span class="sc">%.2f</span><span class="st">, Comm </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                         (order.executed.price,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>                          order.executed.value,</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                          order.executed.comm))</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.bar_executed <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> order.status <span class="kw">in</span> [order.Canceled, order.Margin, order.Rejected]:</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.log(<span class="st">'Order Canceled/Margin/Rejected'</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.order <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> notify_trade(<span class="va">self</span>, trade):</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> trade.isclosed:</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">'OPERATION PROFIT, GROSS </span><span class="sc">%.2f</span><span class="st">, NET </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>                 (trade.pnl, trade.pnlcomm))</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">next</span>(<span class="va">self</span>):</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">'Close, </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span> <span class="va">self</span>.dataclose[<span class="dv">0</span>])</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.order:</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.position:</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.dataclose[<span class="dv">0</span>] <span class="op">&gt;</span> <span class="va">self</span>.sma[<span class="dv">0</span>]:</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.log(<span class="st">'BUY CREATE, </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span> <span class="va">self</span>.dataclose[<span class="dv">0</span>])</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.buy()</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.dataclose[<span class="dv">0</span>] <span class="op">&lt;</span> <span class="va">self</span>.sma[<span class="dv">0</span>]:</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.log(<span class="st">'SELL CREATE, </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span> <span class="va">self</span>.dataclose[<span class="dv">0</span>])</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.order <span class="op">=</span> <span class="va">self</span>.sell()</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>cerebro <span class="op">=</span> bt.Cerebro()</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>cerebro.addstrategy(TestStrategy)</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> bt.feeds.YahooFinanceCSVData(</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>        dataname<span class="op">=</span><span class="st">"datas/orcl-1995-2014.txt"</span>,</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Do not pass values before this date</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>        fromdate<span class="op">=</span>datetime.datetime(<span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Do not pass values after this date</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>        todate<span class="op">=</span>datetime.datetime(<span class="dv">2000</span>, <span class="dv">12</span>, <span class="dv">31</span>),</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>        reverse<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="co"># print(data)</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>cerebro.adddata(data)</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>cerebro.broker.setcash(<span class="fl">100000.0</span>)</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>cerebro.addsizer(bt.sizers.FixedSize, stake<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>cerebro.broker.setcommission(commission<span class="op">=</span><span class="fl">0.001</span>)</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'组合初始值: </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span> cerebro.broker.getvalue())</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>cerebro.run()</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'组合终结值: </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span> cerebro.broker.getvalue())</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="co"># cerebro.plot()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

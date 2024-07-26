@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="王一刀">
-<meta name="dcterms.date" content="2024-07-25">
+<meta name="description" content="量化交易是什么，谁参与量化交易，为什么要量化交易">
 
-<title>随机漫步 – 王君敕的炼丹房</title>
+<title>CH1-量化交易简介 – 王君敕的炼丹房</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,35 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -183,8 +120,13 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">随机漫步</h1>
-                                <div class="quarto-categories">
+      <h1 class="title">CH1-量化交易简介</h1>
+                  <div>
+        <div class="description">
+          量化交易是什么，谁参与量化交易，为什么要量化交易
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">量化交易</div>
               </div>
                   </div>
@@ -200,12 +142,6 @@ window.Quarto = {
             </div>
     </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">July 25, 2024</p>
-      </div>
-    </div>
     
       
     </div>
@@ -222,63 +158,58 @@ window.Quarto = {
 
 
 
-<section id="几何布朗运动brownian-motion" class="level2">
-<h2 class="anchored" data-anchor-id="几何布朗运动brownian-motion">几何布朗运动(Brownian motion)</h2>
-<p>布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）</p>
-<p>即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。</p>
+<section id="什么是量化交易" class="level2">
+<h2 class="anchored" data-anchor-id="什么是量化交易">什么是量化交易</h2>
+<blockquote class="blockquote">
+<p>Quantitative trading, also known as algorithmic trading, is the trading of securities based strictly on the buy/sell decisions of computer algorithms. The computer algorithms are designed and perhaps programmed by the traders themselves, based on the historical performance of the encoded strategy tested against historical financial data.</p>
+</blockquote>
+<p>定量交易，也被称为算法交易，是一种严格基于计算机算法买卖决策的证券交易。计算机算法是由交易员自己设计甚至编写的，并根据历史财务数据测试编码策略，以确定期历史业绩。</p>
+<blockquote class="blockquote">
+<p>As long as you can convert information into bits and bytes that the computer can understand, it can be regarded as part of quantitative trading.</p>
+</blockquote>
+<p>只要您能将信息转换为计算机能够理解的比特和字节，它就可以被视为定量交易的一部分。</p>
 </section>
-<section id="随机游走" class="level2">
-<h2 class="anchored" data-anchor-id="随机游走">随机游走</h2>
-<p>其概念接近于布朗运动，是布朗运动的理想数学状态。任何分子所带的守恒量都各自对应着一个扩散运输定律。</p>
-<p>随机游走过程<span class="math inline">\(S_t\)</span>​遵循几何布朗运动，满足微分方程：<br>
-<span class="math inline">\(dS_t​=uS_t​d_t+σS_t​dW_t\)</span><br>
-<span class="math inline">\(​dS_t​/S_t​=ud_t+σdW_t\)</span></p>
-<p>​设定初试状态<span class="math inline">\(S_0\)</span>，根据伊藤积分，可以解出：</p>
-<p><span class="math inline">\(S_t​=S_0​exp((u−σ^2/2)t+σW_t​)\)</span></p>
-<p>在数学领域，函数exp(x)代表自然指数函数，即以实数e（e≈2.71828）为底的指数函数。其表达式为exp(x)=<span class="math inline">\(e^x\)</span></p>
-<p>所以上面的式子也可以写成：</p>
-<p><span class="math inline">\(S_t​=S_0​e^{(u−σ^2/2)t+σW_t​}\)</span></p>
-<p>其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。</p>
-<p>漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势</p>
-<p>波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。</p>
-<div id="cell-2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#rect=[0.1,5.0,0.1,0.1]</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>plt.figure()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="co">#time span</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>T<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#drift factor飘移率</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mu<span class="op">=</span><span class="fl">0.1</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#volatility波动率</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>sigma<span class="op">=</span><span class="fl">0.04</span> </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#t=0初试价</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>S0<span class="op">=</span><span class="dv">20</span> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#length of steps</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>dt<span class="op">=</span><span class="fl">0.01</span> </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>N<span class="op">=</span><span class="bu">round</span>(T<span class="op">/</span>dt)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>t<span class="op">=</span>np.linspace(<span class="dv">0</span>,T,N)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#布朗运动</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>W<span class="op">=</span>np.random.standard_normal(size<span class="op">=</span>N)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>W<span class="op">=</span>np.cumsum(W)<span class="op">*</span>np.sqrt(dt)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>(mu<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t<span class="op">+</span>sigma<span class="op">*</span>W</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>S<span class="op">=</span>S0<span class="op">*</span>np.exp(X)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.plot(t,S,lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2024-07-25-random-walk_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="谁可以成为量化交易员" class="level2">
+<h2 class="anchored" data-anchor-id="谁可以成为量化交易员">谁可以成为量化交易员</h2>
+<blockquote class="blockquote">
+<p>The ideal independent quantitative trader is therefore someone who has some prior experience with finance or computer programming, who has enough savings to withstand the inevitable losses and periods without income, and whose emotion has found the right balance between fear and greed.</p>
+</blockquote>
+<p>因此，理想的独立定量交易员是那些有金融或计算机编程经验，有足够的储蓄来承受不可避免的损失和一定时期的无收入，他的情感已经在恐惧和贪婪之间找到了正确的平衡。</p>
+</section>
+<section id="量化交易的特点" class="level2">
+<h2 class="anchored" data-anchor-id="量化交易的特点">量化交易的特点</h2>
+<section id="易扩大" class="level3">
+<h3 class="anchored" data-anchor-id="易扩大">易扩大</h3>
+<blockquote class="blockquote">
+<p>It is easy to find yourselves trading millions of dollars in the comfort of your own home, as long as your strategy is consistently profitable. This is because scaling up often just means changing a number in your program.</p>
+</blockquote>
+<p>如果你的策略可以持续产生收益的话，扩大规模仅仅意味着在你的程序里修改一个数字。</p>
+</section>
+<section id="时间自由" class="level3">
+<h3 class="anchored" data-anchor-id="时间自由">时间自由</h3>
+<blockquote class="blockquote">
+<p>if you treasure your leisure time or if you need time and financial resources to explore other businesses, quantitative trading is the business for you.</p>
+</blockquote>
+<p>如果你珍惜你的闲暇时间，或者如果你需要时间和财力来探索其他业务，那么量化交易正适合你。</p>
+</section>
+<section id="无需市场营销" class="level3">
+<h3 class="anchored" data-anchor-id="无需市场营销">无需市场营销</h3>
+<blockquote class="blockquote">
+<p>In trading, your counterparties in the financial marketplace base their purchase decisions on nothing but the price. Unless you are managing money for other people (which is beyond the scope of this book), there is absolutely no marketing to do in a quantitative trading business.</p>
+</blockquote>
+<p>在交易中，你在金融市场上的交易对手，他们的购买决定只基于价格。除非你是在为其他人管理资金(这超出了本书的范围),在量化交易业务中，绝对没有营销要做。</p>
+<blockquote class="blockquote">
+<p>the business of quantitative trading allows you to focus exclusively on your product (the strategy and the software), and not on anything that has to do with influencing other people’s perception of yourself.</p>
+</blockquote>
+<p>量化交易业务允许你只专注于你的产品（策略和软件），而不需要做任何影响他人对你自己看法的事。</p>
+</section>
+</section>
+<section id="前方的路" class="level2">
+<h2 class="anchored" data-anchor-id="前方的路">前方的路</h2>
+<blockquote class="blockquote">
+<p>If you are convinced that you want to become a quantitative trader,a number of questions immediately follow: How do you find the right strategy to trade? How do you recognize a good versus a bad strategy even before devoting any time to backtesting them? How do you rigorously backtest them? If the backtest performance is good, what steps do you need to take to implement the strategy, in terms of both the business structure and the technological infrastructure? If the strategy is profitable in initial real-life trading, how does one scale up the capital to make it into a growing income stream while managing the inevitable (but, hopefully, only occasional) losses that come with trading?</p>
+</blockquote>
+<p>如果你确信要成为一名量化交易员，你需要面对以下问题 * 怎样找到正确的交易策略？ * 在投入时间回测之前怎样区分好坏策略？ * 你怎样严谨地回测你的策略？ * 如果回测效果很好，你要通过哪些步骤实现这些策略，有哪些业务架构和技术基础设施的模式？ * 如果策略在真实交易中获利，怎样在扩大资金规模提升收入流的同时管控交易中不可必免的损失？</p>
 
 
 </section>

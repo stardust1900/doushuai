@@ -4,28 +4,7 @@
     "href": "index.html",
     "title": "兜率宫",
     "section": "",
-    "text": "随机漫步\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 25, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJun 24, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJun 21, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code."
+    "text": "CH7-量化交易专题\n\n\n\n\n\n\n量化交易\n\n\n\nSpecial Topics in Quantitative Trading\n\n\n\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH6-资金和风险管理\n\n\n\n\n\n\n量化交易\n\n\n\nMoney and Risk Management\n\n\n\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH1-量化交易简介\n\n\n\n\n\n\n量化交易\n\n\n\n量化交易是什么，谁参与量化交易，为什么要量化交易\n\n\n\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH4-建立你的事业\n\n\n\n\n\n\n量化交易\n\n\n\nSetting Up Your Business\n\n\n\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH5-交易执行系统\n\n\n\n\n\n\n量化交易\n\n\n\nExecutions Systems\n\n\n\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH2-捕获点子\n\n\n\n\n\n\n量化交易\n\n\n\nfishing of ideas\n\n\n\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nbacktrader回测系统\n\n\n\n\n\n\n量化交易\n\n\n\nbacktrader\n\n\n\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH3-回测\n\n\n\n\n\n\n量化交易\n\n\n\nBacktesting\n\n\n\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\n随机漫步\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 25, 2024\n\n\n王一刀\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2024-07-25-random-walk.html",
@@ -47,5 +26,278 @@
     "title": "随机漫步",
     "section": "随机游走",
     "text": "随机游走\n其概念接近于布朗运动，是布朗运动的理想数学状态。任何分子所带的守恒量都各自对应着一个扩散运输定律。\n随机游走过程\\(S_t\\)​遵循几何布朗运动，满足微分方程：\n\\(dS_t​=uS_t​d_t+σS_t​dW_t\\)\n\\(​dS_t​/S_t​=ud_t+σdW_t\\)\n​设定初试状态\\(S_0\\)，根据伊藤积分，可以解出：\n\\(S_t​=S_0​exp((u−σ^2/2)t+σW_t​)\\)\n在数学领域，函数exp(x)代表自然指数函数，即以实数e（e≈2.71828）为底的指数函数。其表达式为exp(x)=\\(e^x\\)\n所以上面的式子也可以写成：\n\\(S_t​=S_0​e^{(u−σ^2/2)t+σW_t​}\\)\n其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。\n漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势\n波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n#rect=[0.1,5.0,0.1,0.1]\nfig=plt.figure()\n\n #time span\nT=2\n#drift factor飘移率\nmu=0.1 \n#volatility波动率\nsigma=0.04 \n#t=0初试价\nS0=20 \n#length of steps\ndt=0.01 \nN=round(T/dt)\nt=np.linspace(0,T,N)\n\n#布朗运动\nW=np.random.standard_normal(size=N)\nW=np.cumsum(W)*np.sqrt(dt)\n\nX=(mu-0.5*sigma**2)*t+sigma*W\n\nS=S0*np.exp(X)\n\nplt.plot(t,S,lw=2)\nplt.show()"
+  },
+  {
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html",
+    "href": "posts/2021-08-13-fishing-of-ideas.html",
+    "title": "CH2-捕获点子",
+    "section": "",
+    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
+  },
+  {
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
+    "title": "CH2-捕获点子",
+    "section": "",
+    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
+  },
+  {
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
+    "title": "CH2-捕获点子",
+    "section": "如何辨别策略是否适合你",
+    "text": "如何辨别策略是否适合你\n有如下几个评判依据： * 你的工作时间 * 你的编程技能 * 你的交易资本 * 你的目标"
+  },
+  {
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
+    "title": "CH2-捕获点子",
+    "section": "识别可用的策略及其陷阱",
+    "text": "识别可用的策略及其陷阱\n用这些方法快测试策略，确保你不会浪费你的时间和金钱\n\n这个策略和基准比较表现如何?它的回报有多持久? &gt; Though a strategy may have the same average return as the benchmark, perhaps it delivered positive returns every month while the benchmark occasionally suffered some very bad months. In this case, we would still deem the strategy superior. This leads us to consider the information ratio or Sharpe ratio (Sharpe,1994), rather than returns, as the proper performance measurement of a quantitative trading strategy.\n\n虽让一个策略可能和基准有相同的回报，但在基准下跌的月份里它仍然有正收益。我们仍然认为这个策略是优越的。这促使我们考虑用信息比率或者夏普比率，而不是回报来，作为衡量量化交易策略业绩的指标。\n\n$ Information Ratio = $\n\n$ 信息比率 = $\n(其中：超额收益率 = 组合收益率 - 基准收益率)\n\nAs a rule of thumb, any strategy that has a Sharpe ratio of less than 1 is not suitable as a stand-alone strategy. For a strategy that achieves profitability almost every month, its (annualized) Sharpe ratio is typically greater than 2. For a strategy that is profitable al\u0002most every day, its Sharpe ratio is usually greater than 3.\n\n一般来说，任何夏普率小于1的策略不适合作为单独策略。对于每月都有收益的策略，它的年化夏普率通常大于2.对于每天有收益的策略，他的夏普率通常大于3.\n\n下挫有多深多久？\n\n你要问自己，你能承受多深多久的下挫而不清算你的投资组合关闭你的策略。\n\n交易成本如何影响策略？\n\n交易成本不仅包括券商收取的佣金，还有流动成本和机会成本。\n\n数据是否存在生存者偏差\n\n历史数据库中的股票报价不包含破产退市的股票。\n\n为什么策略的业绩过几年会发生改变？\n\n策略回测要关注近几年的表现，久远的数据会包含交易成本和幸存者偏差的影响。\n\n策略是否收到数据范围偏差影响？\n\n策略含有过多参数可能会对历史数据产生过度拟合。\n\n策略是否在基金经理的盲区\n\n\nyou should look for those strategies that fly under the radar of most institutional investors, for example, strategies that have very low capacities because they trade too often, strategies that trade very few stocks ev\u0002ery day, or strategies that have very infrequent positions.\n\n你应该去寻找被机构投资者忽视的策略，比如，交易频繁容量很低的策略，每天只交易很少股票的策略，持仓时段稀少的策略。这样的特色策觉才有利可图，因为他们还没有完全被巨型的对冲基金套利掉。"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html",
+    "href": "posts/2021-08-18-setting-up-your-business.html",
+    "title": "CH4-建立你的事业",
+    "section": "",
+    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
+    "href": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
+    "title": "CH4-建立你的事业",
+    "section": "",
+    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
+    "href": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
+    "title": "CH4-建立你的事业",
+    "section": "选择一家零售经纪公司",
+    "text": "选择一家零售经纪公司\n主要看佣金，其他的诸如交易速度等等，在现在这个时代已经不是问题了。 * 相对较低的佣金 * 可交易金融工具品种广泛 * 有足够深度的流动资金池 * 获取实时数据和传送指令的API\n这个富途居然有接口https://openapi.futunn.com/futu-api-doc/intro/intro.html\n中泰XTP"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#设备",
+    "href": "posts/2021-08-18-setting-up-your-business.html#设备",
+    "title": "CH4-建立你的事业",
+    "section": "设备",
+    "text": "设备\n\n性能良好的电脑\n高速的网络\n防中断电源UPS\n专业实时新闻工具\n多屏幕扩大可视空间"
+  },
+  {
+    "objectID": "posts/2021-08-27-money-and-risk-management.html",
+    "href": "posts/2021-08-27-money-and-risk-management.html",
+    "title": "CH6-资金和风险管理",
+    "section": "",
+    "text": "想从量化交易中赚钱，风险管理至关重要，把挫跌控制在可接受的范围内，把头寸建在净值的最优杠杆水平上，才能实现财富的最大可能增长。 我们要用的主要工具是凯利公式。"
+  },
+  {
+    "objectID": "posts/2021-08-27-money-and-risk-management.html#最佳资本配置和杠杆",
+    "href": "posts/2021-08-27-money-and-risk-management.html#最佳资本配置和杠杆",
+    "title": "CH6-资金和风险管理",
+    "section": "最佳资本配置和杠杆",
+    "text": "最佳资本配置和杠杆\n假设计划进行几个策略的交易，每个策略都有其预期收益和标准差。那么，如何在这些策略之间进行最优的资本配置呢？\n我们的优化目标是长期财富最大化。一定要避免赔光。\n假设策略i(这里用i代表第i个策略)的收益率服从正态分布，其均值\\(m_i\\)和标准差\\(s_i\\)已给定。\n用列向量\n\\(F^* = (f_1^* ,f_2^* ,...,f_n^* )^T\\)\n表示分配到n个策略的最优净值比例，其中T代表转置。\n给定优化目标并假设收益率服从正态分布，Thorp不是给出了以下最优配置公式：\n\\(F^* = C^{-1}M\\)\n\nC表示协方差矩阵，矩阵的元素\\(C_ij\\)表示第i 个策略和第j个策略收益率的协方差，-1表示矩阵的逆\n\\(M = (m_1,m_2,...,m_n)^T\\) 表示策略平均收益率的列向量\n\n如果假设所有策略在统计上独立，协方差矩阵就变为对角矩阵，对角线元素等于每个策略收益率的方差，公式：\n\\(f_i = m_i/s_i^2\\)\n这就是著名的凯利公式。"
+  },
+  {
+    "objectID": "posts/2021-08-27-money-and-risk-management.html#做好心理准备",
+    "href": "posts/2021-08-27-money-and-risk-management.html#做好心理准备",
+    "title": "CH6-资金和风险管理",
+    "section": "做好心理准备",
+    "text": "做好心理准备\n\n禀赋效应、安于现状偏差、亏损厌恶\n代表性偏差（即人们倾向于对近期经验赋予过多权重，而低估了长期平均的作用）\n恐惧和贪婪"
+  },
+  {
+    "objectID": "posts/2021-08-27-money-and-risk-management.html#收益率正态分布时凯利公式的简单推导",
+    "href": "posts/2021-08-27-money-and-risk-management.html#收益率正态分布时凯利公式的简单推导",
+    "title": "CH6-资金和风险管理",
+    "section": "收益率正态分布时凯利公式的简单推导",
+    "text": "收益率正态分布时凯利公式的简单推导\n适用于正态分布的复合杠杆增长率公式为：\n\\(g(f) = r + fm - s^2f^2/2\\)\n\nf为杠杆\nr为无风险利率\nm为平均非复合单期超额收益率\ns为非复合单期收益率的标准差\n\n为了得出使g最大化时的f，令g对f的一阶导数为零：\n\\(dg/df = m - s^2f = 0\\)\n由等式可得\\(f=m/s^2\\), 即为正态分布下策略或政权的凯利公式。"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "关于",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html",
+    "href": "posts/2021-08-27-special-topics-in-quantitative-trading.html",
+    "title": "CH7-量化交易专题",
+    "section": "",
+    "text": "只有当证券价格是均值回归的或趋势的，交易策略才能盈利。否则，价格是随机漫步的，交易将无利可图。 如果你相信价格是均值回归的，并且目前相对较低，应当现在买入，并准备在以后价格升高时卖出。但是，如果你相信价格是趋势的，且目前处于低位，应当现在卖出，并准备在以后价格更低时买入。价格处于高位则刚好相反。\n学术研究表明，股票价格“一般而言”非常接近随机漫步。但这并不意味着在特殊条件下价格不会表现出一定程度的均值回归或趋势行为。"
+  },
+  {
+    "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html#均值回归策略和惯性策略",
+    "href": "posts/2021-08-27-special-topics-in-quantitative-trading.html#均值回归策略和惯性策略",
+    "title": "CH7-量化交易专题",
+    "section": "",
+    "text": "只有当证券价格是均值回归的或趋势的，交易策略才能盈利。否则，价格是随机漫步的，交易将无利可图。 如果你相信价格是均值回归的，并且目前相对较低，应当现在买入，并准备在以后价格升高时卖出。但是，如果你相信价格是趋势的，且目前处于低位，应当现在卖出，并准备在以后价格更低时买入。价格处于高位则刚好相反。\n学术研究表明，股票价格“一般而言”非常接近随机漫步。但这并不意味着在特殊条件下价格不会表现出一定程度的均值回归或趋势行为。"
+  },
+  {
+    "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html#状态转换",
+    "href": "posts/2021-08-27-special-topics-in-quantitative-trading.html#状态转换",
+    "title": "CH7-量化交易专题",
+    "section": "状态转换",
+    "text": "状态转换\n状态是金融市场中一个最基本的概念。如果没有状态，何来“牛市”和“熊市”？自金融市场诞生之日起，人们就试图预测状态转换，即寻找所谓的“拐点”。\n其他最常见的金融或经济状态研究，包括通货膨胀与经济衰退状态、高波动率与低波动率状态以及均值回归与趋势状态。其中，波动率状态转换似乎最实用经典计量经济学工具，如广义自回归条件异方差（GARCH）模型。\n学术界一般沿用以下思路对股票价格的状态转换进行建模：\n\n假设价格在两个（或多个）状态上的概率分布不同。最简单的情况，两个状态的价格都服从对数正态分布，但均值和（或）标准差不同。\n假设状态之间存在某种转移概率\n使用诸如最大似然估计这样的标准统计方法，通过拟合历史数据，来确定状态概率分布和转移概率的参数。\n根据上述拟合模型，找出下一个时间步长的期望状态，更重要的，找出股票的期望价格。\n\n这种方法通常被称为“马尔科夫状态转换模型”或“隐马尔科夫模型”，这一模型通常基于贝叶斯概率框架。\n虽然理论框架完美，马尔科夫状态转换模型在实际交易中的用途却不大。这是因为模型假设状态之间的转移概率都是固定的。实际应用中，这意味着在任何时候股票从正常的静止状态转移到不稳定状态的概率非常小。而这对于想知道转移概率在何时（以及何种情况下）突然达到峰值的交易员，是完全没有用的。这就需要用到拐点模型。\n拐点模型使用了数据挖掘方法：输入所有可能预测拐点或状态转换的变量。变量包括当前的波动率、最近一期的收益，以及消费者信心指数、石油价格变化、债券价格变化等宏观经济数据的变化。"
+  },
+  {
+    "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html#平稳性和协整性",
+    "href": "posts/2021-08-27-special-topics-in-quantitative-trading.html#平稳性和协整性",
+    "title": "CH7-量化交易专题",
+    "section": "平稳性和协整性",
+    "text": "平稳性和协整性\n如果一个时间序列不会越来越大地偏离初始值，这个时间序列就是“平稳的”。用专业术语来说，平稳的时间序列就是“零阶自积”的，即I(0)。不过，大多数股票的价格序列都是不平稳的，通常表现为几何随机游走，不断地离出事点（如首次公开发行价）价值越来越远。尽管如此，你能找到像买入一只股票、卖出一只股票这样的股票配对，配对的市场价值是平稳的。这种情况下，两个独立的时间序列被称为“协整”。协整配对中的两个股票来自同一行业。\n检测两个价格序列是否协整，如何找到最优的对冲比率。 协整检验的主要方法是ADF检验。\n如果一个价格序列（可以是一只股票、一对股票或是一个投资组合）是平稳的，只要未来继续保持平稳（这未必能保证），采用均值回归策略一定能盈利。"
+  },
+  {
+    "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html#因子模型",
+    "href": "posts/2021-08-27-special-topics-in-quantitative-trading.html#因子模型",
+    "title": "CH7-量化交易专题",
+    "section": "因子模型",
+    "text": "因子模型\n因子收益率是股票收益率的共同驱动因素，与单个股票无关。\n因子风险表示对哥哥共同驱动因素的敏感度。\n所有不能用共同因子解释的收益部分就是特有收益率。（比如，仅与某只股票相关，可以看做是APT模型中的随机噪音部分）"
+  },
+  {
+    "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html#清仓策略",
+    "href": "posts/2021-08-27-special-topics-in-quantitative-trading.html#清仓策略",
+    "title": "CH7-量化交易专题",
+    "section": "清仓策略",
+    "text": "清仓策略\n\n固定的持有期\n目标价格或盈利上限\n最新的建仓信号\n止损价格"
+  },
+  {
+    "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html#季节性交易策略",
+    "href": "posts/2021-08-27-special-topics-in-quantitative-trading.html#季节性交易策略",
+    "title": "CH7-量化交易专题",
+    "section": "季节性交易策略",
+    "text": "季节性交易策略"
+  },
+  {
+    "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html#高频交易策略",
+    "href": "posts/2021-08-27-special-topics-in-quantitative-trading.html#高频交易策略",
+    "title": "CH7-量化交易专题",
+    "section": "高频交易策略",
+    "text": "高频交易策略\n高频交易策略能获得高夏普比率的理由很简单：根据大数定律，交易的次数越多，收益率相对于均值的偏差就越小。而在高频交易策略下，一天可交易成百上千次。（这交易佣金也会很高啊）"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html",
+    "title": "CH1-量化交易简介",
+    "section": "",
+    "text": "Quantitative trading, also known as algorithmic trading, is the trading of securities based strictly on the buy/sell decisions of computer algorithms. The computer algorithms are designed and perhaps programmed by the traders themselves, based on the historical performance of the encoded strategy tested against historical financial data.\n\n定量交易，也被称为算法交易，是一种严格基于计算机算法买卖决策的证券交易。计算机算法是由交易员自己设计甚至编写的，并根据历史财务数据测试编码策略，以确定期历史业绩。\n\nAs long as you can convert information into bits and bytes that the computer can understand, it can be re\u0002garded as part of quantitative trading.\n\n只要您能将信息转换为计算机能够理解的比特和字节，它就可以被视为定量交易的一部分。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#什么是量化交易",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#什么是量化交易",
+    "title": "CH1-量化交易简介",
+    "section": "",
+    "text": "Quantitative trading, also known as algorithmic trading, is the trading of securities based strictly on the buy/sell decisions of computer algorithms. The computer algorithms are designed and perhaps programmed by the traders themselves, based on the historical performance of the encoded strategy tested against historical financial data.\n\n定量交易，也被称为算法交易，是一种严格基于计算机算法买卖决策的证券交易。计算机算法是由交易员自己设计甚至编写的，并根据历史财务数据测试编码策略，以确定期历史业绩。\n\nAs long as you can convert information into bits and bytes that the computer can understand, it can be re\u0002garded as part of quantitative trading.\n\n只要您能将信息转换为计算机能够理解的比特和字节，它就可以被视为定量交易的一部分。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#谁可以成为量化交易员",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#谁可以成为量化交易员",
+    "title": "CH1-量化交易简介",
+    "section": "谁可以成为量化交易员",
+    "text": "谁可以成为量化交易员\n\nThe ideal independent quantitative trader is therefore someone who has some prior experience with finance or computer program\u0002ming, who has enough savings to withstand the inevitable losses and periods without income, and whose emotion has found the right bal\u0002ance between fear and greed.\n\n因此，理想的独立定量交易员是那些有金融或计算机编程经验，有足够的储蓄来承受不可避免的损失和一定时期的无收入，他的情感已经在恐惧和贪婪之间找到了正确的平衡。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#量化交易的特点",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#量化交易的特点",
+    "title": "CH1-量化交易简介",
+    "section": "量化交易的特点",
+    "text": "量化交易的特点\n\n易扩大\n\nIt is easy to find yourselves trading millions of dollars in the comfort of your own home, as long as your strategy is consistently profitable. This is because scaling up often just means changing a number in your program.\n\n如果你的策略可以持续产生收益的话，扩大规模仅仅意味着在你的程序里修改一个数字。\n\n\n时间自由\n\nif you treasure your leisure time or if you need time and financial resources to explore other businesses, quantitative trading is the business for you.\n\n如果你珍惜你的闲暇时间，或者如果你需要时间和财力来探索其他业务，那么量化交易正适合你。\n\n\n无需市场营销\n\nIn trading, your counterparties in the financial marketplace base their purchase decisions on nothing but the price. Unless you are managing money for other people (which is beyond the scope of this book), there is absolutely no marketing to do in a quantitative trading business.\n\n在交易中，你在金融市场上的交易对手，他们的购买决定只基于价格。除非你是在为其他人管理资金(这超出了本书的范围),在量化交易业务中，绝对没有营销要做。\n\nthe business of quantitative trading allows you to focus exclusively on your product (the strategy and the software), and not on anything that has to do with influencing other people’s perception of yourself.\n\n量化交易业务允许你只专注于你的产品（策略和软件），而不需要做任何影响他人对你自己看法的事。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#前方的路",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#前方的路",
+    "title": "CH1-量化交易简介",
+    "section": "前方的路",
+    "text": "前方的路\n\nIf you are convinced that you want to become a quantitative trader,a number of questions immediately follow: How do you find the right strategy to trade? How do you recognize a good versus a bad strategy even before devoting any time to backtesting them? How do you rigorously backtest them? If the backtest performance is good, what steps do you need to take to implement the strategy, in terms of both the business structure and the technological infrastructure? If the strategy is profitable in initial real-life trading, how does one scale up the capital to make it into a growing income stream while managing the inevitable (but, hopefully, only occasional) losses that come with trading?\n\n如果你确信要成为一名量化交易员，你需要面对以下问题 * 怎样找到正确的交易策略？ * 在投入时间回测之前怎样区分好坏策略？ * 你怎样严谨地回测你的策略？ * 如果回测效果很好，你要通过哪些步骤实现这些策略，有哪些业务架构和技术基础设施的模式？ * 如果策略在真实交易中获利，怎样在扩大资金规模提升收入流的同时管控交易中不可必免的损失？"
+  },
+  {
+    "objectID": "posts/2021-08-19-executions-systems.html",
+    "href": "posts/2021-08-19-executions-systems.html",
+    "title": "CH5-交易执行系统",
+    "section": "",
+    "text": "An automated trading system will retrieve up-to-date market data from your brokerage or other data vendors, run a trading algorithm to generate orders, and submit those orders to your brokerage for execution.\n\n自动交易系统从经纪商或其他供应商获取市场数据，运行交易算法形成指令，提交指令给经纪商执行。\n全自动交易系统代价高昂，对于低频量化交易策略，半自动交易系统即可。\n\n半自动交易系统\n全自动交易系统"
+  },
+  {
+    "objectID": "posts/2021-08-19-executions-systems.html#自动交易系统能为你做什么",
+    "href": "posts/2021-08-19-executions-systems.html#自动交易系统能为你做什么",
+    "title": "CH5-交易执行系统",
+    "section": "",
+    "text": "An automated trading system will retrieve up-to-date market data from your brokerage or other data vendors, run a trading algorithm to generate orders, and submit those orders to your brokerage for execution.\n\n自动交易系统从经纪商或其他供应商获取市场数据，运行交易算法形成指令，提交指令给经纪商执行。\n全自动交易系统代价高昂，对于低频量化交易策略，半自动交易系统即可。\n\n半自动交易系统\n全自动交易系统"
+  },
+  {
+    "objectID": "posts/2021-08-19-executions-systems.html#雇佣编程顾问",
+    "href": "posts/2021-08-19-executions-systems.html#雇佣编程顾问",
+    "title": "CH5-交易执行系统",
+    "section": "雇佣编程顾问",
+    "text": "雇佣编程顾问\n这里有个策略保密的问题，其他的讨论不值一提，但是有个方法挺好的，就是把策略拆分雇佣不同的程序员，没人实现一部分，最后再合并。"
+  },
+  {
+    "objectID": "posts/2021-08-19-executions-systems.html#最小化交易成本",
+    "href": "posts/2021-08-19-executions-systems.html#最小化交易成本",
+    "title": "CH5-交易执行系统",
+    "section": "最小化交易成本",
+    "text": "最小化交易成本\n\n可以通过避免交易低价股票来降低佣金\n根据股票的流动性来限制指令规模以减小市场冲击成本。警惕成交量小的股票，购买量不要超过其每日成交量的1%。\n根据股票市值来调整下单量也是减少市场冲击的方法\n但是不要按线性比率来调整下单量，因为公司市值差别巨大，按照固定比例会让下公司的下单量为0\n如果是超大单，分批次下单，以减少市场冲击。独立交易者通常不需要。"
+  },
+  {
+    "objectID": "posts/2021-08-19-executions-systems.html#用仿真交易测试交易系统",
+    "href": "posts/2021-08-19-executions-systems.html#用仿真交易测试交易系统",
+    "title": "CH5-交易执行系统",
+    "section": "用仿真交易测试交易系统",
+    "text": "用仿真交易测试交易系统"
+  },
+  {
+    "objectID": "posts/2021-08-19-executions-systems.html#为什么实际业绩偏离预期",
+    "href": "posts/2021-08-19-executions-systems.html#为什么实际业绩偏离预期",
+    "title": "CH5-交易执行系统",
+    "section": "为什么实际业绩偏离预期",
+    "text": "为什么实际业绩偏离预期\n\n自动交易软件是否有bug\n自动交易系统产生的交易和回测程序产生的交易是否一致\n交易成本是否比预期的高很多\n是否交易了流动性差的股票产生了市场冲击\n数据迁就偏差\n状态变更影响，市场结构和宏观经济环境发生巨变"
+  },
+  {
+    "objectID": "posts/2021-12-06-backtrader.html",
+    "href": "posts/2021-12-06-backtrader.html",
+    "title": "backtrader回测系统",
+    "section": "",
+    "text": "import datetime\nimport backtrader as bt\n\nclass TestStrategy(bt.Strategy):\n    params = (\n        ('maperiod', 15),\n    )\n\n    def log(self, txt, dt=None):\n        dt = dt or self.datas[0].datetime.date(0)\n        print('%s, %s' % (dt.isoformat(), txt))\n    def __init__(self):\n        self.dataclose = self.datas[0].close\n        print('buflen %d' % self.dataclose.buflen())\n        self.order = None\n        self.buyprice = None\n        self.buycomm = None\n\n        # Add a MovingAverageSimple indicator\n        self.sma = bt.indicators.SimpleMovingAverage(\n            self.datas[0], period=self.params.maperiod)\n        \n        # Indicators for the plotting show\n        bt.indicators.ExponentialMovingAverage(self.datas[0], period=25)\n        bt.indicators.WeightedMovingAverage(self.datas[0], period=25,\n                                            subplot=True)\n        bt.indicators.StochasticSlow(self.datas[0])\n        bt.indicators.MACDHisto(self.datas[0])\n        rsi = bt.indicators.RSI(self.datas[0])\n        bt.indicators.SmoothedMovingAverage(rsi, period=10)\n        bt.indicators.ATR(self.datas[0], plot=False)\n\n    def notify_order(self, order):\n        if order.status in [order.Submitted, order.Accepted]:\n            return\n        if order.status in [order.Completed]:\n            if order.isbuy():\n                self.log('BUY EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f' %\n                        (order.executed.price,\n                        order.executed.value,\n                        order.executed.comm))\n                self.buyprice = order.executed.price\n                self.buycomm = order.executed.comm\n            elif order.issell():\n                self.log('SELL EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f' %\n                         (order.executed.price,\n                          order.executed.value,\n                          order.executed.comm))\n            self.bar_executed = len(self)\n        elif order.status in [order.Canceled, order.Margin, order.Rejected]:\n            self.log('Order Canceled/Margin/Rejected')\n        self.order = None\n\n    def notify_trade(self, trade):\n        if not trade.isclosed:\n            return\n\n        self.log('OPERATION PROFIT, GROSS %.2f, NET %.2f' %\n                 (trade.pnl, trade.pnlcomm))\n\n    def next(self):\n        self.log('Close, %.2f' % self.dataclose[0])\n        if self.order:\n            return\n        if not self.position:\n            if self.dataclose[0] &gt; self.sma[0]:\n                self.log('BUY CREATE, %.2f' % self.dataclose[0])\n                self.buy()\n        else:\n            if self.dataclose[0] &lt; self.sma[0]:\n                self.log('SELL CREATE, %.2f' % self.dataclose[0])\n                self.order = self.sell()\n\n\ncerebro = bt.Cerebro()\n\ncerebro.addstrategy(TestStrategy)\n\ndata = bt.feeds.YahooFinanceCSVData(\n        dataname=\"datas/orcl-1995-2014.txt\",\n        # Do not pass values before this date\n        fromdate=datetime.datetime(2000, 1, 1),\n        # Do not pass values after this date\n        todate=datetime.datetime(2000, 12, 31),\n        reverse=False)\n\n# print(data)\n\ncerebro.adddata(data)\n\ncerebro.broker.setcash(100000.0)\ncerebro.addsizer(bt.sizers.FixedSize, stake=10)\ncerebro.broker.setcommission(commission=0.001)\n\nprint('组合初始值: %.2f' % cerebro.broker.getvalue())\n\ncerebro.run()\n\nprint('组合终结值: %.2f' % cerebro.broker.getvalue())\n# cerebro.plot()"
+  },
+  {
+    "objectID": "posts/2021-08-16-backtesting.html",
+    "href": "posts/2021-08-16-backtesting.html",
+    "title": "CH3-回测",
+    "section": "",
+    "text": "A key difference between a traditional investment management process and a quantitative investment process is the possibility of back\u0002testing a quantitative investment strategy to see how it would have performed in the past\n量化投资流程和传统投资管理流程最重要的区别是：量化投资策略可以进行回测以观察它在过去的表现。"
+  },
+  {
+    "objectID": "posts/2021-08-16-backtesting.html#常用的回测工具",
+    "href": "posts/2021-08-16-backtesting.html#常用的回测工具",
+    "title": "CH3-回测",
+    "section": "常用的回测工具",
+    "text": "常用的回测工具\n\nExcel &gt; The major disadvantage of Excel is that it can be used to backtest only fairly simple models.But, as I explained in the previous chapter, simple models are often the best!\n\nExcel的主要缺点是只能用于简单模型的回测。但是，简单模型往往是最好的。\n\nMATLAB\n\nMATLAB优点很多，功能强大，但是价格昂贵。有一些替代品:\nO-Matrix\nOctave\nScilab\n\nTradeStation\nHigh-End Backtesting Platforms"
+  },
+  {
+    "objectID": "posts/2021-08-16-backtesting.html#寻找并使用历史数据库",
+    "href": "posts/2021-08-16-backtesting.html#寻找并使用历史数据库",
+    "title": "CH3-回测",
+    "section": "寻找并使用历史数据库",
+    "text": "寻找并使用历史数据库\n\nWhile finding sources of data on the Internet is even easier than finding prospective strategies, there are a number of issues and pit\u0002falls with many of these databases that I will discuss later in this sec\u0002tion. These issues apply mostly to stock and exchange-traded fund (ETF) data only. Here are the most important ones.\n\n虽然在互联网上寻找数据源比寻找有效的策略容易，但这些数据中存在问题和陷阱。下面是最主要的问题，这些问题仅适用股票和交易基金数据。\n\n数据是否已经过分拆和股息调整？\n是否剔除了幸存偏差数据？\n你的策略用最高最低价吗？\n\n\n使用最高最低价的回测没有使用开盘收盘价的回测可靠。\n\n\n业绩度量\n\n夏普比率\n\n年化夏普比率的计算：一般而言，假设每个交易时段的长度为T，T可以是1个月、1天、1小时等，若要计算平均收益率、标准差以及相应的年化指标，就必须先算出一年的交易时段数\\(N_T\\)\n\\(年化夏普比率= \\sqrt {N_T} * 基于T的夏普比率\\)\n年化标准差和日标准差的关系推理：\n\n其中cov是指协方差。\n最大挫跌和最长挫跌期\n\n这个指标算起来挺麻烦，从图中看的话，倒是挺直观。"
+  },
+  {
+    "objectID": "posts/2021-08-16-backtesting.html#避免常见的回测陷阱",
+    "href": "posts/2021-08-16-backtesting.html#避免常见的回测陷阱",
+    "title": "CH3-回测",
+    "section": "避免常见的回测陷阱",
+    "text": "避免常见的回测陷阱\n\n前视偏差\n\n例如，“在日最低价的1%之内买入股票”的交易规则，就有前视偏差，因为在当日市场收盘前，是不可能知道日最低价的。\n\n数据迁就偏差\n\n因迁就历史数据的噪声而过度优化模型参数，造成策略的回测业绩高于未来业绩，即为数据迁就偏差。"
+  },
+  {
+    "objectID": "posts/2021-08-16-backtesting.html#交易成本",
+    "href": "posts/2021-08-16-backtesting.html#交易成本",
+    "title": "CH3-回测",
+    "section": "交易成本",
+    "text": "交易成本\n没有考虑交易成本的回测业绩是不真实的。"
+  },
+  {
+    "objectID": "posts/2021-08-16-backtesting.html#策略改进",
+    "href": "posts/2021-08-16-backtesting.html#策略改进",
+    "title": "CH3-回测",
+    "section": "策略改进",
+    "text": "策略改进\n对基本策略进行微小调整，来提升收益。策略的改进，最好基于经济学基本原理，或者透彻研究过的市场现象，而不是依据一些主观的试错法则。否则，就有可能产生数据迁就偏差。\n\nimport pandas as pd \nimport numpy as np\n\nxlsx = pd.ExcelFile(\"datas/example3_4.xls\")\ndf = pd.read_excel(xlsx,\"table\")\n# 计算每日收益率：\ndf['daily_ret'] = df['Adj Close'].pct_change()\n#假设年化收益率为4%，每年252个交易日 计算每日超额收益\ndf['excess_daily_ret'] = df['daily_ret'] - 0.04/252\n\nsharp_ratio = np.sqrt(252) * df['excess_daily_ret'].mean() / df['excess_daily_ret'].std()\n\nprint(sharp_ratio)\n\n0.7889300350874483"
   }
 ]

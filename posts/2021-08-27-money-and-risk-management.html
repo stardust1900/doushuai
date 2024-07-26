@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="王一刀">
-<meta name="dcterms.date" content="2024-07-25">
+<meta name="description" content="Money and Risk Management">
 
-<title>随机漫步 – 王君敕的炼丹房</title>
+<title>CH6-资金和风险管理 – 王君敕的炼丹房</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -183,8 +149,13 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">随机漫步</h1>
-                                <div class="quarto-categories">
+      <h1 class="title">CH6-资金和风险管理</h1>
+                  <div>
+        <div class="description">
+          Money and Risk Management
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">量化交易</div>
               </div>
                   </div>
@@ -200,12 +171,6 @@ window.Quarto = {
             </div>
     </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">July 25, 2024</p>
-      </div>
-    </div>
     
       
     </div>
@@ -222,63 +187,46 @@ window.Quarto = {
 
 
 
-<section id="几何布朗运动brownian-motion" class="level2">
-<h2 class="anchored" data-anchor-id="几何布朗运动brownian-motion">几何布朗运动(Brownian motion)</h2>
-<p>布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）</p>
-<p>即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。</p>
+<p>想从量化交易中赚钱，风险管理至关重要，把挫跌控制在可接受的范围内，把头寸建在净值的最优杠杆水平上，才能实现财富的最大可能增长。 我们要用的主要工具是凯利公式。</p>
+<section id="最佳资本配置和杠杆" class="level2">
+<h2 class="anchored" data-anchor-id="最佳资本配置和杠杆">最佳资本配置和杠杆</h2>
+<p>假设计划进行几个策略的交易，每个策略都有其预期收益和标准差。那么，如何在这些策略之间进行最优的资本配置呢？</p>
+<p>我们的优化目标是长期财富最大化。一定要避免赔光。</p>
+<p>假设策略i(这里用i代表第i个策略)的收益率服从正态分布，其均值<span class="math inline">\(m_i\)</span>和标准差<span class="math inline">\(s_i\)</span>已给定。</p>
+<p>用列向量</p>
+<p><span class="math inline">\(F^* = (f_1^* ,f_2^* ,...,f_n^* )^T\)</span></p>
+<p>表示分配到n个策略的最优净值比例，其中T代表转置。</p>
+<p>给定优化目标并假设收益率服从正态分布，Thorp不是给出了以下最优配置公式：</p>
+<p><span class="math inline">\(F^* = C^{-1}M\)</span></p>
+<ul>
+<li>C表示协方差矩阵，矩阵的元素<span class="math inline">\(C_ij\)</span>表示第i 个策略和第j个策略收益率的协方差，-1表示矩阵的逆</li>
+<li><span class="math inline">\(M = (m_1,m_2,...,m_n)^T\)</span> 表示策略平均收益率的列向量</li>
+</ul>
+<p>如果假设所有策略在统计上独立，协方差矩阵就变为对角矩阵，对角线元素等于每个策略收益率的方差，公式：</p>
+<p><span class="math inline">\(f_i = m_i/s_i^2\)</span></p>
+<p>这就是著名的凯利公式。</p>
 </section>
-<section id="随机游走" class="level2">
-<h2 class="anchored" data-anchor-id="随机游走">随机游走</h2>
-<p>其概念接近于布朗运动，是布朗运动的理想数学状态。任何分子所带的守恒量都各自对应着一个扩散运输定律。</p>
-<p>随机游走过程<span class="math inline">\(S_t\)</span>​遵循几何布朗运动，满足微分方程：<br>
-<span class="math inline">\(dS_t​=uS_t​d_t+σS_t​dW_t\)</span><br>
-<span class="math inline">\(​dS_t​/S_t​=ud_t+σdW_t\)</span></p>
-<p>​设定初试状态<span class="math inline">\(S_0\)</span>，根据伊藤积分，可以解出：</p>
-<p><span class="math inline">\(S_t​=S_0​exp((u−σ^2/2)t+σW_t​)\)</span></p>
-<p>在数学领域，函数exp(x)代表自然指数函数，即以实数e（e≈2.71828）为底的指数函数。其表达式为exp(x)=<span class="math inline">\(e^x\)</span></p>
-<p>所以上面的式子也可以写成：</p>
-<p><span class="math inline">\(S_t​=S_0​e^{(u−σ^2/2)t+σW_t​}\)</span></p>
-<p>其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。</p>
-<p>漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势</p>
-<p>波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。</p>
-<div id="cell-2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#rect=[0.1,5.0,0.1,0.1]</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>plt.figure()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="co">#time span</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>T<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#drift factor飘移率</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mu<span class="op">=</span><span class="fl">0.1</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#volatility波动率</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>sigma<span class="op">=</span><span class="fl">0.04</span> </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#t=0初试价</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>S0<span class="op">=</span><span class="dv">20</span> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#length of steps</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>dt<span class="op">=</span><span class="fl">0.01</span> </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>N<span class="op">=</span><span class="bu">round</span>(T<span class="op">/</span>dt)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>t<span class="op">=</span>np.linspace(<span class="dv">0</span>,T,N)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#布朗运动</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>W<span class="op">=</span>np.random.standard_normal(size<span class="op">=</span>N)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>W<span class="op">=</span>np.cumsum(W)<span class="op">*</span>np.sqrt(dt)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>(mu<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t<span class="op">+</span>sigma<span class="op">*</span>W</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>S<span class="op">=</span>S0<span class="op">*</span>np.exp(X)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.plot(t,S,lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2024-07-25-random-walk_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="做好心理准备" class="level2">
+<h2 class="anchored" data-anchor-id="做好心理准备">做好心理准备</h2>
+<ul>
+<li>禀赋效应、安于现状偏差、亏损厌恶</li>
+<li>代表性偏差（即人们倾向于对近期经验赋予过多权重，而低估了长期平均的作用）</li>
+<li>恐惧和贪婪</li>
+</ul>
+</section>
+<section id="收益率正态分布时凯利公式的简单推导" class="level2">
+<h2 class="anchored" data-anchor-id="收益率正态分布时凯利公式的简单推导">收益率正态分布时凯利公式的简单推导</h2>
+<p>适用于正态分布的复合杠杆增长率公式为：</p>
+<p><span class="math inline">\(g(f) = r + fm - s^2f^2/2\)</span></p>
+<ul>
+<li>f为杠杆</li>
+<li>r为无风险利率</li>
+<li>m为平均非复合单期超额收益率</li>
+<li>s为非复合单期收益率的标准差</li>
+</ul>
+<p>为了得出使g最大化时的f，令g对f的一阶导数为零：</p>
+<p><span class="math inline">\(dg/df = m - s^2f = 0\)</span></p>
+<p>由等式可得<span class="math inline">\(f=m/s^2\)</span>, 即为正态分布下策略或政权的凯利公式。</p>
 
 
 </section>
