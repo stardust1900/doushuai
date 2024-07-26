@@ -6,16 +6,16 @@ execute:
   freeze: auto
 
 website:
-  title: "王君敕的炼丹房"
+  title: "兜率宫"
   navbar:
     right:
       - icon: house-fill
         href: https://wangxuan.me
-      - about.qmd
       - icon: github
         href: https://github.com/stardust1900
       - icon: sina-weibo
         href: https://weibo.com/halfg0d
+      - about.qmd
 format:
   html:
     theme: cosmo

@@ -1,5 +1,5 @@
 ---
-title: "兜率宫"
+title: "王君敕的炼丹房"
 listing:
   contents: posts
   sort: "date desc"
