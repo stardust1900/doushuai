@@ -1,5 +1,5 @@
 ---
-title: "jjallaire.github.io"
+title: "兜率宫"
 listing:
   contents: posts
   sort: "date desc"

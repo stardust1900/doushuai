@@ -6,7 +6,7 @@ execute:
   freeze: auto
 
 website:
-  title: "Doushuai Palace"
+  title: "兜率宫"
   navbar:
     right:
       - about.qmd
