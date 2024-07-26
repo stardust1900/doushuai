@@ -1,6 +1,7 @@
 ---
 title: CH4-建立你的事业
 description: Setting Up Your Business
+date: 2021-08-18
 author: 王一刀
 categories: [量化交易]
 ---

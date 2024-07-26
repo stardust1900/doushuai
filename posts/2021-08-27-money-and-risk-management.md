@@ -1,6 +1,7 @@
 ---
 title: CH6-资金和风险管理
 description: Money and Risk Management
+date: 2021-08-27
 author: 王一刀
 categories: [量化交易]
 ---

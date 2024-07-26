@@ -1,6 +1,7 @@
 ---
 title: CH1-量化交易简介
 description: 量化交易是什么，谁参与量化交易，为什么要量化交易
+date: 2021-08-12
 author: 王一刀
 categories: [量化交易]
 ---
