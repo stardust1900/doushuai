@@ -277,7 +277,7 @@
     "href": "posts/2021-08-16-backtesting.html#寻找并使用历史数据库",
     "title": "CH3-回测",
     "section": "寻找并使用历史数据库",
-    "text": "寻找并使用历史数据库\n\nWhile finding sources of data on the Internet is even easier than finding prospective strategies, there are a number of issues and pit\u0002falls with many of these databases that I will discuss later in this sec\u0002tion. These issues apply mostly to stock and exchange-traded fund (ETF) data only. Here are the most important ones.\n\n虽然在互联网上寻找数据源比寻找有效的策略容易，但这些数据中存在问题和陷阱。下面是最主要的问题，这些问题仅适用股票和交易基金数据。\n\n数据是否已经过分拆和股息调整？\n是否剔除了幸存偏差数据？\n你的策略用最高最低价吗？\n\n\n使用最高最低价的回测没有使用开盘收盘价的回测可靠。\n\n\n业绩度量\n\n夏普比率\n\n年化夏普比率的计算：一般而言，假设每个交易时段的长度为T，T可以是1个月、1天、1小时等，若要计算平均收益率、标准差以及相应的年化指标，就必须先算出一年的交易时段数\\(N_T\\)\n\\(年化夏普比率= \\sqrt {N_T} * 基于T的夏普比率\\)\n年化标准差和日标准差的关系推理：\n\n其中cov是指协方差。\n最大挫跌和最长挫跌期\n\n这个指标算起来挺麻烦，从图中看的话，倒是挺直观。"
+    "text": "寻找并使用历史数据库\n\nWhile finding sources of data on the Internet is even easier than finding prospective strategies, there are a number of issues and pitfalls with many of these databases that I will discuss later in this section. These issues apply mostly to stock and exchange-traded fund (ETF) data only. Here are the most important ones.\n\n虽然在互联网上寻找数据源比寻找有效的策略容易，但这些数据中存在问题和陷阱。下面是最主要的问题，这些问题仅适用股票和交易基金数据。\n\n数据是否已经过分拆和股息调整？\n是否剔除了幸存偏差数据？\n你的策略用最高最低价吗？\n\n\n使用最高最低价的回测没有使用开盘收盘价的回测可靠。\n\n\n业绩度量\n\n夏普比率\n\n年化夏普比率的计算：一般而言，假设每个交易时段的长度为T，T可以是1个月、1天、1小时等，若要计算平均收益率、标准差以及相应的年化指标，就必须先算出一年的交易时段数\\(N_T\\)\n\\(年化夏普比率= \\sqrt {N_T} * 基于T的夏普比率\\)\n年化标准差和日标准差的关系推理：\n\n其中cov是指协方差。\n最大挫跌和最长挫跌期\n\n这个指标算起来挺麻烦，从图中看的话，倒是挺直观。"
   },
   {
     "objectID": "posts/2021-08-16-backtesting.html#避免常见的回测陷阱",
