@@ -9,7 +9,7 @@ website:
   title: "王君敕的炼丹房"
   navbar:
     right:
-      - text：首页
+      - icon: house-fill
         href: https://wangxuan.me
       - about.qmd
       - icon: github
