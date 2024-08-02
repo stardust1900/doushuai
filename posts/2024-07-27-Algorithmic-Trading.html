@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -226,8 +226,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>最小二乘法估计的有效性</strong>：在存在协整关系的情况下，可以使用最小二乘法（OLS）对回归模型进行估计，并且得到的估计量是一致的。</li>
 </ol>
 <p>协整关系的检验通常使用Engle-Granger两步法或其他更复杂的统计方法。如果检验结果表明变量之间存在协整关系，那么就可以进一步分析它们之间的长期均衡关系，并进行相关的预测和政策分析。</p>
+</section>
+<section id="卡尔曼滤波法则" class="level2">
+<h2 class="anchored" data-anchor-id="卡尔曼滤波法则">卡尔曼滤波法则</h2>
+<p>卡尔曼滤波法则是一种数学算法，用于估计和预测未知变量的值，特别是那些受到随机过程影响的系统。它是由匈牙利出生的美国工程师拉尔夫·伊万·卡尔曼在1960年发明的。卡尔曼滤波器的发展源于20世纪50年代末到60年代初的航天任务需求。当时需要一种能够实时处理复杂动态系统的测量数据的方法，以便进行精确导航和控制。卡尔曼滤波器正是在这种背景下应运而生，成为解决这些问题的有效工具。它的成功应用很快得到了广泛认可，并在之后的几十年里，在多个科学和工程领域中都得到了深入的研究和广泛应用。以下是关于卡尔曼滤波法则的相关信息：</p>
+<section id="卡尔曼滤波的基本原理" class="level3">
+<h3 class="anchored" data-anchor-id="卡尔曼滤波的基本原理">卡尔曼滤波的基本原理</h3>
+<p>卡尔曼滤波的基本思想是通过观测数据对系统状态进行递归估计，不断更新状态的估计值。它假设系统状态是一个高斯分布，而观测值是由真实值和高斯噪声组成的。在每个时间步，卡尔曼滤波通过当前状态的预测和观测值的比较，得到一个新的状态估计值，并且利用上一个时间步的估计误差来调整预测误差的协方差矩阵，从而使得估计误差最小化。</p>
+</section>
+<section id="卡尔曼滤波的主要步骤" class="level3">
+<h3 class="anchored" data-anchor-id="卡尔曼滤波的主要步骤">卡尔曼滤波的主要步骤</h3>
+<ul>
+<li><strong>预测步骤</strong>：根据上一时刻的状态估计和状态转移方程预测当前时刻的状态估计和协方差矩阵。</li>
+<li><strong>更新步骤</strong>：根据当前时刻的观测值和观测方程，计算出当前时刻的状态估计和协方差矩阵。</li>
+</ul>
+</section>
+<section id="卡尔曼滤波的应用领域" class="level3">
+<h3 class="anchored" data-anchor-id="卡尔曼滤波的应用领域">卡尔曼滤波的应用领域</h3>
+<ul>
+<li><strong>航天领域</strong>：飞船自主导航。</li>
+<li><strong>自动驾驶车辆</strong>：高级驾驶辅助系统(ADAS)和自动驾驶车辆。</li>
+<li><strong>机器人导航和运动控制</strong>：融合来自多种传感器的信息，包括激光雷达、视觉传感器和惯性测量单元(IMU)。</li>
+<li><strong>医学影像处理</strong>：图像去噪和增强。</li>
+<li><strong>金融领域</strong>：股票价格预测、风险管理以及利率模型的构建。</li>
+</ul>
+<p>通过上述分析，我们可以看到卡尔曼滤波法则不仅在理论上有着严谨的数学基础，而且在实际应用中也有着广泛的应用和重要的地位。</p>
+</section>
+</section>
+<section id="布林带指标" class="level2">
+<h2 class="anchored" data-anchor-id="布林带指标">布林带指标</h2>
+<p>布林带指标（Bollinger Bands）是一种基于移动平均线和标准差计算的技术分析工具，用于判断价格的波动趋势和判断市场支撑和阻力位。它由三条线组成：中轨线（通常是20日移动平均线）、上轨线（中轨线加上两倍标准差）和下轨线（中轨线减去两倍标准差）。布林带指标通过这三条线描绘出价格波动的范围，帮助投资者判断市场是处于正常波动状态还是极端波动状态。以下是关于布林带指标的相关信息：</p>
+<section id="布林带指标的原理" class="level3">
+<h3 class="anchored" data-anchor-id="布林带指标的原理">布林带指标的原理</h3>
+<p>布林带指标的原理基于统计学中的标准差原理，通过计算股票或其他资产价格的移动平均线（通常是20日移动平均线）和标准差来描绘价格波动的范围。上轨线和下轨线分别表示价格的标准差倍数，通常为2倍和-2倍，从而展示出价格在过去的20个交易日中，相对于其移动平均线的波动范围。</p>
+</section>
+<section id="布林带指标的使用方法" class="level3">
+<h3 class="anchored" data-anchor-id="布林带指标的使用方法">布林带指标的使用方法</h3>
+<ul>
+<li><strong>基本用法</strong>：股价通常在布林通道区间内运行，股价运行到上轨附近时强压力位，一般可以作为卖点；股价运行到下轨附近是强支撑位，一般可以作为买点。</li>
+<li><strong>与其他指标的配合使用</strong>：布林带指标可以与其他技术指标如成交量、KDJ指标等配合使用，以获得更准确的买卖信号。</li>
+</ul>
+</section>
+<section id="注意事项" class="level3">
+<h3 class="anchored" data-anchor-id="注意事项">注意事项</h3>
+<ul>
+<li><strong>参数设定</strong>：布林线参数的设定不得小于6，静态钱龙设定值通常是10；动态钱龙设定时通常为20。</li>
+<li><strong>市场环境</strong>：布林带指标适用于相对平稳的市场，当市场波动较大的时候，布林带指标提供的参考价值就不高了。</li>
+<li><strong>确认信号</strong>：最好使用其他指标（如MACD、RSI）来确认布林带提供的信号，以避免误判。</li>
+</ul>
+<p>通过以上信息，投资者可以更好地理解和使用布林带指标，以提高股票交易的准确性和效率。</p>
+<div id="cell-5" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建一个简单的数据集</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'x'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'y'</span>: [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建一个散点图</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(data).mark_circle().encode(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x:Q'</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'y:Q'</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 显示图表</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># chart.show()</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.plot(data)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-07-27-Algorithmic-Trading_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"font.sans-serif"</span>] <span class="op">=</span> [<span class="st">"SimHei"</span>] </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mpl.rcParams[<span class="st">'axes.unicode_minus'</span>] <span class="op">=</span> <span class="va">False</span> <span class="co"># 正常显示负号</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># zhfont=mpl.font_manager.FontProperties(fname="/System/Library/Fonts/PingFang.ttc")</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># mpl.rcParams['axes.unicode_minus'] = False</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.linspace(<span class="op">-</span>np.pi,np.pi,<span class="dv">100</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>np.sin(x)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">u'正弦函数'</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-07-27-Algorithmic-Trading_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-7" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import altair with an abbreviated alias</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print(alt.Config)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.set_embed_options(base_url='js/',vega_url='js/vega@5',</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># vega_lite_url='js/vega-lite@4',</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># vega_embed_url='js/vega-embed@6')</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 算了吧太费劲了，放弃altair</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.enable('html', base_url='js')</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># load a sample dataset as a pandas DataFrame</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> data.cars()</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.enable('html', vega_cdn='https://cdnjs.cloudflare.com/libraries/vega', vega_lite_cdn='https://cdnjs.cloudflare.com/libraries/vega-lite')</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.26.0/vega-embed.min.js</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># make the chart</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point().encode(</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Horsepower'</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Miles_per_Gallon'</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Origin'</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>).interactive()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
