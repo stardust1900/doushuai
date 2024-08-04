@@ -193,7 +193,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-1" class="cell" data-execution_count="2">
+<p>在均值回归交易策略所相关的系列当中，<strong>我们将讨论以多元的统计技术［如扩展版的迪基-富勒检验（Dickey-Fuller检验，即ADF检验）、赫斯特（Hurst）指数、方差比检验、半衰期检验模式等］来检测时间序列的均值回归之属性，以及相关的平稳性</strong>；同时，我们还要<strong>检测一个由金融工具所构建的投资组合之协整属性［相关检测模式包括协整型ADF检验（即CADF检验）、约翰森（Johansen）检验等］</strong>。除了前述这些统计测试模式被机械地应用于时间序列而外，我们还要努力传达一个直观的理解方法，即要认知相关测试的真正用意以及简易数学方程背后的深层含义。</p>
+<p>我们将解析一些具有均值回归属性之投资组合所相关的最简单的技术和策略模式［如<strong>线性交易模式、布林带线、卡尔曼过滤法则（Kalman filter）</strong>等］。</p>
+<section id="泰勒连续展开公式" class="level2">
+<h2 class="anchored" data-anchor-id="泰勒连续展开公式">泰勒连续展开公式</h2>
+<p>泰勒连续展开公式（Taylor Series Expansion）是数学中用于表示一个函数在某一点附近的一个无穷级数展开。这个公式是以英国数学家布鲁克·泰勒（Brook Taylor）的名字命名的。泰勒级数的基本思想是用一个函数在某一点附近的各阶导数值来代替该函数，从而得到一个关于变量的无穷级数表达式。</p>
+<p>泰勒连续展开公式的定义如下：设函数f(x)在点x=a的某邻域内具有n阶导数，那么对于这个区间上任意x，有：</p>
+<p>f(x) = f(a) + f’(a)(x-a) + f’’(a)(x-a)^2/2! + …+ f<sup>n(a)(x-a)</sup>n/n! + R_n(x)</p>
+<p>其中，f’(a)表示函数f的一阶导数在点a处的值，f’’(a)表示二阶导数在点a处的值，以此类推。R_n(x)是余项，它随着n的增大趋近于0。当n趋向于无穷大时，泰勒级数就变成了泰勒展开式。</p>
+<p>泰勒级数有很多实际应用，例如用于数值计算、求解微分方程、信号处理等领域。</p>
+<div id="cell-3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#是的，Python 中有约翰森检验函数，即 scipy.stats.johnsonsu。</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 该函数用于对连续型数据进行正态性检验，并返回约翰森变换后的参数。</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#以下是 scumpy.stats.johnsonsu 函数的基本用法示例：</span></span>
@@ -215,6 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(np.float64(9.932945657673585), np.float64(1.8845431800180394), np.float64(11.36217894129853), np.float64(0.05378935338333127))</code></pre>
 </div>
 </div>
+</section>
 <section id="协整关系" class="level2">
 <h2 class="anchored" data-anchor-id="协整关系">协整关系</h2>
 <p>协整关系（Cointegration）是时间序列分析中的一个重要概念，它描述了两个或多个非平稳时间序列之间存在的长期稳定关系。</p>
@@ -275,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>确认信号</strong>：最好使用其他指标（如MACD、RSI）来确认布林带提供的信号，以避免误判。</li>
 </ul>
 <p>通过以上信息，投资者可以更好地理解和使用布林带指标，以提高股票交易的准确性和效率。</p>
-<div id="cell-5" class="cell" data-execution_count="19">
+<div id="cell-7" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -303,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="23">
+<div id="cell-8" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -325,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-7" class="cell">
+<div id="cell-9" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import altair with an abbreviated alias</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print(alt.Config)</span></span>
