@@ -439,6 +439,55 @@ look-up table. The actual p-value is smaller than the p-value returned.
 <p>分析结果：根据计算出的半衰期，分析放射性物质的衰变速率和放射性强度。</p>
 <p>需要注意的是，半衰期检验需要在专业的实验室环境中进行，并采取适当的安全措施，以防止辐射对人体的伤害。此外，半衰期检验的结果可能受到测量误差和其他因素的影响，因此需要进行多次实验并取平均值以提高准确性。</p>
 <p><strong>半衰期检验（Half-Life Test）本身并不是专门用于测试时间序列的回归性和平稳性的方法。半衰期检验主要用于评估放射性物质衰变速率，而不是时间序列分析</strong></p>
+<p>协整型ADF检验（Cointegration Augmented Dickey-Fuller Test）是一种用于检验两个或多个非平稳时间序列是否存在协整关系的统计方法。协整关系指的是两个或多个时间序列之间存在长期的稳定关系，即使它们各自是非平稳的。</p>
+<p>在进行协整型ADF检验之前，通常需要先对时间序列进行单位根检验，以确定它们是否为非平稳的。如果两个时间序列都是非平稳的，但它们的线性组合是平稳的，那么这两个时间序列之间存在协整关系。</p>
+<p>协整型ADF检验的基本步骤如下：</p>
+<p>单位根检验：首先对两个或多个时间序列分别进行单位根检验，确定它们是否为非平稳的。常用的单位根检验方法有 Augmented Dickey-Fuller (ADF) 检验和 Phillips-Perron (PP) 检验。</p>
+<p>估计协整关系：如果两个时间序列都是非平稳的，接下来需要估计它们之间的协整关系。这可以通过最小二乘法或其他回归方法来实现。</p>
+<p>协整型ADF检验：在估计出协整关系后，进行协整型ADF检验。这个检验实际上是检验残差序列是否平稳。如果残差序列是平稳的，那么两个时间序列之间存在协整关系；否则，它们之间不存在协整关系。</p>
+<p>解释结果：根据协整型ADF检验的结果，可以得出两个时间序列之间是否存在协整关系的结论。如果存在协整关系，那么可以利用这个关系进行预测和分析。</p>
+<p>需要注意的是，协整型ADF检验对样本大小和数据质量有一定的要求。如果样本太小或数据存在严重的自相关或异方差问题，检验结果可能不准确。在实际应用中，可以考虑使用其他协整检验方法，如 Engle-Granger 两步法或 Johansen 协整检验。</p>
+<div id="cell-10" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.regression.linear_model <span class="im">import</span> OLS</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成两个非平稳的时间序列</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.cumsum(np.random.randn(n))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> x <span class="op">+</span> np.cumsum(np.random.randn(n))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 单位根检验</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>result_x <span class="op">=</span> adfuller(x)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>result_y <span class="op">=</span> adfuller(y)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"x 的单位根检验结果："</span>, result_x)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"y 的单位根检验结果："</span>, result_y)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 估计协整关系</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> OLS(y, x).fit()</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> model.resid</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 协整型ADF检验</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>result_residuals <span class="op">=</span> adfuller(residuals)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"残差序列的单位根检验结果："</span>, result_residuals)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 解释结果</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> result_x[<span class="dv">1</span>] <span class="op">&gt;</span> alpha <span class="kw">and</span> result_y[<span class="dv">1</span>] <span class="op">&gt;</span> alpha <span class="kw">and</span> result_residuals[<span class="dv">1</span>] <span class="op">&lt;</span> alpha:</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"x 和 y 存在协整关系"</span>)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"x 和 y 不存在协整关系"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x 的单位根检验结果： (-1.3583317659818985, 0.6020814791099101, 0, 99, {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}, 222.8689980232281)
+y 的单位根检验结果： (-1.258001500815765, 0.6481611011736785, 1, 98, {'1%': -3.4989097606014496, '5%': -2.891516256916761, '10%': -2.5827604414827157}, 356.0626708213774)
+残差序列的单位根检验结果： (-1.9559190170990346, 0.3062290299375441, 0, 99, {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}, 237.03854879262025)
+x 和 y 不存在协整关系</code></pre>
+</div>
+</div>
 
 
 </section>
