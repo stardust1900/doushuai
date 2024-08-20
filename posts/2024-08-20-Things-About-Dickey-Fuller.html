@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="王一刀">
+<meta name="dcterms.date" content="2024-08-20">
+
+<title>关于迪基-富勒检验 – 兜率宫</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">兜率宫</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://wangxuan.me"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/stardust1900"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://weibo.com/halfg0d"> <i class="bi bi-sina-weibo" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">关于</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">关于迪基-富勒检验</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">量化交易</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>王一刀 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 20, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="时间序列模型" class="level2">
+<h2 class="anchored" data-anchor-id="时间序列模型">时间序列模型</h2>
+<p>时间序列模型是一种用于分析和预测时间序列数据的统计模型。这些模型通过识别数据中的趋势、季节性和其他模式，来预测未来的值。以下是关于时间序列模型的相关信息：</p>
+<section id="时间序列模型的定义" class="level3">
+<h3 class="anchored" data-anchor-id="时间序列模型的定义">时间序列模型的定义</h3>
+<p>时间序列模型定义为一个随机过程，即<strong>按时间排序的随机变量的集合</strong>。每个时刻的位置点作为一个随机变量，其取值是从一个分布中采样得到的。</p>
+</section>
+<section id="时间序列模型的分类" class="level3">
+<h3 class="anchored" data-anchor-id="时间序列模型的分类">时间序列模型的分类</h3>
+<ul>
+<li>自回归模型 (AR)：根据历史观测值来预测未来时序。</li>
+<li>移动平均模型 (MA)：根据白噪声的系数加权和来预测未来时序。</li>
+<li>自回归移动平均模型 (ARMA)：结合了AR和MA的特点，同时考虑历史观测值和白噪声的影响。</li>
+<li>差分移动自回归模型 (ARIMA)：适用于有明显上升或下降趋势的数据集，通过差分使数据平稳后使用ARMA拟合。</li>
+</ul>
+</section>
+<section id="时间序列模型的平稳性" class="level3">
+<h3 class="anchored" data-anchor-id="时间序列模型的平稳性">时间序列模型的平稳性</h3>
+<p>平稳性是指时间序列的统计特性（如均值、方差和自协方差）不随时间变化。如果时间序列有季节性和趋势性，则视为不平稳。平稳性是许多时间序列预测模型（如自回归模型）的基础。</p>
+</section>
+<section id="特征根与时间序列模型的关系" class="level3">
+<h3 class="anchored" data-anchor-id="特征根与时间序列模型的关系">特征根与时间序列模型的关系</h3>
+<p>特征根是判断时间序列模型平稳性的关键。一个平稳时间序列模型的特征根都在单位圆内，这意味着模型是稳定的，能够提供可靠的预测。</p>
+</section>
+</section>
+<section id="特征根" class="level2">
+<h2 class="anchored" data-anchor-id="特征根">特征根</h2>
+<p>特征根是线性代数中的一个重要概念，特别是在时间序列分析中。特征根与特征向量一起，构成了理解线性变换和动态系统行为的基础。以下是关于特征根的相关信息：</p>
+<section id="特征根的定义" class="level3">
+<h3 class="anchored" data-anchor-id="特征根的定义">特征根的定义</h3>
+<p>特征根是线性代数中一个矩阵的特征方程的根，它表示矩阵对应的线性变换在特定方向上的伸缩因子。在时间序列分析中，特征根与时间序列的稳定性密切相关。</p>
+</section>
+<section id="特征根在时间序列分析中的应用" class="level3">
+<h3 class="anchored" data-anchor-id="特征根在时间序列分析中的应用">特征根在时间序列分析中的应用</h3>
+<ul>
+<li>平稳性检验：通过检查特征根的位置（是否在单位圆内），可以判断时间序列是否平稳。如果所有特征根都在单位圆内，则时间序列是平稳的，否则是非平稳的。</li>
+<li>模型选择：不同的时间序列模型（如AR、MA、ARMA）的特征根有不同的性质，这些性质可以帮助我们选择合适的模型进行分析和预测。</li>
+</ul>
+</section>
+<section id="特征根与时间序列稳定性的关系" class="level3">
+<h3 class="anchored" data-anchor-id="特征根与时间序列稳定性的关系">特征根与时间序列稳定性的关系</h3>
+<p>单位根与序列稳定性：如果一个时间序列的特征根包含单位根（即特征根的绝对值等于1），则该序列是非平稳的。单位根的存在意味着序列的统计特性会随时间变化，这可能会影响到时间序列的预测能力。</p>
+<p>特征方程：对于时间序列模型，特征方程是通过将模型的差分方程转化为代数方程得到的。例如，AR(1)模型的特征方程为 1−aZ=0，其中 a 是自回归系数，Z 是特征根</p>
+<p>对模型预测能力的影响：特征根的位置决定了时间序列模型的预测能力。平稳的时间序列模型（所有特征根都在单位圆内）可以提供可靠的短期预测，而非平稳序列可能需要通过差分等方法转换为平稳序列后才能进行有效预测。</p>
+</section>
+<section id="特征根的理解" class="level3">
+<h3 class="anchored" data-anchor-id="特征根的理解">特征根的理解</h3>
+<p>特征根是线性代数中的一个重要概念，它与矩阵的特征方程密切相关。特征方程是一个关于未知数λ的方程，这个方程是通过求解矩阵A减去λ倍的单位矩阵后的行列式等于0得到的。</p>
+<p>具体来说，对于一个n×n的矩阵A，其特征方程可以表示为： det(A - λI) = 0</p>
+<p>其中，det表示行列式，I是n×n的单位矩阵，λ是我们要求的特征根。</p>
+<p>这个特征方程的解，即特征根λ，具有特殊的意义。它表示矩阵A对应的线性变换在某个特定方向上的伸缩因子。换句话说，如果我们有一个向量v，它是对应于特征根λ的特征向量，那么矩阵A作用在这个向量上，就相当于把这个向量伸缩了λ倍。</p>
+<p>举个例子来说明这个概念：</p>
+<p>假设我们有一个2×2的矩阵A：</p>
+<pre><code>A = [[3, 1],
+     [1, 3]]</code></pre>
+<p>我们需要找到这个矩阵的特征根和特征向量。</p>
+<p>首先，我们写出特征方程： det(A - λI) = det([[3-λ, 1], [1, 3-λ]]) = (3-λ)^2 - 1 = λ^2 - 6λ + 8 = 0</p>
+<p>解这个方程，我们得到两个特征根： λ1 = 2, λ2 = 4</p>
+<p>接下来，我们分别求对应于这两个特征根的特征向量。</p>
+<p>对于λ1 = 2，我们解方程组(A - 2I)v = 0，得到一个特征向量v1 = [1, -1]^T（T表示转置）。</p>
+<p>对于λ2 = 4，我们解方程组(A - 4I)v = 0，得到另一个特征向量v2 = [1, 1]^T。</p>
+<p>现在，我们可以验证特征根的含义。对于特征向量v1 = [1, -1]^T，矩阵A作用在这个向量上得到的结果是： Av1 = A[1, -1]^T = [3 * 1 + 1<em>(-1), 1 </em> 1 + 3*(-1)]^T = [2, -2]^T = 2*v1</p>
+<p>可以看到，矩阵A将特征向量v1伸缩了2倍，这与我们找到的特征根λ1 = 2是一致的。</p>
+<p>同样地，对于特征向量v2 = [1, 1]^T，矩阵A作用在这个向量上得到的结果是： Av2 = A[1, 1]^T = [3 * 1 + 1 * 1, 1 * 1 + 3 * 1]^T = [4, 4]^T = 4*v2</p>
+<p>矩阵A将特征向量v2伸缩了4倍，这与我们找到的特征根λ2 = 4也是一致的。</p>
+<p>通过这个例子，我们可以看到特征根确实表示了矩阵对应的线性变换在特定方向上的伸缩因子。</p>
+<div id="cell-3" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller, kpss</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.graphics.tsaplots <span class="im">import</span> plot_acf, plot_pacf</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义一个2x2矩阵</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">3</span>, <span class="dv">1</span>],</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">1</span>, <span class="dv">3</span>]])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用numpy.linalg.eig函数计算特征根和特征向量</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>eigenvalues, eigenvectors <span class="op">=</span> np.linalg.eig(A)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"特征根:"</span>, eigenvalues)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"特征向量:</span><span class="ch">\n</span><span class="st">"</span>, eigenvectors)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成一个非平稳的时间序列数据</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.cumsum(np.random.randn(<span class="dv">100</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 将数据转换为pandas的Series对象</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>data_series <span class="op">=</span> pd.Series(data)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制时间序列图</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># data_series.plot()</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 进行DF检验</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>result_df <span class="op">=</span> adfuller(data_series)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出DF检验结果</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'ADF Statistic:'</span>, result_df[<span class="dv">0</span>])</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value:'</span>, result_df[<span class="dv">1</span>])</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Critical Values:'</span>, result_df[<span class="dv">4</span>])</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 根据p-value判断是否拒绝原假设</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> result_df[<span class="dv">1</span>] <span class="op">&lt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'拒绝原假设，序列是平稳的'</span>)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'接受原假设，序列是非平稳的'</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 进行ADF检验</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>result_adf <span class="op">=</span> adfuller(data_series, regression<span class="op">=</span><span class="st">'c'</span>, autolag<span class="op">=</span><span class="st">'AIC'</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出ADF检验结果</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'ADF Statistic:'</span>, result_adf[<span class="dv">0</span>])</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value:'</span>, result_adf[<span class="dv">1</span>])</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Critical Values:'</span>, result_adf[<span class="dv">4</span>])</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 根根据p-value判断是否拒绝原假设</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> result_adf[<span class="dv">1</span>] <span class="op">&lt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'拒绝原假设，序列是平稳的'</span>)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'接受原假设，序列是非平稳的'</span>)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co"># 进行KPSS检验</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>result_kpss <span class="op">=</span> kpss(data_series, regression<span class="op">=</span><span class="st">'c'</span>)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出KPSS检验结果</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'KPSS Statistic:'</span>, result_kpss[<span class="dv">0</span>])</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value:'</span>, result_kpss[<span class="dv">1</span>])</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Critical Values:'</span>, result_kpss[<span class="dv">3</span>])</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 根据p-value判断是否拒绝原假设</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> result_kpss[<span class="dv">1</span>] <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'拒绝原假设，序列是平稳的'</span>)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'接受原假设，序列是非平稳的'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>特征根: [4. 2.]
+特征向量:
+ [[ 0.70710678 -0.70710678]
+ [ 0.70710678  0.70710678]]
+ADF Statistic: -1.1320384625097901
+p-value: 0.7021277385898382
+Critical Values: {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}
+接受原假设，序列是非平稳的
+ADF Statistic: -1.1320384625097901
+p-value: 0.7021277385898382
+Critical Values: {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}
+接受原假设，序列是非平稳的
+KPSS Statistic: 1.1001161286471666
+p-value: 0.01
+Critical Values: {'10%': 0.347, '5%': 0.463, '2.5%': 0.574, '1%': 0.739}
+接受原假设，序列是非平稳的</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\win10\AppData\Local\Temp\ipykernel_15296\3430932899.py:56: InterpolationWarning: The test statistic is outside of the range of p-values available in the
+look-up table. The actual p-value is smaller than the p-value returned.
+
+  result_kpss = kpss(data_series, regression='c')</code></pre>
+</div>
+</div>
+<p>DF检验，也称为Dickey-Fuller检验，是一种用于检验时间序列数据是否含有单位根的统计方法。单位根是指一个时间序列的期望值不为零，但其自协方差函数仅依赖于时间间隔的长度，而不依赖于时间的起点。这种特性使得时间序列数据表现出非平稳性，即它们的统计特性会随时间变化。DF检验的基本思想是通过检验时间序列的回归模型中的自回归系数是否为零来确定是否存在单位根。以下是DF检验的相关信息：</p>
+</section>
+<section id="df检验的基本原理" class="level3">
+<h3 class="anchored" data-anchor-id="df检验的基本原理">DF检验的基本原理</h3>
+<p>DF检验通过检验时间序列的回归模型中的自回归系数是否为零来确定是否存在单位根。如果自回归系数显著不为零，则表明序列含有单位根，即序列是非平稳的。</p>
+</section>
+<section id="df检验的应用场景" class="level3">
+<h3 class="anchored" data-anchor-id="df检验的应用场景">DF检验的应用场景</h3>
+<p>DF检验广泛应用于经济学、金融学和统计学等领域，用于检验时间序列数据的平稳性。例如，在经济学中，它可以帮助分析经济增长率、通货膨胀率等时间序列数据的稳定性。</p>
+</section>
+<section id="df检验的优缺点" class="level3">
+<h3 class="anchored" data-anchor-id="df检验的优缺点">DF检验的优缺点</h3>
+<p>优点：DF检验是一种简单且易于实施的统计方法，适用于均值比较的问题，并且可以处理样本大小不一致的情况。 缺点：DF检验对样本数据的正态性有一定要求，如果数据不符合正态分布，可能会影响检验结果的准确性。它只能比较两个样本均值之间的差异，不能提供对多个样本进行比较的信息。</p>
+</section>
+<section id="df检验与adf检验的区别" class="level3">
+<h3 class="anchored" data-anchor-id="df检验与adf检验的区别">DF检验与ADF检验的区别</h3>
+<p>DF检验是最早提出的单位根检验方法之一，它是建立在一个简单的自回归模型(AR(1))上的。相比之下，ADF检验使用了更复杂的自回归模型，并且引入了趋势项来对序列的趋势进行建模，从而提高了检验的适用性和准确性。 DF检验只能应用于一阶情况，当序列存在高阶的滞后相关时，可以使用ADF检验，所以说ADF是对DF检验的扩展。</p>
+<div id="cell-5" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 假设我们有以下数据</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 添加截距项</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sm.add_constant(x)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 拟合线性回归模型</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># model = sm.OLS(y, x).fit()</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># # 输出模型摘要</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># print(model.summary())</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># # 预测</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># predictions = model.predict(x)</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># print("预测值:", predictions)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1 2 3 4 5]
+[[1. 1.]
+ [1. 2.]
+ [1. 3.]
+ [1. 4.]
+ [1. 5.]]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="赫斯特hurst指数" class="level2">
+<h2 class="anchored" data-anchor-id="赫斯特hurst指数">赫斯特（Hurst）指数</h2>
+<p>赫斯特（Hurst）指数是一种用于分析时间序列数据的统计工具，主要用于衡量时间序列的长期记忆性或自相关性。赫斯特指数是由英国水文学家哈罗德·赫斯特（Harold Edwin Hurst）在20世纪50年代提出的，最初用于分析尼罗河的水位变化。</p>
+<p>赫斯特指数的取值范围在0到1之间，可以分为以下几种情况：</p>
+<p>H = 0.5：时间序列是随机的，没有自相关性。这种情况下，时间序列的未来值与过去值之间没有任何关系。</p>
+<p>0.5 &lt; H &lt; 1：时间序列具有长期记忆性，即未来的趋势与过去的趋势有关。这种情况下，时间序列呈现出持久性（persistence），即如果过去是上升的，未来也很可能继续上升；如果过去是下降的，未来也很可能继续下降。</p>
+<p>0 ≤ H &lt; 0.5：时间序列具有反记忆性（antipersistence），即未来的趋势与过去的趋势相反。这种情况下，时间序列呈现出均值回归（mean reversion）的特性，即如果过去是上升的，未来很可能下降；如果过去是下降的，未来很可能上升。</p>
+<p>赫斯特指数的计算方法有很多种，其中最常用的是重标极差法（Rescaled Range Analysis, R/S）。以下是计算赫斯特指数的基本步骤：</p>
+<ol type="1">
+<li>将时间序列分成若干个等长的子序列。</li>
+<li>对每个子序列计算累积和（cumulative sum）。</li>
+<li>对每个子序列计算标准差（standard deviation）。</li>
+<li>计算每个子序列的重标极差（rescaled range），即累积和的最大值与最小值之差除以子序列的标准差。</li>
+<li>计算整个时间序列的重标极差均值。</li>
+<li>根据重标极差均值和时间序列的长度计算赫斯特指数。</li>
+</ol>
+<p>赫斯特指数在许多领域都有广泛的应用，如金融市场分析、气象学、水文学、地球物理学等。通过计算赫斯特指数，可以帮助我们了解时间序列数据的特性，预测未来趋势，以及评估不同时间序列之间的相关性。</p>
+<p>方差比检验（Variance Ratio Test）是一种用于检验两个或多个独立样本方差是否相等的统计方法。它基于F分布，通过比较两组数据的方差来判断它们是否来自具有相同方差的总体。</p>
+<p>方差比检验的步骤如下：</p>
+<p>提出假设：</p>
+<p>原假设（H0）：两组数据的方差相等。 备择假设（H1）：两组数据的方差不等于相等。 计算检验统计量：</p>
+<p>计算两组数据的样本方差 ( s_1^2 ) 和 ( s_2^2 )。 计算方差比 ( VR = ) 或 ( VR = )，具体取决于哪组数据的方差较大。 根据样本大小 ( n_1 ) 和 ( n_2 )，查找F分布表，确定临界值 ( F_{/2} ) 和 ( F_{1-/2} )。 做出决策：</p>
+<p>如果 ( VR ) 落在拒绝域内（即 ( VR &lt; F_{/2} ) 或 ( VR &gt; F_{1-/2} )），则拒绝原假设，认为两组数据的方差不等于相等。 如果 ( VR ) 落在接受域内，则不拒绝原假设，认为两组数据的方差相等。 方差比检验的适用条件包括：</p>
+<p>样本是独立的。 样本来自正态分布的总体。 方差比检验通常用于比较两个独立样本的方差，但也可以扩展到多个样本的情况。 需要注意的是，方差比检验对样本大小和分布的正态性有一定的要求。如果样本大小较小或数据分布偏离正态性，检验结果可能不准确。在实际应用中，可以考虑使用其他统计方法，如Levene检验或Bartlett检验，来检验方差的齐性。</p>
+<p>半衰期检验（Half-Life Test）是一种用于评估放射性物质衰变速率的实验方法。在核物理学、化学和环境科学等领域，半衰期检验被广泛应用于研究放射性同位素的衰变特性。通过测量放射性物质在一定时间内的衰变量，可以计算出其半衰期，从而了解其衰变速率和放射性强度。</p>
+<p>半衰期检验的基本原理是：在一个封闭系统中，放射性物质的原子核会随着时间的推移逐渐衰变成其他元素或同位素。在衰变过程中，放射性物质的剩余量会按照一定的规律减少。半衰期是指放射性物质剩余量减少到原来的一半所需的时间。</p>
+<p>进行半衰期检验的步骤如下：</p>
+<p>准备样品：选择一个合适的放射性物质样品，并将其置于一个封闭的容器中。</p>
+<p>测量初始放射性强度：使用辐射探测器测量样品的初始放射性强度。</p>
+<p>等待一段时间：等待足够长的时间，使得样品的放射性强度发生明显变化。</p>
+<p>再次测量放射性强度：在等待时间结束后，再次使用辐射探测器测量样品的放射性强度。</p>
+<p>计算半衰期：根据两次测量的放射性强度和时间间隔，使用以下公式计算半衰期：</p>
+<p>[ t_{1/2} = ]</p>
+<p>其中，( t_{1/2} ) 是半衰期，( (2) ) 是自然对数的底数（约等于 0.693），( k ) 是衰变速率常数。</p>
+<p>分析结果：根据计算出的半衰期，分析放射性物质的衰变速率和放射性强度。</p>
+<p>需要注意的是，半衰期检验需要在专业的实验室环境中进行，并采取适当的安全措施，以防止辐射对人体的伤害。此外，半衰期检验的结果可能受到测量误差和其他因素的影响，因此需要进行多次实验并取平均值以提高准确性。</p>
+<p><strong>半衰期检验（Half-Life Test）本身并不是专门用于测试时间序列的回归性和平稳性的方法。半衰期检验主要用于评估放射性物质衰变速率，而不是时间序列分析</strong></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/stardust1900\.github\.io\/doushuai\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

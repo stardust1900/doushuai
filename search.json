@@ -1,66 +1,87 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "王君敕的炼丹房",
+    "objectID": "posts/2024-08-20-Things-About-Dickey-Fuller.html",
+    "href": "posts/2024-08-20-Things-About-Dickey-Fuller.html",
+    "title": "关于迪基-富勒检验",
     "section": "",
-    "text": "算法交易\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 27, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\n随机漫步\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 25, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nbacktrader回测系统\n\n\n\n\n\n\n量化交易\n\n\n\nbacktrader\n\n\n\n\n\nDec 6, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH7-量化交易专题\n\n\n\n\n\n\n量化交易\n\n\n\nSpecial Topics in Quantitative Trading\n\n\n\n\n\nAug 27, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH6-资金和风险管理\n\n\n\n\n\n\n量化交易\n\n\n\nMoney and Risk Management\n\n\n\n\n\nAug 27, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH5-交易执行系统\n\n\n\n\n\n\n量化交易\n\n\n\nExecutions Systems\n\n\n\n\n\nAug 19, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH4-建立你的事业\n\n\n\n\n\n\n量化交易\n\n\n\nSetting Up Your Business\n\n\n\n\n\nAug 18, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH3-回测\n\n\n\n\n\n\n量化交易\n\n\n\nBacktesting\n\n\n\n\n\nAug 16, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH2-捕获点子\n\n\n\n\n\n\n量化交易\n\n\n\nfishing of ideas\n\n\n\n\n\nAug 13, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH1-量化交易简介\n\n\n\n\n\n\n量化交易\n\n\n\n量化交易是什么，谁参与量化交易，为什么要量化交易\n\n\n\n\n\nAug 12, 2021\n\n\n王一刀\n\n\n\n\n\n\nNo matching items"
+    "text": "时间序列模型是一种用于分析和预测时间序列数据的统计模型。这些模型通过识别数据中的趋势、季节性和其他模式，来预测未来的值。以下是关于时间序列模型的相关信息：\n\n\n时间序列模型定义为一个随机过程，即按时间排序的随机变量的集合。每个时刻的位置点作为一个随机变量，其取值是从一个分布中采样得到的。\n\n\n\n\n自回归模型 (AR)：根据历史观测值来预测未来时序。\n移动平均模型 (MA)：根据白噪声的系数加权和来预测未来时序。\n自回归移动平均模型 (ARMA)：结合了AR和MA的特点，同时考虑历史观测值和白噪声的影响。\n差分移动自回归模型 (ARIMA)：适用于有明显上升或下降趋势的数据集，通过差分使数据平稳后使用ARMA拟合。\n\n\n\n\n平稳性是指时间序列的统计特性（如均值、方差和自协方差）不随时间变化。如果时间序列有季节性和趋势性，则视为不平稳。平稳性是许多时间序列预测模型（如自回归模型）的基础。\n\n\n\n特征根是判断时间序列模型平稳性的关键。一个平稳时间序列模型的特征根都在单位圆内，这意味着模型是稳定的，能够提供可靠的预测。"
   },
   {
-    "objectID": "posts/2021-08-27-money-and-risk-management.html",
-    "href": "posts/2021-08-27-money-and-risk-management.html",
-    "title": "CH6-资金和风险管理",
+    "objectID": "posts/2024-08-20-Things-About-Dickey-Fuller.html#时间序列模型",
+    "href": "posts/2024-08-20-Things-About-Dickey-Fuller.html#时间序列模型",
+    "title": "关于迪基-富勒检验",
     "section": "",
-    "text": "想从量化交易中赚钱，风险管理至关重要，把挫跌控制在可接受的范围内，把头寸建在净值的最优杠杆水平上，才能实现财富的最大可能增长。 我们要用的主要工具是凯利公式。"
+    "text": "时间序列模型是一种用于分析和预测时间序列数据的统计模型。这些模型通过识别数据中的趋势、季节性和其他模式，来预测未来的值。以下是关于时间序列模型的相关信息：\n\n\n时间序列模型定义为一个随机过程，即按时间排序的随机变量的集合。每个时刻的位置点作为一个随机变量，其取值是从一个分布中采样得到的。\n\n\n\n\n自回归模型 (AR)：根据历史观测值来预测未来时序。\n移动平均模型 (MA)：根据白噪声的系数加权和来预测未来时序。\n自回归移动平均模型 (ARMA)：结合了AR和MA的特点，同时考虑历史观测值和白噪声的影响。\n差分移动自回归模型 (ARIMA)：适用于有明显上升或下降趋势的数据集，通过差分使数据平稳后使用ARMA拟合。\n\n\n\n\n平稳性是指时间序列的统计特性（如均值、方差和自协方差）不随时间变化。如果时间序列有季节性和趋势性，则视为不平稳。平稳性是许多时间序列预测模型（如自回归模型）的基础。\n\n\n\n特征根是判断时间序列模型平稳性的关键。一个平稳时间序列模型的特征根都在单位圆内，这意味着模型是稳定的，能够提供可靠的预测。"
   },
   {
-    "objectID": "posts/2021-08-27-money-and-risk-management.html#最佳资本配置和杠杆",
-    "href": "posts/2021-08-27-money-and-risk-management.html#最佳资本配置和杠杆",
-    "title": "CH6-资金和风险管理",
-    "section": "最佳资本配置和杠杆",
-    "text": "最佳资本配置和杠杆\n假设计划进行几个策略的交易，每个策略都有其预期收益和标准差。那么，如何在这些策略之间进行最优的资本配置呢？\n我们的优化目标是长期财富最大化。一定要避免赔光。\n假设策略i(这里用i代表第i个策略)的收益率服从正态分布，其均值\\(m_i\\)和标准差\\(s_i\\)已给定。\n用列向量\n\\(F^* = (f_1^* ,f_2^* ,...,f_n^* )^T\\)\n表示分配到n个策略的最优净值比例，其中T代表转置。\n给定优化目标并假设收益率服从正态分布，Thorp不是给出了以下最优配置公式：\n\\(F^* = C^{-1}M\\)\n\nC表示协方差矩阵，矩阵的元素\\(C_ij\\)表示第i 个策略和第j个策略收益率的协方差，-1表示矩阵的逆\n\\(M = (m_1,m_2,...,m_n)^T\\) 表示策略平均收益率的列向量\n\n如果假设所有策略在统计上独立，协方差矩阵就变为对角矩阵，对角线元素等于每个策略收益率的方差，公式：\n\\(f_i = m_i/s_i^2\\)\n这就是著名的凯利公式。"
+    "objectID": "posts/2024-08-20-Things-About-Dickey-Fuller.html#特征根",
+    "href": "posts/2024-08-20-Things-About-Dickey-Fuller.html#特征根",
+    "title": "关于迪基-富勒检验",
+    "section": "特征根",
+    "text": "特征根\n特征根是线性代数中的一个重要概念，特别是在时间序列分析中。特征根与特征向量一起，构成了理解线性变换和动态系统行为的基础。以下是关于特征根的相关信息：\n\n特征根的定义\n特征根是线性代数中一个矩阵的特征方程的根，它表示矩阵对应的线性变换在特定方向上的伸缩因子。在时间序列分析中，特征根与时间序列的稳定性密切相关。\n\n\n特征根在时间序列分析中的应用\n\n平稳性检验：通过检查特征根的位置（是否在单位圆内），可以判断时间序列是否平稳。如果所有特征根都在单位圆内，则时间序列是平稳的，否则是非平稳的。\n模型选择：不同的时间序列模型（如AR、MA、ARMA）的特征根有不同的性质，这些性质可以帮助我们选择合适的模型进行分析和预测。\n\n\n\n特征根与时间序列稳定性的关系\n单位根与序列稳定性：如果一个时间序列的特征根包含单位根（即特征根的绝对值等于1），则该序列是非平稳的。单位根的存在意味着序列的统计特性会随时间变化，这可能会影响到时间序列的预测能力。\n特征方程：对于时间序列模型，特征方程是通过将模型的差分方程转化为代数方程得到的。例如，AR(1)模型的特征方程为 1−aZ=0，其中 a 是自回归系数，Z 是特征根\n对模型预测能力的影响：特征根的位置决定了时间序列模型的预测能力。平稳的时间序列模型（所有特征根都在单位圆内）可以提供可靠的短期预测，而非平稳序列可能需要通过差分等方法转换为平稳序列后才能进行有效预测。\n\n\n特征根的理解\n特征根是线性代数中的一个重要概念，它与矩阵的特征方程密切相关。特征方程是一个关于未知数λ的方程，这个方程是通过求解矩阵A减去λ倍的单位矩阵后的行列式等于0得到的。\n具体来说，对于一个n×n的矩阵A，其特征方程可以表示为： det(A - λI) = 0\n其中，det表示行列式，I是n×n的单位矩阵，λ是我们要求的特征根。\n这个特征方程的解，即特征根λ，具有特殊的意义。它表示矩阵A对应的线性变换在某个特定方向上的伸缩因子。换句话说，如果我们有一个向量v，它是对应于特征根λ的特征向量，那么矩阵A作用在这个向量上，就相当于把这个向量伸缩了λ倍。\n举个例子来说明这个概念：\n假设我们有一个2×2的矩阵A：\nA = [[3, 1],\n     [1, 3]]\n我们需要找到这个矩阵的特征根和特征向量。\n首先，我们写出特征方程： det(A - λI) = det([[3-λ, 1], [1, 3-λ]]) = (3-λ)^2 - 1 = λ^2 - 6λ + 8 = 0\n解这个方程，我们得到两个特征根： λ1 = 2, λ2 = 4\n接下来，我们分别求对应于这两个特征根的特征向量。\n对于λ1 = 2，我们解方程组(A - 2I)v = 0，得到一个特征向量v1 = [1, -1]^T（T表示转置）。\n对于λ2 = 4，我们解方程组(A - 4I)v = 0，得到另一个特征向量v2 = [1, 1]^T。\n现在，我们可以验证特征根的含义。对于特征向量v1 = [1, -1]^T，矩阵A作用在这个向量上得到的结果是： Av1 = A[1, -1]^T = [3 * 1 + 1(-1), 1  1 + 3*(-1)]^T = [2, -2]^T = 2*v1\n可以看到，矩阵A将特征向量v1伸缩了2倍，这与我们找到的特征根λ1 = 2是一致的。\n同样地，对于特征向量v2 = [1, 1]^T，矩阵A作用在这个向量上得到的结果是： Av2 = A[1, 1]^T = [3 * 1 + 1 * 1, 1 * 1 + 3 * 1]^T = [4, 4]^T = 4*v2\n矩阵A将特征向量v2伸缩了4倍，这与我们找到的特征根λ2 = 4也是一致的。\n通过这个例子，我们可以看到特征根确实表示了矩阵对应的线性变换在特定方向上的伸缩因子。\n\nimport numpy as np\nimport pandas as pd\nfrom statsmodels.tsa.stattools import adfuller, kpss\nfrom statsmodels.graphics.tsaplots import plot_acf, plot_pacf\n\n# 定义一个2x2矩阵\nA = np.array([[3, 1],\n              [1, 3]])\n\n# 使用numpy.linalg.eig函数计算特征根和特征向量\neigenvalues, eigenvectors = np.linalg.eig(A)\n\nprint(\"特征根:\", eigenvalues)\nprint(\"特征向量:\\n\", eigenvectors)\n\n# 生成一个非平稳的时间序列数据\nnp.random.seed(0)\ndata = np.cumsum(np.random.randn(100))\n\n# 将数据转换为pandas的Series对象\ndata_series = pd.Series(data)\n\n# 绘制时间序列图\n# data_series.plot()\n\n# 进行DF检验\nresult_df = adfuller(data_series)\n\n# 输出DF检验结果\nprint('ADF Statistic:', result_df[0])\nprint('p-value:', result_df[1])\nprint('Critical Values:', result_df[4])\n\n# 根据p-value判断是否拒绝原假设\nif result_df[1] &lt; 0.05:\n    print('拒绝原假设，序列是平稳的')\nelse:\n    print('接受原假设，序列是非平稳的')\n\n\n# 进行ADF检验\nresult_adf = adfuller(data_series, regression='c', autolag='AIC')\n\n# 输出ADF检验结果\nprint('ADF Statistic:', result_adf[0])\nprint('p-value:', result_adf[1])\nprint('Critical Values:', result_adf[4])\n\n# 根根据p-value判断是否拒绝原假设\nif result_adf[1] &lt; 0.05:\n    print('拒绝原假设，序列是平稳的')\nelse:\n    print('接受原假设，序列是非平稳的')\n\n# 进行KPSS检验\nresult_kpss = kpss(data_series, regression='c')\n\n# 输出KPSS检验结果\nprint('KPSS Statistic:', result_kpss[0])\nprint('p-value:', result_kpss[1])\nprint('Critical Values:', result_kpss[3])\n\n# 根据p-value判断是否拒绝原假设\nif result_kpss[1] &gt; 0.05:\n    print('拒绝原假设，序列是平稳的')\nelse:\n    print('接受原假设，序列是非平稳的')\n\n特征根: [4. 2.]\n特征向量:\n [[ 0.70710678 -0.70710678]\n [ 0.70710678  0.70710678]]\nADF Statistic: -1.1320384625097901\np-value: 0.7021277385898382\nCritical Values: {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}\n接受原假设，序列是非平稳的\nADF Statistic: -1.1320384625097901\np-value: 0.7021277385898382\nCritical Values: {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}\n接受原假设，序列是非平稳的\nKPSS Statistic: 1.1001161286471666\np-value: 0.01\nCritical Values: {'10%': 0.347, '5%': 0.463, '2.5%': 0.574, '1%': 0.739}\n接受原假设，序列是非平稳的\n\n\nC:\\Users\\win10\\AppData\\Local\\Temp\\ipykernel_15296\\3430932899.py:56: InterpolationWarning: The test statistic is outside of the range of p-values available in the\nlook-up table. The actual p-value is smaller than the p-value returned.\n\n  result_kpss = kpss(data_series, regression='c')\n\n\nDF检验，也称为Dickey-Fuller检验，是一种用于检验时间序列数据是否含有单位根的统计方法。单位根是指一个时间序列的期望值不为零，但其自协方差函数仅依赖于时间间隔的长度，而不依赖于时间的起点。这种特性使得时间序列数据表现出非平稳性，即它们的统计特性会随时间变化。DF检验的基本思想是通过检验时间序列的回归模型中的自回归系数是否为零来确定是否存在单位根。以下是DF检验的相关信息：\n\n\nDF检验的基本原理\nDF检验通过检验时间序列的回归模型中的自回归系数是否为零来确定是否存在单位根。如果自回归系数显著不为零，则表明序列含有单位根，即序列是非平稳的。\n\n\nDF检验的应用场景\nDF检验广泛应用于经济学、金融学和统计学等领域，用于检验时间序列数据的平稳性。例如，在经济学中，它可以帮助分析经济增长率、通货膨胀率等时间序列数据的稳定性。\n\n\nDF检验的优缺点\n优点：DF检验是一种简单且易于实施的统计方法，适用于均值比较的问题，并且可以处理样本大小不一致的情况。 缺点：DF检验对样本数据的正态性有一定要求，如果数据不符合正态分布，可能会影响检验结果的准确性。它只能比较两个样本均值之间的差异，不能提供对多个样本进行比较的信息。\n\n\nDF检验与ADF检验的区别\nDF检验是最早提出的单位根检验方法之一，它是建立在一个简单的自回归模型(AR(1))上的。相比之下，ADF检验使用了更复杂的自回归模型，并且引入了趋势项来对序列的趋势进行建模，从而提高了检验的适用性和准确性。 DF检验只能应用于一阶情况，当序列存在高阶的滞后相关时，可以使用ADF检验，所以说ADF是对DF检验的扩展。\n\nimport statsmodels.api as sm\nimport numpy as np\n\n# 假设我们有以下数据\nx = np.array([1, 2, 3, 4, 5])\ny = np.array([2, 3, 4, 5, 6])\nprint(x)\n# 添加截距项\nx = sm.add_constant(x)\n\nprint(x)\n\n# 拟合线性回归模型\n# model = sm.OLS(y, x).fit()\n\n# # 输出模型摘要\n# print(model.summary())\n\n# # 预测\n# predictions = model.predict(x)\n# print(\"预测值:\", predictions)\n\n[1 2 3 4 5]\n[[1. 1.]\n [1. 2.]\n [1. 3.]\n [1. 4.]\n [1. 5.]]"
   },
   {
-    "objectID": "posts/2021-08-27-money-and-risk-management.html#做好心理准备",
-    "href": "posts/2021-08-27-money-and-risk-management.html#做好心理准备",
-    "title": "CH6-资金和风险管理",
-    "section": "做好心理准备",
-    "text": "做好心理准备\n\n禀赋效应、安于现状偏差、亏损厌恶\n代表性偏差（即人们倾向于对近期经验赋予过多权重，而低估了长期平均的作用）\n恐惧和贪婪"
+    "objectID": "posts/2024-08-20-Things-About-Dickey-Fuller.html#赫斯特hurst指数",
+    "href": "posts/2024-08-20-Things-About-Dickey-Fuller.html#赫斯特hurst指数",
+    "title": "关于迪基-富勒检验",
+    "section": "赫斯特（Hurst）指数",
+    "text": "赫斯特（Hurst）指数\n赫斯特（Hurst）指数是一种用于分析时间序列数据的统计工具，主要用于衡量时间序列的长期记忆性或自相关性。赫斯特指数是由英国水文学家哈罗德·赫斯特（Harold Edwin Hurst）在20世纪50年代提出的，最初用于分析尼罗河的水位变化。\n赫斯特指数的取值范围在0到1之间，可以分为以下几种情况：\nH = 0.5：时间序列是随机的，没有自相关性。这种情况下，时间序列的未来值与过去值之间没有任何关系。\n0.5 &lt; H &lt; 1：时间序列具有长期记忆性，即未来的趋势与过去的趋势有关。这种情况下，时间序列呈现出持久性（persistence），即如果过去是上升的，未来也很可能继续上升；如果过去是下降的，未来也很可能继续下降。\n0 ≤ H &lt; 0.5：时间序列具有反记忆性（antipersistence），即未来的趋势与过去的趋势相反。这种情况下，时间序列呈现出均值回归（mean reversion）的特性，即如果过去是上升的，未来很可能下降；如果过去是下降的，未来很可能上升。\n赫斯特指数的计算方法有很多种，其中最常用的是重标极差法（Rescaled Range Analysis, R/S）。以下是计算赫斯特指数的基本步骤：\n\n将时间序列分成若干个等长的子序列。\n对每个子序列计算累积和（cumulative sum）。\n对每个子序列计算标准差（standard deviation）。\n计算每个子序列的重标极差（rescaled range），即累积和的最大值与最小值之差除以子序列的标准差。\n计算整个时间序列的重标极差均值。\n根据重标极差均值和时间序列的长度计算赫斯特指数。\n\n赫斯特指数在许多领域都有广泛的应用，如金融市场分析、气象学、水文学、地球物理学等。通过计算赫斯特指数，可以帮助我们了解时间序列数据的特性，预测未来趋势，以及评估不同时间序列之间的相关性。\n方差比检验（Variance Ratio Test）是一种用于检验两个或多个独立样本方差是否相等的统计方法。它基于F分布，通过比较两组数据的方差来判断它们是否来自具有相同方差的总体。\n方差比检验的步骤如下：\n提出假设：\n原假设（H0）：两组数据的方差相等。 备择假设（H1）：两组数据的方差不等于相等。 计算检验统计量：\n计算两组数据的样本方差 ( s_1^2 ) 和 ( s_2^2 )。 计算方差比 ( VR = ) 或 ( VR = )，具体取决于哪组数据的方差较大。 根据样本大小 ( n_1 ) 和 ( n_2 )，查找F分布表，确定临界值 ( F_{/2} ) 和 ( F_{1-/2} )。 做出决策：\n如果 ( VR ) 落在拒绝域内（即 ( VR &lt; F_{/2} ) 或 ( VR &gt; F_{1-/2} )），则拒绝原假设，认为两组数据的方差不等于相等。 如果 ( VR ) 落在接受域内，则不拒绝原假设，认为两组数据的方差相等。 方差比检验的适用条件包括：\n样本是独立的。 样本来自正态分布的总体。 方差比检验通常用于比较两个独立样本的方差，但也可以扩展到多个样本的情况。 需要注意的是，方差比检验对样本大小和分布的正态性有一定的要求。如果样本大小较小或数据分布偏离正态性，检验结果可能不准确。在实际应用中，可以考虑使用其他统计方法，如Levene检验或Bartlett检验，来检验方差的齐性。\n半衰期检验（Half-Life Test）是一种用于评估放射性物质衰变速率的实验方法。在核物理学、化学和环境科学等领域，半衰期检验被广泛应用于研究放射性同位素的衰变特性。通过测量放射性物质在一定时间内的衰变量，可以计算出其半衰期，从而了解其衰变速率和放射性强度。\n半衰期检验的基本原理是：在一个封闭系统中，放射性物质的原子核会随着时间的推移逐渐衰变成其他元素或同位素。在衰变过程中，放射性物质的剩余量会按照一定的规律减少。半衰期是指放射性物质剩余量减少到原来的一半所需的时间。\n进行半衰期检验的步骤如下：\n准备样品：选择一个合适的放射性物质样品，并将其置于一个封闭的容器中。\n测量初始放射性强度：使用辐射探测器测量样品的初始放射性强度。\n等待一段时间：等待足够长的时间，使得样品的放射性强度发生明显变化。\n再次测量放射性强度：在等待时间结束后，再次使用辐射探测器测量样品的放射性强度。\n计算半衰期：根据两次测量的放射性强度和时间间隔，使用以下公式计算半衰期：\n[ t_{1/2} = ]\n其中，( t_{1/2} ) 是半衰期，( (2) ) 是自然对数的底数（约等于 0.693），( k ) 是衰变速率常数。\n分析结果：根据计算出的半衰期，分析放射性物质的衰变速率和放射性强度。\n需要注意的是，半衰期检验需要在专业的实验室环境中进行，并采取适当的安全措施，以防止辐射对人体的伤害。此外，半衰期检验的结果可能受到测量误差和其他因素的影响，因此需要进行多次实验并取平均值以提高准确性。\n半衰期检验（Half-Life Test）本身并不是专门用于测试时间序列的回归性和平稳性的方法。半衰期检验主要用于评估放射性物质衰变速率，而不是时间序列分析"
   },
   {
-    "objectID": "posts/2021-08-27-money-and-risk-management.html#收益率正态分布时凯利公式的简单推导",
-    "href": "posts/2021-08-27-money-and-risk-management.html#收益率正态分布时凯利公式的简单推导",
-    "title": "CH6-资金和风险管理",
-    "section": "收益率正态分布时凯利公式的简单推导",
-    "text": "收益率正态分布时凯利公式的简单推导\n适用于正态分布的复合杠杆增长率公式为：\n\\(g(f) = r + fm - s^2f^2/2\\)\n\nf为杠杆\nr为无风险利率\nm为平均非复合单期超额收益率\ns为非复合单期收益率的标准差\n\n为了得出使g最大化时的f，令g对f的一阶导数为零：\n\\(dg/df = m - s^2f = 0\\)\n由等式可得\\(f=m/s^2\\), 即为正态分布下策略或政权的凯利公式。"
-  },
-  {
-    "objectID": "posts/2021-08-13-fishing-of-ideas.html",
-    "href": "posts/2021-08-13-fishing-of-ideas.html",
-    "title": "CH2-捕获点子",
+    "objectID": "posts/2024-07-25-random-walk.html",
+    "href": "posts/2024-07-25-random-walk.html",
+    "title": "随机漫步",
     "section": "",
-    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
+    "text": "布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）\n即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。"
   },
   {
-    "objectID": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
-    "href": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
-    "title": "CH2-捕获点子",
+    "objectID": "posts/2024-07-25-random-walk.html#几何布朗运动brownian-motion",
+    "href": "posts/2024-07-25-random-walk.html#几何布朗运动brownian-motion",
+    "title": "随机漫步",
     "section": "",
-    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
+    "text": "布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）\n即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。"
   },
   {
-    "objectID": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
-    "href": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
-    "title": "CH2-捕获点子",
-    "section": "如何辨别策略是否适合你",
-    "text": "如何辨别策略是否适合你\n有如下几个评判依据： * 你的工作时间 * 你的编程技能 * 你的交易资本 * 你的目标"
+    "objectID": "posts/2024-07-25-random-walk.html#随机游走",
+    "href": "posts/2024-07-25-random-walk.html#随机游走",
+    "title": "随机漫步",
+    "section": "随机游走",
+    "text": "随机游走\n其概念接近于布朗运动，是布朗运动的理想数学状态。任何分子所带的守恒量都各自对应着一个扩散运输定律。\n随机游走过程\\(S_t\\)​遵循几何布朗运动，满足微分方程：\n\\(dS_t​=uS_t​d_t+σS_t​dW_t\\)\n\\(​dS_t​/S_t​=ud_t+σdW_t\\)\n​设定初试状态\\(S_0\\)，根据伊藤积分，可以解出：\n\\(S_t​=S_0​exp((u−σ^2/2)t+σW_t​)\\)\n在数学领域，函数exp(x)代表自然指数函数，即以实数e（e≈2.71828）为底的指数函数。其表达式为exp(x)=\\(e^x\\)\n所以上面的式子也可以写成：\n\\(S_t​=S_0​e^{(u−σ^2/2)t+σW_t​}\\)\n其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。\n漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势\n波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n#rect=[0.1,5.0,0.1,0.1]\nfig=plt.figure()\n\n #time span\nT=2\n#drift factor飘移率\nmu=0.1 \n#volatility波动率\nsigma=0.04 \n#t=0初试价\nS0=20 \n#length of steps\ndt=0.01 \nN=round(T/dt)\nt=np.linspace(0,T,N)\n\n#布朗运动\nW=np.random.standard_normal(size=N)\nW=np.cumsum(W)*np.sqrt(dt)\n\nX=(mu-0.5*sigma**2)*t+sigma*W\n\nS=S0*np.exp(X)\n\nplt.plot(t,S,lw=2)\nplt.show()"
   },
   {
-    "objectID": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
-    "href": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
-    "title": "CH2-捕获点子",
-    "section": "识别可用的策略及其陷阱",
-    "text": "识别可用的策略及其陷阱\n用这些方法快测试策略，确保你不会浪费你的时间和金钱\n\n这个策略和基准比较表现如何?它的回报有多持久? &gt; Though a strategy may have the same average return as the benchmark, perhaps it delivered positive returns every month while the benchmark occasionally suffered some very bad months. In this case, we would still deem the strategy superior. This leads us to consider the information ratio or Sharpe ratio (Sharpe,1994), rather than returns, as the proper performance measurement of a quantitative trading strategy.\n\n虽让一个策略可能和基准有相同的回报，但在基准下跌的月份里它仍然有正收益。我们仍然认为这个策略是优越的。这促使我们考虑用信息比率或者夏普比率，而不是回报来，作为衡量量化交易策略业绩的指标。\n\n$ Information Ratio = $\n\n$ 信息比率 = $\n(其中：超额收益率 = 组合收益率 - 基准收益率)\n\nAs a rule of thumb, any strategy that has a Sharpe ratio of less than 1 is not suitable as a stand-alone strategy. For a strategy that achieves profitability almost every month, its (annualized) Sharpe ratio is typically greater than 2. For a strategy that is profitable al\u0002most every day, its Sharpe ratio is usually greater than 3.\n\n一般来说，任何夏普率小于1的策略不适合作为单独策略。对于每月都有收益的策略，它的年化夏普率通常大于2.对于每天有收益的策略，他的夏普率通常大于3.\n\n下挫有多深多久？\n\n你要问自己，你能承受多深多久的下挫而不清算你的投资组合关闭你的策略。\n\n交易成本如何影响策略？\n\n交易成本不仅包括券商收取的佣金，还有流动成本和机会成本。\n\n数据是否存在生存者偏差\n\n历史数据库中的股票报价不包含破产退市的股票。\n\n为什么策略的业绩过几年会发生改变？\n\n策略回测要关注近几年的表现，久远的数据会包含交易成本和幸存者偏差的影响。\n\n策略是否收到数据范围偏差影响？\n\n策略含有过多参数可能会对历史数据产生过度拟合。\n\n策略是否在基金经理的盲区\n\n\nyou should look for those strategies that fly under the radar of most institutional investors, for example, strategies that have very low capacities because they trade too often, strategies that trade very few stocks ev\u0002ery day, or strategies that have very infrequent positions.\n\n你应该去寻找被机构投资者忽视的策略，比如，交易频繁容量很低的策略，每天只交易很少股票的策略，持仓时段稀少的策略。这样的特色策觉才有利可图，因为他们还没有完全被巨型的对冲基金套利掉。"
+    "objectID": "posts/2024-07-27-Algorithmic-Trading.html",
+    "href": "posts/2024-07-27-Algorithmic-Trading.html",
+    "title": "算法交易",
+    "section": "",
+    "text": "在均值回归交易策略所相关的系列当中，我们将讨论以多元的统计技术［如扩展版的迪基-富勒检验（Dickey-Fuller检验，即ADF检验）、赫斯特（Hurst）指数、方差比检验、半衰期检验模式等］来检测时间序列的均值回归之属性，以及相关的平稳性；同时，我们还要检测一个由金融工具所构建的投资组合之协整属性［相关检测模式包括协整型ADF检验（即CADF检验）、约翰森（Johansen）检验等］。除了前述这些统计测试模式被机械地应用于时间序列而外，我们还要努力传达一个直观的理解方法，即要认知相关测试的真正用意以及简易数学方程背后的深层含义。\n我们将解析一些具有均值回归属性之投资组合所相关的最简单的技术和策略模式［如线性交易模式、布林带线、卡尔曼过滤法则（Kalman filter）等］。"
+  },
+  {
+    "objectID": "posts/2024-07-27-Algorithmic-Trading.html#泰勒连续展开公式",
+    "href": "posts/2024-07-27-Algorithmic-Trading.html#泰勒连续展开公式",
+    "title": "算法交易",
+    "section": "泰勒连续展开公式",
+    "text": "泰勒连续展开公式\n泰勒连续展开公式（Taylor Series Expansion）是数学中用于表示一个函数在某一点附近的一个无穷级数展开。这个公式是以英国数学家布鲁克·泰勒（Brook Taylor）的名字命名的。泰勒级数的基本思想是用一个函数在某一点附近的各阶导数值来代替该函数，从而得到一个关于变量的无穷级数表达式。\n泰勒连续展开公式的定义如下：设函数f(x)在点x=a的某邻域内具有n阶导数，那么对于这个区间上任意x，有：\nf(x) = f(a) + f’(a)(x-a) + f’’(a)(x-a)^2/2! + …+ fn(a)(x-a)n/n! + R_n(x)\n其中，f’(a)表示函数f的一阶导数在点a处的值，f’’(a)表示二阶导数在点a处的值，以此类推。R_n(x)是余项，它随着n的增大趋近于0。当n趋向于无穷大时，泰勒级数就变成了泰勒展开式。\n泰勒级数有很多实际应用，例如用于数值计算、求解微分方程、信号处理等领域。\n\n#是的，Python 中有约翰森检验函数，即 scipy.stats.johnsonsu。\n# 该函数用于对连续型数据进行正态性检验，并返回约翰森变换后的参数。\n#以下是 scumpy.stats.johnsonsu 函数的基本用法示例：\n\nfrom scipy import stats\n\n# 假设有一组连续型数据\ndata = [1.2, 3.4, 5.6, 7.8, 9.0]\n\n# 对数据进行约翰森正态性检验\nresult = stats.johnsonsu.fit(data)\n\n# 输出约翰森变换后的参数\nprint(result)\n\n\n# 需要注意的是，约翰森检验函数适用于连续型数据的正态性检验，对于离散型数据或其他类型的数据可能不适用。\n\n(np.float64(9.932945657673585), np.float64(1.8845431800180394), np.float64(11.36217894129853), np.float64(0.05378935338333127))"
+  },
+  {
+    "objectID": "posts/2024-07-27-Algorithmic-Trading.html#协整关系",
+    "href": "posts/2024-07-27-Algorithmic-Trading.html#协整关系",
+    "title": "算法交易",
+    "section": "协整关系",
+    "text": "协整关系\n协整关系（Cointegration）是时间序列分析中的一个重要概念，它描述了两个或多个非平稳时间序列之间存在的长期稳定关系。\n在经济学和金融学中，协整关系常用于分析不同经济变量之间的长期均衡关系。例如，协整关系可以用来检验两个经济指标（如价格和工资）是否长期同步变动，从而判断它们之间是否存在长期的均衡关系。\n协整关系的存在需要满足一定的条件，包括：\n\n变量的非平稳性：协整关系通常存在于非平稳的时间序列之间。如果所有变量都是平稳的，那么它们之间就不存在协整关系。\n长期稳定性：协整关系描述的是变量之间的长期稳定关系。即使短期内变量之间可能出现波动或偏离，但在长期内它们会回归到均衡状态。\n最小二乘法估计的有效性：在存在协整关系的情况下，可以使用最小二乘法（OLS）对回归模型进行估计，并且得到的估计量是一致的。\n\n协整关系的检验通常使用Engle-Granger两步法或其他更复杂的统计方法。如果检验结果表明变量之间存在协整关系，那么就可以进一步分析它们之间的长期均衡关系，并进行相关的预测和政策分析。"
+  },
+  {
+    "objectID": "posts/2024-07-27-Algorithmic-Trading.html#卡尔曼滤波法则",
+    "href": "posts/2024-07-27-Algorithmic-Trading.html#卡尔曼滤波法则",
+    "title": "算法交易",
+    "section": "卡尔曼滤波法则",
+    "text": "卡尔曼滤波法则\n卡尔曼滤波法则是一种数学算法，用于估计和预测未知变量的值，特别是那些受到随机过程影响的系统。它是由匈牙利出生的美国工程师拉尔夫·伊万·卡尔曼在1960年发明的。卡尔曼滤波器的发展源于20世纪50年代末到60年代初的航天任务需求。当时需要一种能够实时处理复杂动态系统的测量数据的方法，以便进行精确导航和控制。卡尔曼滤波器正是在这种背景下应运而生，成为解决这些问题的有效工具。它的成功应用很快得到了广泛认可，并在之后的几十年里，在多个科学和工程领域中都得到了深入的研究和广泛应用。以下是关于卡尔曼滤波法则的相关信息：\n\n卡尔曼滤波的基本原理\n卡尔曼滤波的基本思想是通过观测数据对系统状态进行递归估计，不断更新状态的估计值。它假设系统状态是一个高斯分布，而观测值是由真实值和高斯噪声组成的。在每个时间步，卡尔曼滤波通过当前状态的预测和观测值的比较，得到一个新的状态估计值，并且利用上一个时间步的估计误差来调整预测误差的协方差矩阵，从而使得估计误差最小化。\n\n\n卡尔曼滤波的主要步骤\n\n预测步骤：根据上一时刻的状态估计和状态转移方程预测当前时刻的状态估计和协方差矩阵。\n更新步骤：根据当前时刻的观测值和观测方程，计算出当前时刻的状态估计和协方差矩阵。\n\n\n\n卡尔曼滤波的应用领域\n\n航天领域：飞船自主导航。\n自动驾驶车辆：高级驾驶辅助系统(ADAS)和自动驾驶车辆。\n机器人导航和运动控制：融合来自多种传感器的信息，包括激光雷达、视觉传感器和惯性测量单元(IMU)。\n医学影像处理：图像去噪和增强。\n金融领域：股票价格预测、风险管理以及利率模型的构建。\n\n通过上述分析，我们可以看到卡尔曼滤波法则不仅在理论上有着严谨的数学基础，而且在实际应用中也有着广泛的应用和重要的地位。"
+  },
+  {
+    "objectID": "posts/2024-07-27-Algorithmic-Trading.html#布林带指标",
+    "href": "posts/2024-07-27-Algorithmic-Trading.html#布林带指标",
+    "title": "算法交易",
+    "section": "布林带指标",
+    "text": "布林带指标\n布林带指标（Bollinger Bands）是一种基于移动平均线和标准差计算的技术分析工具，用于判断价格的波动趋势和判断市场支撑和阻力位。它由三条线组成：中轨线（通常是20日移动平均线）、上轨线（中轨线加上两倍标准差）和下轨线（中轨线减去两倍标准差）。布林带指标通过这三条线描绘出价格波动的范围，帮助投资者判断市场是处于正常波动状态还是极端波动状态。以下是关于布林带指标的相关信息：\n\n布林带指标的原理\n布林带指标的原理基于统计学中的标准差原理，通过计算股票或其他资产价格的移动平均线（通常是20日移动平均线）和标准差来描绘价格波动的范围。上轨线和下轨线分别表示价格的标准差倍数，通常为2倍和-2倍，从而展示出价格在过去的20个交易日中，相对于其移动平均线的波动范围。\n\n\n布林带指标的使用方法\n\n基本用法：股价通常在布林通道区间内运行，股价运行到上轨附近时强压力位，一般可以作为卖点；股价运行到下轨附近是强支撑位，一般可以作为买点。\n与其他指标的配合使用：布林带指标可以与其他技术指标如成交量、KDJ指标等配合使用，以获得更准确的买卖信号。\n\n\n\n注意事项\n\n参数设定：布林线参数的设定不得小于6，静态钱龙设定值通常是10；动态钱龙设定时通常为20。\n市场环境：布林带指标适用于相对平稳的市场，当市场波动较大的时候，布林带指标提供的参考价值就不高了。\n确认信号：最好使用其他指标（如MACD、RSI）来确认布林带提供的信号，以避免误判。\n\n通过以上信息，投资者可以更好地理解和使用布林带指标，以提高股票交易的准确性和效率。\n\nimport altair as alt\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# 创建一个简单的数据集\ndata = pd.DataFrame({\n    'x': [1, 2, 3, 4, 5],\n    'y': [2, 4, 6, 8, 10]\n})\n\n# 创建一个散点图\nchart = alt.Chart(data).mark_circle().encode(\n    x='x:Q',\n    y='y:Q'\n)\n# 显示图表\n# chart.show()\nplt.plot(data)\nplt.show()\n\n\n\n\n\n\n\n\n\nimport matplotlib as mpl\nimport matplotlib.pyplot as plt\nimport numpy as np\nplt.rcParams[\"font.sans-serif\"] = [\"SimHei\"] \nmpl.rcParams['axes.unicode_minus'] = False # 正常显示负号\n# zhfont=mpl.font_manager.FontProperties(fname=\"/System/Library/Fonts/PingFang.ttc\")\n# mpl.rcParams['axes.unicode_minus'] = False\nx=np.linspace(-np.pi,np.pi,100)\ny=np.sin(x)\nplt.title(u'正弦函数')\nplt.plot(x,y)\n\nplt.show()\n\n\n\n\n\n\n\n\n\n# import altair with an abbreviated alias\nimport altair as alt\n# print(alt.Config)\n\n# alt.renderers.set_embed_options(base_url='js/',vega_url='js/vega@5',\n# vega_lite_url='js/vega-lite@4',\n# vega_embed_url='js/vega-embed@6')\n# 算了吧太费劲了，放弃altair\n# alt.renderers.enable('html', base_url='js')\n\n# load a sample dataset as a pandas DataFrame\nfrom vega_datasets import data\ncars = data.cars()\n# alt.renderers.enable('html', vega_cdn='https://cdnjs.cloudflare.com/libraries/vega', vega_lite_cdn='https://cdnjs.cloudflare.com/libraries/vega-lite')\n# https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.26.0/vega-embed.min.js\n# make the chart\nalt.Chart(cars).mark_point().encode(\n    x='Horsepower',\n    y='Miles_per_Gallon',\n    color='Origin',\n).interactive()"
   },
   {
     "objectID": "posts/2021-08-27-special-topics-in-quantitative-trading.html",
@@ -119,32 +140,32 @@
     "text": "高频交易策略\n高频交易策略能获得高夏普比率的理由很简单：根据大数定律，交易的次数越多，收益率相对于均值的偏差就越小。而在高频交易策略下，一天可交易成百上千次。（这交易佣金也会很高啊）"
   },
   {
-    "objectID": "posts/2021-08-18-setting-up-your-business.html",
-    "href": "posts/2021-08-18-setting-up-your-business.html",
-    "title": "CH4-建立你的事业",
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html",
+    "href": "posts/2021-08-13-fishing-of-ideas.html",
+    "title": "CH2-捕获点子",
     "section": "",
-    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
+    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
   },
   {
-    "objectID": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
-    "href": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
-    "title": "CH4-建立你的事业",
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
+    "title": "CH2-捕获点子",
     "section": "",
-    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
+    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
   },
   {
-    "objectID": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
-    "href": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
-    "title": "CH4-建立你的事业",
-    "section": "选择一家零售经纪公司",
-    "text": "选择一家零售经纪公司\n主要看佣金，其他的诸如交易速度等等，在现在这个时代已经不是问题了。 * 相对较低的佣金 * 可交易金融工具品种广泛 * 有足够深度的流动资金池 * 获取实时数据和传送指令的API\n这个富途居然有接口https://openapi.futunn.com/futu-api-doc/intro/intro.html\n中泰XTP"
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
+    "title": "CH2-捕获点子",
+    "section": "如何辨别策略是否适合你",
+    "text": "如何辨别策略是否适合你\n有如下几个评判依据： * 你的工作时间 * 你的编程技能 * 你的交易资本 * 你的目标"
   },
   {
-    "objectID": "posts/2021-08-18-setting-up-your-business.html#设备",
-    "href": "posts/2021-08-18-setting-up-your-business.html#设备",
-    "title": "CH4-建立你的事业",
-    "section": "设备",
-    "text": "设备\n\n性能良好的电脑\n高速的网络\n防中断电源UPS\n专业实时新闻工具\n多屏幕扩大可视空间"
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
+    "title": "CH2-捕获点子",
+    "section": "识别可用的策略及其陷阱",
+    "text": "识别可用的策略及其陷阱\n用这些方法快测试策略，确保你不会浪费你的时间和金钱\n\n这个策略和基准比较表现如何?它的回报有多持久? &gt; Though a strategy may have the same average return as the benchmark, perhaps it delivered positive returns every month while the benchmark occasionally suffered some very bad months. In this case, we would still deem the strategy superior. This leads us to consider the information ratio or Sharpe ratio (Sharpe,1994), rather than returns, as the proper performance measurement of a quantitative trading strategy.\n\n虽让一个策略可能和基准有相同的回报，但在基准下跌的月份里它仍然有正收益。我们仍然认为这个策略是优越的。这促使我们考虑用信息比率或者夏普比率，而不是回报来，作为衡量量化交易策略业绩的指标。\n\n$ Information Ratio = $\n\n$ 信息比率 = $\n(其中：超额收益率 = 组合收益率 - 基准收益率)\n\nAs a rule of thumb, any strategy that has a Sharpe ratio of less than 1 is not suitable as a stand-alone strategy. For a strategy that achieves profitability almost every month, its (annualized) Sharpe ratio is typically greater than 2. For a strategy that is profitable al\u0002most every day, its Sharpe ratio is usually greater than 3.\n\n一般来说，任何夏普率小于1的策略不适合作为单独策略。对于每月都有收益的策略，它的年化夏普率通常大于2.对于每天有收益的策略，他的夏普率通常大于3.\n\n下挫有多深多久？\n\n你要问自己，你能承受多深多久的下挫而不清算你的投资组合关闭你的策略。\n\n交易成本如何影响策略？\n\n交易成本不仅包括券商收取的佣金，还有流动成本和机会成本。\n\n数据是否存在生存者偏差\n\n历史数据库中的股票报价不包含破产退市的股票。\n\n为什么策略的业绩过几年会发生改变？\n\n策略回测要关注近几年的表现，久远的数据会包含交易成本和幸存者偏差的影响。\n\n策略是否收到数据范围偏差影响？\n\n策略含有过多参数可能会对历史数据产生过度拟合。\n\n策略是否在基金经理的盲区\n\n\nyou should look for those strategies that fly under the radar of most institutional investors, for example, strategies that have very low capacities because they trade too often, strategies that trade very few stocks ev\u0002ery day, or strategies that have very infrequent positions.\n\n你应该去寻找被机构投资者忽视的策略，比如，交易频繁容量很低的策略，每天只交易很少股票的策略，持仓时段稀少的策略。这样的特色策觉才有利可图，因为他们还没有完全被巨型的对冲基金套利掉。"
   },
   {
     "objectID": "posts/2021-08-19-executions-systems.html",
@@ -196,25 +217,102 @@
     "text": "About this blog"
   },
   {
-    "objectID": "posts/2024-07-25-random-walk.html",
-    "href": "posts/2024-07-25-random-walk.html",
-    "title": "随机漫步",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "王君敕的炼丹房",
     "section": "",
-    "text": "布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）\n即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。"
+    "text": "关于迪基-富勒检验\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nAug 20, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\n算法交易\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 27, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\n随机漫步\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 25, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nbacktrader回测系统\n\n\n\n\n\n\n量化交易\n\n\n\nbacktrader\n\n\n\n\n\nDec 6, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH6-资金和风险管理\n\n\n\n\n\n\n量化交易\n\n\n\nMoney and Risk Management\n\n\n\n\n\nAug 27, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH7-量化交易专题\n\n\n\n\n\n\n量化交易\n\n\n\nSpecial Topics in Quantitative Trading\n\n\n\n\n\nAug 27, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH5-交易执行系统\n\n\n\n\n\n\n量化交易\n\n\n\nExecutions Systems\n\n\n\n\n\nAug 19, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH4-建立你的事业\n\n\n\n\n\n\n量化交易\n\n\n\nSetting Up Your Business\n\n\n\n\n\nAug 18, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH3-回测\n\n\n\n\n\n\n量化交易\n\n\n\nBacktesting\n\n\n\n\n\nAug 16, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH2-捕获点子\n\n\n\n\n\n\n量化交易\n\n\n\nfishing of ideas\n\n\n\n\n\nAug 13, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH1-量化交易简介\n\n\n\n\n\n\n量化交易\n\n\n\n量化交易是什么，谁参与量化交易，为什么要量化交易\n\n\n\n\n\nAug 12, 2021\n\n\n王一刀\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/2024-07-25-random-walk.html#几何布朗运动brownian-motion",
-    "href": "posts/2024-07-25-random-walk.html#几何布朗运动brownian-motion",
-    "title": "随机漫步",
+    "objectID": "posts/2021-08-18-setting-up-your-business.html",
+    "href": "posts/2021-08-18-setting-up-your-business.html",
+    "title": "CH4-建立你的事业",
     "section": "",
-    "text": "布朗运动是将看起来连成一片的液体，在高倍显微镜下看其实是由许许多多分子组成的。液体分子不停地做无规则的运动，不断地随机撞击悬浮微粒。当悬浮的微粒足够小的时候，由于受到的来自各个方向的液体分子的撞击作用是不平衡的。在某一瞬间，微粒在另一个方向受到的撞击作用超强的时候，致使微粒又向其它方向运动，这样，就引起了微粒的无规则的运动就是布朗运动。（布朗运动指的是分子迸出的微粒的随机运动，而不是分子的随机运动。）\n即布朗运动代表了一种随机涨落现象。普遍的观点仍认为，股票市场是随机波动的，随机波动是股票市场最根本的特性，是股票市场的常态。（随机现象的数学定义是：在个别试验中其结果呈现出不确定性；在大量重复试验中其结果又具有统计规律性的现象。）而布朗运动假设是现代资本市场理论的核心假设。"
+    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
   },
   {
-    "objectID": "posts/2024-07-25-random-walk.html#随机游走",
-    "href": "posts/2024-07-25-random-walk.html#随机游走",
-    "title": "随机漫步",
-    "section": "随机游走",
-    "text": "随机游走\n其概念接近于布朗运动，是布朗运动的理想数学状态。任何分子所带的守恒量都各自对应着一个扩散运输定律。\n随机游走过程\\(S_t\\)​遵循几何布朗运动，满足微分方程：\n\\(dS_t​=uS_t​d_t+σS_t​dW_t\\)\n\\(​dS_t​/S_t​=ud_t+σdW_t\\)\n​设定初试状态\\(S_0\\)，根据伊藤积分，可以解出：\n\\(S_t​=S_0​exp((u−σ^2/2)t+σW_t​)\\)\n在数学领域，函数exp(x)代表自然指数函数，即以实数e（e≈2.71828）为底的指数函数。其表达式为exp(x)=\\(e^x\\)\n所以上面的式子也可以写成：\n\\(S_t​=S_0​e^{(u−σ^2/2)t+σW_t​}\\)\n其中μ (‘百分比drift’) 和σ (‘百分比volatility’)是常量。\n漂移率（Drift Rate）： 在金融领域，漂移率指的是资产价格的平均变动率，用来衡量资产价格的趋势性。例如，股票价格的漂移率可以帮助投资者判断价格的长期趋势\n波动率（volatility） 波动性，在金融数学领域，指金融资产在一定时间段的变化性。通常以一年内涨落的标准差来测量。金融市场中，投资的波动性与其风险有着密切的联系。\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n#rect=[0.1,5.0,0.1,0.1]\nfig=plt.figure()\n\n #time span\nT=2\n#drift factor飘移率\nmu=0.1 \n#volatility波动率\nsigma=0.04 \n#t=0初试价\nS0=20 \n#length of steps\ndt=0.01 \nN=round(T/dt)\nt=np.linspace(0,T,N)\n\n#布朗运动\nW=np.random.standard_normal(size=N)\nW=np.cumsum(W)*np.sqrt(dt)\n\nX=(mu-0.5*sigma**2)*t+sigma*W\n\nS=S0*np.exp(X)\n\nplt.plot(t,S,lw=2)\nplt.show()"
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
+    "href": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
+    "title": "CH4-建立你的事业",
+    "section": "",
+    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
+    "href": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
+    "title": "CH4-建立你的事业",
+    "section": "选择一家零售经纪公司",
+    "text": "选择一家零售经纪公司\n主要看佣金，其他的诸如交易速度等等，在现在这个时代已经不是问题了。 * 相对较低的佣金 * 可交易金融工具品种广泛 * 有足够深度的流动资金池 * 获取实时数据和传送指令的API\n这个富途居然有接口https://openapi.futunn.com/futu-api-doc/intro/intro.html\n中泰XTP"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#设备",
+    "href": "posts/2021-08-18-setting-up-your-business.html#设备",
+    "title": "CH4-建立你的事业",
+    "section": "设备",
+    "text": "设备\n\n性能良好的电脑\n高速的网络\n防中断电源UPS\n专业实时新闻工具\n多屏幕扩大可视空间"
+  },
+  {
+    "objectID": "posts/2021-08-27-money-and-risk-management.html",
+    "href": "posts/2021-08-27-money-and-risk-management.html",
+    "title": "CH6-资金和风险管理",
+    "section": "",
+    "text": "想从量化交易中赚钱，风险管理至关重要，把挫跌控制在可接受的范围内，把头寸建在净值的最优杠杆水平上，才能实现财富的最大可能增长。 我们要用的主要工具是凯利公式。"
+  },
+  {
+    "objectID": "posts/2021-08-27-money-and-risk-management.html#最佳资本配置和杠杆",
+    "href": "posts/2021-08-27-money-and-risk-management.html#最佳资本配置和杠杆",
+    "title": "CH6-资金和风险管理",
+    "section": "最佳资本配置和杠杆",
+    "text": "最佳资本配置和杠杆\n假设计划进行几个策略的交易，每个策略都有其预期收益和标准差。那么，如何在这些策略之间进行最优的资本配置呢？\n我们的优化目标是长期财富最大化。一定要避免赔光。\n假设策略i(这里用i代表第i个策略)的收益率服从正态分布，其均值\\(m_i\\)和标准差\\(s_i\\)已给定。\n用列向量\n\\(F^* = (f_1^* ,f_2^* ,...,f_n^* )^T\\)\n表示分配到n个策略的最优净值比例，其中T代表转置。\n给定优化目标并假设收益率服从正态分布，Thorp不是给出了以下最优配置公式：\n\\(F^* = C^{-1}M\\)\n\nC表示协方差矩阵，矩阵的元素\\(C_ij\\)表示第i 个策略和第j个策略收益率的协方差，-1表示矩阵的逆\n\\(M = (m_1,m_2,...,m_n)^T\\) 表示策略平均收益率的列向量\n\n如果假设所有策略在统计上独立，协方差矩阵就变为对角矩阵，对角线元素等于每个策略收益率的方差，公式：\n\\(f_i = m_i/s_i^2\\)\n这就是著名的凯利公式。"
+  },
+  {
+    "objectID": "posts/2021-08-27-money-and-risk-management.html#做好心理准备",
+    "href": "posts/2021-08-27-money-and-risk-management.html#做好心理准备",
+    "title": "CH6-资金和风险管理",
+    "section": "做好心理准备",
+    "text": "做好心理准备\n\n禀赋效应、安于现状偏差、亏损厌恶\n代表性偏差（即人们倾向于对近期经验赋予过多权重，而低估了长期平均的作用）\n恐惧和贪婪"
+  },
+  {
+    "objectID": "posts/2021-08-27-money-and-risk-management.html#收益率正态分布时凯利公式的简单推导",
+    "href": "posts/2021-08-27-money-and-risk-management.html#收益率正态分布时凯利公式的简单推导",
+    "title": "CH6-资金和风险管理",
+    "section": "收益率正态分布时凯利公式的简单推导",
+    "text": "收益率正态分布时凯利公式的简单推导\n适用于正态分布的复合杠杆增长率公式为：\n\\(g(f) = r + fm - s^2f^2/2\\)\n\nf为杠杆\nr为无风险利率\nm为平均非复合单期超额收益率\ns为非复合单期收益率的标准差\n\n为了得出使g最大化时的f，令g对f的一阶导数为零：\n\\(dg/df = m - s^2f = 0\\)\n由等式可得\\(f=m/s^2\\), 即为正态分布下策略或政权的凯利公式。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html",
+    "title": "CH1-量化交易简介",
+    "section": "",
+    "text": "Quantitative trading, also known as algorithmic trading, is the trading of securities based strictly on the buy/sell decisions of computer algorithms. The computer algorithms are designed and perhaps programmed by the traders themselves, based on the historical performance of the encoded strategy tested against historical financial data.\n\n定量交易，也被称为算法交易，是一种严格基于计算机算法买卖决策的证券交易。计算机算法是由交易员自己设计甚至编写的，并根据历史财务数据测试编码策略，以确定期历史业绩。\n\nAs long as you can convert information into bits and bytes that the computer can understand, it can be re\u0002garded as part of quantitative trading.\n\n只要您能将信息转换为计算机能够理解的比特和字节，它就可以被视为定量交易的一部分。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#什么是量化交易",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#什么是量化交易",
+    "title": "CH1-量化交易简介",
+    "section": "",
+    "text": "Quantitative trading, also known as algorithmic trading, is the trading of securities based strictly on the buy/sell decisions of computer algorithms. The computer algorithms are designed and perhaps programmed by the traders themselves, based on the historical performance of the encoded strategy tested against historical financial data.\n\n定量交易，也被称为算法交易，是一种严格基于计算机算法买卖决策的证券交易。计算机算法是由交易员自己设计甚至编写的，并根据历史财务数据测试编码策略，以确定期历史业绩。\n\nAs long as you can convert information into bits and bytes that the computer can understand, it can be re\u0002garded as part of quantitative trading.\n\n只要您能将信息转换为计算机能够理解的比特和字节，它就可以被视为定量交易的一部分。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#谁可以成为量化交易员",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#谁可以成为量化交易员",
+    "title": "CH1-量化交易简介",
+    "section": "谁可以成为量化交易员",
+    "text": "谁可以成为量化交易员\n\nThe ideal independent quantitative trader is therefore someone who has some prior experience with finance or computer program\u0002ming, who has enough savings to withstand the inevitable losses and periods without income, and whose emotion has found the right bal\u0002ance between fear and greed.\n\n因此，理想的独立定量交易员是那些有金融或计算机编程经验，有足够的储蓄来承受不可避免的损失和一定时期的无收入，他的情感已经在恐惧和贪婪之间找到了正确的平衡。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#量化交易的特点",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#量化交易的特点",
+    "title": "CH1-量化交易简介",
+    "section": "量化交易的特点",
+    "text": "量化交易的特点\n\n易扩大\n\nIt is easy to find yourselves trading millions of dollars in the comfort of your own home, as long as your strategy is consistently profitable. This is because scaling up often just means changing a number in your program.\n\n如果你的策略可以持续产生收益的话，扩大规模仅仅意味着在你的程序里修改一个数字。\n\n\n时间自由\n\nif you treasure your leisure time or if you need time and financial resources to explore other businesses, quantitative trading is the business for you.\n\n如果你珍惜你的闲暇时间，或者如果你需要时间和财力来探索其他业务，那么量化交易正适合你。\n\n\n无需市场营销\n\nIn trading, your counterparties in the financial marketplace base their purchase decisions on nothing but the price. Unless you are managing money for other people (which is beyond the scope of this book), there is absolutely no marketing to do in a quantitative trading business.\n\n在交易中，你在金融市场上的交易对手，他们的购买决定只基于价格。除非你是在为其他人管理资金(这超出了本书的范围),在量化交易业务中，绝对没有营销要做。\n\nthe business of quantitative trading allows you to focus exclusively on your product (the strategy and the software), and not on anything that has to do with influencing other people’s perception of yourself.\n\n量化交易业务允许你只专注于你的产品（策略和软件），而不需要做任何影响他人对你自己看法的事。"
+  },
+  {
+    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#前方的路",
+    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#前方的路",
+    "title": "CH1-量化交易简介",
+    "section": "前方的路",
+    "text": "前方的路\n\nIf you are convinced that you want to become a quantitative trader,a number of questions immediately follow: How do you find the right strategy to trade? How do you recognize a good versus a bad strategy even before devoting any time to backtesting them? How do you rigorously backtest them? If the backtest performance is good, what steps do you need to take to implement the strategy, in terms of both the business structure and the technological infrastructure? If the strategy is profitable in initial real-life trading, how does one scale up the capital to make it into a growing income stream while managing the inevitable (but, hopefully, only occasional) losses that come with trading?\n\n如果你确信要成为一名量化交易员，你需要面对以下问题 * 怎样找到正确的交易策略？ * 在投入时间回测之前怎样区分好坏策略？ * 你怎样严谨地回测你的策略？ * 如果回测效果很好，你要通过哪些步骤实现这些策略，有哪些业务架构和技术基础设施的模式？ * 如果策略在真实交易中获利，怎样在扩大资金规模提升收入流的同时管控交易中不可必免的损失？"
   },
   {
     "objectID": "posts/2021-08-16-backtesting.html",
@@ -264,75 +362,5 @@
     "title": "backtrader回测系统",
     "section": "",
     "text": "import datetime\nimport backtrader as bt\n\nclass TestStrategy(bt.Strategy):\n    params = (\n        ('maperiod', 15),\n    )\n\n    def log(self, txt, dt=None):\n        dt = dt or self.datas[0].datetime.date(0)\n        print('%s, %s' % (dt.isoformat(), txt))\n    def __init__(self):\n        self.dataclose = self.datas[0].close\n        print('buflen %d' % self.dataclose.buflen())\n        self.order = None\n        self.buyprice = None\n        self.buycomm = None\n\n        # Add a MovingAverageSimple indicator\n        self.sma = bt.indicators.SimpleMovingAverage(\n            self.datas[0], period=self.params.maperiod)\n        \n        # Indicators for the plotting show\n        bt.indicators.ExponentialMovingAverage(self.datas[0], period=25)\n        bt.indicators.WeightedMovingAverage(self.datas[0], period=25,\n                                            subplot=True)\n        bt.indicators.StochasticSlow(self.datas[0])\n        bt.indicators.MACDHisto(self.datas[0])\n        rsi = bt.indicators.RSI(self.datas[0])\n        bt.indicators.SmoothedMovingAverage(rsi, period=10)\n        bt.indicators.ATR(self.datas[0], plot=False)\n\n    def notify_order(self, order):\n        if order.status in [order.Submitted, order.Accepted]:\n            return\n        if order.status in [order.Completed]:\n            if order.isbuy():\n                self.log('BUY EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f' %\n                        (order.executed.price,\n                        order.executed.value,\n                        order.executed.comm))\n                self.buyprice = order.executed.price\n                self.buycomm = order.executed.comm\n            elif order.issell():\n                self.log('SELL EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f' %\n                         (order.executed.price,\n                          order.executed.value,\n                          order.executed.comm))\n            self.bar_executed = len(self)\n        elif order.status in [order.Canceled, order.Margin, order.Rejected]:\n            self.log('Order Canceled/Margin/Rejected')\n        self.order = None\n\n    def notify_trade(self, trade):\n        if not trade.isclosed:\n            return\n\n        self.log('OPERATION PROFIT, GROSS %.2f, NET %.2f' %\n                 (trade.pnl, trade.pnlcomm))\n\n    def next(self):\n        self.log('Close, %.2f' % self.dataclose[0])\n        if self.order:\n            return\n        if not self.position:\n            if self.dataclose[0] &gt; self.sma[0]:\n                self.log('BUY CREATE, %.2f' % self.dataclose[0])\n                self.buy()\n        else:\n            if self.dataclose[0] &lt; self.sma[0]:\n                self.log('SELL CREATE, %.2f' % self.dataclose[0])\n                self.order = self.sell()\n\n\ncerebro = bt.Cerebro()\n\ncerebro.addstrategy(TestStrategy)\n\ndata = bt.feeds.YahooFinanceCSVData(\n        dataname=\"datas/orcl-1995-2014.txt\",\n        # Do not pass values before this date\n        fromdate=datetime.datetime(2000, 1, 1),\n        # Do not pass values after this date\n        todate=datetime.datetime(2000, 12, 31),\n        reverse=False)\n\n# print(data)\n\ncerebro.adddata(data)\n\ncerebro.broker.setcash(100000.0)\ncerebro.addsizer(bt.sizers.FixedSize, stake=10)\ncerebro.broker.setcommission(commission=0.001)\n\nprint('组合初始值: %.2f' % cerebro.broker.getvalue())\n\ncerebro.run()\n\nprint('组合终结值: %.2f' % cerebro.broker.getvalue())\n# cerebro.plot()\n\n组合初始值: 100000.00\nbuflen 252\n2000-02-18, Close, 26.05\n2000-02-22, Close, 26.38\n2000-02-22, BUY CREATE, 26.38\n2000-02-23, BUY EXECUTED, Price: 26.77, Cost: 267.70, Comm 0.27\n2000-02-23, Close, 28.05\n2000-02-24, Close, 27.55\n2000-02-25, Close, 31.41\n2000-02-28, Close, 30.52\n2000-02-29, Close, 33.02\n2000-03-01, Close, 31.80\n2000-03-02, Close, 30.47\n2000-03-03, Close, 33.36\n2000-03-06, Close, 33.69\n2000-03-07, Close, 33.33\n2000-03-08, Close, 36.97\n2000-03-09, Close, 37.36\n2000-03-10, Close, 36.30\n2000-03-13, Close, 35.02\n2000-03-14, Close, 34.25\n2000-03-15, Close, 34.97\n2000-03-16, Close, 36.44\n2000-03-17, Close, 35.50\n2000-03-20, Close, 34.75\n2000-03-21, Close, 35.89\n2000-03-22, Close, 37.39\n2000-03-23, Close, 38.64\n2000-03-24, Close, 38.69\n2000-03-27, Close, 39.33\n2000-03-28, Close, 38.50\n2000-03-29, Close, 36.69\n2000-03-30, Close, 34.88\n2000-03-30, SELL CREATE, 34.88\n2000-03-31, SELL EXECUTED, Price: 35.66, Cost: 267.70, Comm 0.36\n2000-03-31, OPERATION PROFIT, GROSS 88.90, NET 88.28\n2000-03-31, Close, 34.72\n2000-04-03, Close, 34.19\n2000-04-04, Close, 33.77\n2000-04-05, Close, 34.80\n2000-04-06, Close, 36.55\n2000-04-06, BUY CREATE, 36.55\n2000-04-07, BUY EXECUTED, Price: 37.22, Cost: 372.20, Comm 0.37\n2000-04-07, Close, 38.75\n2000-04-10, Close, 36.69\n2000-04-11, Close, 34.41\n2000-04-11, SELL CREATE, 34.41\n2000-04-12, SELL EXECUTED, Price: 34.66, Cost: 372.20, Comm 0.35\n2000-04-12, OPERATION PROFIT, GROSS -25.60, NET -26.32\n2000-04-12, Close, 32.52\n2000-04-13, Close, 31.99\n2000-04-14, Close, 27.80\n2000-04-17, Close, 33.27\n2000-04-18, Close, 35.11\n2000-04-18, BUY CREATE, 35.11\n2000-04-19, BUY EXECUTED, Price: 34.97, Cost: 349.70, Comm 0.35\n2000-04-19, Close, 33.16\n2000-04-19, SELL CREATE, 33.16\n2000-04-20, SELL EXECUTED, Price: 32.83, Cost: 349.70, Comm 0.33\n2000-04-20, OPERATION PROFIT, GROSS -21.40, NET -22.08\n2000-04-20, Close, 31.49\n2000-04-24, Close, 32.22\n2000-04-25, Close, 33.61\n2000-04-26, Close, 32.11\n2000-04-27, Close, 34.38\n2000-04-27, BUY CREATE, 34.38\n2000-04-28, BUY EXECUTED, Price: 34.91, Cost: 349.10, Comm 0.35\n2000-04-28, Close, 35.55\n2000-05-01, Close, 35.44\n2000-05-02, Close, 34.61\n2000-05-03, Close, 33.72\n2000-05-04, Close, 33.02\n2000-05-04, SELL CREATE, 33.02\n2000-05-05, SELL EXECUTED, Price: 32.91, Cost: 349.10, Comm 0.33\n2000-05-05, OPERATION PROFIT, GROSS -20.00, NET -20.68\n2000-05-05, Close, 34.16\n2000-05-05, BUY CREATE, 34.16\n2000-05-08, BUY EXECUTED, Price: 33.49, Cost: 334.90, Comm 0.33\n2000-05-08, Close, 32.16\n2000-05-08, SELL CREATE, 32.16\n2000-05-09, SELL EXECUTED, Price: 32.77, Cost: 334.90, Comm 0.33\n2000-05-09, OPERATION PROFIT, GROSS -7.20, NET -7.86\n2000-05-09, Close, 32.02\n2000-05-10, Close, 30.08\n2000-05-11, Close, 32.19\n2000-05-12, Close, 32.99\n2000-05-15, Close, 34.25\n2000-05-15, BUY CREATE, 34.25\n2000-05-16, BUY EXECUTED, Price: 34.52, Cost: 345.20, Comm 0.35\n2000-05-16, Close, 35.22\n2000-05-17, Close, 34.77\n2000-05-18, Close, 32.49\n2000-05-18, SELL CREATE, 32.49\n2000-05-19, SELL EXECUTED, Price: 32.02, Cost: 345.20, Comm 0.32\n2000-05-19, OPERATION PROFIT, GROSS -25.00, NET -25.67\n2000-05-19, Close, 31.16\n2000-05-22, Close, 30.16\n2000-05-23, Close, 27.85\n2000-05-24, Close, 28.57\n2000-05-25, Close, 29.55\n2000-05-26, Close, 29.80\n2000-05-30, Close, 32.99\n2000-05-30, BUY CREATE, 32.99\n2000-05-31, BUY EXECUTED, Price: 32.58, Cost: 325.80, Comm 0.33\n2000-05-31, Close, 31.97\n2000-06-01, Close, 34.63\n2000-06-02, Close, 35.66\n2000-06-05, Close, 36.00\n2000-06-06, Close, 34.27\n2000-06-07, Close, 35.58\n2000-06-08, Close, 36.64\n2000-06-09, Close, 36.77\n2000-06-12, Close, 35.83\n2000-06-13, Close, 36.33\n2000-06-14, Close, 35.13\n2000-06-15, Close, 36.69\n2000-06-16, Close, 36.41\n2000-06-19, Close, 38.25\n2000-06-20, Close, 38.27\n2000-06-21, Close, 38.33\n2000-06-22, Close, 36.25\n2000-06-22, SELL CREATE, 36.25\n2000-06-23, SELL EXECUTED, Price: 35.94, Cost: 325.80, Comm 0.36\n2000-06-23, OPERATION PROFIT, GROSS 33.60, NET 32.91\n2000-06-23, Close, 35.36\n2000-06-26, Close, 36.77\n2000-06-26, BUY CREATE, 36.77\n2000-06-27, BUY EXECUTED, Price: 36.64, Cost: 366.40, Comm 0.37\n2000-06-27, Close, 36.58\n2000-06-27, SELL CREATE, 36.58\n2000-06-28, SELL EXECUTED, Price: 36.50, Cost: 366.40, Comm 0.36\n2000-06-28, OPERATION PROFIT, GROSS -1.40, NET -2.13\n2000-06-28, Close, 36.89\n2000-06-28, BUY CREATE, 36.89\n2000-06-29, BUY EXECUTED, Price: 36.50, Cost: 365.00, Comm 0.36\n2000-06-29, Close, 35.97\n2000-06-29, SELL CREATE, 35.97\n2000-06-30, SELL EXECUTED, Price: 35.75, Cost: 365.00, Comm 0.36\n2000-06-30, OPERATION PROFIT, GROSS -7.50, NET -8.22\n2000-06-30, Close, 37.39\n2000-06-30, BUY CREATE, 37.39\n2000-07-03, BUY EXECUTED, Price: 36.08, Cost: 360.80, Comm 0.36\n2000-07-03, Close, 35.66\n2000-07-03, SELL CREATE, 35.66\n2000-07-05, SELL EXECUTED, Price: 34.16, Cost: 360.80, Comm 0.34\n2000-07-05, OPERATION PROFIT, GROSS -19.20, NET -19.90\n2000-07-05, Close, 32.16\n2000-07-06, Close, 33.63\n2000-07-07, Close, 33.75\n2000-07-10, Close, 32.97\n2000-07-11, Close, 32.16\n2000-07-12, Close, 33.22\n2000-07-13, Close, 33.69\n2000-07-14, Close, 33.86\n2000-07-17, Close, 33.86\n2000-07-18, Close, 32.99\n2000-07-19, Close, 32.80\n2000-07-20, Close, 34.75\n2000-07-20, BUY CREATE, 34.75\n2000-07-21, BUY EXECUTED, Price: 34.44, Cost: 344.40, Comm 0.34\n2000-07-21, Close, 33.55\n2000-07-21, SELL CREATE, 33.55\n2000-07-24, SELL EXECUTED, Price: 34.30, Cost: 344.40, Comm 0.34\n2000-07-24, OPERATION PROFIT, GROSS -1.40, NET -2.09\n2000-07-24, Close, 33.36\n2000-07-25, Close, 33.80\n2000-07-25, BUY CREATE, 33.80\n2000-07-26, BUY EXECUTED, Price: 33.27, Cost: 332.70, Comm 0.33\n2000-07-26, Close, 34.13\n2000-07-27, Close, 33.38\n2000-07-27, SELL CREATE, 33.38\n2000-07-28, SELL EXECUTED, Price: 33.41, Cost: 332.70, Comm 0.33\n2000-07-28, OPERATION PROFIT, GROSS 1.40, NET 0.73\n2000-07-28, Close, 32.19\n2000-07-31, Close, 33.44\n2000-07-31, BUY CREATE, 33.44\n2000-08-01, BUY EXECUTED, Price: 33.44, Cost: 334.40, Comm 0.33\n2000-08-01, Close, 32.52\n2000-08-01, SELL CREATE, 32.52\n2000-08-02, SELL EXECUTED, Price: 32.47, Cost: 334.40, Comm 0.32\n2000-08-02, OPERATION PROFIT, GROSS -9.70, NET -10.36\n2000-08-02, Close, 32.52\n2000-08-03, Close, 34.44\n2000-08-03, BUY CREATE, 34.44\n2000-08-04, BUY EXECUTED, Price: 34.83, Cost: 348.30, Comm 0.35\n2000-08-04, Close, 36.27\n2000-08-07, Close, 36.41\n2000-08-08, Close, 36.91\n2000-08-09, Close, 36.19\n2000-08-10, Close, 35.61\n2000-08-11, Close, 36.08\n2000-08-14, Close, 36.64\n2000-08-15, Close, 36.14\n2000-08-16, Close, 36.11\n2000-08-17, Close, 37.33\n2000-08-18, Close, 36.16\n2000-08-21, Close, 37.00\n2000-08-22, Close, 37.16\n2000-08-23, Close, 36.86\n2000-08-24, Close, 37.66\n2000-08-25, Close, 37.64\n2000-08-28, Close, 38.58\n2000-08-29, Close, 39.03\n2000-08-30, Close, 39.25\n2000-08-31, Close, 40.44\n2000-09-01, Close, 41.19\n2000-09-05, Close, 40.50\n2000-09-06, Close, 39.69\n2000-09-07, Close, 40.56\n2000-09-08, Close, 38.50\n2000-09-08, SELL CREATE, 38.50\n2000-09-11, SELL EXECUTED, Price: 38.28, Cost: 348.30, Comm 0.38\n2000-09-11, OPERATION PROFIT, GROSS 34.50, NET 33.77\n2000-09-11, Close, 37.11\n2000-09-12, Close, 35.30\n2000-09-13, Close, 36.39\n2000-09-14, Close, 37.78\n2000-09-15, Close, 34.83\n2000-09-18, Close, 34.01\n2000-09-19, Close, 35.27\n2000-09-20, Close, 35.55\n2000-09-21, Close, 35.11\n2000-09-22, Close, 35.91\n2000-09-25, Close, 35.02\n2000-09-26, Close, 35.33\n2000-09-27, Close, 35.52\n2000-09-28, Close, 36.24\n2000-09-28, BUY CREATE, 36.24\n2000-09-29, BUY EXECUTED, Price: 36.18, Cost: 361.80, Comm 0.36\n2000-09-29, Close, 35.02\n2000-09-29, SELL CREATE, 35.02\n2000-10-02, SELL EXECUTED, Price: 35.47, Cost: 361.80, Comm 0.35\n2000-10-02, OPERATION PROFIT, GROSS -7.10, NET -7.82\n2000-10-02, Close, 35.02\n2000-10-03, Close, 30.91\n2000-10-04, Close, 30.30\n2000-10-05, Close, 30.38\n2000-10-06, Close, 30.08\n2000-10-09, Close, 29.69\n2000-10-10, Close, 28.74\n2000-10-11, Close, 27.69\n2000-10-12, Close, 28.02\n2000-10-13, Close, 31.69\n2000-10-16, Close, 30.74\n2000-10-17, Close, 29.96\n2000-10-18, Close, 29.85\n2000-10-19, Close, 32.36\n2000-10-19, BUY CREATE, 32.36\n2000-10-20, BUY EXECUTED, Price: 32.13, Cost: 321.30, Comm 0.32\n2000-10-20, Close, 31.35\n2000-10-23, Close, 30.30\n2000-10-24, Close, 31.85\n2000-10-25, Close, 30.58\n2000-10-26, Close, 30.30\n2000-10-27, Close, 30.41\n2000-10-30, Close, 28.13\n2000-10-30, SELL CREATE, 28.13\n2000-10-31, SELL EXECUTED, Price: 29.02, Cost: 321.30, Comm 0.29\n2000-10-31, OPERATION PROFIT, GROSS -31.10, NET -31.71\n2000-10-31, Close, 29.35\n2000-11-01, Close, 27.91\n2000-11-02, Close, 26.30\n2000-11-03, Close, 26.96\n2000-11-06, Close, 24.85\n2000-11-07, Close, 23.63\n2000-11-08, Close, 22.07\n2000-11-09, Close, 24.18\n2000-11-10, Close, 22.63\n2000-11-13, Close, 22.01\n2000-11-14, Close, 25.24\n2000-11-15, Close, 25.68\n2000-11-16, Close, 24.35\n2000-11-17, Close, 25.63\n2000-11-17, BUY CREATE, 25.63\n2000-11-20, BUY EXECUTED, Price: 21.63, Cost: 216.30, Comm 0.22\n2000-11-20, Close, 22.01\n2000-11-20, SELL CREATE, 22.01\n2000-11-21, SELL EXECUTED, Price: 22.07, Cost: 216.30, Comm 0.22\n2000-11-21, OPERATION PROFIT, GROSS 4.40, NET 3.96\n2000-11-21, Close, 21.24\n2000-11-22, Close, 19.85\n2000-11-24, Close, 21.46\n2000-11-27, Close, 20.57\n2000-11-28, Close, 20.15\n2000-11-29, Close, 20.35\n2000-11-30, Close, 23.57\n2000-11-30, BUY CREATE, 23.57\n2000-12-01, BUY EXECUTED, Price: 23.46, Cost: 234.60, Comm 0.23\n2000-12-01, Close, 23.52\n2000-12-04, Close, 25.07\n2000-12-05, Close, 28.02\n2000-12-06, Close, 26.85\n2000-12-07, Close, 25.18\n2000-12-08, Close, 26.74\n2000-12-11, Close, 28.41\n2000-12-12, Close, 27.35\n2000-12-13, Close, 25.24\n2000-12-14, Close, 24.46\n2000-12-14, SELL CREATE, 24.46\n2000-12-15, SELL EXECUTED, Price: 26.18, Cost: 234.60, Comm 0.26\n2000-12-15, OPERATION PROFIT, GROSS 27.20, NET 26.70\n2000-12-15, Close, 25.41\n2000-12-15, BUY CREATE, 25.41\n2000-12-18, BUY EXECUTED, Price: 26.68, Cost: 266.80, Comm 0.27\n2000-12-18, Close, 28.46\n2000-12-19, Close, 27.24\n2000-12-20, Close, 25.35\n2000-12-20, SELL CREATE, 25.35\n2000-12-21, SELL EXECUTED, Price: 24.74, Cost: 266.80, Comm 0.25\n2000-12-21, OPERATION PROFIT, GROSS -19.40, NET -19.91\n2000-12-21, Close, 26.24\n2000-12-21, BUY CREATE, 26.24\n2000-12-22, BUY EXECUTED, Price: 27.02, Cost: 270.20, Comm 0.27\n2000-12-22, Close, 28.35\n2000-12-26, Close, 27.52\n2000-12-27, Close, 27.30\n2000-12-28, Close, 27.63\n2000-12-29, Close, 25.85\n2000-12-29, SELL CREATE, 25.85\n组合终结值: 99969.64"
-  },
-  {
-    "objectID": "posts/2024-07-27-Algorithmic-Trading.html",
-    "href": "posts/2024-07-27-Algorithmic-Trading.html",
-    "title": "算法交易",
-    "section": "",
-    "text": "在均值回归交易策略所相关的系列当中，我们将讨论以多元的统计技术［如扩展版的迪基-富勒检验（Dickey-Fuller检验，即ADF检验）、赫斯特（Hurst）指数、方差比检验、半衰期检验模式等］来检测时间序列的均值回归之属性，以及相关的平稳性；同时，我们还要检测一个由金融工具所构建的投资组合之协整属性［相关检测模式包括协整型ADF检验（即CADF检验）、约翰森（Johansen）检验等］。除了前述这些统计测试模式被机械地应用于时间序列而外，我们还要努力传达一个直观的理解方法，即要认知相关测试的真正用意以及简易数学方程背后的深层含义。\n我们将解析一些具有均值回归属性之投资组合所相关的最简单的技术和策略模式［如线性交易模式、布林带线、卡尔曼过滤法则（Kalman filter）等］。"
-  },
-  {
-    "objectID": "posts/2024-07-27-Algorithmic-Trading.html#泰勒连续展开公式",
-    "href": "posts/2024-07-27-Algorithmic-Trading.html#泰勒连续展开公式",
-    "title": "算法交易",
-    "section": "泰勒连续展开公式",
-    "text": "泰勒连续展开公式\n泰勒连续展开公式（Taylor Series Expansion）是数学中用于表示一个函数在某一点附近的一个无穷级数展开。这个公式是以英国数学家布鲁克·泰勒（Brook Taylor）的名字命名的。泰勒级数的基本思想是用一个函数在某一点附近的各阶导数值来代替该函数，从而得到一个关于变量的无穷级数表达式。\n泰勒连续展开公式的定义如下：设函数f(x)在点x=a的某邻域内具有n阶导数，那么对于这个区间上任意x，有：\nf(x) = f(a) + f’(a)(x-a) + f’’(a)(x-a)^2/2! + …+ fn(a)(x-a)n/n! + R_n(x)\n其中，f’(a)表示函数f的一阶导数在点a处的值，f’’(a)表示二阶导数在点a处的值，以此类推。R_n(x)是余项，它随着n的增大趋近于0。当n趋向于无穷大时，泰勒级数就变成了泰勒展开式。\n泰勒级数有很多实际应用，例如用于数值计算、求解微分方程、信号处理等领域。\n\n#是的，Python 中有约翰森检验函数，即 scipy.stats.johnsonsu。\n# 该函数用于对连续型数据进行正态性检验，并返回约翰森变换后的参数。\n#以下是 scumpy.stats.johnsonsu 函数的基本用法示例：\n\nfrom scipy import stats\n\n# 假设有一组连续型数据\ndata = [1.2, 3.4, 5.6, 7.8, 9.0]\n\n# 对数据进行约翰森正态性检验\nresult = stats.johnsonsu.fit(data)\n\n# 输出约翰森变换后的参数\nprint(result)\n\n\n# 需要注意的是，约翰森检验函数适用于连续型数据的正态性检验，对于离散型数据或其他类型的数据可能不适用。\n\n(np.float64(9.932945657673585), np.float64(1.8845431800180394), np.float64(11.36217894129853), np.float64(0.05378935338333127))"
-  },
-  {
-    "objectID": "posts/2024-07-27-Algorithmic-Trading.html#协整关系",
-    "href": "posts/2024-07-27-Algorithmic-Trading.html#协整关系",
-    "title": "算法交易",
-    "section": "协整关系",
-    "text": "协整关系\n协整关系（Cointegration）是时间序列分析中的一个重要概念，它描述了两个或多个非平稳时间序列之间存在的长期稳定关系。\n在经济学和金融学中，协整关系常用于分析不同经济变量之间的长期均衡关系。例如，协整关系可以用来检验两个经济指标（如价格和工资）是否长期同步变动，从而判断它们之间是否存在长期的均衡关系。\n协整关系的存在需要满足一定的条件，包括：\n\n变量的非平稳性：协整关系通常存在于非平稳的时间序列之间。如果所有变量都是平稳的，那么它们之间就不存在协整关系。\n长期稳定性：协整关系描述的是变量之间的长期稳定关系。即使短期内变量之间可能出现波动或偏离，但在长期内它们会回归到均衡状态。\n最小二乘法估计的有效性：在存在协整关系的情况下，可以使用最小二乘法（OLS）对回归模型进行估计，并且得到的估计量是一致的。\n\n协整关系的检验通常使用Engle-Granger两步法或其他更复杂的统计方法。如果检验结果表明变量之间存在协整关系，那么就可以进一步分析它们之间的长期均衡关系，并进行相关的预测和政策分析。"
-  },
-  {
-    "objectID": "posts/2024-07-27-Algorithmic-Trading.html#卡尔曼滤波法则",
-    "href": "posts/2024-07-27-Algorithmic-Trading.html#卡尔曼滤波法则",
-    "title": "算法交易",
-    "section": "卡尔曼滤波法则",
-    "text": "卡尔曼滤波法则\n卡尔曼滤波法则是一种数学算法，用于估计和预测未知变量的值，特别是那些受到随机过程影响的系统。它是由匈牙利出生的美国工程师拉尔夫·伊万·卡尔曼在1960年发明的。卡尔曼滤波器的发展源于20世纪50年代末到60年代初的航天任务需求。当时需要一种能够实时处理复杂动态系统的测量数据的方法，以便进行精确导航和控制。卡尔曼滤波器正是在这种背景下应运而生，成为解决这些问题的有效工具。它的成功应用很快得到了广泛认可，并在之后的几十年里，在多个科学和工程领域中都得到了深入的研究和广泛应用。以下是关于卡尔曼滤波法则的相关信息：\n\n卡尔曼滤波的基本原理\n卡尔曼滤波的基本思想是通过观测数据对系统状态进行递归估计，不断更新状态的估计值。它假设系统状态是一个高斯分布，而观测值是由真实值和高斯噪声组成的。在每个时间步，卡尔曼滤波通过当前状态的预测和观测值的比较，得到一个新的状态估计值，并且利用上一个时间步的估计误差来调整预测误差的协方差矩阵，从而使得估计误差最小化。\n\n\n卡尔曼滤波的主要步骤\n\n预测步骤：根据上一时刻的状态估计和状态转移方程预测当前时刻的状态估计和协方差矩阵。\n更新步骤：根据当前时刻的观测值和观测方程，计算出当前时刻的状态估计和协方差矩阵。\n\n\n\n卡尔曼滤波的应用领域\n\n航天领域：飞船自主导航。\n自动驾驶车辆：高级驾驶辅助系统(ADAS)和自动驾驶车辆。\n机器人导航和运动控制：融合来自多种传感器的信息，包括激光雷达、视觉传感器和惯性测量单元(IMU)。\n医学影像处理：图像去噪和增强。\n金融领域：股票价格预测、风险管理以及利率模型的构建。\n\n通过上述分析，我们可以看到卡尔曼滤波法则不仅在理论上有着严谨的数学基础，而且在实际应用中也有着广泛的应用和重要的地位。"
-  },
-  {
-    "objectID": "posts/2024-07-27-Algorithmic-Trading.html#布林带指标",
-    "href": "posts/2024-07-27-Algorithmic-Trading.html#布林带指标",
-    "title": "算法交易",
-    "section": "布林带指标",
-    "text": "布林带指标\n布林带指标（Bollinger Bands）是一种基于移动平均线和标准差计算的技术分析工具，用于判断价格的波动趋势和判断市场支撑和阻力位。它由三条线组成：中轨线（通常是20日移动平均线）、上轨线（中轨线加上两倍标准差）和下轨线（中轨线减去两倍标准差）。布林带指标通过这三条线描绘出价格波动的范围，帮助投资者判断市场是处于正常波动状态还是极端波动状态。以下是关于布林带指标的相关信息：\n\n布林带指标的原理\n布林带指标的原理基于统计学中的标准差原理，通过计算股票或其他资产价格的移动平均线（通常是20日移动平均线）和标准差来描绘价格波动的范围。上轨线和下轨线分别表示价格的标准差倍数，通常为2倍和-2倍，从而展示出价格在过去的20个交易日中，相对于其移动平均线的波动范围。\n\n\n布林带指标的使用方法\n\n基本用法：股价通常在布林通道区间内运行，股价运行到上轨附近时强压力位，一般可以作为卖点；股价运行到下轨附近是强支撑位，一般可以作为买点。\n与其他指标的配合使用：布林带指标可以与其他技术指标如成交量、KDJ指标等配合使用，以获得更准确的买卖信号。\n\n\n\n注意事项\n\n参数设定：布林线参数的设定不得小于6，静态钱龙设定值通常是10；动态钱龙设定时通常为20。\n市场环境：布林带指标适用于相对平稳的市场，当市场波动较大的时候，布林带指标提供的参考价值就不高了。\n确认信号：最好使用其他指标（如MACD、RSI）来确认布林带提供的信号，以避免误判。\n\n通过以上信息，投资者可以更好地理解和使用布林带指标，以提高股票交易的准确性和效率。\n\nimport altair as alt\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# 创建一个简单的数据集\ndata = pd.DataFrame({\n    'x': [1, 2, 3, 4, 5],\n    'y': [2, 4, 6, 8, 10]\n})\n\n# 创建一个散点图\nchart = alt.Chart(data).mark_circle().encode(\n    x='x:Q',\n    y='y:Q'\n)\n# 显示图表\n# chart.show()\nplt.plot(data)\nplt.show()\n\n\n\n\n\n\n\n\n\nimport matplotlib as mpl\nimport matplotlib.pyplot as plt\nimport numpy as np\nplt.rcParams[\"font.sans-serif\"] = [\"SimHei\"] \nmpl.rcParams['axes.unicode_minus'] = False # 正常显示负号\n# zhfont=mpl.font_manager.FontProperties(fname=\"/System/Library/Fonts/PingFang.ttc\")\n# mpl.rcParams['axes.unicode_minus'] = False\nx=np.linspace(-np.pi,np.pi,100)\ny=np.sin(x)\nplt.title(u'正弦函数')\nplt.plot(x,y)\n\nplt.show()\n\n\n\n\n\n\n\n\n\n# import altair with an abbreviated alias\nimport altair as alt\n# print(alt.Config)\n\n# alt.renderers.set_embed_options(base_url='js/',vega_url='js/vega@5',\n# vega_lite_url='js/vega-lite@4',\n# vega_embed_url='js/vega-embed@6')\n# 算了吧太费劲了，放弃altair\n# alt.renderers.enable('html', base_url='js')\n\n# load a sample dataset as a pandas DataFrame\nfrom vega_datasets import data\ncars = data.cars()\n# alt.renderers.enable('html', vega_cdn='https://cdnjs.cloudflare.com/libraries/vega', vega_lite_cdn='https://cdnjs.cloudflare.com/libraries/vega-lite')\n# https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.26.0/vega-embed.min.js\n# make the chart\nalt.Chart(cars).mark_point().encode(\n    x='Horsepower',\n    y='Miles_per_Gallon',\n    color='Origin',\n).interactive()"
-  },
-  {
-    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html",
-    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html",
-    "title": "CH1-量化交易简介",
-    "section": "",
-    "text": "Quantitative trading, also known as algorithmic trading, is the trading of securities based strictly on the buy/sell decisions of computer algorithms. The computer algorithms are designed and perhaps programmed by the traders themselves, based on the historical performance of the encoded strategy tested against historical financial data.\n\n定量交易，也被称为算法交易，是一种严格基于计算机算法买卖决策的证券交易。计算机算法是由交易员自己设计甚至编写的，并根据历史财务数据测试编码策略，以确定期历史业绩。\n\nAs long as you can convert information into bits and bytes that the computer can understand, it can be re\u0002garded as part of quantitative trading.\n\n只要您能将信息转换为计算机能够理解的比特和字节，它就可以被视为定量交易的一部分。"
-  },
-  {
-    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#什么是量化交易",
-    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#什么是量化交易",
-    "title": "CH1-量化交易简介",
-    "section": "",
-    "text": "Quantitative trading, also known as algorithmic trading, is the trading of securities based strictly on the buy/sell decisions of computer algorithms. The computer algorithms are designed and perhaps programmed by the traders themselves, based on the historical performance of the encoded strategy tested against historical financial data.\n\n定量交易，也被称为算法交易，是一种严格基于计算机算法买卖决策的证券交易。计算机算法是由交易员自己设计甚至编写的，并根据历史财务数据测试编码策略，以确定期历史业绩。\n\nAs long as you can convert information into bits and bytes that the computer can understand, it can be re\u0002garded as part of quantitative trading.\n\n只要您能将信息转换为计算机能够理解的比特和字节，它就可以被视为定量交易的一部分。"
-  },
-  {
-    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#谁可以成为量化交易员",
-    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#谁可以成为量化交易员",
-    "title": "CH1-量化交易简介",
-    "section": "谁可以成为量化交易员",
-    "text": "谁可以成为量化交易员\n\nThe ideal independent quantitative trader is therefore someone who has some prior experience with finance or computer program\u0002ming, who has enough savings to withstand the inevitable losses and periods without income, and whose emotion has found the right bal\u0002ance between fear and greed.\n\n因此，理想的独立定量交易员是那些有金融或计算机编程经验，有足够的储蓄来承受不可避免的损失和一定时期的无收入，他的情感已经在恐惧和贪婪之间找到了正确的平衡。"
-  },
-  {
-    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#量化交易的特点",
-    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#量化交易的特点",
-    "title": "CH1-量化交易简介",
-    "section": "量化交易的特点",
-    "text": "量化交易的特点\n\n易扩大\n\nIt is easy to find yourselves trading millions of dollars in the comfort of your own home, as long as your strategy is consistently profitable. This is because scaling up often just means changing a number in your program.\n\n如果你的策略可以持续产生收益的话，扩大规模仅仅意味着在你的程序里修改一个数字。\n\n\n时间自由\n\nif you treasure your leisure time or if you need time and financial resources to explore other businesses, quantitative trading is the business for you.\n\n如果你珍惜你的闲暇时间，或者如果你需要时间和财力来探索其他业务，那么量化交易正适合你。\n\n\n无需市场营销\n\nIn trading, your counterparties in the financial marketplace base their purchase decisions on nothing but the price. Unless you are managing money for other people (which is beyond the scope of this book), there is absolutely no marketing to do in a quantitative trading business.\n\n在交易中，你在金融市场上的交易对手，他们的购买决定只基于价格。除非你是在为其他人管理资金(这超出了本书的范围),在量化交易业务中，绝对没有营销要做。\n\nthe business of quantitative trading allows you to focus exclusively on your product (the strategy and the software), and not on anything that has to do with influencing other people’s perception of yourself.\n\n量化交易业务允许你只专注于你的产品（策略和软件），而不需要做任何影响他人对你自己看法的事。"
-  },
-  {
-    "objectID": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#前方的路",
-    "href": "posts/2021-08-12-the-whats-whos-and-whys-of-quantitative-trading.html#前方的路",
-    "title": "CH1-量化交易简介",
-    "section": "前方的路",
-    "text": "前方的路\n\nIf you are convinced that you want to become a quantitative trader,a number of questions immediately follow: How do you find the right strategy to trade? How do you recognize a good versus a bad strategy even before devoting any time to backtesting them? How do you rigorously backtest them? If the backtest performance is good, what steps do you need to take to implement the strategy, in terms of both the business structure and the technological infrastructure? If the strategy is profitable in initial real-life trading, how does one scale up the capital to make it into a growing income stream while managing the inevitable (but, hopefully, only occasional) losses that come with trading?\n\n如果你确信要成为一名量化交易员，你需要面对以下问题 * 怎样找到正确的交易策略？ * 在投入时间回测之前怎样区分好坏策略？ * 你怎样严谨地回测你的策略？ * 如果回测效果很好，你要通过哪些步骤实现这些策略，有哪些业务架构和技术基础设施的模式？ * 如果策略在真实交易中获利，怎样在扩大资金规模提升收入流的同时管控交易中不可必免的损失？"
   }
 ]
