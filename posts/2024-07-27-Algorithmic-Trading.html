@@ -9,7 +9,7 @@
 <meta name="author" content="王一刀">
 <meta name="dcterms.date" content="2024-07-27">
 
-<title>算法交易 – 兜率宫</title>
+<title>算法交易：制胜策略与原理(欧内斯特·陈)之一 – 兜率宫</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">算法交易</h1>
+      <h1 class="title">算法交易：制胜策略与原理(欧内斯特·陈)之一</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">量化交易</div>
               </div>
@@ -202,6 +202,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>前言</p>
 </blockquote>
 </blockquote>
+<blockquote class="blockquote">
+<p>如果我们不采取措施规避某些交易策略中的缺陷与圈套，而是毫无顾忌地应用此种交易策略，同时对其进行相应的回测，那么，这种回测将毫无意义，而且也可能出现更加糟糕的情况，因为在错误的背景之下所进行的回测会对你产生误导，从而诱发巨大的亏损。<br>
+回测技术的主要特色是：对预期收益进行估算，同时，对相应交易策略的绩效进行统计学意义上的权衡。 &gt;第一章 回测及自动化的执行系统</p>
+</blockquote>
+<p>这个可以用backtrader框架来实现</p>
+<blockquote class="blockquote">
+<p>而我们之所以倾向于<strong>在短期最大跌幅区间构建附着高夏普比率之模型</strong>的原因是：此种方法能够以最大程度的自动化模式确保相关的模型通过交叉式的检测，而那些不能通过检测的模型所对应的数据子集大都是在下调区间之内缺少相应的样本。<br>
+结论：非线性模型比线性模型更加容易受到相应误差的干扰，因为非线性模型不仅仅是其构建过程过于烦琐，而且它所采集的随机参数也比线性模型多。<br>
+如果我们企图以简单的金融工具历史价格的外推法来预期其未来的走势，一个非线性的模型可以更好地填充数据，但它不能做出较好的预期，但是，如果我们向非线性模型与线性模型同样填充大量的参数，相对于非线性模型，我们经常采用微积分的方法，<strong>以泰勒连续展开公式求得近似的值</strong>，这就意味着：相对于每一个非线性模型，总会有一个相应比较简单的、近似的、线性的解；而我们也不得不承认一个现实，即线性模型的本身是不被采用的（这里也存在一种例外，即在单一事件下弱化某些低阶项，但我们很少用此类事件描述理想金融市场的时间序列）。</p>
+</blockquote>
 <section id="泰勒连续展开公式" class="level2">
 <h2 class="anchored" data-anchor-id="泰勒连续展开公式">泰勒连续展开公式</h2>
 <p>泰勒连续展开公式（Taylor Series Expansion）是数学中用于表示一个函数在某一点附近的一个无穷级数展开。这个公式是以英国数学家布鲁克·泰勒（Brook Taylor）的名字命名的。泰勒级数的基本思想是用一个函数在某一点附近的各阶导数值来代替该函数，从而得到一个关于变量的无穷级数表达式。</p>
@@ -209,24 +219,175 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>f(x) = f(a) + f’(a)(x-a) + f’’(a)(x-a)^2/2! + …+ f<sup>n(a)(x-a)</sup>n/n! + R_n(x)</p>
 <p>其中，f’(a)表示函数f的一阶导数在点a处的值，f’’(a)表示二阶导数在点a处的值，以此类推。R_n(x)是余项，它随着n的增大趋近于0。当n趋向于无穷大时，泰勒级数就变成了泰勒展开式。</p>
 <p>泰勒级数有很多实际应用，例如用于数值计算、求解微分方程、信号处理等领域。</p>
-<div id="cell-3" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#是的，Python 中有约翰森检验函数，即 scipy.stats.johnsonsu。</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 该函数用于对连续型数据进行正态性检验，并返回约翰森变换后的参数。</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#以下是 scumpy.stats.johnsonsu 函数的基本用法示例：</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 假设有一组连续型数据</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [<span class="fl">1.2</span>, <span class="fl">3.4</span>, <span class="fl">5.6</span>, <span class="fl">7.8</span>, <span class="fl">9.0</span>]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 对数据进行约翰森正态性检验</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.johnsonsu.fit(data)</span>
+<blockquote class="blockquote">
+<p>瞬时出现的数据信息会在瞬时之间即刻消失。这是因为对于相应的做市商与电子通信网络的运营商而言，他们没有义务向所有的交易参与方通报相关的价格信息。坦白地说，很多做市商将相关的交易信息视若珍宝，同时将对这些信息的掌控视为自身的专利与特权（他们这种做法很聪明，因为，如货币这般的高频交易策略往往要依赖于订单信息与价格信息，这一点我们在第7章会有所涉及。像银行之类金融机构中的外汇自营交易部门，就擅长于将前述的相关信息据为己有）。</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>如果我们发现一个比较理想的概率，在其情境之下，应用相关交易策略所获取的收益不输于或好于随机的收益以及实际收益的观测值，那么，这并不意味着所谓的动量交易策略能够捕捉任何行情或收益，其之所以盈利是因为我们比较幸运，即攫取的收益率的观测数值所生成的概率分布恰巧具有一个特定的均值和分布形态。为了在规定的时刻内生成模拟的随机收益率的相应数据，我们可以从MATLAB系统中的统计软件内选取那些服从皮尔逊分布的随机数来创建相应的函数；在模拟收益率marketRet_sim生成之后，我们根据其变化创建模拟的价格序列cl_sim；最后，我们根据相应价格的变化运行相关的交易策略，同时计算该策略项下的平均收益率。我们需要模拟10000次，然后统计有多少次因此策略而产生的平均收益大于等于实际的观测数据。</p>
+</blockquote>
+<div id="cell-6" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypothesis Testing on a Futures Momentum Strategy</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#from scipy.stats import describe</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearson3</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># moments表示阶矩，pearsrnd表示皮尔逊分布，skewness表示收益率曲线的偏度，kurtosis指峰度值，long代表多头（买方），short代表空头（卖方），backshift指二次变分，pos指持仓头寸。</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/TU.csv'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Time'</span>]<span class="op">=</span>pd.to_datetime(df[<span class="st">'Time'</span>]).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Time'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出约翰森变换后的参数</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">250</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>holddays<span class="op">=</span><span class="dv">25</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 需要注意的是，约翰森检验函数适用于连续型数据的正态性检验，对于离散型数据或其他类型的数据可能不适用。</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用shift()方法将数据向下移动一行</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>longs<span class="op">=</span> df[<span class="st">'Close'</span>] <span class="op">&gt;</span> df[<span class="st">'Close'</span>].shift()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>shorts<span class="op">=</span> df[<span class="st">'Close'</span>] <span class="op">&lt;</span> df[<span class="st">'Close'</span>].shift()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>pos<span class="op">=</span>np.zeros(df.shape[<span class="dv">0</span>])</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> h <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, holddays):</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    long_lag<span class="op">=</span>longs.shift(h)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    long_lag[long_lag.isna()]<span class="op">=</span><span class="va">False</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    long_lag<span class="op">=</span>long_lag.astype(<span class="bu">bool</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    short_lag<span class="op">=</span>shorts.shift(h)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    short_lag[short_lag.isna()]<span class="op">=</span><span class="va">False</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    short_lag<span class="op">=</span>short_lag.astype(<span class="bu">bool</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    pos[long_lag]<span class="op">=</span>pos[long_lag]<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    pos[short_lag]<span class="op">=</span>pos[short_lag]<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>capital<span class="op">=</span>np.nansum(np.array(pd.DataFrame(<span class="bu">abs</span>(pos)).shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>pos[capital<span class="op">==</span><span class="dv">0</span>,]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>capital[capital<span class="op">==</span><span class="dv">0</span>]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># pct_change()方法是pandas库中DataFrame和Series对象的一个常用方法，用于计算数据的变化百分比。</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 该方法计算相邻行之间的相对变化，并返回一个新的Series或DataFrame，其中包含每个元素相对于前一个元素的百分比变化。</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算收盘价的每日百分比变化，得到一个包含每日收益率的Series对象。</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>marketRet<span class="op">=</span>df[<span class="st">'Close'</span>].pct_change()</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># pd.DataFrame(pos).shift()：将持仓（pos）转换为DataFrame对象，并将其向上移动一行。这样做的目的是为了计算每个持仓在下一交易日的表现。</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># np.array(pd.DataFrame(pos).shift()) * np.array(marketRet)：将移动后的持仓数据与每日收益率相乘，得到每个持仓在下一交易日的收益。</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># np.nansum(..., axis=1)：沿着行方向对收益进行求和，得到每个交易日的总收益。</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># ... / capital / holddays：将总收益除以初始资本（capital）和持仓天数（holddays），得到每日收益率。</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>np.nansum(np.array(pd.DataFrame(pos).shift())<span class="op">*</span>np.array(marketRet), axis<span class="op">=</span><span class="dv">1</span>)<span class="op">/</span>capital<span class="op">/</span>holddays</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 夏普比率（Sharpe Ratio） </span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># np.sqrt(len(ret))：计算观测值的数量的平方根，即 (\sqrt{T})，其中 (T) 是观测值的数量。</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># np.nanmean(ret)：计算收益率的平均值，忽略NaN值。</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># np.nanstd(ret)：计算收益率的标准差，忽略NaN值。</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 将上述三个值相除，得到夏普比率</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>sharpe<span class="op">=</span>np.sqrt(<span class="bu">len</span>(ret))<span class="op">*</span>np.nanmean(ret)<span class="op">/</span>np.nanstd(ret)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Gaussian Test statistic=</span><span class="sc">%f</span><span class="st">"</span> <span class="op">%</span> sharpe)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">#Gaussian Test statistic=2.769741</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomized market returns hypothesis test</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">#_,_,mean,var,skew,kurt=describe(marketRet, nan_policy='omit')</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co"># fit方法用于估计Pearson III分布的参数。</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co"># fit方法返回三个参数：skew_、loc_和scale_，分别表示：</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co"># skew_：偏度参数，描述了分布的不对称程度。正值表示右偏（尾部向右延伸），负值表示左偏（尾部向左延伸）。</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co"># `loc_**：**位置参数，描述了分布的中心位置。通常与均值相关。</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co"># `scale_**：**尺度参数，描述了分布的宽度或分散程度。通常与标准差相关。</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>skew_, loc_, scale_<span class="op">=</span>pearson3.fit(marketRet[<span class="dv">1</span>:]) <span class="co"># First element is NaN</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>numSampleAvgretBetterOrEqualObserved<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rvs方法用于从指定的Pearson III分布中随机抽取样本。</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 以下是代码中各个参数的含义：</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    <span class="co"># skew_：偏度参数，描述了分布的不对称程度。</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="co"># loc_：位置参数，描述了分布的中心位置。</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scale_：尺度参数，描述了分布的宽度或分散程度。</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    <span class="co"># size：生成的模拟数据的大小，这里设置为与原始市场收益率数据（marketRet）相同的大小。</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="co"># random_state：随机数生成器的种子，用于确保每次运行代码时生成的随机数据相同。</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    marketRet_sim<span class="op">=</span>pearson3.rvs(skew<span class="op">=</span>skew_, loc<span class="op">=</span>loc_, scale<span class="op">=</span>scale_, size<span class="op">=</span>marketRet.shape[<span class="dv">0</span>], random_state<span class="op">=</span>sample)</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    cl_sim<span class="op">=</span>np.cumproduct(<span class="dv">1</span><span class="op">+</span>marketRet_sim)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    longs_sim <span class="op">=</span>cl_sim <span class="op">&gt;</span> pd.Series(cl_sim).shift(lookback)</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    shorts_sim<span class="op">=</span>cl_sim <span class="op">&lt;</span> pd.Series(cl_sim).shift(lookback)</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    pos_sim<span class="op">=</span>np.zeros(cl_sim.shape[<span class="dv">0</span>])</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> h <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, holddays):</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>        long_sim_lag<span class="op">=</span>longs_sim.shift(h)</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>        long_sim_lag[long_sim_lag.isna()]<span class="op">=</span><span class="va">False</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>        long_sim_lag<span class="op">=</span>long_sim_lag.astype(<span class="bu">bool</span>)</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>        short_sim_lag<span class="op">=</span>shorts_sim.shift(h)</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>        short_sim_lag[short_sim_lag.isna()]<span class="op">=</span><span class="va">False</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>        short_sim_lag<span class="op">=</span>short_sim_lag.astype(<span class="bu">bool</span>)</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>        pos_sim[long_sim_lag]<span class="op">=</span>pos_sim[long_sim_lag]<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>        pos_sim[short_sim_lag]<span class="op">=</span>pos_sim[short_sim_lag]<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>        capital<span class="op">=</span>np.nansum(np.array(pd.DataFrame(<span class="bu">abs</span>(pos_sim)).shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>        pos_sim[capital<span class="op">==</span><span class="dv">0</span>,]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>        capital[capital<span class="op">==</span><span class="dv">0</span>]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>               </span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>        ret_sim<span class="op">=</span>np.nansum(np.array(pd.DataFrame(pos_sim).shift())<span class="op">*</span>np.array(marketRet_sim), axis<span class="op">=</span><span class="dv">1</span>)<span class="op">/</span>capital<span class="op">/</span>holddays</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (np.mean(ret_sim) <span class="op">&gt;=</span> np.mean(ret)):</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>            numSampleAvgretBetterOrEqualObserved<span class="op">=</span>numSampleAvgretBetterOrEqualObserved<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Randomized prices: p-value=</span><span class="sc">%f</span><span class="st">"</span> <span class="op">%</span> (numSampleAvgretBetterOrEqualObserved<span class="op">/</span><span class="dv">100</span>))</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="co">#Randomized prices: p-value=23.617800</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomized entry trades hypothesis test</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>numSampleAvgretBetterOrEqualObserved<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sample <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 生成一个随机排列的索引数组</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>    P<span class="op">=</span>np.random.permutation(<span class="bu">len</span>(longs))</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>    longs_sim<span class="op">=</span>longs[P]</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>    shorts_sim<span class="op">=</span>shorts[P]</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>    pos_sim<span class="op">=</span>np.zeros(cl_sim.shape[<span class="dv">0</span>])</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> h <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, holddays):</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>        long_sim_lag<span class="op">=</span>longs_sim.shift(h)</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>        long_sim_lag[long_sim_lag.isna()]<span class="op">=</span><span class="va">False</span></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>        long_sim_lag<span class="op">=</span>long_sim_lag.astype(<span class="bu">bool</span>)</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>        short_sim_lag<span class="op">=</span>shorts_sim.shift(h)</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>        short_sim_lag[short_sim_lag.isna()]<span class="op">=</span><span class="va">False</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>        short_sim_lag<span class="op">=</span>short_sim_lag.astype(<span class="bu">bool</span>)</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>        pos_sim[long_sim_lag]<span class="op">=</span>pos_sim[long_sim_lag]<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>        pos_sim[short_sim_lag]<span class="op">=</span>pos_sim[short_sim_lag]<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>        capital<span class="op">=</span>np.nansum(np.array(pd.DataFrame(<span class="bu">abs</span>(pos_sim)).shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>        pos_sim[capital<span class="op">==</span><span class="dv">0</span>,]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>        capital[capital<span class="op">==</span><span class="dv">0</span>]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>               </span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>        ret_sim<span class="op">=</span>np.nansum(np.array(pd.DataFrame(pos_sim).shift())<span class="op">*</span>np.array(marketRet), axis<span class="op">=</span><span class="dv">1</span>)<span class="op">/</span>capital<span class="op">/</span>holddays</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (np.mean(ret_sim) <span class="op">&gt;=</span> np.mean(ret)):</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>            numSampleAvgretBetterOrEqualObserved<span class="op">=</span>numSampleAvgretBetterOrEqualObserved<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Randomized trades: p-value=</span><span class="sc">%f</span><span class="st">"</span> <span class="op">%</span> (numSampleAvgretBetterOrEqualObserved<span class="op">/</span><span class="dv">100</span>))</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="co">#Randomized trades: p-value=1.365600</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Gaussian Test statistic=2.769741
+Randomized prices: p-value=23.500000
+Randomized trades: p-value=1.000000</code></pre>
+</div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#是的，Python 中有约翰森检验函数，即 scipy.stats.johnsonsu。</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 该函数用于对连续型数据进行正态性检验，并返回约翰森变换后的参数。</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#以下是 scumpy.stats.johnsonsu 函数的基本用法示例：</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 假设有一组连续型数据</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [<span class="fl">1.2</span>, <span class="fl">3.4</span>, <span class="fl">5.6</span>, <span class="fl">7.8</span>, <span class="fl">9.0</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 对数据进行约翰森正态性检验</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.johnsonsu.fit(data)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 输出约翰森变换后的参数</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 需要注意的是，约翰森检验函数适用于连续型数据的正态性检验，对于离散型数据或其他类型的数据可能不适用。</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(np.float64(9.932945657673585), np.float64(1.8845431800180394), np.float64(11.36217894129853), np.float64(0.05378935338333127))</code></pre>
 </div>
@@ -292,48 +453,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>确认信号</strong>：最好使用其他指标（如MACD、RSI）来确认布林带提供的信号，以避免误判。</li>
 </ul>
 <p>通过以上信息，投资者可以更好地理解和使用布林带指标，以提高股票交易的准确性和效率。</p>
-<div id="cell-7" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建一个简单的数据集</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'x'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'y'</span>: [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>]</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建一个散点图</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(data).mark_circle().encode(</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x:Q'</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'y:Q'</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 显示图表</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># chart.show()</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.plot(data)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2024-07-27-Algorithmic-Trading_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="cell-8" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"font.sans-serif"</span>] <span class="op">=</span> [<span class="st">"SimHei"</span>] </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mpl.rcParams[<span class="st">'axes.unicode_minus'</span>] <span class="op">=</span> <span class="va">False</span> <span class="co"># 正常显示负号</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># zhfont=mpl.font_manager.FontProperties(fname="/System/Library/Fonts/PingFang.ttc")</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># mpl.rcParams['axes.unicode_minus'] = False</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.linspace(<span class="op">-</span>np.pi,np.pi,<span class="dv">100</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>np.sin(x)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">u'正弦函数'</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-11" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建一个简单的数据集</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'x'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'y'</span>: [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建一个散点图</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(data).mark_circle().encode(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x:Q'</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'y:Q'</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 显示图表</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># chart.show()</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>plt.plot(data)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -342,28 +481,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-9" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import altair with an abbreviated alias</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print(alt.Config)</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.set_embed_options(base_url='js/',vega_url='js/vega@5',</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># vega_lite_url='js/vega-lite@4',</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># vega_embed_url='js/vega-embed@6')</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 算了吧太费劲了，放弃altair</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.enable('html', base_url='js')</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># load a sample dataset as a pandas DataFrame</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> data.cars()</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.enable('html', vega_cdn='https://cdnjs.cloudflare.com/libraries/vega', vega_lite_cdn='https://cdnjs.cloudflare.com/libraries/vega-lite')</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.26.0/vega-embed.min.js</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># make the chart</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point().encode(</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Horsepower'</span>,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Miles_per_Gallon'</span>,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Origin'</span>,</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>).interactive()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"font.sans-serif"</span>] <span class="op">=</span> [<span class="st">"SimHei"</span>] </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>mpl.rcParams[<span class="st">'axes.unicode_minus'</span>] <span class="op">=</span> <span class="va">False</span> <span class="co"># 正常显示负号</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># zhfont=mpl.font_manager.FontProperties(fname="/System/Library/Fonts/PingFang.ttc")</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># mpl.rcParams['axes.unicode_minus'] = False</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.linspace(<span class="op">-</span>np.pi,np.pi,<span class="dv">100</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>np.sin(x)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">u'正弦函数'</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-07-27-Algorithmic-Trading_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-13" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import altair with an abbreviated alias</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print(alt.Config)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.set_embed_options(base_url='js/',vega_url='js/vega@5',</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># vega_lite_url='js/vega-lite@4',</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># vega_embed_url='js/vega-embed@6')</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 算了吧太费劲了，放弃altair</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.enable('html', base_url='js')</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># load a sample dataset as a pandas DataFrame</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vega_datasets <span class="im">import</span> data</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> data.cars()</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.renderers.enable('html', vega_cdn='https://cdnjs.cloudflare.com/libraries/vega', vega_lite_cdn='https://cdnjs.cloudflare.com/libraries/vega-lite')</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.26.0/vega-embed.min.js</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># make the chart</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>alt.Chart(cars).mark_point().encode(</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Horsepower'</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Miles_per_Gallon'</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Origin'</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>).interactive()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

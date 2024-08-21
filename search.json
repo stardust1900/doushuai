@@ -25,7 +25,28 @@
     "href": "posts/2024-08-20-Things-About-Dickey-Fuller.html#赫斯特hurst指数",
     "title": "关于迪基-富勒检验",
     "section": "赫斯特（Hurst）指数",
-    "text": "赫斯特（Hurst）指数\n赫斯特（Hurst）指数是一种用于分析时间序列数据的统计工具，主要用于衡量时间序列的长期记忆性或自相关性。赫斯特指数是由英国水文学家哈罗德·赫斯特（Harold Edwin Hurst）在20世纪50年代提出的，最初用于分析尼罗河的水位变化。\n赫斯特指数的取值范围在0到1之间，可以分为以下几种情况：\nH = 0.5：时间序列是随机的，没有自相关性。这种情况下，时间序列的未来值与过去值之间没有任何关系。\n0.5 &lt; H &lt; 1：时间序列具有长期记忆性，即未来的趋势与过去的趋势有关。这种情况下，时间序列呈现出持久性（persistence），即如果过去是上升的，未来也很可能继续上升；如果过去是下降的，未来也很可能继续下降。\n0 ≤ H &lt; 0.5：时间序列具有反记忆性（antipersistence），即未来的趋势与过去的趋势相反。这种情况下，时间序列呈现出均值回归（mean reversion）的特性，即如果过去是上升的，未来很可能下降；如果过去是下降的，未来很可能上升。\n赫斯特指数的计算方法有很多种，其中最常用的是重标极差法（Rescaled Range Analysis, R/S）。以下是计算赫斯特指数的基本步骤：\n\n将时间序列分成若干个等长的子序列。\n对每个子序列计算累积和（cumulative sum）。\n对每个子序列计算标准差（standard deviation）。\n计算每个子序列的重标极差（rescaled range），即累积和的最大值与最小值之差除以子序列的标准差。\n计算整个时间序列的重标极差均值。\n根据重标极差均值和时间序列的长度计算赫斯特指数。\n\n赫斯特指数在许多领域都有广泛的应用，如金融市场分析、气象学、水文学、地球物理学等。通过计算赫斯特指数，可以帮助我们了解时间序列数据的特性，预测未来趋势，以及评估不同时间序列之间的相关性。\n方差比检验（Variance Ratio Test）是一种用于检验两个或多个独立样本方差是否相等的统计方法。它基于F分布，通过比较两组数据的方差来判断它们是否来自具有相同方差的总体。\n方差比检验的步骤如下：\n提出假设：\n原假设（H0）：两组数据的方差相等。 备择假设（H1）：两组数据的方差不等于相等。 计算检验统计量：\n计算两组数据的样本方差 ( s_1^2 ) 和 ( s_2^2 )。 计算方差比 ( VR = ) 或 ( VR = )，具体取决于哪组数据的方差较大。 根据样本大小 ( n_1 ) 和 ( n_2 )，查找F分布表，确定临界值 ( F_{/2} ) 和 ( F_{1-/2} )。 做出决策：\n如果 ( VR ) 落在拒绝域内（即 ( VR &lt; F_{/2} ) 或 ( VR &gt; F_{1-/2} )），则拒绝原假设，认为两组数据的方差不等于相等。 如果 ( VR ) 落在接受域内，则不拒绝原假设，认为两组数据的方差相等。 方差比检验的适用条件包括：\n样本是独立的。 样本来自正态分布的总体。 方差比检验通常用于比较两个独立样本的方差，但也可以扩展到多个样本的情况。 需要注意的是，方差比检验对样本大小和分布的正态性有一定的要求。如果样本大小较小或数据分布偏离正态性，检验结果可能不准确。在实际应用中，可以考虑使用其他统计方法，如Levene检验或Bartlett检验，来检验方差的齐性。\n半衰期检验（Half-Life Test）是一种用于评估放射性物质衰变速率的实验方法。在核物理学、化学和环境科学等领域，半衰期检验被广泛应用于研究放射性同位素的衰变特性。通过测量放射性物质在一定时间内的衰变量，可以计算出其半衰期，从而了解其衰变速率和放射性强度。\n半衰期检验的基本原理是：在一个封闭系统中，放射性物质的原子核会随着时间的推移逐渐衰变成其他元素或同位素。在衰变过程中，放射性物质的剩余量会按照一定的规律减少。半衰期是指放射性物质剩余量减少到原来的一半所需的时间。\n进行半衰期检验的步骤如下：\n准备样品：选择一个合适的放射性物质样品，并将其置于一个封闭的容器中。\n测量初始放射性强度：使用辐射探测器测量样品的初始放射性强度。\n等待一段时间：等待足够长的时间，使得样品的放射性强度发生明显变化。\n再次测量放射性强度：在等待时间结束后，再次使用辐射探测器测量样品的放射性强度。\n计算半衰期：根据两次测量的放射性强度和时间间隔，使用以下公式计算半衰期：\n[ t_{1/2} = ]\n其中，( t_{1/2} ) 是半衰期，( (2) ) 是自然对数的底数（约等于 0.693），( k ) 是衰变速率常数。\n分析结果：根据计算出的半衰期，分析放射性物质的衰变速率和放射性强度。\n需要注意的是，半衰期检验需要在专业的实验室环境中进行，并采取适当的安全措施，以防止辐射对人体的伤害。此外，半衰期检验的结果可能受到测量误差和其他因素的影响，因此需要进行多次实验并取平均值以提高准确性。\n半衰期检验（Half-Life Test）本身并不是专门用于测试时间序列的回归性和平稳性的方法。半衰期检验主要用于评估放射性物质衰变速率，而不是时间序列分析\n协整型ADF检验（Cointegration Augmented Dickey-Fuller Test）是一种用于检验两个或多个非平稳时间序列是否存在协整关系的统计方法。协整关系指的是两个或多个时间序列之间存在长期的稳定关系，即使它们各自是非平稳的。\n在进行协整型ADF检验之前，通常需要先对时间序列进行单位根检验，以确定它们是否为非平稳的。如果两个时间序列都是非平稳的，但它们的线性组合是平稳的，那么这两个时间序列之间存在协整关系。\n协整型ADF检验的基本步骤如下：\n单位根检验：首先对两个或多个时间序列分别进行单位根检验，确定它们是否为非平稳的。常用的单位根检验方法有 Augmented Dickey-Fuller (ADF) 检验和 Phillips-Perron (PP) 检验。\n估计协整关系：如果两个时间序列都是非平稳的，接下来需要估计它们之间的协整关系。这可以通过最小二乘法或其他回归方法来实现。\n协整型ADF检验：在估计出协整关系后，进行协整型ADF检验。这个检验实际上是检验残差序列是否平稳。如果残差序列是平稳的，那么两个时间序列之间存在协整关系；否则，它们之间不存在协整关系。\n解释结果：根据协整型ADF检验的结果，可以得出两个时间序列之间是否存在协整关系的结论。如果存在协整关系，那么可以利用这个关系进行预测和分析。\n需要注意的是，协整型ADF检验对样本大小和数据质量有一定的要求。如果样本太小或数据存在严重的自相关或异方差问题，检验结果可能不准确。在实际应用中，可以考虑使用其他协整检验方法，如 Engle-Granger 两步法或 Johansen 协整检验。\n\nimport numpy as np\nimport pandas as pd\nfrom statsmodels.tsa.stattools import adfuller\nfrom statsmodels.regression.linear_model import OLS\n\n# 生成两个非平稳的时间序列\nnp.random.seed(42)\nn = 100\nx = np.cumsum(np.random.randn(n))\ny = 2 * x + np.cumsum(np.random.randn(n))\n\n# 单位根检验\nresult_x = adfuller(x)\nresult_y = adfuller(y)\n\nprint(\"x 的单位根检验结果：\", result_x)\nprint(\"y 的单位根检验结果：\", result_y)\n\n# 估计协整关系\nmodel = OLS(y, x).fit()\nresiduals = model.resid\n\n# 协整型ADF检验\nresult_residuals = adfuller(residuals)\n\nprint(\"残差序列的单位根检验结果：\", result_residuals)\n\n# 解释结果\nalpha = 0.05\nif result_x[1] &gt; alpha and result_y[1] &gt; alpha and result_residuals[1] &lt; alpha:\n    print(\"x 和 y 存在协整关系\")\nelse:\n    print(\"x 和 y 不存在协整关系\")\n\nx 的单位根检验结果： (-1.3583317659818985, 0.6020814791099101, 0, 99, {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}, 222.8689980232281)\ny 的单位根检验结果： (-1.258001500815765, 0.6481611011736785, 1, 98, {'1%': -3.4989097606014496, '5%': -2.891516256916761, '10%': -2.5827604414827157}, 356.0626708213774)\n残差序列的单位根检验结果： (-1.9559190170990346, 0.3062290299375441, 0, 99, {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}, 237.03854879262025)\nx 和 y 不存在协整关系"
+    "text": "赫斯特（Hurst）指数\n赫斯特（Hurst）指数是一种用于分析时间序列数据的统计工具，主要用于衡量时间序列的长期记忆性或自相关性。赫斯特指数是由英国水文学家哈罗德·赫斯特（Harold Edwin Hurst）在20世纪50年代提出的，最初用于分析尼罗河的水位变化。\n赫斯特指数的取值范围在0到1之间，可以分为以下几种情况：\nH = 0.5：时间序列是随机的，没有自相关性。这种情况下，时间序列的未来值与过去值之间没有任何关系。\n0.5 &lt; H &lt; 1：时间序列具有长期记忆性，即未来的趋势与过去的趋势有关。这种情况下，时间序列呈现出持久性（persistence），即如果过去是上升的，未来也很可能继续上升；如果过去是下降的，未来也很可能继续下降。\n0 ≤ H &lt; 0.5：时间序列具有反记忆性（antipersistence），即未来的趋势与过去的趋势相反。这种情况下，时间序列呈现出均值回归（mean reversion）的特性，即如果过去是上升的，未来很可能下降；如果过去是下降的，未来很可能上升。\n赫斯特指数的计算方法有很多种，其中最常用的是重标极差法（Rescaled Range Analysis, R/S）。以下是计算赫斯特指数的基本步骤：\n\n将时间序列分成若干个等长的子序列。\n对每个子序列计算累积和（cumulative sum）。\n对每个子序列计算标准差（standard deviation）。\n计算每个子序列的重标极差（rescaled range），即累积和的最大值与最小值之差除以子序列的标准差。\n计算整个时间序列的重标极差均值。\n根据重标极差均值和时间序列的长度计算赫斯特指数。\n\n赫斯特指数在许多领域都有广泛的应用，如金融市场分析、气象学、水文学、地球物理学等。通过计算赫斯特指数，可以帮助我们了解时间序列数据的特性，预测未来趋势，以及评估不同时间序列之间的相关性。"
+  },
+  {
+    "objectID": "posts/2024-08-20-Things-About-Dickey-Fuller.html#方差比检验",
+    "href": "posts/2024-08-20-Things-About-Dickey-Fuller.html#方差比检验",
+    "title": "关于迪基-富勒检验",
+    "section": "方差比检验",
+    "text": "方差比检验\n（Variance Ratio Test）是一种用于检验两个或多个独立样本方差是否相等的统计方法。它基于F分布，通过比较两组数据的方差来判断它们是否来自具有相同方差的总体。\n方差比检验的步骤如下：\n提出假设：\n原假设（H0）：两组数据的方差相等。 备择假设（H1）：两组数据的方差不等于相等。 计算检验统计量：\n计算两组数据的样本方差 ( s_1^2 ) 和 ( s_2^2 )。 计算方差比 ( VR = ) 或 ( VR = )，具体取决于哪组数据的方差较大。 根据样本大小 ( n_1 ) 和 ( n_2 )，查找F分布表，确定临界值 ( F_{/2} ) 和 ( F_{1-/2} )。 做出决策：\n如果 ( VR ) 落在拒绝域内（即 ( VR &lt; F_{/2} ) 或 ( VR &gt; F_{1-/2} )），则拒绝原假设，认为两组数据的方差不等于相等。 如果 ( VR ) 落在接受域内，则不拒绝原假设，认为两组数据的方差相等。 方差比检验的适用条件包括：\n样本是独立的。 样本来自正态分布的总体。 方差比检验通常用于比较两个独立样本的方差，但也可以扩展到多个样本的情况。 需要注意的是，方差比检验对样本大小和分布的正态性有一定的要求。如果样本大小较小或数据分布偏离正态性，检验结果可能不准确。在实际应用中，可以考虑使用其他统计方法，如Levene检验或Bartlett检验，来检验方差的齐性。"
+  },
+  {
+    "objectID": "posts/2024-08-20-Things-About-Dickey-Fuller.html#半衰期检验",
+    "href": "posts/2024-08-20-Things-About-Dickey-Fuller.html#半衰期检验",
+    "title": "关于迪基-富勒检验",
+    "section": "半衰期检验",
+    "text": "半衰期检验\n半衰期检验（Half-Life Test）是一种用于评估放射性物质衰变速率的实验方法。在核物理学、化学和环境科学等领域，半衰期检验被广泛应用于研究放射性同位素的衰变特性。通过测量放射性物质在一定时间内的衰变量，可以计算出其半衰期，从而了解其衰变速率和放射性强度。\n半衰期检验的基本原理是：在一个封闭系统中，放射性物质的原子核会随着时间的推移逐渐衰变成其他元素或同位素。在衰变过程中，放射性物质的剩余量会按照一定的规律减少。半衰期是指放射性物质剩余量减少到原来的一半所需的时间。\n进行半衰期检验的步骤如下：\n准备样品：选择一个合适的放射性物质样品，并将其置于一个封闭的容器中。\n测量初始放射性强度：使用辐射探测器测量样品的初始放射性强度。\n等待一段时间：等待足够长的时间，使得样品的放射性强度发生明显变化。\n再次测量放射性强度：在等待时间结束后，再次使用辐射探测器测量样品的放射性强度。\n计算半衰期：根据两次测量的放射性强度和时间间隔，使用以下公式计算半衰期：\n[ t_{1/2} = ]\n其中，( t_{1/2} ) 是半衰期，( (2) ) 是自然对数的底数（约等于 0.693），( k ) 是衰变速率常数。\n分析结果：根据计算出的半衰期，分析放射性物质的衰变速率和放射性强度。\n需要注意的是，半衰期检验需要在专业的实验室环境中进行，并采取适当的安全措施，以防止辐射对人体的伤害。此外，半衰期检验的结果可能受到测量误差和其他因素的影响，因此需要进行多次实验并取平均值以提高准确性。\n半衰期检验（Half-Life Test）本身并不是专门用于测试时间序列的回归性和平稳性的方法。半衰期检验主要用于评估放射性物质衰变速率，而不是时间序列分析"
+  },
+  {
+    "objectID": "posts/2024-08-20-Things-About-Dickey-Fuller.html#协整型adf检验",
+    "href": "posts/2024-08-20-Things-About-Dickey-Fuller.html#协整型adf检验",
+    "title": "关于迪基-富勒检验",
+    "section": "协整型ADF检验",
+    "text": "协整型ADF检验\n协整型ADF检验（Cointegration Augmented Dickey-Fuller Test）是一种用于检验两个或多个非平稳时间序列是否存在协整关系的统计方法。协整关系指的是两个或多个时间序列之间存在长期的稳定关系，即使它们各自是非平稳的。\n在进行协整型ADF检验之前，通常需要先对时间序列进行单位根检验，以确定它们是否为非平稳的。如果两个时间序列都是非平稳的，但它们的线性组合是平稳的，那么这两个时间序列之间存在协整关系。\n协整型ADF检验的基本步骤如下：\n单位根检验：首先对两个或多个时间序列分别进行单位根检验，确定它们是否为非平稳的。常用的单位根检验方法有 Augmented Dickey-Fuller (ADF) 检验和 Phillips-Perron (PP) 检验。\n估计协整关系：如果两个时间序列都是非平稳的，接下来需要估计它们之间的协整关系。这可以通过最小二乘法或其他回归方法来实现。\n协整型ADF检验：在估计出协整关系后，进行协整型ADF检验。这个检验实际上是检验残差序列是否平稳。如果残差序列是平稳的，那么两个时间序列之间存在协整关系；否则，它们之间不存在协整关系。\n解释结果：根据协整型ADF检验的结果，可以得出两个时间序列之间是否存在协整关系的结论。如果存在协整关系，那么可以利用这个关系进行预测和分析。\n需要注意的是，协整型ADF检验对样本大小和数据质量有一定的要求。如果样本太小或数据存在严重的自相关或异方差问题，检验结果可能不准确。在实际应用中，可以考虑使用其他协整检验方法，如 Engle-Granger 两步法或 Johansen 协整检验。\n\nimport numpy as np\nimport pandas as pd\nfrom statsmodels.tsa.stattools import adfuller\nfrom statsmodels.regression.linear_model import OLS\n\n# 生成两个非平稳的时间序列\nnp.random.seed(42)\nn = 100\nx = np.cumsum(np.random.randn(n))\ny = 2 * x + np.cumsum(np.random.randn(n))\n\n# 单位根检验\nresult_x = adfuller(x)\nresult_y = adfuller(y)\n\nprint(\"x 的单位根检验结果：\", result_x)\nprint(\"y 的单位根检验结果：\", result_y)\n\n# 估计协整关系\nmodel = OLS(y, x).fit()\nresiduals = model.resid\n\n# 协整型ADF检验\nresult_residuals = adfuller(residuals)\n\nprint(\"残差序列的单位根检验结果：\", result_residuals)\n\n# 解释结果\nalpha = 0.05\nif result_x[1] &gt; alpha and result_y[1] &gt; alpha and result_residuals[1] &lt; alpha:\n    print(\"x 和 y 存在协整关系\")\nelse:\n    print(\"x 和 y 不存在协整关系\")\n\nx 的单位根检验结果： (-1.3583317659818985, 0.6020814791099101, 0, 99, {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}, 222.8689980232281)\ny 的单位根检验结果： (-1.258001500815765, 0.6481611011736785, 1, 98, {'1%': -3.4989097606014496, '5%': -2.891516256916761, '10%': -2.5827604414827157}, 356.0626708213774)\n残差序列的单位根检验结果： (-1.9559190170990346, 0.3062290299375441, 0, 99, {'1%': -3.498198082189098, '5%': -2.891208211860468, '10%': -2.5825959973472097}, 237.03854879262025)\nx 和 y 不存在协整关系"
   },
   {
     "objectID": "posts/2024-07-25-random-walk.html",
@@ -51,35 +72,35 @@
   {
     "objectID": "posts/2024-07-27-Algorithmic-Trading.html",
     "href": "posts/2024-07-27-Algorithmic-Trading.html",
-    "title": "算法交易",
+    "title": "算法交易：制胜策略与原理(欧内斯特·陈)之一",
     "section": "",
-    "text": "在均值回归交易策略所相关的系列当中，我们将讨论以多元的统计技术［如扩展版的迪基-富勒检验（Dickey-Fuller检验，即ADF检验）、赫斯特（Hurst）指数、方差比检验、半衰期检验模式等］来检测时间序列的均值回归之属性，以及相关的平稳性；同时，我们还要检测一个由金融工具所构建的投资组合之协整属性［相关检测模式包括协整型ADF检验（即CADF检验）、约翰森（Johansen）检验等］。除了前述这些统计测试模式被机械地应用于时间序列而外，我们还要努力传达一个直观的理解方法，即要认知相关测试的真正用意以及简易数学方程背后的深层含义。\n我们将解析一些具有均值回归属性之投资组合所相关的最简单的技术和策略模式［如线性交易模式、布林带线、卡尔曼过滤法则(Kalman filter)等］。"
+    "text": "在均值回归交易策略所相关的系列当中，我们将讨论以多元的统计技术［如扩展版的迪基-富勒检验（Dickey-Fuller检验，即ADF检验）、赫斯特（Hurst）指数、方差比检验、半衰期检验模式等］来检测时间序列的均值回归之属性，以及相关的平稳性；同时，我们还要检测一个由金融工具所构建的投资组合之协整属性［相关检测模式包括协整型ADF检验（即CADF检验）、约翰森（Johansen）检验等］。除了前述这些统计测试模式被机械地应用于时间序列而外，我们还要努力传达一个直观的理解方法，即要认知相关测试的真正用意以及简易数学方程背后的深层含义。\n我们将解析一些具有均值回归属性之投资组合所相关的最简单的技术和策略模式［如线性交易模式、布林带线、卡尔曼过滤法则(Kalman filter)等］。\n这个可以用backtrader框架来实现"
   },
   {
     "objectID": "posts/2024-07-27-Algorithmic-Trading.html#泰勒连续展开公式",
     "href": "posts/2024-07-27-Algorithmic-Trading.html#泰勒连续展开公式",
-    "title": "算法交易",
+    "title": "算法交易：制胜策略与原理(欧内斯特·陈)之一",
     "section": "泰勒连续展开公式",
-    "text": "泰勒连续展开公式\n泰勒连续展开公式（Taylor Series Expansion）是数学中用于表示一个函数在某一点附近的一个无穷级数展开。这个公式是以英国数学家布鲁克·泰勒（Brook Taylor）的名字命名的。泰勒级数的基本思想是用一个函数在某一点附近的各阶导数值来代替该函数，从而得到一个关于变量的无穷级数表达式。\n泰勒连续展开公式的定义如下：设函数f(x)在点x=a的某邻域内具有n阶导数，那么对于这个区间上任意x，有：\nf(x) = f(a) + f’(a)(x-a) + f’’(a)(x-a)^2/2! + …+ fn(a)(x-a)n/n! + R_n(x)\n其中，f’(a)表示函数f的一阶导数在点a处的值，f’’(a)表示二阶导数在点a处的值，以此类推。R_n(x)是余项，它随着n的增大趋近于0。当n趋向于无穷大时，泰勒级数就变成了泰勒展开式。\n泰勒级数有很多实际应用，例如用于数值计算、求解微分方程、信号处理等领域。\n\n#是的，Python 中有约翰森检验函数，即 scipy.stats.johnsonsu。\n# 该函数用于对连续型数据进行正态性检验，并返回约翰森变换后的参数。\n#以下是 scumpy.stats.johnsonsu 函数的基本用法示例：\n\nfrom scipy import stats\n\n# 假设有一组连续型数据\ndata = [1.2, 3.4, 5.6, 7.8, 9.0]\n\n# 对数据进行约翰森正态性检验\nresult = stats.johnsonsu.fit(data)\n\n# 输出约翰森变换后的参数\nprint(result)\n\n\n# 需要注意的是，约翰森检验函数适用于连续型数据的正态性检验，对于离散型数据或其他类型的数据可能不适用。\n\n(np.float64(9.932945657673585), np.float64(1.8845431800180394), np.float64(11.36217894129853), np.float64(0.05378935338333127))"
+    "text": "泰勒连续展开公式\n泰勒连续展开公式（Taylor Series Expansion）是数学中用于表示一个函数在某一点附近的一个无穷级数展开。这个公式是以英国数学家布鲁克·泰勒（Brook Taylor）的名字命名的。泰勒级数的基本思想是用一个函数在某一点附近的各阶导数值来代替该函数，从而得到一个关于变量的无穷级数表达式。\n泰勒连续展开公式的定义如下：设函数f(x)在点x=a的某邻域内具有n阶导数，那么对于这个区间上任意x，有：\nf(x) = f(a) + f’(a)(x-a) + f’’(a)(x-a)^2/2! + …+ fn(a)(x-a)n/n! + R_n(x)\n其中，f’(a)表示函数f的一阶导数在点a处的值，f’’(a)表示二阶导数在点a处的值，以此类推。R_n(x)是余项，它随着n的增大趋近于0。当n趋向于无穷大时，泰勒级数就变成了泰勒展开式。\n泰勒级数有很多实际应用，例如用于数值计算、求解微分方程、信号处理等领域。\n\n瞬时出现的数据信息会在瞬时之间即刻消失。这是因为对于相应的做市商与电子通信网络的运营商而言，他们没有义务向所有的交易参与方通报相关的价格信息。坦白地说，很多做市商将相关的交易信息视若珍宝，同时将对这些信息的掌控视为自身的专利与特权（他们这种做法很聪明，因为，如货币这般的高频交易策略往往要依赖于订单信息与价格信息，这一点我们在第7章会有所涉及。像银行之类金融机构中的外汇自营交易部门，就擅长于将前述的相关信息据为己有）。\n\n\n如果我们发现一个比较理想的概率，在其情境之下，应用相关交易策略所获取的收益不输于或好于随机的收益以及实际收益的观测值，那么，这并不意味着所谓的动量交易策略能够捕捉任何行情或收益，其之所以盈利是因为我们比较幸运，即攫取的收益率的观测数值所生成的概率分布恰巧具有一个特定的均值和分布形态。为了在规定的时刻内生成模拟的随机收益率的相应数据，我们可以从MATLAB系统中的统计软件内选取那些服从皮尔逊分布的随机数来创建相应的函数；在模拟收益率marketRet_sim生成之后，我们根据其变化创建模拟的价格序列cl_sim；最后，我们根据相应价格的变化运行相关的交易策略，同时计算该策略项下的平均收益率。我们需要模拟10000次，然后统计有多少次因此策略而产生的平均收益大于等于实际的观测数据。\n\n\n# Hypothesis Testing on a Futures Momentum Strategy\n\nimport numpy as np\nimport pandas as pd\n#from scipy.stats import describe\nfrom scipy.stats import pearson3\n\n# moments表示阶矩，pearsrnd表示皮尔逊分布，skewness表示收益率曲线的偏度，kurtosis指峰度值，long代表多头（买方），short代表空头（卖方），backshift指二次变分，pos指持仓头寸。\ndf=pd.read_csv('datas/TU.csv')\ndf['Time']=pd.to_datetime(df['Time']).dt.date # remove HH:MM:SS\ndf.set_index('Time', inplace=True)\n\nlookback=250\nholddays=25\n\n# 使用shift()方法将数据向下移动一行\nlongs= df['Close'] &gt; df['Close'].shift()\nshorts= df['Close'] &lt; df['Close'].shift()\n\npos=np.zeros(df.shape[0])\n\nfor h in range(0, holddays):\n    long_lag=longs.shift(h)\n    long_lag[long_lag.isna()]=False\n    long_lag=long_lag.astype(bool)\n\n    short_lag=shorts.shift(h)\n    short_lag[short_lag.isna()]=False\n    short_lag=short_lag.astype(bool)\n\n    pos[long_lag]=pos[long_lag]+1\n    pos[short_lag]=pos[short_lag]-1\n    \ncapital=np.nansum(np.array(pd.DataFrame(abs(pos)).shift()), axis=1)\npos[capital==0,]=0\ncapital[capital==0]=1\n# pct_change()方法是pandas库中DataFrame和Series对象的一个常用方法，用于计算数据的变化百分比。\n# 该方法计算相邻行之间的相对变化，并返回一个新的Series或DataFrame，其中包含每个元素相对于前一个元素的百分比变化。\n# 计算收盘价的每日百分比变化，得到一个包含每日收益率的Series对象。\nmarketRet=df['Close'].pct_change()\n# pd.DataFrame(pos).shift()：将持仓（pos）转换为DataFrame对象，并将其向上移动一行。这样做的目的是为了计算每个持仓在下一交易日的表现。\n# np.array(pd.DataFrame(pos).shift()) * np.array(marketRet)：将移动后的持仓数据与每日收益率相乘，得到每个持仓在下一交易日的收益。\n# np.nansum(..., axis=1)：沿着行方向对收益进行求和，得到每个交易日的总收益。\n# ... / capital / holddays：将总收益除以初始资本（capital）和持仓天数（holddays），得到每日收益率。\nret=np.nansum(np.array(pd.DataFrame(pos).shift())*np.array(marketRet), axis=1)/capital/holddays\n# 夏普比率（Sharpe Ratio） \n# np.sqrt(len(ret))：计算观测值的数量的平方根，即 (\\sqrt{T})，其中 (T) 是观测值的数量。\n# np.nanmean(ret)：计算收益率的平均值，忽略NaN值。\n# np.nanstd(ret)：计算收益率的标准差，忽略NaN值。\n# 将上述三个值相除，得到夏普比率\nsharpe=np.sqrt(len(ret))*np.nanmean(ret)/np.nanstd(ret)\n\nprint(\"Gaussian Test statistic=%f\" % sharpe)\n#Gaussian Test statistic=2.769741\n\n# Randomized market returns hypothesis test\n# =============================================================================\n#_,_,mean,var,skew,kurt=describe(marketRet, nan_policy='omit')\n# =============================================================================\n\n# fit方法用于估计Pearson III分布的参数。\n# fit方法返回三个参数：skew_、loc_和scale_，分别表示：\n# skew_：偏度参数，描述了分布的不对称程度。正值表示右偏（尾部向右延伸），负值表示左偏（尾部向左延伸）。\n# `loc_**：**位置参数，描述了分布的中心位置。通常与均值相关。\n# `scale_**：**尺度参数，描述了分布的宽度或分散程度。通常与标准差相关。\nskew_, loc_, scale_=pearson3.fit(marketRet[1:]) # First element is NaN\nnumSampleAvgretBetterOrEqualObserved=0\nfor sample in range(100):\n    # rvs方法用于从指定的Pearson III分布中随机抽取样本。\n    # 以下是代码中各个参数的含义：\n    # skew_：偏度参数，描述了分布的不对称程度。\n    # loc_：位置参数，描述了分布的中心位置。\n    # scale_：尺度参数，描述了分布的宽度或分散程度。\n    # size：生成的模拟数据的大小，这里设置为与原始市场收益率数据（marketRet）相同的大小。\n    # random_state：随机数生成器的种子，用于确保每次运行代码时生成的随机数据相同。\n    marketRet_sim=pearson3.rvs(skew=skew_, loc=loc_, scale=scale_, size=marketRet.shape[0], random_state=sample)\n    cl_sim=np.cumproduct(1+marketRet_sim)-1\n    \n    longs_sim =cl_sim &gt; pd.Series(cl_sim).shift(lookback)\n    shorts_sim=cl_sim &lt; pd.Series(cl_sim).shift(lookback)\n    \n    pos_sim=np.zeros(cl_sim.shape[0])\n    \n    for h in range(0, holddays):\n        long_sim_lag=longs_sim.shift(h)\n        long_sim_lag[long_sim_lag.isna()]=False\n        long_sim_lag=long_sim_lag.astype(bool)\n    \n        short_sim_lag=shorts_sim.shift(h)\n        short_sim_lag[short_sim_lag.isna()]=False\n        short_sim_lag=short_sim_lag.astype(bool)\n    \n        pos_sim[long_sim_lag]=pos_sim[long_sim_lag]+1\n        pos_sim[short_sim_lag]=pos_sim[short_sim_lag]-1\n        \n        capital=np.nansum(np.array(pd.DataFrame(abs(pos_sim)).shift()), axis=1)\n        pos_sim[capital==0,]=0\n        capital[capital==0]=1\n               \n        ret_sim=np.nansum(np.array(pd.DataFrame(pos_sim).shift())*np.array(marketRet_sim), axis=1)/capital/holddays\n        if (np.mean(ret_sim) &gt;= np.mean(ret)):\n            numSampleAvgretBetterOrEqualObserved=numSampleAvgretBetterOrEqualObserved+1\n            \nprint(\"Randomized prices: p-value=%f\" % (numSampleAvgretBetterOrEqualObserved/100))\n#Randomized prices: p-value=23.617800\n\n# Randomized entry trades hypothesis test\nnumSampleAvgretBetterOrEqualObserved=0\nfor sample in range(100):\n    # 生成一个随机排列的索引数组\n    P=np.random.permutation(len(longs))\n    longs_sim=longs[P]\n    shorts_sim=shorts[P]\n    \n    pos_sim=np.zeros(cl_sim.shape[0])\n\n    for h in range(0, holddays):\n        long_sim_lag=longs_sim.shift(h)\n        long_sim_lag[long_sim_lag.isna()]=False\n        long_sim_lag=long_sim_lag.astype(bool)\n    \n        short_sim_lag=shorts_sim.shift(h)\n        short_sim_lag[short_sim_lag.isna()]=False\n        short_sim_lag=short_sim_lag.astype(bool)\n    \n        pos_sim[long_sim_lag]=pos_sim[long_sim_lag]+1\n        pos_sim[short_sim_lag]=pos_sim[short_sim_lag]-1\n        \n        capital=np.nansum(np.array(pd.DataFrame(abs(pos_sim)).shift()), axis=1)\n        pos_sim[capital==0,]=0\n        capital[capital==0]=1\n               \n        ret_sim=np.nansum(np.array(pd.DataFrame(pos_sim).shift())*np.array(marketRet), axis=1)/capital/holddays\n        if (np.mean(ret_sim) &gt;= np.mean(ret)):\n            numSampleAvgretBetterOrEqualObserved=numSampleAvgretBetterOrEqualObserved+1\n            \nprint(\"Randomized trades: p-value=%f\" % (numSampleAvgretBetterOrEqualObserved/100))\n#Randomized trades: p-value=1.365600\n\nGaussian Test statistic=2.769741\nRandomized prices: p-value=23.500000\nRandomized trades: p-value=1.000000\n\n\n\n#是的，Python 中有约翰森检验函数，即 scipy.stats.johnsonsu。\n# 该函数用于对连续型数据进行正态性检验，并返回约翰森变换后的参数。\n#以下是 scumpy.stats.johnsonsu 函数的基本用法示例：\n\nfrom scipy import stats\n\n# 假设有一组连续型数据\ndata = [1.2, 3.4, 5.6, 7.8, 9.0]\n\n# 对数据进行约翰森正态性检验\nresult = stats.johnsonsu.fit(data)\n\n# 输出约翰森变换后的参数\nprint(result)\n\n\n# 需要注意的是，约翰森检验函数适用于连续型数据的正态性检验，对于离散型数据或其他类型的数据可能不适用。\n\n(np.float64(9.932945657673585), np.float64(1.8845431800180394), np.float64(11.36217894129853), np.float64(0.05378935338333127))"
   },
   {
     "objectID": "posts/2024-07-27-Algorithmic-Trading.html#协整关系",
     "href": "posts/2024-07-27-Algorithmic-Trading.html#协整关系",
-    "title": "算法交易",
+    "title": "算法交易：制胜策略与原理(欧内斯特·陈)之一",
     "section": "协整关系",
     "text": "协整关系\n协整关系（Cointegration）是时间序列分析中的一个重要概念，它描述了两个或多个非平稳时间序列之间存在的长期稳定关系。\n在经济学和金融学中，协整关系常用于分析不同经济变量之间的长期均衡关系。例如，协整关系可以用来检验两个经济指标（如价格和工资）是否长期同步变动，从而判断它们之间是否存在长期的均衡关系。\n协整关系的存在需要满足一定的条件，包括：\n\n变量的非平稳性：协整关系通常存在于非平稳的时间序列之间。如果所有变量都是平稳的，那么它们之间就不存在协整关系。\n长期稳定性：协整关系描述的是变量之间的长期稳定关系。即使短期内变量之间可能出现波动或偏离，但在长期内它们会回归到均衡状态。\n最小二乘法估计的有效性：在存在协整关系的情况下，可以使用最小二乘法（OLS）对回归模型进行估计，并且得到的估计量是一致的。\n\n协整关系的检验通常使用Engle-Granger两步法或其他更复杂的统计方法。如果检验结果表明变量之间存在协整关系，那么就可以进一步分析它们之间的长期均衡关系，并进行相关的预测和政策分析。"
   },
   {
     "objectID": "posts/2024-07-27-Algorithmic-Trading.html#卡尔曼滤波法则",
     "href": "posts/2024-07-27-Algorithmic-Trading.html#卡尔曼滤波法则",
-    "title": "算法交易",
+    "title": "算法交易：制胜策略与原理(欧内斯特·陈)之一",
     "section": "卡尔曼滤波法则",
     "text": "卡尔曼滤波法则\n卡尔曼滤波法则是一种数学算法，用于估计和预测未知变量的值，特别是那些受到随机过程影响的系统。它是由匈牙利出生的美国工程师拉尔夫·伊万·卡尔曼在1960年发明的。卡尔曼滤波器的发展源于20世纪50年代末到60年代初的航天任务需求。当时需要一种能够实时处理复杂动态系统的测量数据的方法，以便进行精确导航和控制。卡尔曼滤波器正是在这种背景下应运而生，成为解决这些问题的有效工具。它的成功应用很快得到了广泛认可，并在之后的几十年里，在多个科学和工程领域中都得到了深入的研究和广泛应用。以下是关于卡尔曼滤波法则的相关信息：\n\n卡尔曼滤波的基本原理\n卡尔曼滤波的基本思想是通过观测数据对系统状态进行递归估计，不断更新状态的估计值。它假设系统状态是一个高斯分布，而观测值是由真实值和高斯噪声组成的。在每个时间步，卡尔曼滤波通过当前状态的预测和观测值的比较，得到一个新的状态估计值，并且利用上一个时间步的估计误差来调整预测误差的协方差矩阵，从而使得估计误差最小化。\n\n\n卡尔曼滤波的主要步骤\n\n预测步骤：根据上一时刻的状态估计和状态转移方程预测当前时刻的状态估计和协方差矩阵。\n更新步骤：根据当前时刻的观测值和观测方程，计算出当前时刻的状态估计和协方差矩阵。\n\n\n\n卡尔曼滤波的应用领域\n\n航天领域：飞船自主导航。\n自动驾驶车辆：高级驾驶辅助系统(ADAS)和自动驾驶车辆。\n机器人导航和运动控制：融合来自多种传感器的信息，包括激光雷达、视觉传感器和惯性测量单元(IMU)。\n医学影像处理：图像去噪和增强。\n金融领域：股票价格预测、风险管理以及利率模型的构建。\n\n通过上述分析，我们可以看到卡尔曼滤波法则不仅在理论上有着严谨的数学基础，而且在实际应用中也有着广泛的应用和重要的地位。"
   },
   {
     "objectID": "posts/2024-07-27-Algorithmic-Trading.html#布林带指标",
     "href": "posts/2024-07-27-Algorithmic-Trading.html#布林带指标",
-    "title": "算法交易",
+    "title": "算法交易：制胜策略与原理(欧内斯特·陈)之一",
     "section": "布林带指标",
     "text": "布林带指标\n布林带指标（Bollinger Bands）是一种基于移动平均线和标准差计算的技术分析工具，用于判断价格的波动趋势和判断市场支撑和阻力位。它由三条线组成：中轨线（通常是20日移动平均线）、上轨线（中轨线加上两倍标准差）和下轨线（中轨线减去两倍标准差）。布林带指标通过这三条线描绘出价格波动的范围，帮助投资者判断市场是处于正常波动状态还是极端波动状态。以下是关于布林带指标的相关信息：\n\n布林带指标的原理\n布林带指标的原理基于统计学中的标准差原理，通过计算股票或其他资产价格的移动平均线（通常是20日移动平均线）和标准差来描绘价格波动的范围。上轨线和下轨线分别表示价格的标准差倍数，通常为2倍和-2倍，从而展示出价格在过去的20个交易日中，相对于其移动平均线的波动范围。\n\n\n布林带指标的使用方法\n\n基本用法：股价通常在布林通道区间内运行，股价运行到上轨附近时强压力位，一般可以作为卖点；股价运行到下轨附近是强支撑位，一般可以作为买点。\n与其他指标的配合使用：布林带指标可以与其他技术指标如成交量、KDJ指标等配合使用，以获得更准确的买卖信号。\n\n\n\n注意事项\n\n参数设定：布林线参数的设定不得小于6，静态钱龙设定值通常是10；动态钱龙设定时通常为20。\n市场环境：布林带指标适用于相对平稳的市场，当市场波动较大的时候，布林带指标提供的参考价值就不高了。\n确认信号：最好使用其他指标（如MACD、RSI）来确认布林带提供的信号，以避免误判。\n\n通过以上信息，投资者可以更好地理解和使用布林带指标，以提高股票交易的准确性和效率。\n\nimport altair as alt\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# 创建一个简单的数据集\ndata = pd.DataFrame({\n    'x': [1, 2, 3, 4, 5],\n    'y': [2, 4, 6, 8, 10]\n})\n\n# 创建一个散点图\nchart = alt.Chart(data).mark_circle().encode(\n    x='x:Q',\n    y='y:Q'\n)\n# 显示图表\n# chart.show()\nplt.plot(data)\nplt.show()\n\n\n\n\n\n\n\n\n\nimport matplotlib as mpl\nimport matplotlib.pyplot as plt\nimport numpy as np\nplt.rcParams[\"font.sans-serif\"] = [\"SimHei\"] \nmpl.rcParams['axes.unicode_minus'] = False # 正常显示负号\n# zhfont=mpl.font_manager.FontProperties(fname=\"/System/Library/Fonts/PingFang.ttc\")\n# mpl.rcParams['axes.unicode_minus'] = False\nx=np.linspace(-np.pi,np.pi,100)\ny=np.sin(x)\nplt.title(u'正弦函数')\nplt.plot(x,y)\n\nplt.show()\n\n\n\n\n\n\n\n\n\n# import altair with an abbreviated alias\nimport altair as alt\n# print(alt.Config)\n\n# alt.renderers.set_embed_options(base_url='js/',vega_url='js/vega@5',\n# vega_lite_url='js/vega-lite@4',\n# vega_embed_url='js/vega-embed@6')\n# 算了吧太费劲了，放弃altair\n# alt.renderers.enable('html', base_url='js')\n\n# load a sample dataset as a pandas DataFrame\nfrom vega_datasets import data\ncars = data.cars()\n# alt.renderers.enable('html', vega_cdn='https://cdnjs.cloudflare.com/libraries/vega', vega_lite_cdn='https://cdnjs.cloudflare.com/libraries/vega-lite')\n# https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.26.0/vega-embed.min.js\n# make the chart\nalt.Chart(cars).mark_point().encode(\n    x='Horsepower',\n    y='Miles_per_Gallon',\n    color='Origin',\n).interactive()"
   },
@@ -140,32 +161,95 @@
     "text": "高频交易策略\n高频交易策略能获得高夏普比率的理由很简单：根据大数定律，交易的次数越多，收益率相对于均值的偏差就越小。而在高频交易策略下，一天可交易成百上千次。（这交易佣金也会很高啊）"
   },
   {
-    "objectID": "posts/2021-08-13-fishing-of-ideas.html",
-    "href": "posts/2021-08-13-fishing-of-ideas.html",
-    "title": "CH2-捕获点子",
+    "objectID": "posts/2024-08-21-conceptions-in-algorithmic-trading.html",
+    "href": "posts/2024-08-21-conceptions-in-algorithmic-trading.html",
+    "title": "算法交易中的一些概念",
     "section": "",
-    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
+    "text": "高斯分布，也称为正态分布，是一种在自然界和社会科学中广泛存在的概率分布。它以数学家卡尔·弗里德里希·高斯的名字命名，因其图形呈钟形曲线而得名“钟形曲线”。以下是详细介绍：\n高斯分布的基本原理\n定义：高斯分布是一种连续概率分布，其图形显示为对称于平均值的钟形曲线。\n数学表达：若随机变量X服从数学期望为μ、方差为σ²的正态分布，记为N(μ，σ²)。\n应用领域：高斯分布在自然科学、工程学和社会科学等领域中广泛应用，用于描述连续型的随机变量。\n高斯分布的特性\n对称性：分布曲线关于平均值μ对称。\n集中性：大部分数据集中在平均值附近，离平均值越远，数据出现的概率越低。\n数学特性：高斯分布的曲线由均值μ和标准差σ决定，其中标准差σ越小，分布越集中；σ越大，分布越分散。\n高斯分布的应用\n统计学：在统计学中，高斯分布是描述连续型随机变量的重要工具，如测量误差分析。\n机器学习：作为许多机器学习算法（如线性回归、聚类分析）的基础假设。\n金融领域：用于风险评估和资产定价。\n图像处理：在图像处理中，高斯分布用于噪声模型和图像平滑。\n自然和社会现象：高斯分布在描述人口智力、身高、体重等自然和社会现象中无处不在。"
   },
   {
-    "objectID": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
-    "href": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
-    "title": "CH2-捕获点子",
+    "objectID": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#高斯分布",
+    "href": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#高斯分布",
+    "title": "算法交易中的一些概念",
     "section": "",
-    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
+    "text": "高斯分布，也称为正态分布，是一种在自然界和社会科学中广泛存在的概率分布。它以数学家卡尔·弗里德里希·高斯的名字命名，因其图形呈钟形曲线而得名“钟形曲线”。以下是详细介绍：\n高斯分布的基本原理\n定义：高斯分布是一种连续概率分布，其图形显示为对称于平均值的钟形曲线。\n数学表达：若随机变量X服从数学期望为μ、方差为σ²的正态分布，记为N(μ，σ²)。\n应用领域：高斯分布在自然科学、工程学和社会科学等领域中广泛应用，用于描述连续型的随机变量。\n高斯分布的特性\n对称性：分布曲线关于平均值μ对称。\n集中性：大部分数据集中在平均值附近，离平均值越远，数据出现的概率越低。\n数学特性：高斯分布的曲线由均值μ和标准差σ决定，其中标准差σ越小，分布越集中；σ越大，分布越分散。\n高斯分布的应用\n统计学：在统计学中，高斯分布是描述连续型随机变量的重要工具，如测量误差分析。\n机器学习：作为许多机器学习算法（如线性回归、聚类分析）的基础假设。\n金融领域：用于风险评估和资产定价。\n图像处理：在图像处理中，高斯分布用于噪声模型和图像平滑。\n自然和社会现象：高斯分布在描述人口智力、身高、体重等自然和社会现象中无处不在。"
   },
   {
-    "objectID": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
-    "href": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
-    "title": "CH2-捕获点子",
-    "section": "如何辨别策略是否适合你",
-    "text": "如何辨别策略是否适合你\n有如下几个评判依据： * 你的工作时间 * 你的编程技能 * 你的交易资本 * 你的目标"
+    "objectID": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#学生t分布",
+    "href": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#学生t分布",
+    "title": "算法交易中的一些概念",
+    "section": "学生t分布",
+    "text": "学生t分布\n学生t分布，也称为Student’s t-distribution，是一种连续概率分布，它在统计学中特别重要，尤其是在小样本情况下估计呈正态分布且标准差未知的总体均值时。以下是关于学生t分布理论的详细介绍：\n\n学生t分布的由来\n学生t分布最早由英国统计学家威廉·塞弗顿(William Sealy Gosset)在1908年提出，当时他使用笔名“学生”发表了自己的研究成果。Gosset的工作是在酿酒厂进行的，他需要分析小样本数据，因此开发了t分布来解决小样本量下的统计问题。\n\n\n学生t分布的定义\nt分布的概率密度函数(PDF)定义为：\n\\[f(t) = \\frac{\\Gamma\\left(\\frac{v+1}{2}\\right)}{\\sqrt{v\\pi}}\\left(1+\\frac{t^2}{v}\\right)^{-\\frac{v+1}{2}}\\]\n其中，\\(v\\) 是自由度，是一个正整数。\n\n\n学生t分布的性质\n\n对称性：t分布以0为中心，左右对称。\n自由度的影响：自由度越大，t分布的形状越接近于标准正态分布，尾部越窄；自由度越小，尾部越厚，形状更加扁平。\n应用：t分布广泛应用于统计学中的假设检验和置信区间估计，特别是在小样本情况下。\n\n\n\n学生t分布与正态分布的关系\n当样本量足够大时，样本平均数的分布可以转化为标准正态分布。但是当样本量较小时，这个比值的分布不再是标准正态分布，而是t分布。\n\n\n学生t分布的自由度\n自由度(degrees of freedom, df)是一个参数，用来确定t分布的形状。它通常与样本量有关，但并不等于样本量。在不同的统计问题中，自由度的计算方式略有不同，但它们都与样本量和统计模型的复杂度有关。\n通过了解学生t分布的基本原理、定义、性质及其与正态分布的关系，可以更好地应用这一理论于实际的统计分析和研究中。"
   },
   {
-    "objectID": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
-    "href": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
-    "title": "CH2-捕获点子",
-    "section": "识别可用的策略及其陷阱",
-    "text": "识别可用的策略及其陷阱\n用这些方法快测试策略，确保你不会浪费你的时间和金钱\n\n这个策略和基准比较表现如何?它的回报有多持久? &gt; Though a strategy may have the same average return as the benchmark, perhaps it delivered positive returns every month while the benchmark occasionally suffered some very bad months. In this case, we would still deem the strategy superior. This leads us to consider the information ratio or Sharpe ratio (Sharpe,1994), rather than returns, as the proper performance measurement of a quantitative trading strategy.\n\n虽让一个策略可能和基准有相同的回报，但在基准下跌的月份里它仍然有正收益。我们仍然认为这个策略是优越的。这促使我们考虑用信息比率或者夏普比率，而不是回报来，作为衡量量化交易策略业绩的指标。\n\n$ Information Ratio = $\n\n$ 信息比率 = $\n(其中：超额收益率 = 组合收益率 - 基准收益率)\n\nAs a rule of thumb, any strategy that has a Sharpe ratio of less than 1 is not suitable as a stand-alone strategy. For a strategy that achieves profitability almost every month, its (annualized) Sharpe ratio is typically greater than 2. For a strategy that is profitable al\u0002most every day, its Sharpe ratio is usually greater than 3.\n\n一般来说，任何夏普率小于1的策略不适合作为单独策略。对于每月都有收益的策略，它的年化夏普率通常大于2.对于每天有收益的策略，他的夏普率通常大于3.\n\n下挫有多深多久？\n\n你要问自己，你能承受多深多久的下挫而不清算你的投资组合关闭你的策略。\n\n交易成本如何影响策略？\n\n交易成本不仅包括券商收取的佣金，还有流动成本和机会成本。\n\n数据是否存在生存者偏差\n\n历史数据库中的股票报价不包含破产退市的股票。\n\n为什么策略的业绩过几年会发生改变？\n\n策略回测要关注近几年的表现，久远的数据会包含交易成本和幸存者偏差的影响。\n\n策略是否收到数据范围偏差影响？\n\n策略含有过多参数可能会对历史数据产生过度拟合。\n\n策略是否在基金经理的盲区\n\n\nyou should look for those strategies that fly under the radar of most institutional investors, for example, strategies that have very low capacities because they trade too often, strategies that trade very few stocks ev\u0002ery day, or strategies that have very infrequent positions.\n\n你应该去寻找被机构投资者忽视的策略，比如，交易频繁容量很低的策略，每天只交易很少股票的策略，持仓时段稀少的策略。这样的特色策觉才有利可图，因为他们还没有完全被巨型的对冲基金套利掉。"
+    "objectID": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#帕累托分布",
+    "href": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#帕累托分布",
+    "title": "算法交易中的一些概念",
+    "section": "帕累托分布",
+    "text": "帕累托分布\n帕累托分布理论，也称为帕累托法则或80/20法则，是由意大利经济学家维弗雷多·帕雷托提出的。这一理论指出，在许多情况下，大约80%的结果来自于20%的原因。这一原则不仅在经济学中有广泛应用，也被应用于社会学、管理学等多个领域。以下是关于帕累托分布理论的详细介绍：\n\n帕累托分布的定义和原理\n帕累托分布是一种幂次定律分布，描述了在许多情况下，一小部分原因会导致大部分结果的现象。例如，20%的人口可能拥有80%的财富，或者20%的客户可能贡献80%的销售额。\n\n\n帕累托分布的应用实例\n\n销售领域：识别并专注于最重要的20%的客户，以增加销售额。\n时间管理：优先处理能带来最大效益的20%的关键任务。\n商品库存管理：对贡献80%销售额的20%的商品给予更多关注。\n生产质量控制：集中解决导致80%客户投诉的20%的缺陷问题。\n健身锻炼：专注于对身体产生80%锻炼效果的20%的关键动作。\n软件开发：优先修复导致80%错误的20%的关键代码。\n\n\n\n帕累托分布的数学表达\n帕累托分布的概率密度函数(PDF)通常表示为：\n\\[f(x) = \\frac{k \\cdot x^{-\\alpha}}{1 - x^{-\\alpha}}\\]\n其中，\\(x\\) 是大于某个最小值 \\(x_{min}\\) 的正数，\\(k\\) 是分布的尺度参数，而 \\(\\alpha\\) 是形状参数，决定了分布的形状。当 \\(\\alpha &gt; 1\\) 时，分布是长尾的，这在描述财富分布等自然和社会现象时非常有用。\n\n\n帕累托分布与正态分布的区别\n\n形状：帕累托分布是长尾的，而正态分布是钟形的。\n应用领域：帕累托分布常用于描述极端值分布，如财富分布，而正态分布则适用于描述大多数自然和社会现象中的连续变量。\n\n通过了解帕累托分布的基本原理、定义、性质及其与正态分布的区别，可以更好地应用这一理论于实际的统计分析和研究中。帕累托分布不仅是一个数学工具，更是一种理解和分析复杂系统的思维方式。"
+  },
+  {
+    "objectID": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#乌伦贝克随机微分方程",
+    "href": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#乌伦贝克随机微分方程",
+    "title": "算法交易中的一些概念",
+    "section": "乌伦贝克随机微分方程",
+    "text": "乌伦贝克随机微分方程\n乌伦贝克（Uhlenbeck）随机微分方程是一类重要的随机微分方程，通常用于描述物理、金融等领域中的随机现象。这类方程通常具有以下形式：\n\\[\ndX_t = b(X_t)dt + \\sigma(X_t)dW_t\n\\]\n其中，\\(X_t\\) 是一个随机过程，\\(b(X_t)\\) 是漂移项，\\(\\sigma(X_t)\\) 是扩散项，\\(W_t\\) 是一个标准布朗运动。\n乌伦贝克随机微分方程的一个特殊情况是奥恩斯坦-乌伦贝克（Ornstein-Uhlenbeck）过程，其形式如下：\n\\[\ndX_t = -\\theta X_t dt + \\sigma dW_t\n\\]\n其中，\\(\\theta\\) 和 \\(\\sigma\\) 是常数。这个过程描述了一个随机变量在受到线性恢复力和随机扰动的影响下的演化。\n解乌伦贝克随机微分方程通常需要使用随机微积分的理论和技术。对于一般的乌伦贝克随机微分方程，可以使用伊藤公式（Ito’s lemma）来求解。对于奥恩斯坦-乌伦贝克过程，可以直接求解得到其解析解：\n\\[\nX_t = X_0 e^{-\\theta t} + \\sigma \\int_0^t e^{-\\theta (t-s)} dW_s\n\\]\n其中，\\(X_0\\) 是初始条件。\n在实际应用中，乌伦贝克随机微分方程被广泛用于模拟和分析各种随机现象，如金融市场的波动、物理系统的布朗运动等。"
+  },
+  {
+    "objectID": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#均值标准差偏度和峰度",
+    "href": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#均值标准差偏度和峰度",
+    "title": "算法交易中的一些概念",
+    "section": "均值、标准差、偏度和峰度",
+    "text": "均值、标准差、偏度和峰度\n均值、标准差、偏度和峰度是统计学中用于描述数据分布特征的四个重要指标。\n\n均值（Mean）：\n\n定义：所有数据的总和除以数据的个数。\n计算公式：μ = (Σx_i) / n，其中 x_i 是每个数据点，n 是数据点的数量。\n意义：均值反映了数据的集中趋势，即数据的一般水平。\n\n标准差（Standard Deviation）：\n\n定义：衡量数据点相对于均值的离散程度。\n计算公式：σ = sqrt(Σ(x_i - μ)^2 / n)，其中 x_i 是每个数据点，μ 是均值，n 是数据点的数量。\n意义：标准差越大，数据越分散；标准差越小，数据越集中。\n\n偏度（Skewness）：\n\n定义：衡量数据分布的对称性。\n计算公式：Sk = (Σ(x_i - μ)^3 / n) / σ^3，其中 x_i 是每个数据点，μ 是均值，σ 是标准差，n 是数据点的数量。\n意义：偏度为正表示数据右偏（尾部向右延伸），偏度为负表示数据左偏（尾部向左延伸），偏度为0表示数据对称。\n\n峰度（Kurtosis）：\n\n定义：衡量数据分布的尖峭程度。\n计算公式：K = (Σ(x_i - μ)^4 / n) / σ^4 - 3，其中 x_i 是每个数据点，μ 是均值，σ 是标准差，n 是数据点的数量。\n意义：峰度大于3表示数据分布比正态分布更尖峭，峰度小于3表示数据分布比正态分布更平坦。\n\n\n这些指标可以帮助我们更好地理解数据的分布特征，从而做出更合理的分析和决策。"
+  },
+  {
+    "objectID": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#皮尔逊分布",
+    "href": "posts/2024-08-21-conceptions-in-algorithmic-trading.html#皮尔逊分布",
+    "title": "算法交易中的一些概念",
+    "section": "皮尔逊分布",
+    "text": "皮尔逊分布\n皮尔逊分布，也称为皮尔逊III型分布，是一种连续概率分布，常用于统计学中描述偏态分布的数据。它是由Karl Pearson在19世纪提出的，作为一种更一般化的分布，用于描述那些不符合正态分布假设的数据。以下是关于皮尔逊分布的相关信息：\n\n定义\n皮尔逊分布的概率密度函数为：\n[ f(x, ) = ((x - ))^{- 1} (-(x - )) ]\n其中：\n\n\\(\\beta = \\frac{2}{\\kappa}\\)\n\\(\\alpha = \\beta^2 = \\frac{4}{\\kappa^2}\\)\n\\(\\zeta = -\\frac{\\alpha}{\\beta} = -\\beta\\)\n\n这个概率密度函数在“标准化”形式下定义，通过loc和scale参数可以移动和/或缩放分布。\n\n\nScipy中的实现\n在Python的SciPy库中，可以通过scipy.stats.pearson3对象来生成Pearson III分布的随机变量、计算概率密度函数、累积分布函数(CDF)、逆累积分布函数(PPF)等。例如，生成随机数或显示概率密度函数的代码示例如下：\nimport numpy as np\nfrom scipy.stats import pearson3\n\n# 生成1000个随机数\nr = pearson3.rvs(skew=-2, size=1000)\n\n# 显示概率密度函数\nx = np.linspace(pearson3.ppf(0.01, skew=-2), pearson3.ppf(0.99, skew=-2), 100)\nplt.plot(x, pearson3.pdf(x, skew=-2), label='pearson3 pdf')\n通过这些工具，研究者可以更好地理解和分析偏态分布的数据，以及进行相关的统计推断和预测。\n\n\n应用场景\n皮尔逊III型分布适用于偏态分布数据的描述，特别是在统计学、金融、经济学等领域中，当数据分布明显偏离正态分布时，Pearson III分布提供了一个有效的模型来分析和预测数据。\n通过上述信息，可以看出皮尔逊分布在统计学和相关领域中具有重要的应用价值。"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html",
+    "href": "posts/2021-08-18-setting-up-your-business.html",
+    "title": "CH4-建立你的事业",
+    "section": "",
+    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
+    "href": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
+    "title": "CH4-建立你的事业",
+    "section": "",
+    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
+    "href": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
+    "title": "CH4-建立你的事业",
+    "section": "选择一家零售经纪公司",
+    "text": "选择一家零售经纪公司\n主要看佣金，其他的诸如交易速度等等，在现在这个时代已经不是问题了。 * 相对较低的佣金 * 可交易金融工具品种广泛 * 有足够深度的流动资金池 * 获取实时数据和传送指令的API\n这个富途居然有接口https://openapi.futunn.com/futu-api-doc/intro/intro.html\n中泰XTP"
+  },
+  {
+    "objectID": "posts/2021-08-18-setting-up-your-business.html#设备",
+    "href": "posts/2021-08-18-setting-up-your-business.html#设备",
+    "title": "CH4-建立你的事业",
+    "section": "设备",
+    "text": "设备\n\n性能良好的电脑\n高速的网络\n防中断电源UPS\n专业实时新闻工具\n多屏幕扩大可视空间"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "王君敕的炼丹房",
+    "section": "",
+    "text": "算法交易中的一些概念\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nAug 21, 2024\n\n\n王君敕\n\n\n\n\n\n\n\n\n\n\n\n\n关于迪基-富勒检验\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nAug 20, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\n算法交易：制胜策略与原理(欧内斯特·陈)之一\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 27, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\n随机漫步\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 25, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nbacktrader回测系统\n\n\n\n\n\n\n量化交易\n\n\n\nbacktrader\n\n\n\n\n\nDec 6, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH6-资金和风险管理\n\n\n\n\n\n\n量化交易\n\n\n\nMoney and Risk Management\n\n\n\n\n\nAug 27, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH7-量化交易专题\n\n\n\n\n\n\n量化交易\n\n\n\nSpecial Topics in Quantitative Trading\n\n\n\n\n\nAug 27, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH5-交易执行系统\n\n\n\n\n\n\n量化交易\n\n\n\nExecutions Systems\n\n\n\n\n\nAug 19, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH4-建立你的事业\n\n\n\n\n\n\n量化交易\n\n\n\nSetting Up Your Business\n\n\n\n\n\nAug 18, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH3-回测\n\n\n\n\n\n\n量化交易\n\n\n\nBacktesting\n\n\n\n\n\nAug 16, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH2-捕获点子\n\n\n\n\n\n\n量化交易\n\n\n\nfishing of ideas\n\n\n\n\n\nAug 13, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH1-量化交易简介\n\n\n\n\n\n\n量化交易\n\n\n\n量化交易是什么，谁参与量化交易，为什么要量化交易\n\n\n\n\n\nAug 12, 2021\n\n\n王一刀\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "关于",
+    "section": "",
+    "text": "About this blog"
   },
   {
     "objectID": "posts/2021-08-19-executions-systems.html",
@@ -210,46 +294,32 @@
     "text": "为什么实际业绩偏离预期\n\n自动交易软件是否有bug\n自动交易系统产生的交易和回测程序产生的交易是否一致\n交易成本是否比预期的高很多\n是否交易了流动性差的股票产生了市场冲击\n数据迁就偏差\n状态变更影响，市场结构和宏观经济环境发生巨变"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "关于",
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html",
+    "href": "posts/2021-08-13-fishing-of-ideas.html",
+    "title": "CH2-捕获点子",
     "section": "",
-    "text": "About this blog"
+    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "王君敕的炼丹房",
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#从何处获取策略",
+    "title": "CH2-捕获点子",
     "section": "",
-    "text": "关于迪基-富勒检验\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nAug 20, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\n算法交易\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 27, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\n随机漫步\n\n\n\n\n\n\n量化交易\n\n\n\n\n\n\n\n\n\nJul 25, 2024\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nbacktrader回测系统\n\n\n\n\n\n\n量化交易\n\n\n\nbacktrader\n\n\n\n\n\nDec 6, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH6-资金和风险管理\n\n\n\n\n\n\n量化交易\n\n\n\nMoney and Risk Management\n\n\n\n\n\nAug 27, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH7-量化交易专题\n\n\n\n\n\n\n量化交易\n\n\n\nSpecial Topics in Quantitative Trading\n\n\n\n\n\nAug 27, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH5-交易执行系统\n\n\n\n\n\n\n量化交易\n\n\n\nExecutions Systems\n\n\n\n\n\nAug 19, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH4-建立你的事业\n\n\n\n\n\n\n量化交易\n\n\n\nSetting Up Your Business\n\n\n\n\n\nAug 18, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH3-回测\n\n\n\n\n\n\n量化交易\n\n\n\nBacktesting\n\n\n\n\n\nAug 16, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH2-捕获点子\n\n\n\n\n\n\n量化交易\n\n\n\nfishing of ideas\n\n\n\n\n\nAug 13, 2021\n\n\n王一刀\n\n\n\n\n\n\n\n\n\n\n\n\nCH1-量化交易简介\n\n\n\n\n\n\n量化交易\n\n\n\n量化交易是什么，谁参与量化交易，为什么要量化交易\n\n\n\n\n\nAug 12, 2021\n\n\n王一刀\n\n\n\n\n\n\nNo matching items"
+    "text": "This is the surprise: Finding a trading idea is actually not the hardest part of building a quantitative trading business. There are hundreds, if not thousands, of trading ideas that are in the public sphere at any time, accessible to anyone at little or no cost. Many authors of these trading ideas will tell you their complete methodologies in addition to their backtest results. There are finance and investment books, newspapers and magazines, main\u0002stream media web sites, academic papers vailable online or in the nearest public library, trader forums, blogs, and on and on.\n\n你可能会奇怪：寻找交易点子不是建立量化交易事业最难的部分。在公共领域有成千上万的交易点子，任何个人任何时间都可以免费或者用一点点花费就能获取到。很多交易点子的作者，不仅会完全告诉你实现的方法，还会附上他们的回测结果。有很多金融投资的书籍，报纸，杂志，主流媒体的网站，在线的学术期刊，或者最近的公共图书馆，交易者论坛，博客等等。\n\n\n\n类型\n网址\n\n\n\n\nAcademic\n\n\n\nBusiness schools’ finance professors’ websites\nwww.hbs.edu/research/research.html\n\n\nSocial Science Research Network\nwww.ssrn.com\n\n\nNational Bureau of Economic Research\nwww.nber.org\n\n\nBusiness schools’ quantitative finance seminars\nwww.ieor.columbia.edu/seminars/financialengineering\n\n\nButtonwood column in the Economist magazine’s finance section\nwww.economist.com\n\n\nFinancial web sites and blogs\n\n\n\nYahoo! Finance\nfinance.yahoo.com\n\n\nTradingMarkets\nwww.TradingMarkets.com\n\n\nSeeking Alpha\nwww.SeekingAlpha.com\n\n\nTheStreet.com\nwww.TheStreet.com\n\n\nThe Kirk Report\nwww.TheKirkReport.com\n\n\nAlea Blog\nwww.aleablog.com\n\n\nAbnormal Returns\nwww.AbnormalReturns.com\n\n\nBrett Steenbarger Trading Psychology\nwww.brettsteenbarger.com\n\n\n本书作者\nepchan.blogspot.com\n\n\nTrader forums\n\n\n\nElite Trader\nwww.Elitetrader.com\n\n\nWealth-Lab\nwww.wealth-lab.com\n\n\nNewspaper and magazines\n\n\n\nStocks, Futures and Options magazine\nwww.sfomag.com\n\n\n\n\nNo, the difficulty is not the lack of ideas. The difficulty is to develop a taste for which strategy is suitable for your personal circumstances and goals, and which ones look viable even before you devote the time to diligently backtest them. This taste for prospective strategies is what I will try to convey in this chapter.\n\n困难不是缺少点子。困难是培养出一种敏锐的嗅觉，能分辨出哪些策略是适合你的环境和目标的，并能在对策略进行回测前发觉其是否可行。这种预见策略的嗅觉正是我要在本章试图阐明的。"
   },
   {
-    "objectID": "posts/2021-08-18-setting-up-your-business.html",
-    "href": "posts/2021-08-18-setting-up-your-business.html",
-    "title": "CH4-建立你的事业",
-    "section": "",
-    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#如何辨别策略是否适合你",
+    "title": "CH2-捕获点子",
+    "section": "如何辨别策略是否适合你",
+    "text": "如何辨别策略是否适合你\n有如下几个评判依据： * 你的工作时间 * 你的编程技能 * 你的交易资本 * 你的目标"
   },
   {
-    "objectID": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
-    "href": "posts/2021-08-18-setting-up-your-business.html#业务结构零售还是自营",
-    "title": "CH4-建立你的事业",
-    "section": "",
-    "text": "在中国似乎没有这种选择，很难成为“自营交易公司”的员工。这种公司本身就几乎没有。"
-  },
-  {
-    "objectID": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
-    "href": "posts/2021-08-18-setting-up-your-business.html#选择一家零售经纪公司",
-    "title": "CH4-建立你的事业",
-    "section": "选择一家零售经纪公司",
-    "text": "选择一家零售经纪公司\n主要看佣金，其他的诸如交易速度等等，在现在这个时代已经不是问题了。 * 相对较低的佣金 * 可交易金融工具品种广泛 * 有足够深度的流动资金池 * 获取实时数据和传送指令的API\n这个富途居然有接口https://openapi.futunn.com/futu-api-doc/intro/intro.html\n中泰XTP"
-  },
-  {
-    "objectID": "posts/2021-08-18-setting-up-your-business.html#设备",
-    "href": "posts/2021-08-18-setting-up-your-business.html#设备",
-    "title": "CH4-建立你的事业",
-    "section": "设备",
-    "text": "设备\n\n性能良好的电脑\n高速的网络\n防中断电源UPS\n专业实时新闻工具\n多屏幕扩大可视空间"
+    "objectID": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
+    "href": "posts/2021-08-13-fishing-of-ideas.html#识别可用的策略及其陷阱",
+    "title": "CH2-捕获点子",
+    "section": "识别可用的策略及其陷阱",
+    "text": "识别可用的策略及其陷阱\n用这些方法快测试策略，确保你不会浪费你的时间和金钱\n\n这个策略和基准比较表现如何?它的回报有多持久? &gt; Though a strategy may have the same average return as the benchmark, perhaps it delivered positive returns every month while the benchmark occasionally suffered some very bad months. In this case, we would still deem the strategy superior. This leads us to consider the information ratio or Sharpe ratio (Sharpe,1994), rather than returns, as the proper performance measurement of a quantitative trading strategy.\n\n虽让一个策略可能和基准有相同的回报，但在基准下跌的月份里它仍然有正收益。我们仍然认为这个策略是优越的。这促使我们考虑用信息比率或者夏普比率，而不是回报来，作为衡量量化交易策略业绩的指标。\n\n$ Information Ratio = $\n\n$ 信息比率 = $\n(其中：超额收益率 = 组合收益率 - 基准收益率)\n\nAs a rule of thumb, any strategy that has a Sharpe ratio of less than 1 is not suitable as a stand-alone strategy. For a strategy that achieves profitability almost every month, its (annualized) Sharpe ratio is typically greater than 2. For a strategy that is profitable al\u0002most every day, its Sharpe ratio is usually greater than 3.\n\n一般来说，任何夏普率小于1的策略不适合作为单独策略。对于每月都有收益的策略，它的年化夏普率通常大于2.对于每天有收益的策略，他的夏普率通常大于3.\n\n下挫有多深多久？\n\n你要问自己，你能承受多深多久的下挫而不清算你的投资组合关闭你的策略。\n\n交易成本如何影响策略？\n\n交易成本不仅包括券商收取的佣金，还有流动成本和机会成本。\n\n数据是否存在生存者偏差\n\n历史数据库中的股票报价不包含破产退市的股票。\n\n为什么策略的业绩过几年会发生改变？\n\n策略回测要关注近几年的表现，久远的数据会包含交易成本和幸存者偏差的影响。\n\n策略是否收到数据范围偏差影响？\n\n策略含有过多参数可能会对历史数据产生过度拟合。\n\n策略是否在基金经理的盲区\n\n\nyou should look for those strategies that fly under the radar of most institutional investors, for example, strategies that have very low capacities because they trade too often, strategies that trade very few stocks ev\u0002ery day, or strategies that have very infrequent positions.\n\n你应该去寻找被机构投资者忽视的策略，比如，交易频繁容量很低的策略，每天只交易很少股票的策略，持仓时段稀少的策略。这样的特色策觉才有利可图，因为他们还没有完全被巨型的对冲基金套利掉。"
   },
   {
     "objectID": "posts/2021-08-27-money-and-risk-management.html",
