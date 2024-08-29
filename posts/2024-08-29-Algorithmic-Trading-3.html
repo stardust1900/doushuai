@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="王君敕">
-<meta name="dcterms.date" content="2024-08-21">
+<meta name="author" content="王一刀">
+<meta name="dcterms.date" content="2024-08-29">
 
-<title>算法交易中的一些概念 – 兜率宫</title>
+<title>算法交易：制胜策略与原理(欧内斯特·陈)之三 – 兜率宫</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,35 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -183,9 +154,9 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">算法交易中的一些概念</h1>
+      <h1 class="title">算法交易：制胜策略与原理(欧内斯特·陈)之三</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">量化交易概念</div>
+                <div class="quarto-category">算法交易</div>
               </div>
                   </div>
   </div>
@@ -196,14 +167,14 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>王君敕 </p>
+               <p>王一刀 </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 21, 2024</p>
+        <p class="date">August 29, 2024</p>
       </div>
     </div>
     
@@ -222,203 +193,93 @@ window.Quarto = {
 
 
 
-<section id="高斯分布" class="level2">
-<h2 class="anchored" data-anchor-id="高斯分布">高斯分布</h2>
-<p>高斯分布，也称为正态分布，是一种在自然界和社会科学中广泛存在的概率分布。它以数学家卡尔·弗里德里希·高斯的名字命名，因其图形呈钟形曲线而得名“钟形曲线”。以下是详细介绍：</p>
-<p>高斯分布的基本原理<br>
-定义：高斯分布是一种连续概率分布，其图形显示为对称于平均值的钟形曲线。<br>
-数学表达：若随机变量X服从数学期望为μ、方差为σ²的正态分布，记为N(μ，σ²)。<br>
-应用领域：高斯分布在自然科学、工程学和社会科学等领域中广泛应用，用于描述连续型的随机变量。</p>
-<p>高斯分布的特性<br>
-对称性：分布曲线关于平均值μ对称。<br>
-集中性：大部分数据集中在平均值附近，离平均值越远，数据出现的概率越低。<br>
-数学特性：高斯分布的曲线由均值μ和标准差σ决定，其中标准差σ越小，分布越集中；σ越大，分布越分散。</p>
-<p>高斯分布的应用<br>
-统计学：在统计学中，高斯分布是描述连续型随机变量的重要工具，如测量误差分析。<br>
-机器学习：作为许多机器学习算法（如线性回归、聚类分析）的基础假设。<br>
-金融领域：用于风险评估和资产定价。<br>
-图像处理：在图像处理中，高斯分布用于噪声模型和图像平滑。<br>
-自然和社会现象：高斯分布在描述人口智力、身高、体重等自然和社会现象中无处不在。</p>
-</section>
-<section id="学生t分布" class="level2">
-<h2 class="anchored" data-anchor-id="学生t分布">学生t分布</h2>
-<p>学生t分布，也称为Student’s t-distribution，是一种连续概率分布，它在统计学中特别重要，尤其是在小样本情况下估计呈正态分布且标准差未知的总体均值时。以下是关于学生t分布理论的详细介绍：</p>
-<section id="学生t分布的由来" class="level3">
-<h3 class="anchored" data-anchor-id="学生t分布的由来">学生t分布的由来</h3>
-<p>学生t分布最早由英国统计学家威廉·塞弗顿(William Sealy Gosset)在1908年提出，当时他使用笔名“学生”发表了自己的研究成果。Gosset的工作是在酿酒厂进行的，他需要分析小样本数据，因此开发了t分布来解决小样本量下的统计问题。</p>
-</section>
-<section id="学生t分布的定义" class="level3">
-<h3 class="anchored" data-anchor-id="学生t分布的定义">学生t分布的定义</h3>
-<p>t分布的概率密度函数(PDF)定义为：</p>
-<p><span class="math display">\[f(t) = \frac{\Gamma\left(\frac{v+1}{2}\right)}{\sqrt{v\pi}}\left(1+\frac{t^2}{v}\right)^{-\frac{v+1}{2}}\]</span></p>
-<p>其中，<span class="math inline">\(v\)</span> 是自由度，是一个正整数。</p>
-</section>
-<section id="学生t分布的性质" class="level3">
-<h3 class="anchored" data-anchor-id="学生t分布的性质">学生t分布的性质</h3>
-<ul>
-<li><strong>对称性</strong>：t分布以0为中心，左右对称。</li>
-<li><strong>自由度的影响</strong>：自由度越大，t分布的形状越接近于标准正态分布，尾部越窄；自由度越小，尾部越厚，形状更加扁平。</li>
-<li><strong>应用</strong>：t分布广泛应用于统计学中的假设检验和置信区间估计，特别是在小样本情况下。</li>
-</ul>
-</section>
-<section id="学生t分布与正态分布的关系" class="level3">
-<h3 class="anchored" data-anchor-id="学生t分布与正态分布的关系">学生t分布与正态分布的关系</h3>
-<p>当样本量足够大时，样本平均数的分布可以转化为标准正态分布。但是当样本量较小时，这个比值的分布不再是标准正态分布，而是t分布。</p>
-</section>
-<section id="学生t分布的自由度" class="level3">
-<h3 class="anchored" data-anchor-id="学生t分布的自由度">学生t分布的自由度</h3>
-<p>自由度(degrees of freedom, df)是一个参数，用来确定t分布的形状。它通常与样本量有关，但并不等于样本量。在不同的统计问题中，自由度的计算方式略有不同，但它们都与样本量和统计模型的复杂度有关。</p>
-<p>通过了解学生t分布的基本原理、定义、性质及其与正态分布的关系，可以更好地应用这一理论于实际的统计分析和研究中。</p>
-</section>
-</section>
-<section id="帕累托分布" class="level2">
-<h2 class="anchored" data-anchor-id="帕累托分布">帕累托分布</h2>
-<p>帕累托分布理论，也称为帕累托法则或80/20法则，是由意大利经济学家维弗雷多·帕雷托提出的。这一理论指出，在许多情况下，大约80%的结果来自于20%的原因。这一原则不仅在经济学中有广泛应用，也被应用于社会学、管理学等多个领域。以下是关于帕累托分布理论的详细介绍：</p>
-<section id="帕累托分布的定义和原理" class="level3">
-<h3 class="anchored" data-anchor-id="帕累托分布的定义和原理">帕累托分布的定义和原理</h3>
-<p>帕累托分布是一种幂次定律分布，描述了在许多情况下，一小部分原因会导致大部分结果的现象。例如，20%的人口可能拥有80%的财富，或者20%的客户可能贡献80%的销售额。</p>
-</section>
-<section id="帕累托分布的应用实例" class="level3">
-<h3 class="anchored" data-anchor-id="帕累托分布的应用实例">帕累托分布的应用实例</h3>
-<ul>
-<li><strong>销售领域</strong>：识别并专注于最重要的20%的客户，以增加销售额。</li>
-<li><strong>时间管理</strong>：优先处理能带来最大效益的20%的关键任务。</li>
-<li><strong>商品库存管理</strong>：对贡献80%销售额的20%的商品给予更多关注。</li>
-<li><strong>生产质量控制</strong>：集中解决导致80%客户投诉的20%的缺陷问题。</li>
-<li><strong>健身锻炼</strong>：专注于对身体产生80%锻炼效果的20%的关键动作。</li>
-<li><strong>软件开发</strong>：优先修复导致80%错误的20%的关键代码。</li>
-</ul>
-</section>
-<section id="帕累托分布的数学表达" class="level3">
-<h3 class="anchored" data-anchor-id="帕累托分布的数学表达">帕累托分布的数学表达</h3>
-<p>帕累托分布的概率密度函数(PDF)通常表示为：</p>
-<p><span class="math display">\[f(x) = \frac{k \cdot x^{-\alpha}}{1 - x^{-\alpha}}\]</span></p>
-<p>其中，<span class="math inline">\(x\)</span> 是大于某个最小值 <span class="math inline">\(x_{min}\)</span> 的正数，<span class="math inline">\(k\)</span> 是分布的尺度参数，而 <span class="math inline">\(\alpha\)</span> 是形状参数，决定了分布的形状。当 <span class="math inline">\(\alpha &gt; 1\)</span> 时，分布是长尾的，这在描述财富分布等自然和社会现象时非常有用。</p>
-</section>
-<section id="帕累托分布与正态分布的区别" class="level3">
-<h3 class="anchored" data-anchor-id="帕累托分布与正态分布的区别">帕累托分布与正态分布的区别</h3>
-<ul>
-<li><strong>形状</strong>：帕累托分布是长尾的，而正态分布是钟形的。</li>
-<li><strong>应用领域</strong>：帕累托分布常用于描述极端值分布，如财富分布，而正态分布则适用于描述大多数自然和社会现象中的连续变量。</li>
-</ul>
-<p>通过了解帕累托分布的基本原理、定义、性质及其与正态分布的区别，可以更好地应用这一理论于实际的统计分析和研究中。帕累托分布不仅是一个数学工具，更是一种理解和分析复杂系统的思维方式。</p>
-</section>
-</section>
-<section id="乌伦贝克随机微分方程" class="level2">
-<h2 class="anchored" data-anchor-id="乌伦贝克随机微分方程">乌伦贝克随机微分方程</h2>
-<p>乌伦贝克（Uhlenbeck）随机微分方程是一类重要的随机微分方程，通常用于描述物理、金融等领域中的随机现象。这类方程通常具有以下形式：</p>
-<p><span class="math display">\[
-dX_t = b(X_t)dt + \sigma(X_t)dW_t
-\]</span></p>
-<p>其中，<span class="math inline">\(X_t\)</span> 是一个随机过程，<span class="math inline">\(b(X_t)\)</span> 是漂移项，<span class="math inline">\(\sigma(X_t)\)</span> 是扩散项，<span class="math inline">\(W_t\)</span> 是一个标准布朗运动。</p>
-<p>乌伦贝克随机微分方程的一个特殊情况是奥恩斯坦-乌伦贝克（Ornstein-Uhlenbeck）过程，其形式如下：</p>
-<p><span class="math display">\[
-dX_t = -\theta X_t dt + \sigma dW_t
-\]</span></p>
-<p>其中，<span class="math inline">\(\theta\)</span> 和 <span class="math inline">\(\sigma\)</span> 是常数。这个过程描述了一个随机变量在受到线性恢复力和随机扰动的影响下的演化。</p>
-<p>解乌伦贝克随机微分方程通常需要使用随机微积分的理论和技术。对于一般的乌伦贝克随机微分方程，可以使用伊藤公式（Ito’s lemma）来求解。对于奥恩斯坦-乌伦贝克过程，可以直接求解得到其解析解：</p>
-<p><span class="math display">\[
-X_t = X_0 e^{-\theta t} + \sigma \int_0^t e^{-\theta (t-s)} dW_s
-\]</span></p>
-<p>其中，<span class="math inline">\(X_0\)</span> 是初始条件。</p>
-<p>在实际应用中，乌伦贝克随机微分方程被广泛用于模拟和分析各种随机现象，如金融市场的波动、物理系统的布朗运动等。</p>
-</section>
-<section id="均值标准差偏度和峰度" class="level2">
-<h2 class="anchored" data-anchor-id="均值标准差偏度和峰度">均值、标准差、偏度和峰度</h2>
-<p>均值、标准差、偏度和峰度是统计学中用于描述数据分布特征的四个重要指标。</p>
-<ol type="1">
-<li><strong>均值（Mean）</strong>：
-<ul>
-<li>定义：所有数据的总和除以数据的个数。</li>
-<li>计算公式：<code>μ = (Σx_i) / n</code>，其中 <code>x_i</code> 是每个数据点，<code>n</code> 是数据点的数量。</li>
-<li>意义：均值反映了数据的集中趋势，即数据的一般水平。</li>
-</ul></li>
-<li><strong>标准差（Standard Deviation）</strong>：
-<ul>
-<li>定义：衡量数据点相对于均值的离散程度。</li>
-<li>计算公式：<code>σ = sqrt(Σ(x_i - μ)^2 / n)</code>，其中 <code>x_i</code> 是每个数据点，<code>μ</code> 是均值，<code>n</code> 是数据点的数量。</li>
-<li>意义：标准差越大，数据越分散；标准差越小，数据越集中。</li>
-</ul></li>
-<li><strong>偏度（Skewness）</strong>：
-<ul>
-<li>定义：衡量数据分布的对称性。</li>
-<li>计算公式：<code>Sk = (Σ(x_i - μ)^3 / n) / σ^3</code>，其中 <code>x_i</code> 是每个数据点，<code>μ</code> 是均值，<code>σ</code> 是标准差，<code>n</code> 是数据点的数量。</li>
-<li>意义：偏度为正表示数据右偏（尾部向右延伸），偏度为负表示数据左偏（尾部向左延伸），偏度为0表示数据对称。</li>
-</ul></li>
-<li><strong>峰度（Kurtosis）</strong>：
-<ul>
-<li>定义：衡量数据分布的尖峭程度。</li>
-<li>计算公式：<code>K = (Σ(x_i - μ)^4 / n) / σ^4 - 3</code>，其中 <code>x_i</code> 是每个数据点，<code>μ</code> 是均值，<code>σ</code> 是标准差，<code>n</code> 是数据点的数量。</li>
-<li>意义：峰度大于3表示数据分布比正态分布更尖峭，峰度小于3表示数据分布比正态分布更平坦。</li>
-</ul></li>
-</ol>
-<p>这些指标可以帮助我们更好地理解数据的分布特征，从而做出更合理的分析和决策。</p>
-</section>
-<section id="皮尔逊分布" class="level2">
-<h2 class="anchored" data-anchor-id="皮尔逊分布">皮尔逊分布</h2>
-<p>皮尔逊分布，也称为皮尔逊III型分布，是一种连续概率分布，常用于统计学中描述偏态分布的数据。它是由Karl Pearson在19世纪提出的，作为一种更一般化的分布，用于描述那些不符合正态分布假设的数据。以下是关于皮尔逊分布的相关信息：</p>
-<section id="定义" class="level3">
-<h3 class="anchored" data-anchor-id="定义">定义</h3>
-<p>皮尔逊分布的概率密度函数为：</p>
-<p>$ f(x, ) = ((x - ))^{- 1} (-(x - )) $</p>
-<p>其中：</p>
-<ul>
-<li><span class="math inline">\(\beta = \frac{2}{\kappa}\)</span></li>
-<li><span class="math inline">\(\alpha = \beta^2 = \frac{4}{\kappa^2}\)</span></li>
-<li><span class="math inline">\(\zeta = -\frac{\alpha}{\beta} = -\beta\)</span></li>
-</ul>
-<p>这个概率密度函数在“标准化”形式下定义，通过<code>loc</code>和<code>scale</code>参数可以移动和/或缩放分布。</p>
-</section>
-<section id="scipy中的实现" class="level3">
-<h3 class="anchored" data-anchor-id="scipy中的实现">Scipy中的实现</h3>
-<p>在Python的SciPy库中，可以通过<code>scipy.stats.pearson3</code>对象来生成Pearson III分布的随机变量、计算概率密度函数、累积分布函数(CDF)、逆累积分布函数(PPF)等。例如，生成随机数或显示概率密度函数的代码示例如下：</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearson3</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成1000个随机数</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> pearson3.rvs(skew<span class="op">=-</span><span class="dv">2</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 显示概率密度函数</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(pearson3.ppf(<span class="fl">0.01</span>, skew<span class="op">=-</span><span class="dv">2</span>), pearson3.ppf(<span class="fl">0.99</span>, skew<span class="op">=-</span><span class="dv">2</span>), <span class="dv">100</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, pearson3.pdf(x, skew<span class="op">=-</span><span class="dv">2</span>), label<span class="op">=</span><span class="st">'pearson3 pdf'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>通过这些工具，研究者可以更好地理解和分析偏态分布的数据，以及进行相关的统计推断和预测。</p>
-</section>
-<section id="应用场景" class="level3">
-<h3 class="anchored" data-anchor-id="应用场景">应用场景</h3>
-<p>皮尔逊III型分布适用于偏态分布数据的描述，特别是在统计学、金融、经济学等领域中，当数据分布明显偏离正态分布时，Pearson III分布提供了一个有效的模型来分析和预测数据。</p>
-<p>通过上述信息，可以看出皮尔逊分布在统计学和相关领域中具有重要的应用价值。</p>
-</section>
-</section>
-<section id="零假设" class="level2">
-<h2 class="anchored" data-anchor-id="零假设">零假设</h2>
-<p>零假设（null hypothesis）是统计学中一个核心概念，它代表了研究者试图通过数据来反驳或拒绝的假设。以下是关于零假设的相关信息：</p>
-<section id="零假设的定义" class="level3">
-<h3 class="anchored" data-anchor-id="零假设的定义">零假设的定义</h3>
-<p>零假设，也称为原假设，是在进行统计检验时预先建立的假设。它通常表达为总体参数等于某个固定值，例如“两组之间没有差异”或“两个事件之间没有关联”。</p>
-</section>
-<section id="零假设的理念" class="level3">
-<h3 class="anchored" data-anchor-id="零假设的理念">零假设的理念</h3>
-<p>零假设的理念在于，它作为一个起点，研究者通过收集和分析数据来试图证明这个假设是错误的，从而接受备择假设。这一过程体现了科学方法中的怀疑和验证精神。</p>
-</section>
-<section id="零假设与备择假设的关系" class="level3">
-<h3 class="anchored" data-anchor-id="零假设与备择假设的关系">零假设与备择假设的关系</h3>
-<ul>
-<li><strong>零假设</strong>：研究者希望收集证据予以反对的假设。</li>
-<li><strong>备择假设</strong>：与零假设相对，是研究者希望证明为真的假设。</li>
-</ul>
-</section>
-<section id="零假设在统计学中的重要性" class="level3">
-<h3 class="anchored" data-anchor-id="零假设在统计学中的重要性">零假设在统计学中的重要性</h3>
-<p>零假设是假设检验的基础，它帮助研究者系统地收集和评估证据，以决定是接受还是拒绝某个假设。通过假设检验，研究者可以基于数据做出更加科学和理性的决策。</p>
-</section>
-<section id="零假设的应用示例" class="level3">
-<h3 class="anchored" data-anchor-id="零假设的应用示例">零假设的应用示例</h3>
-<p>例如，在药物疗效研究中，零假设可能是“新药物对治疗疾病没有效果”，而备择假设则是“新药物对治疗疾病有显著效果”。通过统计分析，研究者会尝试收集证据来推翻零假设，从而支持备择假设。</p>
-<p>通过理解零假设的理念、定义及其在统计学中的应用，研究者可以更加有效地进行假设检验，从而得出更加科学和可靠的结论。</p>
+<p>应用价差、价差的对数或相应比率所进行的配对交易</p>
+<div id="cell-2" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Trading Price Spread</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> sm</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.tsa.stattools <span class="im">as</span> ts</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputData_GLD_USO.csv'</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(df[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">20</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>hedgeRatio<span class="op">=</span>np.full(df.shape[<span class="dv">0</span>], np.nan)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算对冲比率</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> np.arange(lookback, <span class="bu">len</span>(hedgeRatio)):</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    regress_results<span class="op">=</span>sm.ols(formula<span class="op">=</span><span class="st">"USO ~ GLD"</span>, data<span class="op">=</span>df[(t<span class="op">-</span>lookback):t]).fit() <span class="co"># Note this can deal with NaN in top row</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    hedgeRatio[t<span class="op">-</span><span class="dv">1</span>]<span class="op">=</span>regress_results.params.iloc[<span class="dv">1</span>]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'hedgeRatio:'</span>,hedgeRatio)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'ts.add_constant(-hedgeRatio):'</span>,ts.add_constant(<span class="op">-</span>hedgeRatio))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算投资组合净值</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>yport<span class="op">=</span>np.<span class="bu">sum</span>(ts.add_constant(<span class="op">-</span>hedgeRatio)[:, [<span class="dv">1</span>,<span class="dv">0</span>]]<span class="op">*</span>df, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>yport.plot()</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a simple linear mean reversion strategy to GLD-USO</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 实现简单的线性均值回归策略</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算投资单位数。这个公式实际上是计算yport与其移动平均值的偏差，然后除以其标准差。</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 这个值表示相对于其历史平均表现，今天的投资组合表现有多好（或有多差）。正值表示今天的表现优于平均水平，负值表示今天的表现低于平均水平。</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 乘以-1是为了反转符号，使得正值表示买入，负值表示卖出。</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>numUnits <span class="op">=-</span>(yport<span class="op">-</span>yport.rolling(lookback).mean())<span class="op">/</span>yport.rolling(lookback).std() <span class="co"># capital invested in portfolio in dollars.  movingAvg and movingStd are functions from epchan.com/book2</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'numUnits:'</span>,numUnits)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># np.tile(numUnits.values, [2, 1]):</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># np.tile函数用于重复数组的元素以创建新的数组。</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># numUnits.values是一个一维数组（假设numUnits只有一列），[2, 1]表示在行方向上重复两次，在列方向上重复一次。</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 结果是一个二维数组，其中第一行是numUnits.values的复制，第二行也是numUnit.values的复制。</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(np.tile(numUnits.values, [<span class="dv">2</span>, <span class="dv">1</span>]).T <span class="op">*</span> ts.add_constant(<span class="op">-</span>hedgeRatio)[:, [<span class="dv">1</span>,<span class="dv">0</span>]] <span class="op">*</span>df.values) <span class="co"># results.evec(:, 1)' can be viewed as the capital allocation, while positions is the dollar capital in each ETF.</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>((positions.shift().values)<span class="op">*</span>(df.pct_change().values), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pnl<span class="op">/</span>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(positions.shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># np.cumprod 是 NumPy 库中的一个函数，用于计算数组的累积积（cumulative product）。</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 累积积是指从数组的第一个元素开始，逐个元素相乘，直到当前元素为止的所有元素的乘积</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>pd.DataFrame((np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>)).plot()</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>hedgeRatio: [       nan        nan        nan ... 0.15994561 0.18147442        nan]
+ts.add_constant(-hedgeRatio): [[ 1.                 nan]
+ [ 1.                 nan]
+ [ 1.                 nan]
+ ...
+ [ 1.         -0.15994561]
+ [ 1.         -0.18147442]
+ [ 1.                 nan]]
+numUnits: Date
+2006-04-26         NaN
+2006-04-27         NaN
+2006-04-28         NaN
+2006-05-01         NaN
+2006-05-02         NaN
+                ...   
+2012-04-02    0.885846
+2012-04-03    1.690156
+2012-04-04    2.805475
+2012-04-05    2.581271
+2012-04-09   -1.475398
+Length: 1500, dtype: float64
+APR=0.109551 Sharpe=0.598899</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-2-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-2-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
