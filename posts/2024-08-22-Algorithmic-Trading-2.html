@@ -550,7 +550,7 @@ APR=0.125739 Sharpe=1.402653</code></pre>
 <p>交易策略相关的另一个极端情境是：依赖于基本面分析的投资者偏好于投资那些被低估并持有很多年的股票，耐心地等待它们的价格回归至“正常”的价值水平。<br>
 短时间内完成交易对我们这一类交易者最有利，因为较短的时间尺度意味着每年有更高的交易数量，进而使我们的回测系统与实时交易具有更高的统计信心和更高的夏普比率，最终使我们的交易策略具有更高的复合收益率。</p>
 <p>看似具有很高一致性的均值回归的交易策略最终可能会失效。迈克尔·德弗指出，这种高度一致性经常会使相关的交易员过度自信，且过度举债（德弗，2011）（考虑一下长期的资本管理问题）。当均值回归交易策略突然崩坏，其原因也许是我们都是“事后诸葛亮”，而且，此类事件经常发生在我们以此策略获得一系列成功之后、加大交易杠杆之时，由此而产生的罕见的损失往往是非常痛苦的，有时是灾难性的。因此，所谓的风险管理的概念对均值回归型的交易者尤为重要，但也特别困难，因为通常意义上的止损是不能按逻辑进行部署的。</p>
-<div id="cell-9" class="cell" data-execution_count="33">
+<div id="cell-9" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -759,21 +759,6 @@ Intercept   -0.115768
 ylag        -0.030586
 dtype: float64
 halflife=22.662578 days
-data_EWA_new:             close
-Date             
-2006-04-26  16.10
-2006-04-27  15.98
-2006-04-28  16.10
-2006-05-01  16.31
-2006-05-02  16.29
-...           ...
-2012-04-02  23.63
-2012-04-03  23.26
-2012-04-04  22.98
-2012-04-05  23.12
-2012-04-09  22.93
-
-[1500 rows x 1 columns]
 组合初始值: 100000000.0
 __init__ 23 [ 0.7599635  -1.04602749  0.22330592]
 __init__ 1500
@@ -784,7 +769,7 @@ __init__ 1500
 Mean: 0
 Std Dev: 0
 组合终结值: nan
-result: &lt;__main__.TestStrategy object at 0x000001E4107CDB50&gt;
+result: &lt;__main__.TestStrategy object at 0x000001E40E83B5B0&gt;
 --------------- AnnualReturn -----------------
 OrderedDict([(2006, nan), (2007, nan), (2008, nan), (2009, nan), (2010, nan), (2011, nan), (2012, nan)])
 --------------- SharpeRatio -----------------
