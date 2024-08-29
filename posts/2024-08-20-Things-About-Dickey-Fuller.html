@@ -497,8 +497,154 @@ y 的单位根检验结果： (-1.258001500815765, 0.6481611011736785, 1, 98, {'
 x 和 y 不存在协整关系</code></pre>
 </div>
 </div>
+<p>约翰森测试（Johansen Test），也称为约翰森协整检验（Johansen Cointegration Test），是一种用于检验多个非平稳时间序列之间是否存在长期稳定关系的统计方法。这种方法是基于向量自回归（VAR）模型，通过估计模型参数并构造相应的统计量来检验协整关系的存在性。以下是关于约翰森测试的详细介绍：</p>
+<section id="约翰森测试的基本原理" class="level3">
+<h3 class="anchored" data-anchor-id="约翰森测试的基本原理">约翰森测试的基本原理</h3>
+<p>约翰森测试的核心思想是，如果两个或多个非平稳时间序列之间存在协整关系，那么它们的线性组合应该是平稳的。通过构建一个向量自回归（VAR）模型，并估计模型参数，可以检验这些时间序列的协整关系。</p>
+</section>
+<section id="约翰森测试的主要步骤" class="level3">
+<h3 class="anchored" data-anchor-id="约翰森测试的主要步骤">约翰森测试的主要步骤</h3>
+<ol type="1">
+<li><strong>建立VAR模型</strong>：首先确定VAR模型的最优滞后阶数，并估计模型参数。</li>
+<li><strong>计算残差</strong>：对VAR模型进行估计后，计算模型的残差。</li>
+<li><strong>单位根检验</strong>：对残差进行单位根检验，以判断是否存在协整关系。</li>
+</ol>
+</section>
+<section id="约翰森测试的结果解读" class="level3">
+<h3 class="anchored" data-anchor-id="约翰森测试的结果解读">约翰森测试的结果解读</h3>
+<ul>
+<li><strong>特征值</strong>：特征值表示每个潜在协整关系的强度。特征值越接近1，表示协整关系越强。</li>
+<li><strong>特征向量</strong>：特征向量表示协整关系的方向。</li>
+<li><strong>似然比统计量</strong>：用于检验是否存在协整关系以及协整关系的数量。</li>
+<li><strong>临界值</strong>：用于确定似然比统计量是否显著。</li>
+</ul>
+</section>
+<section id="约翰森测试的应用场景" class="level3">
+<h3 class="anchored" data-anchor-id="约翰森测试的应用场景">约翰森测试的应用场景</h3>
+<p>约翰森测试广泛应用于经济学和金融学领域，特别是用于研究股票价格、汇率、利率等变量之间的长期均衡关系。它可以帮助分析师判断两个或多个时间序列之间是否存在长期的稳定关系，从而为投资决策提供依据。</p>
+</section>
+<section id="约翰森测试与相关性检验的区别" class="level3">
+<h3 class="anchored" data-anchor-id="约翰森测试与相关性检验的区别">约翰森测试与相关性检验的区别</h3>
+<ul>
+<li><strong>协整性</strong>：描述的是两个或多个非平稳时间序列之间存在的一种长期稳定关系。</li>
+<li><strong>相关性</strong>：衡量的是两个时间序列之间的线性关系强度。</li>
+</ul>
+<p>约翰森测试的结果可以帮助我们避免使用非平稳数据进行回归分析所导致的“伪回归”问题，从而更准确地分析变量之间的长期均衡关系。在实际操作中，交易者通常会结合其他技术指标和市场分析来综合判断股票之间的协整性，以制定更为有效的交易策略。</p>
+<div id="cell-12" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd  </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.vector_ar.vecm <span class="im">import</span> coint_johansen  </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成模拟数据  </span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)  </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)  </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.sin(t) <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">100</span>)  </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.cos(t) <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">100</span>)  </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>x3 <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> x1 <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> x2 <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">100</span>)  </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 将数据转换为DataFrame  </span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({<span class="st">'X1'</span>: x1, <span class="st">'X2'</span>: x2, <span class="st">'X3'</span>: x3})  </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用Johansen协整检验  </span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> coint_johansen(data, det_order<span class="op">=</span><span class="dv">0</span>, k_ar_diff<span class="op">=</span><span class="dv">1</span>)  </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 打印结果  </span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Johansen协整检验结果:"</span>)  </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 迹统计量（Trace Statistics, lr1）---"</span>)  </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.lr1)  </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 临界值（Critical Values，通常为1%、5%、10%显著性水平）---"</span>)  </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.cvt)  </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 最大特征值统计量（Maximum Eigenvalue Statistics, lr2）---"</span>)  </span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.lr2)  </span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 临界值（Critical Values，通常为1%、5%、10%显著性水平）---"</span>)  </span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.cvm)  </span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 解释结果并打印的函数  </span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_rejection(stat, cv, name, significance_level<span class="op">=</span><span class="fl">0.05</span>):  </span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 将显著性水平转换为列索引（cvt的第一行通常是显著性水平说明，从第二行开始是临界值）  </span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    sig_levels <span class="op">=</span> [<span class="st">'1%'</span>, <span class="st">'5%'</span>, <span class="st">'10%'</span>]  <span class="co"># 假设cvt的列标题是这样，实际情况可能不同  </span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    col_index <span class="op">=</span> sig_levels.index(<span class="ss">f"</span><span class="sc">{</span>significance_level<span class="op">*</span><span class="dv">100</span><span class="sc">:.0f}</span><span class="ss">%"</span>)  </span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> col_index <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:  <span class="co"># 如果指定的显著性水平不在列表中，则默认使用5%  </span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        col_index <span class="op">=</span> <span class="dv">1</span>  </span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'cv[0]:'</span>,cv[<span class="dv">0</span>])</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'col_index:'</span>,col_index)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    num_rejections <span class="op">=</span> <span class="dv">0</span>  </span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> value, c_value <span class="kw">in</span> <span class="bu">zip</span>(stat, cv[:, col_index]):  </span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="op">&gt;</span> c_value:  </span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>            num_rejections <span class="op">+=</span> <span class="dv">1</span>  </span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"在</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">检验中，拒绝了不存在至少</span><span class="sc">{</span>num_rejections<span class="sc">}</span><span class="ss">个协整向量的原假设（统计量=</span><span class="sc">{</span>value<span class="sc">:.2f}</span><span class="ss">，</span><span class="sc">{</span>significance_level<span class="op">*</span><span class="dv">100</span><span class="sc">:.0f}</span><span class="ss">%临界值=</span><span class="sc">{</span>c_value<span class="sc">:.2f}</span><span class="ss">）"</span>)  </span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:  </span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span>  </span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>print_rejection(model.lr1, model.cvt, <span class="st">"迹"</span>,significance_level<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>print_rejection(model.lr2, model.cvm, <span class="st">"最大特征值"</span>)  </span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 得出结论  </span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 注意：由于迹统计量和最大特征值统计量可能会给出不同的结论，  </span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co"># 我们通常根据其中一个或结合两者来得出结论。  </span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 在这里，我们简单地基于迹统计量的结果来得出结论。  </span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>col_idx <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'model.lr1 &gt; model.cvt[:, col_idx]:'</span>,model.lr1 <span class="op">&gt;</span> model.cvt[:, col_idx])</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'np.any(model.lr1 &gt; model.cvt[:, col_idx]):'</span>,np.<span class="bu">any</span>(model.lr1 <span class="op">&gt;</span> model.cvt[:, col_idx]))</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> np.<span class="bu">any</span>(model.lr1 <span class="op">&gt;</span> model.cvt[:, col_idx]):  <span class="co"># 检查是否有拒绝发生  </span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    num_cointegrating_vectors <span class="op">=</span> np.<span class="bu">sum</span>(model.lr1 <span class="op">&gt;</span> model.cvt[:, col_idx])  </span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">结论：时间序列之间存在至少</span><span class="sc">{</span>num_cointegrating_vectors<span class="sc">}</span><span class="ss">个协整向量（基于迹统计量）。"</span>)  </span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:  </span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">结论：时间序列之间不存在协整向量（基于迹统计量）。"</span>)  </span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 注意：实际中，你可能需要更仔细地分析两个统计量的结果，  </span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 并考虑数据的性质、样本大小、滞后阶数的选择等因素来综合得出结论。</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          X1        X2        X3
+0   0.049671  0.858463  0.489846
+1   0.087012  0.952838  0.576004
+2   0.265418  0.945392  0.713710
+3   0.450717  0.874209  0.767843
+4   0.369721  0.903352  0.498769
+..       ...       ...       ...
+95 -0.316698 -0.946852 -0.701066
+96 -0.239231 -1.051570 -0.555440
+97 -0.338493 -0.915792 -0.596413
+98 -0.456126 -0.883832 -0.588693
+99 -0.567480 -0.953369 -0.697461
+
+[100 rows x 3 columns]
+Johansen协整检验结果:
+
+--- 迹统计量（Trace Statistics, lr1）---
+[144.34074724  83.97031191  37.69871001]
+
+--- 临界值（Critical Values，通常为1%、5%、10%显著性水平）---
+[[27.0669 29.7961 35.4628]
+ [13.4294 15.4943 19.9349]
+ [ 2.7055  3.8415  6.6349]]
+
+--- 最大特征值统计量（Maximum Eigenvalue Statistics, lr2）---
+[60.37043533 46.2716019  37.69871001]
+
+--- 临界值（Critical Values，通常为1%、5%、10%显著性水平）---
+[[18.8928 21.1314 25.865 ]
+ [12.2971 14.2639 18.52  ]
+ [ 2.7055  3.8415  6.6349]]
+cv[0]: [27.0669 29.7961 35.4628]
+col_index: 1
+在迹检验中，拒绝了不存在至少1个协整向量的原假设（统计量=144.34，5%临界值=29.80）
+在迹检验中，拒绝了不存在至少2个协整向量的原假设（统计量=83.97，5%临界值=15.49）
+在迹检验中，拒绝了不存在至少3个协整向量的原假设（统计量=37.70，5%临界值=3.84）
+cv[0]: [18.8928 21.1314 25.865 ]
+col_index: 1
+在最大特征值检验中，拒绝了不存在至少1个协整向量的原假设（统计量=60.37，5%临界值=21.13）
+在最大特征值检验中，拒绝了不存在至少2个协整向量的原假设（统计量=46.27，5%临界值=14.26）
+在最大特征值检验中，拒绝了不存在至少3个协整向量的原假设（统计量=37.70，5%临界值=3.84）
+model.lr1 &gt; model.cvt[:, col_idx]: [ True  True  True]
+np.any(model.lr1 &gt; model.cvt[:, col_idx]): True
+
+结论：时间序列之间存在至少3个协整向量（基于迹统计量）。</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
