@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="王一刀">
+<meta name="dcterms.date" content="2024-08-30">
+
+<title>算法交易：制胜策略与原理(欧内斯特·陈)之四 – 兜率宫</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">兜率宫</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://wangxuan.me"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/stardust1900"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://weibo.com/halfg0d"> <i class="bi bi-sina-weibo" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">关于</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">算法交易：制胜策略与原理(欧内斯特·陈)之四</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">算法交易</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>王一刀 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 30, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>相对于应用均值回归策略交易一对股票而言，要想做到持续盈利其实是很困难的，除非你对每一个公司都有一个基本的认知，同时，你能够在某个公司相关的坏消息公布于众之前平仓离场。</p>
+<p>对可以配对交易的ETF基金的选择过程相当简单：我们只需要寻找那些暴露于共同的经济因素之下的ETF基金即可。除了国家级别的ETF基金以外，<strong>行业ETF基金也拥有一个能够发现具有协整性质资产的肥沃的土壤</strong>。例如，零售业基金RTH与消费品基金XLP就具有协整性质。随着对多少具有相同属性的行业ETF基金的增值功能的探索，相应的配对交易规模就稳步增长了。</p>
+<p>我所喜欢的另一个ETF基金的配对交易是大宗商品之ETF基金和由生产这些商品的公司股票所构成的ETF基金之间所构建的投资组合。黄金相关的GLD基金与金矿金矿股票指数型基金GDX就是一个很好的例子，其基本原理是：由于金矿公司的主要资产是黄金，因此其股票的价值应该与黄金现货价格具有协整关系，而且事实上，两者之间的协整关系一直持续到2008年7月14日左右。</p>
+<p>石油价格和黄金价格，以及与黄金企业股指之间的协整关系又是怎样的呢？显然，它们有很多相关性，而且事实证明：当石油价格变得昂贵，我就要花费更多的资金去开采黄金，如此，开采企业的利润就会减少，进而导致相关企业的股票价格相对于黄金现货价格来说表现不佳（“古怪黄金界”，2011）。</p>
+<section id="日间均值回归交易策略缺口买入模式" class="level2">
+<h2 class="anchored" data-anchor-id="日间均值回归交易策略缺口买入模式">日间均值回归交易策略：缺口买入模式</h2>
+<ul>
+<li>（1）于靠近开盘时刻，选择所有的自前一天的最低价至今日的开盘价之间的收益率低于一个标准差的股票。标准差的计算依据的是90天的日间收盘价的收益率，而被选中的股票就是“缺口”型的。</li>
+<li>（2）缩小所选股票的范围，留下那些开盘价格高于收盘价20日移动均线的股票。</li>
+<li>（3）在剩余股票中，买入10只，要求是：此类股票价格与前一日之最低价格相比较而得出的收益率最低。如果能够买入的数量少于10只股票，那就买入上述的所有股票。</li>
+<li>（4）在收盘之前清算所有股票。 上述这种策略的基本原理是：当股指期货的价格于开盘之前下跌，那么，由于市场上的恐慌情绪，某些股票于开盘之时会被不成比例地抛售。但是，一旦这种恐慌性抛售结束，股票于当天将会逐步地升值。</li>
+</ul>
+<p>上述第二个规则通常是非常有用的均值回归型的交易策略：它基本上是一个动量过滤法则再叠加一个均值回归策略，这是我们经常重复的一种技术。在通常情况之下，那些价格跌了“一点点”的股票相较于那些跌了“很多”的股票而言，会有一个更好的反转契机，因为后者经常会面临负面新闻的冲击，比如营业收入公告不如人意等。由负面消息所造成的价格下降是不太可能恢复的。</p>
+<div id="cell-2" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4.1: Buy-on-Gap Model on SPX Stocks</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.stattools as ts</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>topN<span class="op">=</span><span class="dv">10</span> <span class="co"># Max number of positions 最大持仓数量</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>entryZscore<span class="op">=</span><span class="dv">1</span> <span class="co">#用于计算买入价格的Z分数</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">20</span> <span class="co"># for MA 用于计算移动平均的天数</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 它需要三个T×N型的输入数组，即op数组、lo数组和cl数组，其中，T代表的是天数，N代表的是仓中的股票数量，同时，op包含的是每日的开盘价格，lo包含的是每日的最低价格，而cl是每日的收盘价。</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>op<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_op.csv'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>hi<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_hi.csv'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>lo<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_lo.csv'</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>cl<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_cl.csv'</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>stocks<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_stocks.csv'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>op[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(op[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>op.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>op.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># print(op)</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>hi[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(hi[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>hi.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>hi.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>lo[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(lo[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>lo.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>lo.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>cl[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(cl[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>cl.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>cl.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算过去90天的收盘价标准差（stdretC2C90d）</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>stdretC2C90d<span class="op">=</span>cl.pct_change().rolling(<span class="dv">90</span>).std().shift(<span class="dv">1</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算买入价格（buyPrice），即最低价减去一个Z分数乘以过去90天的收盘价标准差。</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>buyPrice<span class="op">=</span>lo.shift()<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>entryZscore<span class="op">*</span>stdretC2C90d)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算开盘价与前一天的最低价之间的收益差（retGap）</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>retGap<span class="op">=</span>(op<span class="op">-</span>lo.shift())<span class="op">/</span>lo.shift()</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算移动平均</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>ma<span class="op">=</span>cl.rolling(lookback).mean()</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># 初始化持仓表（positionsTable）并遍历每一天</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>positionsTable<span class="op">=</span>np.zeros(retGap.shape)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> np.arange(<span class="dv">1</span>, cl.shape[<span class="dv">0</span>]):</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 对于每一天，找到满足以下条件的股票：收益差有限、开盘价低于买入价格且高于移动平均</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    hasData<span class="op">=</span>np.where(np.isfinite(retGap.iloc[t, :]) <span class="op">&amp;</span> (op.iloc[t, :] <span class="op">&lt;</span> buyPrice.iloc[t, :]).values <span class="op">&amp;</span> (op.iloc[t, :] <span class="op">&gt;</span> ma.iloc[t, :]).values)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    hasData<span class="op">=</span>hasData[<span class="dv">0</span>]</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(hasData)<span class="op">&gt;</span><span class="dv">0</span>:</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 对满足条件的股票按收益差排序，并将前topN个股票的持仓表位置设为1</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        idxSort<span class="op">=</span>np.argsort(retGap.iloc[t, hasData])  </span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        positionsTable[t, hasData[idxSort.values[np.arange(<span class="op">-</span>np.<span class="bu">min</span>((topN, <span class="bu">len</span>(idxSort))),<span class="dv">0</span>)]]]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>retO2C<span class="op">=</span>(cl<span class="op">-</span>op)<span class="op">/</span>op</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>(positionsTable<span class="op">*</span>retO2C, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pnl<span class="op">/</span>topN</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>).plot()</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=0.054392 Sharpe=1.163273</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-30-Algorithmic-Trading-4_files/figure-html/cell-2-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>你可以同时做多，且做空某个公司的股票；或者，你可以做多股票，同时用股指期货的空头进行对冲；你也可以购买更大数量的股票，但同时限制同一行业的股票数量；你还可以于市场开盘时刻之外扩展购买的期限；你也可以实施盘中“抢帽子”交易。但是，这里有一个重要的信息：以日间棒线为样本、不具有均值回归属性的价格系列可以在特定的时期表现出强烈的均值回归属性，这是较短时间尺度所呈现的季节性的工作原理。</p>
+</section>
+<section id="抢帽子交易" class="level2">
+<h2 class="anchored" data-anchor-id="抢帽子交易">“抢帽子”交易</h2>
+<p>“抢帽子”交易是一种短线交易策略，通常是指在股票市场中，投资者试图通过在极短的时间内买入和卖出股票来获利。这种策略的名称来源于一种想象中的场景，即投资者像抢帽子一样迅速地买入和卖出股票。</p>
+<p>“抢帽子”交易的特点包括：</p>
+<ol type="1">
+<li><p>高频交易：这种策略通常涉及大量的交易，而且交易频率非常高。投资者需要密切关注市场动态，并在短时间内做出决策。</p></li>
+<li><p>短线操作：由于交易频率高，投资者通常只持有股票很短的时间，可能是几分钟甚至几秒钟。因此，这种策略需要投资者具备快速反应和决策的能力。</p></li>
+<li><p>利用市场波动：抢帽子交易者通常会利用市场的短期波动来获利。他们会在股价上涨时迅速买入，然后在股价达到高点时迅速卖出；或者在股价下跌时迅速卖出，然后在股价触底时迅速买入。</p></li>
+<li><p>风险较高：由于抢帽子交易涉及高频交易和短线操作，因此风险也相对较高。如果市场波动剧烈或者投资者的决策出现失误，可能会导致巨大的损失。</p></li>
+<li><p>需要专业技能：抢帽子交易需要投资者具备丰富的市场经验和专业知识，以便能够准确判断市场趋势和时机。此外，投资者还需要具备良好的心理素质和风险控制能力。</p></li>
+</ol>
+<p>需要注意的是，<strong>“抢帽子”交易在中国是被禁止的</strong>。根据中国证监会发布的《关于加强对利用“荐股软件”从事证券投资咨询业务监管的暂行规定》，投资者在证券交易活动中不得有“抢帽子”交易等操纵市场的行为。因此，投资者应该遵守相关法律法规，远离任何非法的交易行为。</p>
+</section>
+<section id="etf基金与成分股之间的套利模式" class="level2">
+<h2 class="anchored" data-anchor-id="etf基金与成分股之间的套利模式">ETF基金与成分股之间的套利模式</h2>
+<p>许多读者对“指数套利”的相关策略应该是很熟悉的，即在股票的投资组合与指数期货之间构建一种对冲的关系，并按照它们之间的价差进行相关的交易。</p>
+<p>高频交易员已经能够利用日间交易中的两个缺陷来计算股指期货与成分股之间的套利比率及相关指标，其中第一个缺陷是：许多主要的指数，包括道琼斯指数（DowJones）、标准普尔指数（S&amp;P）、纳斯达克指数（Nasdaq）和罗素指数（Russell），其计算程序只使用初级市场的交易数据（详见第1章对初级市场与综合股票价格的论述），而这只代表了不到30%的被交易的股票（阿诺、萨鲁奇，2012）；第二个缺陷是：相关该指数每隔几秒钟就要更新一次。前述两个缺陷会导致由一组股票所构成的“篮子”证券的价格以及股指本身的价格在不断地被更新，从而生成它们之间的市值差异。因此，对股指期货价值的预期较之瞬时变化的股票市值而言，会有稍许的延迟。如果股指期货的价值高于成分股的瞬时市值，那我们就可以做空股指期货，反之亦然。那么，我们在哪里可以发现这个事实呢？是瞬时变化的股票市值吗？当然，我们需要从所有美国证交所和电子交易平台（ECN）（而不是证券行业自动化公司，SIAC）订阅直接的数据，同时，我们要在相关的交易场所对指数相关的所有股票的交易价格实施监控，而且，延迟的时间要以毫秒来计算。所以，没有人能说“高频交易”是件很容易的事情！</p>
+<p>我们将选择一年的数据（在我们的例子中，我们选择的是2007年1月1日至2007年12月31日的数据）作为训练集，然后以约翰森检验模式寻找所有那些与SPY基金的协整属性达到90%概率之上的股票，接下来，我们用这些股票构建一个投资组合，且对每只股票平均分配资金，再用约翰森检验模式进行测试，确认此多头形式的投资组合是否仍然与SPY基金具有协整关系。前述这一步是必要的，因为一个任意金额以相等权重将资本平均分配给每只股票，而由这些股票所构建的组合并不一定与SPY基金具有协整关系，即使每个成分股都与SPY基金具有协整关系，投资组合的情况也是如此。我们在第二个测试当中使用了价格的对数形式，因为我们希望每天都调整这个组合，进而使每个股票的资本都是恒定的（详见第3章的讨论内容）。在确认相关的协整属性之后，我们就可以回测在第2章所描述的线性均值回归的交易策略，</p>
+<div id="cell-6" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4.2: Arbitrage between SPY and Its Component Stocks</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.stattools as ts</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.tsa.vector_ar.vecm <span class="im">as</span> vm</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Stocks</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>cl<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_cl.csv'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>stocks<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_stocks.csv'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>cl[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(cl[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>cl.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>cl.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ETFs</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>cl_etf<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputData_ETF_cl.csv'</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>etfs<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputData_ETF_stocks.csv'</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>cl_etf[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(cl_etf[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>cl_etf.columns<span class="op">=</span>np.insert(etfs.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>cl_etf.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge on common dates</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.merge(cl, cl_etf, how<span class="op">=</span><span class="st">'inner'</span>, on<span class="op">=</span><span class="st">'Date'</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>cl_stocks<span class="op">=</span>df[cl.columns]</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>cl_etf<span class="op">=</span>df[cl_etf.columns]</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Use SPY only</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>cl_etf<span class="op">=</span>cl_etf[<span class="st">'SPY'</span>] <span class="co"># This turns cl_etf into Series</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>trainDataIdx<span class="op">=</span>df.index[(df.index <span class="op">&gt;</span> pd.to_datetime(<span class="st">"2007-01-01"</span>).date()) <span class="op">&amp;</span> (df.index <span class="op">&lt;=</span> pd.to_datetime(<span class="st">"2007-12-31"</span>).date())]</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>testDataIdx <span class="op">=</span>df.index[df.index <span class="op">&gt;</span> pd.to_datetime(<span class="st">"2007-12-31"</span>).date()]</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 我们基于约翰森检验的原理对SPY基金的每只成分股与SPY基金本身之间的协整关系进行测试，之后我们发现：有98只股票分别与SPY基金具有协整关系。</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 现在，我们可以将所有与SPY基金具有协整关系的股票之多头形式构成一个投资组合，且配置同样的资本，但是，我们还必须测试这个投资组合与SPY基金的协整关系，</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>isCoint<span class="op">=</span>np.full(stocks.shape[<span class="dv">1</span>], <span class="va">False</span>)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(stocks.shape[<span class="dv">1</span>]):</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine the two time series into a matrix y2 for input into Johansen test</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    y2<span class="op">=</span>pd.concat([cl_stocks.loc[trainDataIdx].iloc[:, s], cl_etf.loc[trainDataIdx]], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    y2<span class="op">=</span>y2.loc[y2.notnull().<span class="bu">all</span>(axis<span class="op">=</span><span class="dv">1</span>),]</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (y2.shape[<span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">250</span>):</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Johansen test 对每个成分股与SPY进行协整检验</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>        result<span class="op">=</span>vm.coint_johansen(y2.values, det_order<span class="op">=</span><span class="dv">0</span>, k_ar_diff<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (result.lr1[<span class="dv">0</span>] <span class="op">&gt;</span> result.cvt[<span class="dv">0</span>,<span class="dv">0</span>]): <span class="co"># 如果存在协整关系，则将对应的成分股标记为True</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>            isCoint[s]<span class="op">=</span><span class="va">True</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(isCoint.<span class="bu">sum</span>())</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>yN<span class="op">=</span>cl_stocks.loc[trainDataIdx, isCoint]</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算仅做多组合的净市场价值</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>logMktVal_long<span class="op">=</span>np.<span class="bu">sum</span>(np.log(yN), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># The net market value of the long-only portfolio is same as the "spread"</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm that the portfolio cointegrates with SPY 确认组合与SPY的协整关系</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>ytest<span class="op">=</span>pd.concat([logMktVal_long, np.log(cl_etf.loc[trainDataIdx])], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>result<span class="op">=</span>vm.coint_johansen(ytest, det_order<span class="op">=</span><span class="dv">0</span>, k_ar_diff<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.lr1)</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.cvt)</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.lr2)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.cvm)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co"># 上述约翰森测试表明股票的多头组合与SPY基金的协整属性达到95%以上的概率。所以，我们可以构建一个包括股票和SPY基金在内的多单-空单相间的平稳投资组合，</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co"># 同时，我们可以使用约翰森检验中的特征向量来确定SPY基金与股票投资组合的权重（事实上，即使二者之间存在协整关系，我们也可以选择特征向量矩阵eigenmatrix中的、位于第一列的最大值来构建平稳的投资组合）。</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co">#Apply linear mean-reversion model on test set 应用线性均值回归模型</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>yNplus<span class="op">=</span>pd.concat([cl_stocks.loc[testDataIdx, isCoint], pd.DataFrame(cl_etf.loc[testDataIdx])], axis<span class="op">=</span><span class="dv">1</span>)  <span class="co"># Array of stock and ETF prices</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算测试集中的投资组合权重</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>weights<span class="op">=</span>np.column_stack((np.full((testDataIdx.shape[<span class="dv">0</span>], isCoint.<span class="bu">sum</span>()), result.evec[<span class="dv">0</span>,<span class="dv">0</span>]), np.full((testDataIdx.shape[<span class="dv">0</span>], <span class="dv">1</span>), result.evec[<span class="dv">1</span>, <span class="dv">0</span>]))) <span class="co"># Array of log market value of stocks and ETF's</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算投资组合的净市场价值</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>logMktVal<span class="op">=</span>np.<span class="bu">sum</span>(weights<span class="op">*</span>np.log(yNplus), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># Log market value of long-short portfolio</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算投资组合的单位资本投入</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>numUnits <span class="op">=-</span>(logMktVal<span class="op">-</span>logMktVal.rolling(lookback).mean())<span class="op">/</span>logMktVal.rolling(lookback).std() <span class="co"># capital invested in portfolio in dollars.  movingAvg and movingStd are functions from epchan.com/book2</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算每日持仓</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(np.expand_dims(numUnits, axis<span class="op">=</span><span class="dv">1</span>)<span class="op">*</span>weights)<span class="co"># results.evec(:, 1)' can be viewed as the capital allocation, while positions is the dollar capital in each ETF.</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>((positions.shift().values)<span class="op">*</span>(np.log(yNplus)<span class="op">-</span>np.log(yNplus.shift()).values), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="co"># print(positions.shift())</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>denominator <span class="op">=</span> np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(positions.shift()), axis<span class="op">=</span><span class="dv">1</span>)  </span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="co"># print(denominator.values)</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="co"># print(pnl.values)</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>denominator <span class="op">=</span> np.where(denominator <span class="op">==</span> <span class="dv">0</span>, <span class="fl">1e-9</span>, denominator)  <span class="co"># 使用一个非常小的数替换零</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co"># print(denominator)</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pd.DataFrame(pnl.values<span class="op">/</span>denominator)</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>).plot()</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> ((np.prod(<span class="dv">1</span><span class="op">+</span>ret,axis<span class="op">=</span><span class="dv">0</span>)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>).iloc[<span class="dv">0</span>], (np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret,axis<span class="op">=</span><span class="dv">0</span>)).iloc[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>98
+[15.86864835  6.19735725]
+[[13.4294 15.4943 19.9349]
+ [ 2.7055  3.8415  6.6349]]
+[9.6712911  6.19735725]
+[[12.2971 14.2639 18.52  ]
+ [ 2.7055  3.8415  6.6349]]
+APR=0.044930 Sharpe=1.320011</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-30-Algorithmic-Trading-4_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>“PnL” 是 “Profit and Loss” 的缩写，中文意思是“盈亏”或“损益”。在金融领域，PnL 通常用于描述一个投资策略、交易或其他金融产品的盈利或亏损情况。它反映了在一定时间范围内，投资从初始投资金额到终值的变化。</p>
+<p>PnL 可以用于评估投资策略的表现，帮助投资者了解他们的投资是否成功，以及成功的程度如何。PnL 的计算通常包括以下几个步骤：</p>
+<ol type="1">
+<li>确定投资组合的初始价值。</li>
+<li>确定投资组合在特定时间点的价值。</li>
+<li>计算两者之间的差异，即 PnL = 投资组合终值 - 投资组合初始价值。</li>
+</ol>
+<p>正的 PnL 表示盈利，负的 PnL 表示亏损。通过分析 PnL，投资者可以更好地了解他们的投资策略的风险和回报特性，从而做出更明智的投资决策。</p>
+<blockquote class="blockquote">
+<p>当然，与上述问题系统的理念可以适用于任何ETF基金、指数或指数子集的交易。此外，如果存在一个跟踪指数或指数子集的期货合约，那我们就可以使用这个期货来取代ETF基金，但是在这种情况下，我们必须对相应的期货价格倍加小心，即使用于回测的期货价格与股票的收盘价格同步运行，也不例外.<br>
+你可能想知道：为什么我们不直接运行约翰森检验模式，检测标准普尔指数所包含的500只股票与SPY基金之间的协整属性，然后让相关算法为包含SPY基金在内的所有具有协整关系的金融工具自动寻找一个特征向量呢？（其实，并不是所有具有协整关系的股票+SPY基金的仓内头寸都必然包括SPY基金本身，但是我们只需要选择一个。）与这种相关的方法论有着双重含义：<br>
+* （1）在约翰森测试的实施过程中，我知道的其所能接受的函数符号最多是12个（LeSage，1998）。 * （2）特征向量通常会涉及股票的多、空两个头寸，这意味着我们不能做多股票的投资组合，同时用SPY基金的空头进行对冲，反之亦然。这就存在一个问题：如果我们在股票投资组合中拥有空头头寸，而同时又做空SPY基金，那么，即使我们做多股票的投资组合，但存在的两个空方头寸会增加我们的特定的风险。</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>关于上述的问题，我们有一个替代的方法，即构造一个多-空头寸并存的股票投资组合。我们仍然可以使用约翰森检验模式——单独测试标准普尔（SPX）指数中每只股票与SPY基金的协整属性，找到相应的股票子集之后，将其纳入股票的投资组合之内，然后，使用一个约束优化方法（如遗传算法和模拟退火算法）来减少股票投资组合的价格系列和SPY基金的价格系列之间的平均差的绝对值——在这种情况下，我们想要优化的变量就是股票的对冲比率，同时，我们的约束条件是：所有对冲比率的值必须是正数。全球MATLAB优化工具箱会提供遗传算法和模拟退火函数来完成这种具有“约束性”的优化任务。</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>由于上述这一策略涉及股票的空方头寸，因此同样受制于卖空交易的约束机制，其实，任何涉及做空的策略都不例外。但是，在这里，此类问题不是太严重，因为相应的投资组合包含的是非常多样化的股票，如果由于卖空约束机制的限制而必须移除几只股票，那影响应该也是有限的。</p>
+</blockquote>
+<p>遗传算法（Genetic Algorithm, GA）和模拟退火算法（Simulated Annealing, SA）都是启发式优化算法，用于解决组合优化问题和全局优化问题。它们都模拟了自然现象，遗传算法模仿了生物进化过程中的自然选择和基因交叉，而模拟退火算法则模仿了物理中的退火过程。</p>
+<section id="遗传算法-ga" class="level3">
+<h3 class="anchored" data-anchor-id="遗传算法-ga">遗传算法 (GA)</h3>
+<p>遗传算法的基本思想是通过模拟生物进化过程中的自然选择、遗传和变异来搜索最优解。遗传算法的主要步骤包括：</p>
+<ol type="1">
+<li><strong>初始化种群</strong>：随机生成一组解作为初始种群。</li>
+<li><strong>适应度评估</strong>：计算每个个体（解）的适应度（目标函数值）。</li>
+<li><strong>选择</strong>：根据适应度选择优秀的个体进行繁殖。</li>
+<li><strong>交叉</strong>：通过基因交叉操作产生新的个体。</li>
+<li><strong>变异</strong>：对新产生的个体进行变异操作，增加种群的多样性。</li>
+<li><strong>终止条件</strong>：达到预设的迭代次数或其他停止条件时终止算法。</li>
+</ol>
+<p>遗传算法的优点是能够在大规模搜索空间中找到近似最优解，并且具有较好的全局搜索能力。缺点是收敛速度较慢，且有可能陷入局部最优解。</p>
+</section>
+<section id="模拟退火算法-sa" class="level3">
+<h3 class="anchored" data-anchor-id="模拟退火算法-sa">模拟退火算法 (SA)</h3>
+<p>模拟退火算法的基本思想是通过模拟物理中的退火过程来搜索最优解。退火是一种金属热处理工艺，通过将金属加热到高温，然后缓慢降温，使金属内部的原子达到稳定状态。模拟退火算法的主要步骤包括：</p>
+<ol type="1">
+<li><strong>初始化</strong>：随机生成一个初始解，并设置初始温度。</li>
+<li><strong>邻域搜索</strong>：在当前解的邻域内随机生成一个新解。</li>
+<li><strong>接受准则</strong>：根据Metropolis准则判断是否接受新解。如果新解的目标函数值更好，则接受新解；如果更差，则以一定概率接受新解，这个概率与温度和目标函数值差有关。</li>
+<li><strong>降温</strong>：降低温度。</li>
+<li><strong>终止条件</strong>：达到预设的迭代次数或温度降至设定阈值时终止算法。</li>
+</ol>
+<p>模拟退火算法的优点是能够跳出局部最优解，具有较好的全局搜索能力。缺点是收敛速度较慢，且参数设置对算法性能有很大影响。</p>
+</section>
+<section id="总结" class="level3">
+<h3 class="anchored" data-anchor-id="总结">总结</h3>
+<p>遗传算法和模拟退火算法都是有效的启发式优化算法，适用于解决复杂的优化问题。遗传算法通过模拟生物进化过程，具有较好的全局搜索能力；而模拟退火算法通过模拟物理退火过程，能够跳出局部最优解。在实际应用中，可以根据问题的特点和需求选择合适的算法，或者将两种算法结合使用以提高优化效果。</p>
+<p>在基于协整检验的均值回归策略相关的交易当中，我们以一组固定的金融工具和固定数量的股票，或每个金融工具所配置的一定数额的美元资本来构建一个投资组合。这种固定的数量可以由菲亚特模式（如例4-2所示）、线性回归模式、约翰森测试模式，或约束优化模式来予以确定。但是，没有理由来解析一个问题，即为什么投资组合每天需要包含相同的、数量固定的金融工具，而且，数量固定的金融工具具有相同的权重。其实，许多基于股票交易策略而构建的投资组合的优势恰恰应该是：每日精明地选择股票，同时，对相应的权重，要重新进行加权。</p>
+<p>在所谓的“跨行业”（通常被称之为“横截面”）均值回归策略当中，相关个股价格不一定向自己的历史性的均值回归（这种类型的策略通常只包括股票交易，不包含期货交易，或货币交易）；相反，其重点是相关股票的短期相对收益率；同时，我们依靠这些相对收益率的序列反相关模式而生成相应利润。在大多数情况下，相对收益率的数值是通过特定股票的收益率减去仓内头寸相关的所有股票的平均收益率而得出的。之所以如此，是因为我们预期那些表现不佳的股票在之后的绩效可能会超出市场的平均水平，反之亦然。因为我们只测量相对的收益率，因此，我们很有可能做空一些股票，即使其先前的（绝对）收益率是负值，但只要它的数值高于仓内所有股票的平均收益率即可。</p>
+<p>我在之前的一本书中曾经描述过一个交易策略，此策略由汉丹和罗开发（出现于陈先生的2009年著作之中的例3-7；原始论文由汉丹和罗于2007年所著）。这种策略是：我们投资买入一些股票，这些股票大都是标准普尔500指数（S&amp;P500）、标准普尔1500指数（S&amp;P1500），或罗素2000指数（Russell2000）中的成分股，我们对每只股票都予以配置资本，但配置的比重各有不同。在每一天靠近收盘的时间段内，我们将决定多头资本，或空头资本wi配置给第i只股票（ith）</p>
+<p>换句话说，如果一只股票相对于同类股票来说有一个较高的回报率，那么，我们会大量做空此股票，而如果它相对于同类股票来说表现消极，那我们就会大量做多此股票。</p>
+<div id="cell-11" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4.3: Linear Long-Short Model on Stocks</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 股票相关的线性多-空模式</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.stattools as ts</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Stocks</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>cl_<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_cl.csv'</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>stocks<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_stocks.csv'</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>cl_[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(cl_[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>cl_.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>cl_.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>cl_<span class="op">=</span>cl_.loc[(cl_.index <span class="op">&gt;=</span> pd.to_datetime(<span class="st">"2007-01-03"</span>).date()) <span class="op">&amp;</span> (cl_.index <span class="op">&lt;=</span> pd.to_datetime(<span class="st">"2011-12-30"</span>).date()),:]</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>op<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_op.csv'</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>op[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(op[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>op.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>op.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>op<span class="op">=</span>op.loc[(op.index <span class="op">&gt;=</span> pd.to_datetime(<span class="st">"2007-01-03"</span>).date()) <span class="op">&amp;</span> (op.index <span class="op">&lt;=</span> pd.to_datetime(<span class="st">"2011-12-30"</span>).date()),:]</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 基于收盘价的策略</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>cl_.pct_change() <span class="co"># daily returns</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>marketRet<span class="op">=</span>np.mean(ret, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># equal weighted market index return</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>weights<span class="op">=-</span>(np.array(ret)<span class="op">-</span>np.reshape(marketRet.values, (ret.shape[<span class="dv">0</span>], <span class="dv">1</span>)))</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>weights<span class="op">=</span>weights<span class="op">/</span>pd.DataFrame(np.<span class="bu">abs</span>(weights)).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>).values.reshape((weights.shape[<span class="dv">0</span>], <span class="dv">1</span>))</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>weights<span class="op">=</span>pd.DataFrame(weights, columns<span class="op">=</span>stocks.values[<span class="dv">0</span>], index<span class="op">=</span>np.array(ret.index))</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>dailyret<span class="op">=</span>(weights.shift()<span class="op">*</span>ret).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># Capital is always one</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>((<span class="dv">1</span><span class="op">+</span>dailyret).cumprod()<span class="op">-</span><span class="dv">1</span>).plot()</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>dailyret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(dailyret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(dailyret)<span class="op">/</span>np.std(dailyret)))</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co"># APR=13.7%, Sharpe=1.3</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 基于开盘价和收盘价的策略</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>(op<span class="op">-</span>cl_.shift())<span class="op">/</span>cl_.shift() <span class="co"># daily returns</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>marketRet<span class="op">=</span>np.mean(ret, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># equal weighted market index return</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>weights<span class="op">=-</span>(np.array(ret)<span class="op">-</span>np.reshape(marketRet.values, (ret.shape[<span class="dv">0</span>], <span class="dv">1</span>)))</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>weights<span class="op">=</span>weights<span class="op">/</span>pd.DataFrame(np.<span class="bu">abs</span>(weights)).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>).values.reshape((weights.shape[<span class="dv">0</span>], <span class="dv">1</span>))</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>weights<span class="op">=</span>pd.DataFrame(weights, columns<span class="op">=</span>stocks.values[<span class="dv">0</span>], index<span class="op">=</span>np.array(ret.index))</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>dailyret<span class="op">=</span>(weights<span class="op">*</span>(cl_<span class="op">-</span>op)<span class="op">/</span>op).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># Capital is always one</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>((<span class="dv">1</span><span class="op">+</span>dailyret).cumprod()<span class="op">-</span><span class="dv">1</span>).plot()</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>dailyret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(dailyret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(dailyret)<span class="op">/</span>np.std(dailyret)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=0.136776 Sharpe=1.259979
+APR=0.731553 Sharpe=4.715156</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-30-Algorithmic-Trading-4_files/figure-html/cell-4-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>上述策略的显著特点是：它完全是线性的，且没有参数，相应资本又是完美中性的。</p>
+<p>在我以前的著作当中，我也曾建议：我们应该使用靠近今日开盘时刻的之前的收益率指标来确定今日开盘时各类资产的权重，进而提高相关交易策略的整体收益。同时，在收盘之前，我们应该将仓内的头寸全部结清，从而使相应策略变成盘中（日间）的交易策略，</p>
+<p>以上程序的运行结果是：同期年化收益率和夏普比率分别是73%和4.7。尽管有这样出色的绩效，但是开盘价-收盘价的模式仍然有一定的期限，而此缺陷在收盘价-收盘价模式中是没有的，那么，相应模式都有哪些缺陷呢？第一，交易成本（不包括在我们的回测系统当中）将翻倍，因为，我们是一天交易两次，而不是一次交易一天；第二，由于这种策略也必须使用“开盘”价格来确定开盘时刻入场的交易信号，而这同样会产生我在例4-1中所提到的噪声交易信号。</p>
+<p>实际上，即使对于收盘价-收盘价的交易策略而言，我们也不能用确切的收盘价来确定相关的权重，然后按照这些价格入场。但是，在这种情况下，闭市几秒钟之前的价格通常更接近实际的官方（初级交易所）公布的收盘价格，因为这些收盘之前的价格在初级市场第二天开盘之时需要被打印出来，而且具有较高的流动性。</p>
+<p>另外，上述相关策略还有可能存在其他变量（也被称为“要素”），这些变量更善于预测股票价格相关的跨行业（横截面）式的均值回归模式的运行效应，可能比我们在例4-3和例4-4中所使用的相对收益率的模式要好：一个流行的，且被交易员常常使用的变量是衡量股票等级的市盈率（P/E）比率，此比率可能是最后一个季度的收益率，也可能是由分析师或股票发行公司本身所估计的预期收益。收益率的推理模式是：如果收入公告或相关预期发生变化，那么，股票价格将转向一个新的均衡点位，所以，如果对股票的收益预期是正偏的，那么，相关股票的收益率就可能呈现正值，同时，我们不应预期：如果相应收益率与预期的估计值呈等比例变化，那么，相关股票价格就会呈现均值回归的属性。因此，如果我们使用市盈率对股票进行排名的话，我们就可以避免卖空这些股票。</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/stardust1900\.github\.io\/doushuai\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

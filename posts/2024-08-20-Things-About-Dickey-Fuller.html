@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -446,6 +446,18 @@ look-up table. The actual p-value is smaller than the p-value returned.
 <p>需要注意的是，半衰期检验需要在专业的实验室环境中进行，并采取适当的安全措施，以防止辐射对人体的伤害。此外，半衰期检验的结果可能受到测量误差和其他因素的影响，因此需要进行多次实验并取平均值以提高准确性。</p>
 <p><strong>半衰期检验（Half-Life Test）本身并不是专门用于测试时间序列的回归性和平稳性的方法。半衰期检验主要用于评估放射性物质衰变速率，而不是时间序列分析</strong></p>
 </section>
+<section id="协整关系" class="level2">
+<h2 class="anchored" data-anchor-id="协整关系">协整关系</h2>
+<p>协整关系（Cointegration）是时间序列分析中的一个重要概念，它描述了两个或多个非平稳时间序列之间存在的长期稳定关系。</p>
+<p>在经济学和金融学中，协整关系常用于分析不同经济变量之间的长期均衡关系。例如，协整关系可以用来检验两个经济指标（如价格和工资）是否长期同步变动，从而判断它们之间是否存在长期的均衡关系。</p>
+<p>协整关系的存在需要满足一定的条件，包括：</p>
+<ol type="1">
+<li><strong>变量的非平稳性</strong>：协整关系通常存在于非平稳的时间序列之间。如果所有变量都是平稳的，那么它们之间就不存在协整关系。</li>
+<li><strong>长期稳定性</strong>：协整关系描述的是变量之间的长期稳定关系。即使短期内变量之间可能出现波动或偏离，但在长期内它们会回归到均衡状态。</li>
+<li><strong>最小二乘法估计的有效性</strong>：在存在协整关系的情况下，可以使用最小二乘法（OLS）对回归模型进行估计，并且得到的估计量是一致的。</li>
+</ol>
+<p>协整关系的检验通常使用Engle-Granger两步法或其他更复杂的统计方法。如果检验结果表明变量之间存在协整关系，那么就可以进一步分析它们之间的长期均衡关系，并进行相关的预测和政策分析。</p>
+</section>
 <section id="协整型adf检验" class="level2">
 <h2 class="anchored" data-anchor-id="协整型adf检验">协整型ADF检验</h2>
 <p>协整型ADF检验（Cointegration Augmented Dickey-Fuller Test）是一种用于检验两个或多个非平稳时间序列是否存在协整关系的统计方法。协整关系指的是两个或多个时间序列之间存在长期的稳定关系，即使它们各自是非平稳的。</p>
@@ -456,7 +468,7 @@ look-up table. The actual p-value is smaller than the p-value returned.
 <p>协整型ADF检验：在估计出协整关系后，进行协整型ADF检验。这个检验实际上是检验残差序列是否平稳。如果残差序列是平稳的，那么两个时间序列之间存在协整关系；否则，它们之间不存在协整关系。</p>
 <p>解释结果：根据协整型ADF检验的结果，可以得出两个时间序列之间是否存在协整关系的结论。如果存在协整关系，那么可以利用这个关系进行预测和分析。</p>
 <p>需要注意的是，协整型ADF检验对样本大小和数据质量有一定的要求。如果样本太小或数据存在严重的自相关或异方差问题，检验结果可能不准确。在实际应用中，可以考虑使用其他协整检验方法，如 Engle-Granger 两步法或 Johansen 协整检验。</p>
-<div id="cell-10" class="cell" data-execution_count="16">
+<div id="cell-11" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
@@ -530,7 +542,7 @@ x 和 y 不存在协整关系</code></pre>
 <li><strong>相关性</strong>：衡量的是两个时间序列之间的线性关系强度。</li>
 </ul>
 <p>约翰森测试的结果可以帮助我们避免使用非平稳数据进行回归分析所导致的“伪回归”问题，从而更准确地分析变量之间的长期均衡关系。在实际操作中，交易者通常会结合其他技术指标和市场分析来综合判断股票之间的协整性，以制定更为有效的交易策略。</p>
-<div id="cell-12" class="cell" data-execution_count="51">
+<div id="cell-13" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd  </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.vector_ar.vecm <span class="im">import</span> coint_johansen  </span>

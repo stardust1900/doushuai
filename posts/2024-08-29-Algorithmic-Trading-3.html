@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -194,6 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>应用价差、价差的对数或相应比率所进行的配对交易</p>
+<p>我们用来计算对冲比率的方法属于线性回归的模式——从jplv7软件包中选取ols函数（ols指的是“正常最小二乘法”），当然，你也可以使用约翰森检验中的第一特征向量来计算相应的对冲比率。</p>
 <div id="cell-2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Trading Price Spread</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -274,6 +275,308 @@ APR=0.109551 Sharpe=0.598899</code></pre>
 <div>
 <figure class="figure">
 <p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-2-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Trading Log Price Spread</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用价格对数值的差分模式所产生的效应</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> sm</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.tsa.stattools <span class="im">as</span> ts</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputData_GLD_USO.csv'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(df[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">20</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>hedgeRatio<span class="op">=</span>np.full(df.shape[<span class="dv">0</span>], np.nan)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> np.arange(lookback, <span class="bu">len</span>(hedgeRatio)):</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># regress_results=sm.ols(formula="USO ~ GLD", data=df[(t-lookback):t]).fit()</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    regress_results<span class="op">=</span>sm.ols(formula<span class="op">=</span><span class="st">"USO ~ GLD"</span>, data<span class="op">=</span>np.log(df[(t<span class="op">-</span>lookback):t])).fit() <span class="co"># Note this can deal with NaN in top row</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    hedgeRatio[t<span class="op">-</span><span class="dv">1</span>]<span class="op">=</span>regress_results.params.iloc[<span class="dv">1</span>]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># yport=np.sum(ts.add_constant(-hedgeRatio)[:, [1,0]]*df, axis=1)</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>yport<span class="op">=</span>np.<span class="bu">sum</span>(ts.add_constant(<span class="op">-</span>hedgeRatio)[:, [<span class="dv">1</span>,<span class="dv">0</span>]]<span class="op">*</span>np.log(df), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>yport.plot()</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a simple linear mean reversion strategy to GLD-USO</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>numUnits <span class="op">=-</span>(yport<span class="op">-</span>yport.rolling(lookback).mean())<span class="op">/</span>yport.rolling(lookback).std() <span class="co"># capital invested in portfolio in dollars.  movingAvg and movingStd are functions from epchan.com/book2</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(np.tile(numUnits.values, [<span class="dv">2</span>, <span class="dv">1</span>]).T <span class="op">*</span> ts.add_constant(<span class="op">-</span>hedgeRatio)[:, [<span class="dv">1</span>,<span class="dv">0</span>]] ) <span class="co">#  positions is the dollar capital in each ETF.</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>((positions.shift().values)<span class="op">*</span>(df.pct_change().values), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pnl<span class="op">/</span>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(positions.shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>).plot()</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=0.099520 Sharpe=0.553442</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-3-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Trading Ratio</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 相应的价格比率模式所生成的效应与价差模式和自适应对冲比率模式相比较而言，其看起来根本就不是不平稳的。所以，如果我们发现相关的均值回归模式的表现不佳，且生成负的年化收益率时，我们都不应该感到惊讶，</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputData_GLD_USO.csv'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(df[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">20</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>ratio<span class="op">=</span>df[<span class="st">'USO'</span>]<span class="op">/</span>df[<span class="st">'GLD'</span>]</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ratio.plot()</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#yport=np.sum(ts.add_constant(-hedgeRatio)[:, [1,0]]*np.log(df), axis=1)</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#yport.plot()</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply a simple linear mean reversion strategy to GLD-USO</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>numUnits <span class="op">=-</span>(ratio<span class="op">-</span>ratio.rolling(lookback).mean())<span class="op">/</span>ratio.rolling(lookback).std() <span class="co"># capital invested in portfolio in dollars.  movingAvg and movingStd are functions from epchan.com/book2</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(np.tile(numUnits.values, [<span class="dv">2</span>, <span class="dv">1</span>]).T <span class="op">*</span> np.ones((numUnits.shape[<span class="dv">0</span>], <span class="dv">2</span>)) <span class="op">*</span> np.array([<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]) ) <span class="co"># positions in dollar invested</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>((positions.shift().values)<span class="op">*</span>(df.pct_change().values), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pnl<span class="op">/</span>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(positions.shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># (np.cumprod(1+ret)-1).plot()</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>pd.DataFrame((np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>)).plot()</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=-0.140674 Sharpe=-0.749583</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-4-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-4-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bollinger Band Mean Reversion Strategy</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 布林线带均值回归策略</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> sm</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.tsa.stattools <span class="im">as</span> ts</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputData_GLD_USO.csv'</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(df[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">20</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>hedgeRatio<span class="op">=</span>np.full(df.shape[<span class="dv">0</span>], np.nan)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> np.arange(lookback, <span class="bu">len</span>(hedgeRatio)):</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    regress_results<span class="op">=</span>sm.ols(formula<span class="op">=</span><span class="st">"USO ~ GLD"</span>, data<span class="op">=</span>df[(t<span class="op">-</span>lookback):t]).fit() <span class="co"># Note this can deal with NaN in top row</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    hedgeRatio[t<span class="op">-</span><span class="dv">1</span>]<span class="op">=</span>regress_results.params.iloc[<span class="dv">1</span>]</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>yport<span class="op">=</span>np.<span class="bu">sum</span>(ts.add_constant(<span class="op">-</span>hedgeRatio)[:, [<span class="dv">1</span>,<span class="dv">0</span>]]<span class="op">*</span>df, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>yport.plot()</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 这里我们需要注意的是：多单入场信号longsEntry与空单入场信号shortsEntry是T×1型的逻辑数组，多单离场信号longsExit和空单离场信号shortsExit也是如此。</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 我们以numUnitsLong函数将与多单相关的单位投资组合的数量单位进行初始化的处理，这是一个T×1型的数组，然后，在出现多单入场信号之时，设置其值为1，而在多单离场信号出现之时，则设置其值为0；</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 而对于空单的数量单位，我们则进行反向设置即可；在没有入场、离场信号的时间序列之内，我们使用失踪数据填充函数fillMissingData来提取前一天的数量单位（fillMissingData函数从数组的第二行开始，</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 并以前一行各单元格的价值覆盖本期单元格的非数变量（NaN值），相应程序可以从我的网站下载）。一旦我们计算出代表多单数量单位的numUnitsLong函数和代表空单单位数量的numUnitsShort函数的数值，</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 我们就可以计算相关数量单位的净值。</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Bollinger band strategy</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>entryZscore<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>exitZscore<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>MA<span class="op">=</span>yport.rolling(lookback).mean()</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>MSTD<span class="op">=</span>yport.rolling(lookback).std()</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>zScore<span class="op">=</span>(yport<span class="op">-</span>MA)<span class="op">/</span>MSTD</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>longsEntry<span class="op">=</span>zScore <span class="op">&lt;</span> <span class="op">-</span>entryZscore</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>longsExit <span class="op">=</span>zScore <span class="op">&gt;</span> <span class="op">-</span>entryZscore</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>shortsEntry<span class="op">=</span>zScore <span class="op">&gt;</span> entryZscore</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>shortsExit <span class="op">=</span>zScore <span class="op">&lt;</span> exitZscore</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>numUnitsLong<span class="op">=</span>np.zeros(longsEntry.shape)</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>numUnitsLong[:]<span class="op">=</span>np.nan</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>numUnitsShort<span class="op">=</span>np.zeros(shortsEntry.shape)</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>numUnitsShort[:]<span class="op">=</span>np.nan</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>numUnitsLong[<span class="dv">0</span>]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>numUnitsLong[longsEntry]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>numUnitsLong[longsExit]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>numUnitsLong<span class="op">=</span>pd.DataFrame(numUnitsLong)</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="co"># numUnitsLong.fillna(method='ffill', inplace=True)</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>numUnitsLong.ffill(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>numUnitsShort[<span class="dv">0</span>]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>numUnitsShort[shortsEntry]<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>numUnitsShort[shortsExit]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>numUnitsShort<span class="op">=</span>pd.DataFrame(numUnitsShort)</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="co"># numUnitsShort.fillna(method='ffill', inplace=True)</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>numUnitsShort.ffill(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>numUnits<span class="op">=</span>numUnitsLong<span class="op">+</span>numUnitsShort</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(np.tile(numUnits.values, [<span class="dv">1</span>, <span class="dv">2</span>]) <span class="op">*</span> ts.add_constant(<span class="op">-</span>hedgeRatio)[:, [<span class="dv">1</span>,<span class="dv">0</span>]] <span class="op">*</span>df.values) <span class="co">#  [hedgeRatio -ones(size(hedgeRatio))] is the shares allocation, [hedgeRatio -ones(size(hedgeRatio))].*y2 is the dollar capital allocation, while positions is the dollar capital in each ETF.</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>((positions.shift().values)<span class="op">*</span>(df.pct_change().values), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pnl<span class="op">/</span>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(positions.shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>pd.DataFrame((np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>)).plot()</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=0.149725 Sharpe=1.110355</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-5-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>对于一对真正的、具有协整性质的价格系列来说，确定对冲比率的方法非常简单：只要我们能够找到尽可能多的历史数据，然后，使用回归拟合相关的普通最小二乘法（OLS），或使用约翰森检验法则找到特征向量就可以了。</p>
+<p>对于到目前为止我们所讨论过的所有均值回归之交易策略而言，我们只是提取一个移动的回溯期，然后在此期限内计算回归系数，或特定的约翰森检验相关的特征向量，不过，此种方法有一个缺陷，即如果回溯周期过短，那么，随着时间的推进，我们需要删除初始的价格以及最新的价格，如此则会对相关比率产生一个突然的、人为的冲击；如果我们使用移动平均线，或者移动标准差来计算当前价格系列的平均值和标准差，我们也会面临相同的问题。 其实，指数加权移动平均线（EMA）就相当于前述的这种加权方式，但是，目前关于“为什么指数权重下降就是一个最优化的指标”这个问题，尚无比较清晰的答案。这里，我们将描述一个使用卡尔曼过滤法则更新对冲比率的模式，此模式可以避免因随意挑选一个加权方案而产生误差的问题（Montana、Triantafyllopoulos和Tsagaris，2009）。</p>
+<p>卡尔曼过滤法是最优化的线性算法，它能够基于一个可观测变量的最新值更新一个隐变量的期望值（关于这个话题，我们可以参看“卡尔曼，2007”）。此法则是线性的，因为它假定可观测变量是与噪声相关之隐变量的函数，同时，此法则还假设t时刻所对应的隐变量是其本身于t-1时刻（与噪声变量相关）的线性函数，而出现在这些函数中的噪声变量具有高斯分布的性质（因此，我们可以指定一个渐变式的协方差矩阵，这里我们假设相应的均值都是零）。因为所有的这些线性关系，t时刻相对应的隐变量的期望值也是其自身于观测期t时刻之前的期望值的一个线性函数，同时，它也是于t时刻所能观测到的变量的数值的线性函数。如果我们把噪声的分布假定为高斯分布，则卡尔曼过滤法就是一种最优化的方法，并且可以将相应的预期变量的均方误差最小化。</p>
+<p>对于卡尔曼过滤法则的每一次应用而言，我们需要先弄清楚相关的变量和矩阵： * （1）可观测变量（向量） * （2）隐变量（向量） * （3）状态转换模型（矩阵） * （4）观测模型（矩阵）</p>
+<p>上述模式是相关应用程序当中唯一具有创造性的部分，因为一旦相关数值被指定之后，那剩下的就是一个机械的应用算法了。作为交易者，我们不需要知道如何推导这些物理变量之间的关系，我们只需要知道在哪里能够找到好的软件包，进而为我们提供正确的答案。</p>
+<div id="cell-7" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kalman Filter Mean Reversion Strategy</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.tsa.stattools <span class="im">as</span> ts</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputData_EWA_EWC_IGE.csv'</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 删除列'IGE'</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(<span class="st">'IGE'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(df[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>df[<span class="st">'EWA'</span>]</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>df[<span class="st">'EWC'</span>]</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 对x进行预处理，添加一列常数项以适应可能的截距偏移</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.array(ts.add_constant(x))[:, [<span class="dv">1</span>,<span class="dv">0</span>]] <span class="co"># Augment x with ones to  accomodate possible offset in the regression between y vs x.</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 初始化一些变量，如卡尔曼滤波器的状态协方差矩阵R、预测误差协方差矩阵P、回归系数beta、过程噪声协方差矩阵Vw和观测噪声协方差矩阵Ve。</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>delta<span class="op">=</span><span class="fl">0.0001</span> <span class="co"># delta=1 gives fastest change in beta, delta=0.000....1 allows no change (like traditional linear regression).</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>yhat<span class="op">=</span>np.full(y.shape[<span class="dv">0</span>], np.nan) <span class="co"># measurement prediction</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>e<span class="op">=</span>yhat.copy()</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>Q<span class="op">=</span>yhat.copy()</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># For clarity, we denote R(t|t) by P(t). Initialize R, P and beta.</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>R<span class="op">=</span>np.zeros((<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>P<span class="op">=</span>R.copy()</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>beta<span class="op">=</span>np.full((<span class="dv">2</span>, x.shape[<span class="dv">0</span>]), np.nan)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>Vw<span class="op">=</span>delta<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>delta)<span class="op">*</span>np.eye(<span class="dv">2</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>Ve<span class="op">=</span><span class="fl">0.001</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize beta(:, 1) to zero</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>beta[:, <span class="dv">0</span>]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用卡尔曼滤波器迭代更新回归系数beta。在每个时间步长t，首先根据上一时刻的beta值更新R，然后计算预测值yhat、预测误差e和观测噪声协方差Q。接着计算卡尔曼增益K，并使用它来更新beta和P</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Given initial beta and R (and P)</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(y)):</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> t <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        beta[:, t]<span class="op">=</span>beta[:, t<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>        R<span class="op">=</span>P<span class="op">+</span>Vw</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    yhat[t]<span class="op">=</span>np.dot(x[t, :], beta[:, t])</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#    print('FIRST: yhat[t]=', yhat[t])</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    Q[t]<span class="op">=</span>np.dot(np.dot(x[t, :], R), x[t, :].T)<span class="op">+</span>Ve</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">#    print('Q[t]=', Q[t])</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Observe y(t)</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    e[t]<span class="op">=</span>y.iloc[t]<span class="op">-</span>yhat[t] <span class="co"># measurement prediction error</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co">#    print('e[t]=', e[t])</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="co">#    print('SECOND: yhat[t]=', yhat[t])</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    K<span class="op">=</span>np.dot(R, x[t, :].T)<span class="op">/</span>Q[t] <span class="co">#  Kalman gain</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#    print(K)</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>    beta[:, t]<span class="op">=</span>beta[:, t]<span class="op">+</span>np.dot(K, e[t]) <span class="co">#  State update. Equation 3.11</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co">#    print(beta[:, t])</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># P=R-np.dot(np.dot(K, x[t, :]), R) # State covariance update. Euqation 3.12</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    P<span class="op">=</span>R<span class="op">-</span>np.dot(np.outer(K, x[t, :]), R) <span class="co"># Thanks to Matthias for chaning np.dot -&gt; np.outer!</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="co">#    print(R)</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>plt.plot(beta[<span class="dv">0</span>, :])</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>plt.plot(beta[<span class="dv">1</span>, :])</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>plt.plot(e[<span class="dv">2</span>:])</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>plt.plot(np.sqrt(Q[<span class="dv">2</span>:]))</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="co"># 根据预测误差e和观测噪声协方差Q来确定买入和卖出的信号（longsEntry、longsExit、shortsEntry和shortsExit）。</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>longsEntry<span class="op">=</span>e <span class="op">&lt;</span> <span class="op">-</span>np.sqrt(Q)</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>longsExit <span class="op">=</span>e <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>shortsEntry<span class="op">=</span>e <span class="op">&gt;</span> np.sqrt(Q)</span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>shortsExit <span class="op">=</span>e <span class="op">&lt;</span> <span class="dv">0</span></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算每个时间步长的持仓数量（numUnitsLong和numUnitsShort），并将它们合并为一个总持仓数量numUnits。</span></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>numUnitsLong<span class="op">=</span>np.zeros(longsEntry.shape)</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>numUnitsLong[:]<span class="op">=</span>np.nan</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>numUnitsShort<span class="op">=</span>np.zeros(shortsEntry.shape)</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>numUnitsShort[:]<span class="op">=</span>np.nan</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>numUnitsLong[<span class="dv">0</span>]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>numUnitsLong[longsEntry]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>numUnitsLong[longsExit]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>numUnitsLong<span class="op">=</span>pd.DataFrame(numUnitsLong)</span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="co"># numUnitsLong.fillna(method='ffill', inplace=True)</span></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>numUnitsLong.ffill(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>numUnitsShort[<span class="dv">0</span>]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>numUnitsShort[shortsEntry]<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>numUnitsShort[shortsExit]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>numUnitsShort<span class="op">=</span>pd.DataFrame(numUnitsShort)</span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="co"># numUnitsShort.fillna(method='ffill', inplace=True)</span></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>numUnitsShort.ffill(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>numUnits<span class="op">=</span>numUnitsLong<span class="op">+</span>numUnitsShort</span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="co"># 根据持仓数量和回归系数beta构建投资组合，并计算每日盈亏pnl和投资组合的累计收益率。</span></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(np.tile(numUnits.values, [<span class="dv">1</span>, <span class="dv">2</span>]) <span class="op">*</span> ts.add_constant(<span class="op">-</span>beta[<span class="dv">0</span>,:].T)[:, [<span class="dv">1</span>,<span class="dv">0</span>]] <span class="op">*</span>df.values) <span class="co">#  [hedgeRatio -ones(size(hedgeRatio))] is the shares allocation, [hedgeRatio -ones(size(hedgeRatio))].*y2 is the dollar capital allocation, while positions is the dollar capital in each ETF.</span></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>((positions.shift().values)<span class="op">*</span>(df.pct_change().values), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pnl<span class="op">/</span>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(positions.shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>).plot()</span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a><span class="co">#APR=0.313225 Sharpe=3.464060</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=0.305703 Sharpe=3.314831</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-08-29-Algorithmic-Trading-3_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
