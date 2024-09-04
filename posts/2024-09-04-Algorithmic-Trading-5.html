@@ -408,7 +408,7 @@ Average annualized roll return= -0.1277565022746007</code></pre>
 <h3 class="anchored" data-anchor-id="跨期套利具有均值回归属性吗">跨期套利具有均值回归属性吗</h3>
 <p>跨期套利是构建一个投资组合，由一个期货合约的多头和另一个期货合约的空头所组成，且标的资产相同，但到期月份不一样。基于我们之前所掌握的点差，跨期套利似乎是非常适合均值回归交易的可选项，但两个仓位头寸所跟踪的是同一个标的资产吗？在这里，答案为是的。</p>
 <p>收益率系列（而不是价格系列）几乎总是具有均值回归的性质。我们正在考虑的不是期货的总收益，而是构成总收益的连续收益率，所以相应情况可能有所不同［尽管式（5-7）所表达模型的前提是现货收益率和连续收益率都是常数，不过，我们可以尝试将其应用于连续收益率是变量的情境之下］。我们以原油期货CL价格之日历价差的对数形式，运行期限为12个月的ADF检验模式，并且发现：相关组合确实是平稳的，且概率为99%，半衰期为36日。此外，如果我们应用正常的线性均值回归策略检测2008年1月2日至2012年8月13日的原油期货CL之日历价差的对数值，我们可以得到一个8.3%的年化收益率，且夏普比率为1.3，</p>
-<div id="cell-8" class="cell" data-execution_count="11">
+<div id="cell-8" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 5.4: Mean Reversion Trading of Calendar Spreads</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -497,70 +497,14 @@ Average annualized roll return= -0.1277565022746007</code></pre>
 <span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span>
 <span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a><span class="co">#APR=0.024347 Sharpe=1.275860</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(-4.586684184658414, 0.0001366696053855159, 1, 1995, {'1%': -3.4336320721769433, '5%': -2.862989840784964, '10%': -2.56754183359401})</code></pre>
+<pre><code>(-4.586684184658414, 0.0001366696053855159, 1, 1995, {'1%': -3.4336320721769433, '5%': -2.862989840784964, '10%': -2.56754183359401})
+APR=0.024347 Sharpe=1.275860</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\win10\AppData\Local\Temp\ipykernel_20380\4075093606.py:30: FutureWarning: DataFrame.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
-  gamma.fillna(method='ffill')</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg ansi-bold">KeyError</span>                                  Traceback (most recent call last)
-File <span class="ansi-green-fg ansi-bold">~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\pandas\core\indexes\base.py:3805</span>, in <span class="ansi-cyan-fg">Index.get_loc</span><span class="ansi-blue-fg ansi-bold">(self, key)</span>
-<span class="ansi-green-fg">   3804</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>:
-<span class="ansi-green-fg ansi-bold">-&gt; 3805</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_engine</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">get_loc</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">casted_key</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">   3806</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyError</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> err:
-
-File <span class="ansi-green-fg ansi-bold">index.pyx:167</span>, in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-fg ansi-bold">()</span>
-
-File <span class="ansi-green-fg ansi-bold">index.pyx:196</span>, in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-fg ansi-bold">()</span>
-
-File <span class="ansi-green-fg ansi-bold">pandas\\_libs\\hashtable_class_helper.pxi:7081</span>, in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-fg ansi-bold">()</span>
-
-File <span class="ansi-green-fg ansi-bold">pandas\\_libs\\hashtable_class_helper.pxi:7089</span>, in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-fg ansi-bold">()</span>
-
-<span class="ansi-red-fg ansi-bold">KeyError</span>: 1
-
-The above exception was the direct cause of the following exception:
-
-<span class="ansi-red-fg ansi-bold">KeyError</span>                                  Traceback (most recent call last)
-Cell <span class="ansi-green-fg ansi-bold">In[11], line 42</span>
-<span class="ansi-green-fg">     40</span> model<span style="color:rgb(98,98,98)">=</span>sm<span style="color:rgb(98,98,98)">.</span>OLS(deltaGamma, X)
-<span class="ansi-green-fg">     41</span> res<span style="color:rgb(98,98,98)">=</span>model<span style="color:rgb(98,98,98)">.</span>fit()
-<span class="ansi-green-fg ansi-bold">---&gt; 42</span> halflife<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">-</span>np<span style="color:rgb(98,98,98)">.</span>log(<span style="color:rgb(98,98,98)">2</span>)<span style="color:rgb(98,98,98)">/</span><span class="ansi-yellow-bg">res</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">params</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">1</span><span class="ansi-yellow-bg">]</span>
-<span class="ansi-green-fg">     43</span> <span style="font-style:italic;color:rgb(95,135,135)"># 41.095311903707795</span>
-<span class="ansi-green-fg">     45</span> lookback<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(0,135,0)">int</span>(halflife)
-
-File <span class="ansi-green-fg ansi-bold">~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\pandas\core\series.py:1121</span>, in <span class="ansi-cyan-fg">Series.__getitem__</span><span class="ansi-blue-fg ansi-bold">(self, key)</span>
-<span class="ansi-green-fg">   1118</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_values[key]
-<span class="ansi-green-fg">   1120</span> <span style="font-weight:bold;color:rgb(0,135,0)">elif</span> key_is_scalar:
-<span class="ansi-green-fg ansi-bold">-&gt; 1121</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_get_value</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">key</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">   1123</span> <span style="font-style:italic;color:rgb(95,135,135)"># Convert generator to list before going through hashable part</span>
-<span class="ansi-green-fg">   1124</span> <span style="font-style:italic;color:rgb(95,135,135)"># (We will iterate through the generator there to check for slices)</span>
-<span class="ansi-green-fg">   1125</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> is_iterator(key):
-
-File <span class="ansi-green-fg ansi-bold">~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\pandas\core\series.py:1237</span>, in <span class="ansi-cyan-fg">Series._get_value</span><span class="ansi-blue-fg ansi-bold">(self, label, takeable)</span>
-<span class="ansi-green-fg">   1234</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_values[label]
-<span class="ansi-green-fg">   1236</span> <span style="font-style:italic;color:rgb(95,135,135)"># Similar to Index.get_value, but we do not fall back to positional</span>
-<span class="ansi-green-fg ansi-bold">-&gt; 1237</span> loc <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">index</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">get_loc</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">label</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">   1239</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> is_integer(loc):
-<span class="ansi-green-fg">   1240</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_values[loc]
-
-File <span class="ansi-green-fg ansi-bold">~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\pandas\core\indexes\base.py:3812</span>, in <span class="ansi-cyan-fg">Index.get_loc</span><span class="ansi-blue-fg ansi-bold">(self, key)</span>
-<span class="ansi-green-fg">   3807</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">isinstance</span>(casted_key, <span style="color:rgb(0,135,0)">slice</span>) <span style="font-weight:bold;color:rgb(175,0,255)">or</span> (
-<span class="ansi-green-fg">   3808</span>         <span style="color:rgb(0,135,0)">isinstance</span>(casted_key, abc<span style="color:rgb(98,98,98)">.</span>Iterable)
-<span class="ansi-green-fg">   3809</span>         <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span style="color:rgb(0,135,0)">any</span>(<span style="color:rgb(0,135,0)">isinstance</span>(x, <span style="color:rgb(0,135,0)">slice</span>) <span style="font-weight:bold;color:rgb(0,135,0)">for</span> x <span style="font-weight:bold;color:rgb(175,0,255)">in</span> casted_key)
-<span class="ansi-green-fg">   3810</span>     ):
-<span class="ansi-green-fg">   3811</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> InvalidIndexError(key)
-<span class="ansi-green-fg ansi-bold">-&gt; 3812</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyError</span>(key) <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">err</span>
-<span class="ansi-green-fg">   3813</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">TypeError</span>:
-<span class="ansi-green-fg">   3814</span>     <span style="font-style:italic;color:rgb(95,135,135)"># If we have a listlike key, _check_indexing_error will raise</span>
-<span class="ansi-green-fg">   3815</span>     <span style="font-style:italic;color:rgb(95,135,135)">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
-<span class="ansi-green-fg">   3816</span>     <span style="font-style:italic;color:rgb(95,135,135)">#  the TypeError.</span>
-<span class="ansi-green-fg">   3817</span>     <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_check_indexing_error(key)
-
-<span class="ansi-red-fg ansi-bold">KeyError</span>: 1</pre>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-09-04-Algorithmic-Trading-5_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
 </div>
