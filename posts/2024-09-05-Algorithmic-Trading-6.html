@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="王一刀">
+<meta name="dcterms.date" content="2024-09-05">
+<meta name="description" content="日间动量型交易策略">
+
+<title>算法交易：制胜策略与原理(欧内斯特·陈)之六 – 兜率宫</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">兜率宫</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://wangxuan.me"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/stardust1900"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://weibo.com/halfg0d"> <i class="bi bi-sina-weibo" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">关于</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">算法交易：制胜策略与原理(欧内斯特·陈)之六</h1>
+                  <div>
+        <div class="description">
+          日间动量型交易策略
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">算法交易</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>王一刀 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 5, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>日间动量型交易策略之所以存在的主要原因有四个： * （1）对期货而言，连续收益率具有可持续性，尤其是它们所显现的迹象。 * （2）一个新的信息要经历缓慢的扩散、分析和接受三个过程。 * （3）由各种类型的基金所构成的资产经常被迫出售或购回。 * （4）金融市场往往被高频交易员所操纵。 研究人员有时将资产价格所显现的动量模式分为两种类型，即时间序列动量和横向动量.</p>
+<p>时间序列型动量模式非常简单和直观：过往价格系列的收益率与未来的收益呈正相关性；横向动量是指某种金融工具的价格系列相对于其他工具的价格系列的相对性——当某种价格系列的收益胜过其他系列的收益，那么，此种势头将来可能会被延续，反之亦然。</p>
+<section id="时间序列型交易策略" class="level3">
+<h3 class="anchored" data-anchor-id="时间序列型交易策略">时间序列型交易策略</h3>
+<p>我们应该分别找到最优化的过去和未来的时间序列，从而使其之间的相应收益率呈现最高的正相关性，然后，将其设置为回溯期与持单（仓）期，进而检验相应的动量交易策略。</p>
+<p>如果我们感兴趣的是探寻是否存在一种具有长期趋势之行情的时间序列，而不考虑特定的时间框架，那我们就可以计算赫斯特指数，同时，以方差比率的检验模式排除随机漫步的零假设，这个在第2章中已被描述的测试模式是用于检测均值回归交易策略的，但它们也可以用于测试动量型的交易策略。</p>
+<div id="cell-2" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Box 6.1 and Example 6.1: Finding Correlations between Returns of Different Time Frames</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.stattools as ts</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 用于计算最大回撤（Maximum Drawdown）和最大回撤持续时间（Maximum Drawdown Duration）</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculateMaxDD(cumret):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># calculation of maximum drawdown and maximum drawdown duration based on</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># cumulative COMPOUNDED returns. cumret must be a compounded cumulative return.</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># i is the index of the day with maxDD.</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    highwatermark<span class="op">=</span>np.zeros(cumret.shape)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    drawdown<span class="op">=</span>np.zeros(cumret.shape)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    drawdownduration<span class="op">=</span>np.zeros(cumret.shape)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> np.arange(<span class="dv">1</span>, cumret.shape[<span class="dv">0</span>]):</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        highwatermark[t]<span class="op">=</span>np.maximum(highwatermark[t<span class="op">-</span><span class="dv">1</span>], cumret[t])</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        drawdown[t]<span class="op">=</span>(<span class="dv">1</span><span class="op">+</span>cumret[t])<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>highwatermark[t])<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> drawdown[t]<span class="op">==</span><span class="dv">0</span>:</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            drawdownduration[t]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            drawdownduration[t]<span class="op">=</span>drawdownduration[t<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    maxDD, i<span class="op">=</span>np.<span class="bu">min</span>(drawdown), np.argmin(drawdown) <span class="co"># drawdown &lt; 0 always</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    maxDDD<span class="op">=</span>np.<span class="bu">max</span>(drawdownduration)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> maxDD, maxDDD, i</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_TU_20120511.csv'</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(df[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算不同时间框架下的收益率相关性：</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lookback <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">60</span>, <span class="dv">120</span>, <span class="dv">250</span>]:</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> holddays <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">60</span>, <span class="dv">120</span>, <span class="dv">250</span>]:</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        ret_lag<span class="op">=</span>df.pct_change(periods<span class="op">=</span>lookback)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        ret_fut<span class="op">=</span>df.shift(<span class="op">-</span>holddays).pct_change(periods<span class="op">=</span>holddays,fill_method<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (lookback <span class="op">&gt;=</span> holddays):</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>            indepSet<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, ret_lag.shape[<span class="dv">0</span>], holddays)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            indepSet<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, ret_lag.shape[<span class="dv">0</span>], lookback)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        ret_lag<span class="op">=</span>ret_lag.iloc[indepSet]</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        ret_fut<span class="op">=</span>ret_fut.iloc[indepSet]</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 确保 ret_lag 和 ret_fut 是 pandas Series</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        ret_lag <span class="op">=</span> ret_lag.squeeze()  <span class="co"># 将 DataFrame 转换为 Series</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        ret_fut <span class="op">=</span> ret_fut.squeeze()  <span class="co"># 将 DataFrame 转换为 Series</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        goodDates<span class="op">=</span>(ret_lag.notna() <span class="op">&amp;</span> ret_fut.notna()).values</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        (cc, pval)<span class="op">=</span>pearsonr(ret_lag[goodDates], ret_fut[goodDates])</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'</span><span class="sc">%4i</span><span class="st"> </span><span class="sc">%4i</span><span class="st"> </span><span class="sc">%7.4f</span><span class="st"> </span><span class="sc">%7.4f</span><span class="st">'</span> <span class="op">%</span> (lookback, holddays, cc, pval))</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">250</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>holddays<span class="op">=</span><span class="dv">25</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>longs<span class="op">=</span>df <span class="op">&gt;</span> df.shift(lookback)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>shorts<span class="op">=</span>df <span class="op">&lt;</span> df.shift(lookback)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>pos<span class="op">=</span>np.zeros(df.shape)</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'future.no_silent_downcasting'</span>, <span class="va">True</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> h <span class="kw">in</span> <span class="bu">range</span>(holddays<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    long_lag<span class="op">=</span>longs.shift(h).fillna(<span class="va">False</span>).astype(<span class="bu">bool</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    short_lag<span class="op">=</span>shorts.shift(h).fillna(<span class="va">False</span>).astype(<span class="bu">bool</span>)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    pos[long_lag]<span class="op">=</span>pos[long_lag]<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    pos[short_lag]<span class="op">=</span>pos[short_lag]<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>pos<span class="op">=</span>pd.DataFrame(pos)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>((pos.shift().values)<span class="op">*</span>(df.pct_change().values), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pnl<span class="op">/</span>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(pos.shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>cumret<span class="op">=</span>(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>cumret.plot()</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD(cumret.fillna(<span class="dv">0</span>))</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Max DD=</span><span class="sc">%f</span><span class="st"> Max DDD in days=</span><span class="sc">%i</span><span class="st">'</span> <span class="op">%</span> (maxDD, maxDDD))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   1    1 -0.0576  0.0100
+   1    5 -0.0769  0.0006
+   1   10 -0.0274  0.2230
+   1   25 -0.0139  0.5385
+   1   60  0.0326  0.1583
+   1  120  0.0195  0.4137
+   1  250  0.0361  0.1626
+   5    1 -0.0756  0.0007
+   5    5 -0.1271  0.0111
+   5   10 -0.0472  0.3485
+   5   25  0.0323  0.5245
+   5   60  0.0860  0.0958
+   5  120  0.0514  0.3361
+   5  250  0.0943  0.1032
+  10    1 -0.0280  0.2118
+  10    5 -0.0485  0.3348
+  10   10  0.0366  0.6087
+  10   25  0.1162  0.1058
+  10   60  0.1804  0.0132
+  10  120  0.0929  0.2200
+  10  250  0.1651  0.0434
+  25    1 -0.0140  0.5353
+  25    5  0.0319  0.5276
+  25   10  0.1513  0.0343
+  25   25  0.1955  0.0863
+  25   60  0.2361  0.0414
+  25  120  0.1692  0.1584
+  25  250  0.2470  0.0571
+  60    1  0.0313  0.1686
+  60    5  0.0799  0.1168
+  60   10  0.1718  0.0169
+  60   25  0.1850  0.1095
+  60   60  0.2162  0.2346
+  60  120 -0.0087  0.9635
+  60  250  0.2971  0.1492
+ 120    1  0.0222  0.3355
+ 120    5  0.0565  0.2750
+ 120   10  0.0955  0.1934
+ 120   25  0.1567  0.1824
+ 120   60 -0.0192  0.9182
+ 120  120  0.2081  0.4567
+ 120  250  0.3609  0.2491
+ 250    1  0.0411  0.0857
+ 250    5  0.1068  0.0462
+ 250   10  0.1784  0.0185
+ 250   25  0.2719  0.0238
+ 250   60  0.3258  0.0907
+ 250  120  0.3571  0.2310
+ 250  250  0.4873  0.3269
+APR=0.016751 Sharpe=1.089553
+Max DD=-0.024847 Max DDD in days=342</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-09-05-Algorithmic-Trading-6_files/figure-html/cell-2-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>如果期货的总收益率=现货收益率+连续收益率，那么，提取连续收益的一个明显的方法是：如果连续收益率是负值（例如，在期货溢价的情境之下），那我们就购买标的资产，同时做空期货；如果连续收益率是正值（即在现货溢价的情境之下），那我们就进行反向操作，此种模式可一直延续至连续收益率相关的信号迹象之变化趋缓，如往常一样之时。</p>
+<p>如果我们想要提取连续收益，VX期货是一种很自然的选择：此期货的年化连续收益率可以低至-50%；与此同时，其与ES期货具有强烈的反关联性，两者天收益率之间的相关系数达到-75%。在第5章中，我们使用了VX期货和ES期货之间的协整关系，开发了一个有利可图的均值回归策略。在这里，我们将利用VX期货较大幅度的连续收益率的变化，同时，依据ES期货较小幅度的连续收益率的变化，并且，根据两者的反相关性，进而开发相关的动量交易策略。</p>
+<div id="cell-4" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Volatility Futures vs Equity Index Futures</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.stattools as ts</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>entryThreshold<span class="op">=</span><span class="fl">0.1</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>onewaytcost<span class="op">=</span><span class="dv">1</span><span class="op">/</span><span class="dv">10000</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># VX futures</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>vx<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataDaily_VX_20120507.csv'</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>vx[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(vx[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>vx.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># VIX index</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>vix<span class="op">=</span>pd.read_csv(<span class="st">'datas/VIX.csv'</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>vix[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(vix[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>vix.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>vix<span class="op">=</span>vix[[<span class="st">'Close'</span>]]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>vix.rename({<span class="st">'Close'</span>: <span class="st">'VIX'</span>}, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># ES backadjusted continuous contract</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>es<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataDaily_ES_20120507.csv'</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>es[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(es[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>es.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>es.rename({<span class="st">'Close'</span>: <span class="st">'ES'</span>}, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge on common dates</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.merge(vx, vix, how<span class="op">=</span><span class="st">'inner'</span>, on<span class="op">=</span><span class="st">'Date'</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.merge(df, es, how<span class="op">=</span><span class="st">'inner'</span>, on<span class="op">=</span><span class="st">'Date'</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>vx<span class="op">=</span>df.drop({<span class="st">'VIX'</span>, <span class="st">'ES'</span>}, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>vix<span class="op">=</span>df[[<span class="st">'VIX'</span>]]</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>es<span class="op">=</span>df[[<span class="st">'ES'</span>]]</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>isExpireDate<span class="op">=</span>vx.notnull() <span class="op">&amp;</span> vx.shift(<span class="op">-</span><span class="dv">1</span>).isnull()</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Define front month as 40 days to 10 days before expiration</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>numDaysStart<span class="op">=</span><span class="dv">40</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>numDaysEnd<span class="op">=</span><span class="dv">10</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>np.zeros((vx.shape[<span class="dv">0</span>], vx.shape[<span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(vx.shape[<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    expireIdx<span class="op">=</span>np.where(isExpireDate.iloc[:,c])</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> c<span class="op">==</span><span class="dv">0</span>:</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>        startIdx<span class="op">=</span>expireIdx[<span class="dv">0</span>]<span class="op">-</span>numDaysStart</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>        endIdx<span class="op">=</span>expireIdx[<span class="dv">0</span>]<span class="op">-</span>numDaysEnd</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        startIdx<span class="op">=</span>np.<span class="bu">max</span>((endIdx<span class="op">+</span><span class="dv">1</span>, expireIdx[<span class="dv">0</span>]<span class="op">-</span>numDaysStart))</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>        endIdx<span class="op">=</span>expireIdx[<span class="dv">0</span>]<span class="op">-</span>numDaysEnd</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (expireIdx[<span class="dv">0</span>] <span class="op">&gt;=</span> <span class="dv">0</span>):</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>        <span class="co"># startIdx = int(startIdx[0])</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>        <span class="co"># endIdx = int(endIdx[0])</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(<span class="bu">isinstance</span>(startIdx, np.ndarray)):</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>            intStartIdx <span class="op">=</span> startIdx[<span class="dv">0</span>]</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>            intStartIdx <span class="op">=</span> startIdx</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(<span class="bu">isinstance</span>(endIdx, np.ndarray)):</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>            intEndIdx <span class="op">=</span> endIdx[<span class="dv">0</span>]</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>            intEndIdx <span class="op">=</span> endIdx</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>        idx<span class="op">=</span>np.arange(intStartIdx, intEndIdx<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(expireIdx)</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        <span class="co"># expireIdx = int(expireIdx[0])</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(expireIdx[0][0])</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(type(expireIdx))</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>        <span class="co"># temp = np.arange(expireIdx[0][0]-intStartIdx+1, expireIdx[0][0]-intEndIdx, -1)</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>        dailyRoll<span class="op">=</span>(vx.iloc[idx, c]<span class="op">-</span>vix.iloc[idx, <span class="dv">0</span>])<span class="op">/</span>np.arange(expireIdx[<span class="dv">0</span>][<span class="dv">0</span>]<span class="op">-</span>intStartIdx<span class="op">+</span><span class="dv">1</span>, expireIdx[<span class="dv">0</span>][<span class="dv">0</span>]<span class="op">-</span>intEndIdx, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>        positions[idx[dailyRoll <span class="op">&gt;</span> entryThreshold], c]<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>        positions[idx[dailyRoll <span class="op">&gt;</span> entryThreshold], <span class="op">-</span><span class="dv">1</span>]<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>        positions[idx[dailyRoll <span class="op">&lt;</span> <span class="op">-</span>entryThreshold], c]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>        positions[idx[dailyRoll <span class="op">&lt;</span> entryThreshold], <span class="op">-</span><span class="dv">1</span>]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>pd.merge(vx<span class="op">*</span><span class="dv">1000</span>, es<span class="op">*</span><span class="dv">50</span>, on<span class="op">=</span><span class="st">'Date'</span>)</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(positions, index<span class="op">=</span>y.index)</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>pnl<span class="op">=</span>np.<span class="bu">sum</span>((positions.shift().values)<span class="op">*</span>(y<span class="op">-</span>y.shift()) <span class="op">-</span> onewaytcost<span class="op">*</span>np.<span class="bu">abs</span>(positions.values<span class="op">*</span>y <span class="op">-</span> (positions.values<span class="op">*</span>y).shift()), axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pnl<span class="op">/</span>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>((positions.values<span class="op">*</span>y).shift()), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>idx<span class="op">=</span>ret.index[ret.index <span class="op">&gt;=</span> pd.to_datetime(<span class="st">"2008-08-04"</span>).date()]</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>cumret<span class="op">=</span>(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret[idx[<span class="dv">500</span>:]])<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>cumret.plot()</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret[idx[<span class="dv">500</span>:]])<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret[idx[<span class="dv">500</span>:]]))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret[idx[<span class="dv">500</span>:]])<span class="op">/</span>np.std(ret[idx[<span class="dv">500</span>:]])))</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="co"># from calculateMaxDD import calculateMaxDD</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD(cumret.fillna(<span class="dv">0</span>))</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Max DD=</span><span class="sc">%f</span><span class="st"> Max DDD in days=</span><span class="sc">%i</span><span class="st">'</span> <span class="op">%</span> (maxDD, maxDDD))</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="co">#APR=0.377914 Sharpe=2.117500</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="co">#Max DD=-0.434420 Max DDD in days=73</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=0.377914 Sharpe=2.117500
+Max DD=-0.434420 Max DDD in days=73</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\win10\AppData\Local\Temp\ipykernel_4936\1180818726.py:22: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  highwatermark[t]=np.maximum(highwatermark[t-1], cumret[t])
+C:\Users\win10\AppData\Local\Temp\ipykernel_4936\1180818726.py:23: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  drawdown[t]=(1+cumret[t])/(1+highwatermark[t])-1</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-09-05-Algorithmic-Trading-6_files/figure-html/cell-3-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="横向型动量交易策略" class="level3">
+<h3 class="anchored" data-anchor-id="横向型动量交易策略">横向型动量交易策略</h3>
+<p>除了购买和持有，或相对于标的资产（或凭借与标的资产具有相关性的金融工具）所进行的套利交易之外，还有第三种方法可以从期货当中提取高额连续收益。这第三条路径是一个跨部门的横向型交易策略，即<strong>我们可以在现货溢价的情境之下，买入一个期货的投资组合，同时，在期货溢价的状况之下，做空相关期货的投资组合，如此则有希望将相应现货价格的收益率进行彼此的抵消［如果我们相信大宗商品的现货价格与经济增长，或其他宏观经济指标呈正相关性，那么，此种期望就不是不合理的］，这样的话，抵消之后所遗留的就是连续收益了</strong>。丹尼尔和莫斯科维茨描述了这样一个简单的“横向型”动量交易策略，它几乎就是汉丹和罗在第3章所述的线性多空股票均值回归模型的一个镜像，只不过，本章的策略有更长的回溯期和持单期（丹尼尔和莫斯科维茨，2011）。</p>
+<p>丹尼尔和莫斯科维茨也发现上述策略适用于世界性的股票指数期货、货币交易、国际股市和美国股市。换句话说，几乎一切在阳光下的金融交易均可适用于此策略。很明显，在货币交易和股票交易中，横向型动量交易策略已不再被解释成连续收益率相关的具有持久性的行情趋势。而我们可能掌握的序列相关属性是：在货币交易中，世界经济和利率增长与其具有相关性，而在股票交易中，一个新的信息要经历缓慢扩散、分析和接受三个过程。</p>
+<p>上述这种策略如果应用到美国股市的话，我们可以如此操作：购买和持有12个月展期收益率排在前10的股票，持有期限为一个月，而对于最差的10只股票，我们则可进行反向操作，</p>
+<div id="cell-6" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 6.2: Cross-Sectional Momentum Strategy for Stocks</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.stattools as ts</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">252</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>holddays<span class="op">=</span><span class="dv">25</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>topN<span class="op">=</span><span class="dv">50</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Stocks</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>cl<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_cl.csv'</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>stocks<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_stocks.csv'</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>cl[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(cl[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>cl.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>cl.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>cl.pct_change(periods<span class="op">=</span>lookback)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>longs<span class="op">=</span>np.full(cl.shape, <span class="va">False</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>shorts<span class="op">=</span>np.full(cl.shape, <span class="va">False</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>np.zeros(cl.shape)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(lookback, cl.shape[<span class="dv">0</span>]):</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    hasData<span class="op">=</span>np.where(np.isfinite(ret.iloc[t, :]))</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    hasData<span class="op">=</span>hasData[<span class="dv">0</span>]</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(hasData)<span class="op">&gt;</span><span class="dv">0</span>:</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        idxSort<span class="op">=</span>np.argsort(ret.iloc[t, hasData])  </span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        longs[t, hasData[idxSort.values[np.arange(<span class="op">-</span>np.<span class="bu">min</span>((topN, <span class="bu">len</span>(idxSort))),<span class="dv">0</span>)]]]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        shorts[t, hasData[idxSort.values[np.arange(<span class="dv">0</span>,topN)]]]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>longs<span class="op">=</span>pd.DataFrame(longs)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>shorts<span class="op">=</span>pd.DataFrame(shorts)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> h <span class="kw">in</span> <span class="bu">range</span>(holddays<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    long_lag<span class="op">=</span>longs.shift(h).fillna(<span class="va">False</span>).astype(<span class="bu">bool</span>)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    short_lag<span class="op">=</span>shorts.shift(h).fillna(<span class="va">False</span>).astype(<span class="bu">bool</span>)</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    positions[long_lag]<span class="op">=</span>positions[long_lag]<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    positions[short_lag]<span class="op">=</span>positions[short_lag]<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(positions)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>pd.DataFrame(np.<span class="bu">sum</span>((positions.shift().values)<span class="op">*</span>(cl.pct_change().values), axis<span class="op">=</span><span class="dv">1</span>)<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>topN)<span class="op">/</span>holddays) <span class="co"># daily P&amp;L of the strategy</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>cumret<span class="op">=</span>(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>cumret.plot()</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret,axis<span class="op">=</span><span class="dv">0</span>)<span class="op">/</span>np.std(ret)))</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co">#from calculateMaxDD import calculateMaxDD</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co">#maxDD, maxDDD, i=calculateMaxDD(cumret.fillna(0))</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">#print('Max DD=%f Max DDD in days=%i' % (maxDD, maxDDD))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=-0.003019 Sharpe=-0.286628</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\win10\AppData\Roaming\Python\Python39\site-packages\numpy\_core\fromnumeric.py:84: FutureWarning: The behavior of DataFrame.prod with axis=None is deprecated, in a future version this will reduce over both axes and return a scalar. To retain the old behavior, pass axis=0 (or do not pass axis)
+  return reduction(axis=axis, out=out, **passkwargs)
+C:\Users\win10\AppData\Roaming\Python\Python39\site-packages\numpy\_core\fromnumeric.py:3800: FutureWarning: The behavior of DataFrame.std with axis=None is deprecated, in a future version this will reduce over both axes and return a scalar. To retain the old behavior, pass axis=0 (or do not pass axis)
+  return std(axis=axis, dtype=dtype, out=out, ddof=ddof, **kwargs)
+C:\Users\win10\AppData\Local\Temp\ipykernel_4936\4244792157.py:49: FutureWarning: Calling float on a single element Series is deprecated and will raise a TypeError in the future. Use float(ser.iloc[0]) instead
+  print('APR=%f Sharpe=%f' % (np.prod(1+ret)**(252/len(ret))-1, np.sqrt(252)*np.mean(ret,axis=0)/np.std(ret)))</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-09-05-Algorithmic-Trading-6_files/figure-html/cell-4-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>由股票所构成的跨行业的横向投资组合，无论是基于均值回归策略，还是动量交易策略，都会排除相关成分股的市值收益，而相应总收益就只有靠要素生成了。至于相关要素，其可以由基本面分析所产生，例如，相关企业的收益增长率、相关股票的市净率，以及一些线性组合因素等。同时，相关要素还可能是一些统计因子，例如《量化交易》（Quantitative Trading）（陈，2009）里的“资本成分分析”（PAC）一节当中所涉及的因子，除却这些因子以外，前述各类要素的变化很慢，所以，以此类因素为股票排序的话，相应效能的展示时间亦会很长，其跨度基本与本节中所描述的第一种类型的横向型动量交易模式中的持单期限一样。</p>
+</section>
+<section id="盘中动量型交易策略" class="level2">
+<h2 class="anchored" data-anchor-id="盘中动量型交易策略">盘中动量型交易策略</h2>
+<p>我们看到大多数的金融工具，无论是股票还是期货，大都表现出横向型的动量模式，同时也经常呈现时间序列的性质。但不幸的是，这种动量行为模式的时间周期往往是一个月或更长的时间。而较长的持有期存在两个问题，即从统计学意义的回测程序上看，其所导致的夏普比率比较低，这主要是因为其间的独立交易信号比较罕见，进而在财政危机发生之后，相应的交易模式就会表现不佳。</p>
+<p>盘中动量交易策略可以触发的特定事件不仅仅是价格的运行模式，相关事件还包括诸如盈利公告之类的企业信息，或者分析师的更改建议，以及宏观经济新闻等，这些事件所生成的时间序列型动量交易策略早已为人所知，但是现在，我要对每个特定类别事件的影响做一些新的研究。</p>
+<section id="敞口交易策略" class="level3">
+<h3 class="anchored" data-anchor-id="敞口交易策略">“敞口”交易策略</h3>
+<p>在第4章中，我们讨论了一个缺口买入型的、股票相关的均值回归策略，而于同等情境之下，动量型策略在操作期货和货币交易之时，其运行模式正好相反，即当相关金融工具的价格向上跳开时做多，而在其向下跳开时做空。</p>
+<div id="cell-8" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 7.1: Opening Gap Strategy for FSTX</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>entryZscore<span class="op">=</span><span class="fl">0.1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataDaily_FSTX_20120517.csv'</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(df[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>stdretC2C90d<span class="op">=</span>df[<span class="st">'Close'</span>].pct_change().rolling(<span class="dv">90</span>).std().shift()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>longs<span class="op">=</span> df[<span class="st">'Open'</span>] <span class="op">&gt;=</span> df[<span class="st">'High'</span>].shift()<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>entryZscore<span class="op">*</span>stdretC2C90d)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>shorts<span class="op">=</span>df[<span class="st">'Open'</span>] <span class="op">&gt;=</span> df[<span class="st">'Low'</span>].shift()<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>entryZscore<span class="op">*</span>stdretC2C90d)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>np.zeros(longs.shape)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>positions[longs]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>positions[shorts]<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>positions<span class="op">*</span>(df[<span class="st">'Close'</span>]<span class="op">-</span>df[<span class="st">'Open'</span>])<span class="op">/</span>df[<span class="st">'Open'</span>]</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>cumret<span class="op">=</span>(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>cumret.plot()</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co"># from calculateMaxDD import calculateMaxDD</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD(cumret.fillna(<span class="dv">0</span>))</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Max DD=</span><span class="sc">%f</span><span class="st"> Max DDD in days=</span><span class="sc">%i</span><span class="st">'</span> <span class="op">%</span> (maxDD, maxDDD))</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#APR=0.074864 Sharpe=0.494857</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#Max DD=-0.233629 Max DDD in days=789</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=0.074864 Sharpe=0.494857
+Max DD=-0.233629 Max DDD in days=789</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\win10\AppData\Local\Temp\ipykernel_4936\1180818726.py:22: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  highwatermark[t]=np.maximum(highwatermark[t-1], cumret[t])
+C:\Users\win10\AppData\Local\Temp\ipykernel_4936\1180818726.py:23: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  drawdown[t]=(1+cumret[t])/(1+highwatermark[t])-1</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-09-05-Algorithmic-Trading-6_files/figure-html/cell-5-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="信息驱动的动量交易策略" class="level3">
+<h3 class="anchored" data-anchor-id="信息驱动的动量交易策略">信息驱动的动量交易策略</h3>
+<p>正如许多人认为的那样：价格的动量运行模式是由缓慢扩散的新闻事件所导致的。当然，我们可以在一个有新闻价值的事件之后的前几天、几小时甚至几秒之后有所受益，这就是传统的财报收益报告公布之后的行情漂移的基本原理模型（post-earnings announcement drift models，PEAD模型）；同时，还有一些其他的模型，它们大都基于不同企业或宏观经济新闻等因素来生成相应的动量运行模式。</p>
+<p>如果在前一个交易日收盘之后，股票相关企业公布其收益报告，我们于第二个交易日的开盘时刻入场——如果相关收益率为正，我们就做多该股票；如果相应收益率为负，我们就做空该股票，同时，在当天清算所有头寸，那么，这个交易策略仍然是有利可图的。这里需要注意的是：这种策略不需要交易员解释收益报告是“好”还是“坏”，甚至不要求交易员知道相应收益是否高于或低于分析师的预期，我们可以让市场行情告诉自己相应的收益是好还是坏。</p>
+<div id="cell-10" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4.1: Buy-on-Gap Model on SPX Stocks</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.stattools as ts</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>op<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_op.csv'</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>cl<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_cl.csv'</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>stocks<span class="op">=</span>pd.read_csv(<span class="st">'datas/inputDataOHLCDaily_20120424_stocks.csv'</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>op[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(op[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>op.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>op.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>cl[<span class="st">'Var1'</span>]<span class="op">=</span>pd.to_datetime(cl[<span class="st">'Var1'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>cl.columns<span class="op">=</span>np.insert(stocks.values, <span class="dv">0</span>, <span class="st">'Date'</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>cl.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>earnann<span class="op">=</span>pd.read_csv(<span class="st">'datas/earnannFile.csv'</span>)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>earnann[<span class="st">'Date'</span>]<span class="op">=</span>pd.to_datetime(earnann[<span class="st">'Date'</span>],  <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>).dt.date <span class="co"># remove HH:MM:SS</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>earnann.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>np.testing.assert_array_equal(stocks.iloc[<span class="dv">0</span>,:], earnann.columns)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.merge(op, cl, how<span class="op">=</span><span class="st">'inner'</span>, left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>, suffixes<span class="op">=</span>(<span class="st">'_op'</span>, <span class="st">'_cl'</span>))</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.merge(earnann, df, how<span class="op">=</span><span class="st">'inner'</span>, left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>earnann<span class="op">=</span>df.iloc[:, <span class="dv">0</span>:(earnann.shape[<span class="dv">1</span>])].astype(<span class="bu">bool</span>)</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>op<span class="op">=</span>df.iloc[:, (earnann.shape[<span class="dv">1</span>]):((earnann.shape[<span class="dv">1</span>])<span class="op">+</span>op.shape[<span class="dv">1</span>])]</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>cl<span class="op">=</span>df.iloc[:, ((earnann.shape[<span class="dv">1</span>])<span class="op">+</span>op.shape[<span class="dv">1</span>]):]</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>op.columns<span class="op">=</span>stocks.iloc[<span class="dv">0</span>,:]</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>cl.columns<span class="op">=</span>stocks.iloc[<span class="dv">0</span>,:]</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>lookback<span class="op">=</span><span class="dv">90</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>retC2O<span class="op">=</span>(op<span class="op">-</span>cl.shift())<span class="op">/</span>cl.shift()</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>stdC2O<span class="op">=</span>retC2O.rolling(lookback).std()</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>np.zeros(cl.shape) </span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>longs<span class="op">=</span>  (retC2O <span class="op">&gt;=</span>  <span class="fl">0.5</span><span class="op">*</span>stdC2O) <span class="op">&amp;</span> earnann</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>shorts<span class="op">=</span> (retC2O <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>stdC2O) <span class="op">&amp;</span> earnann</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>positions[longs]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>positions[shorts]<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>ret<span class="op">=</span>np.<span class="bu">sum</span>(positions<span class="op">*</span>(cl<span class="op">-</span>op)<span class="op">/</span>op, axis<span class="op">=</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">30</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>cumret<span class="op">=</span>(np.cumprod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>cumret.plot()</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="co"># from calculateMaxDD import calculateMaxDD</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD(cumret.fillna(<span class="dv">0</span>))</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Max DD=</span><span class="sc">%f</span><span class="st"> Max DDD in days=</span><span class="sc">%i</span><span class="st">'</span> <span class="op">%</span> (maxDD, maxDDD))</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="co">#APR=0.068126 Sharpe=1.494743</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="co">#Max DD=-0.026052 Max DDD in days=109</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>APR=0.068126 Sharpe=1.494743
+Max DD=-0.026052 Max DDD in days=109</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\win10\AppData\Local\Temp\ipykernel_4936\1180818726.py:22: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  highwatermark[t]=np.maximum(highwatermark[t-1], cumret[t])
+C:\Users\win10\AppData\Local\Temp\ipykernel_4936\1180818726.py:23: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  drawdown[t]=(1+cumret[t])/(1+highwatermark[t])-1</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-09-05-Algorithmic-Trading-6_files/figure-html/cell-6-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>我们在均值回归策略所相关的例5-1中，对蒙特卡罗技术进行了详细的解析。但首先，我们依据测试集中的天收益率就会很容易地计算出相应的凯利杠杆比例是18.4；我们应该记住这个数字，且与蒙特卡罗模拟的测试结果进行比较；接下来，我们基于相应日收益率所相关的初始四个阶矩来构造一个皮尔逊系统，并在系统中生成100000个随机收益率的数值</p>
+<div id="cell-12" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Box 8.1</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#from scipy.stats import describe </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearson3</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.formula.api as sm</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.stattools as ts</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#import statsmodels.tsa.vector_ar.vecm as vm</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">'datas/AUDCAD_unequal_ret.csv'</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用pearson3函数拟合数据，并计算了数据的偏度、位置和尺度参数</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>skew_, loc_, scale_<span class="op">=</span>pearson3.fit(df) </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'skew=</span><span class="sc">%f</span><span class="st"> loc=</span><span class="sc">%f</span><span class="st"> scale=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (skew_, loc_, scale_))</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>mean,var,skew,kurt<span class="op">=</span>pearson3.stats(skew_, loc_, scale_, moments<span class="op">=</span><span class="st">'mvks'</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'mean=</span><span class="sc">%f</span><span class="st"> var=</span><span class="sc">%f</span><span class="st"> skew=</span><span class="sc">%f</span><span class="st"> kurt=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (mean, var, skew, kurt))</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用拟合得到的参数生成了100,000个模拟收益率</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>ret_sim<span class="op">=</span>pearson3.rvs(skew_, loc_, scale_, size<span class="op">=</span><span class="dv">100000</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义了一个函数g，用于计算给定收益率和杠杆率的增长率</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g(f, R):</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(np.log(<span class="dv">1</span><span class="op">+</span>f<span class="op">*</span>R), axis<span class="op">=</span><span class="dv">0</span>)<span class="op">/</span>R.shape[<span class="dv">0</span>]</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 对于不同的杠杆率（从1到23），计算了模拟收益率的增长率，并绘制了图表</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>myf<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">24</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>myg<span class="op">=</span>np.full(<span class="dv">24</span>, np.nan)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> myf:</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    myg[f]<span class="op">=</span>g(f, ret_sim)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>myg<span class="op">=</span>myg[<span class="dv">1</span>:]</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>myg<span class="op">=</span>pd.DataFrame(myg)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>myg.plot()</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义了一个最小化函数minusG和minusGsim，用于找到最优的杠杆率</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>minusG <span class="op">=</span> <span class="kw">lambda</span> f : <span class="op">-</span>g(f, df)</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>minusGsim <span class="op">=</span> <span class="kw">lambda</span> f : <span class="op">-</span>g(f, ret_sim)</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用minimize函数找到了最优的杠杆率和对应的最大增长率</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="co">#optimal leverage based on simulated returns</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> minimize(minusGsim, <span class="dv">0</span>, method<span class="op">=</span><span class="st">'Nelder-Mead'</span>)</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>optimalF<span class="op">=</span>res.x</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Optimal leverage=</span><span class="sc">%f</span><span class="st"> optimal growth rate=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (optimalF[<span class="dv">0</span>], <span class="op">-</span>res.fun))</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="co">#Optimal leverage=25.512625 optimal growth rate=0.005767</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>minR<span class="op">=</span>np.<span class="bu">min</span>(ret_sim)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'minR=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (minR))</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a><span class="co">#minR=-0.018201</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="co"># max drawdown with optimal leverage</span></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a><span class="co"># from calculateMaxDD import calculateMaxDD</span></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD((np.cumprod(<span class="dv">1</span><span class="op">+</span>optimalF<span class="op">*</span>ret_sim)<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Max DD=</span><span class="sc">%f</span><span class="st"> with optimal leverage=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (maxDD, optimalF[<span class="dv">0</span>]))</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co">#Max DD=-0.996312 with optimal leverage=25.512625</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a><span class="co">#max drawdown with half of optimal leverage</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD((np.cumprod(<span class="dv">1</span><span class="op">+</span>optimalF<span class="op">/</span><span class="dv">2</span><span class="op">*</span>ret_sim)<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Max DD=</span><span class="sc">%f</span><span class="st"> with half optimal leverage=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (maxDD, optimalF[<span class="dv">0</span>]<span class="op">/</span><span class="dv">2</span>))</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="co">#Max DD=-0.900276 with half optimal leverage=12.756313</span></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a><span class="co"># max drawdown with 1/7 of optimal leverage</span></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD((np.cumprod(<span class="dv">1</span><span class="op">+</span>optimalF<span class="op">/</span><span class="dv">7</span><span class="op">*</span>ret_sim)<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Max DD=</span><span class="sc">%f</span><span class="st"> with half optimal leverage=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (maxDD, optimalF[<span class="dv">0</span>]<span class="op">/</span><span class="dv">7</span>))</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a><span class="co">#Max DD=-0.429629 with half optimal leverage=3.644661</span></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a><span class="co">#max drawdown with 1/1.4 of optimal leverage for historical returns</span></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD((np.cumprod(<span class="dv">1</span><span class="op">+</span>optimalF<span class="op">/</span><span class="fl">1.4</span><span class="op">*</span>df.values)<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Max DD=</span><span class="sc">%f</span><span class="st"> with historical returns=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (maxDD, optimalF[<span class="dv">0</span>]<span class="op">/</span><span class="fl">1.4</span>))</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="co">#Max DD=-0.625894 with historical returns=18.223304</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>D<span class="op">=</span><span class="fl">0.5</span></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Growth rate on simulated returns using D=</span><span class="sc">%3.1f</span><span class="st"> of optimal leverage on full account=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (D, <span class="op">-</span>minusGsim(optimalF<span class="op">*</span>D)))</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a><span class="co">#Growth rate on simulated returns using D=0.5 of optimal leverage on full account=0.004317</span></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD((np.cumprod(<span class="dv">1</span><span class="op">+</span>optimalF<span class="op">*</span>D<span class="op">*</span>ret_sim)<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MaxDD on simulated returns using D of optimal leverage on full account=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (maxDD))</span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a><span class="co">#MaxDD on simulated returns using D of optimal leverage on full account=-0.900276</span></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用CPPI策略计算了模拟收益率和历史收益率的增长率和最大回撤</span></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a><span class="co"># CPPI</span></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>g_cppi<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>drawdown<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(ret_sim.shape[<span class="dv">0</span>]):</span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>    g_cppi<span class="op">+=</span>np.log(<span class="dv">1</span><span class="op">+</span>ret_sim[t]<span class="op">*</span>D<span class="op">*</span>optimalF<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>drawdown))</span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>    drawdown<span class="op">=</span><span class="bu">min</span>([<span class="dv">0</span>, (<span class="dv">1</span><span class="op">+</span>drawdown)<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>ret_sim[t])<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>g_cppi<span class="op">=</span>g_cppi<span class="op">/</span><span class="bu">len</span>(ret_sim)</span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Growth rate on simulated returns using CPPI=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> g_cppi[<span class="dv">0</span>])</span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a><span class="co">#Growth rate on simulated returns using CPPI=0.004264</span></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Growth rate on historical returns using D of optimal leverage on full account=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (<span class="op">-</span>minusG(optimalF<span class="op">*</span>D)))</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a><span class="co">#Growth rate on historical returns using D of optimal leverage on full account=0.004053</span></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a>maxDD, maxDDD, i<span class="op">=</span>calculateMaxDD((np.cumprod(<span class="dv">1</span><span class="op">+</span>optimalF<span class="op">*</span>D<span class="op">*</span>df.values)<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MaxDD on historical returns using D of optimal leverage on full account=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (maxDD))</span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="co">#MaxDD on historical returns using D of optimal leverage on full account=-0.303448</span></span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a><span class="co"># CPPI</span></span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a>g_cppi<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a>drawdown<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(df.shape[<span class="dv">0</span>]):</span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>    g_cppi<span class="op">+=</span>np.log(<span class="dv">1</span><span class="op">+</span>df.iloc[t,]<span class="op">*</span>D<span class="op">*</span>optimalF<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>drawdown))</span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print("=========")</span></span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(type((1+drawdown)*(1+df.iloc[t,])-1))</span></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print((1+drawdown)*(1+df.iloc[t,])-1)</span></span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(((1+drawdown)*(1+df.iloc[t,])-1)[0])</span></span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print("=========")</span></span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a>    drawdown<span class="op">=</span>np.<span class="bu">min</span>([<span class="dv">0</span>, ((<span class="dv">1</span><span class="op">+</span>drawdown)<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>df.iloc[t,])<span class="op">-</span><span class="dv">1</span>)[<span class="dv">0</span>]])</span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a>g_cppi<span class="op">=</span>g_cppi<span class="op">/</span><span class="bu">len</span>(df)</span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Growth rate on historical returns CPPI=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (g_cppi))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>skew=0.122820 loc=0.000432 scale=0.004231
+mean=0.000432 var=0.000018 skew=0.122820 kurt=0.022627
+Optimal leverage=25.512625 optimal growth rate=0.005767
+minR=-0.018201
+Max DD=-0.996312 with optimal leverage=25.512625
+Max DD=-0.900276 with half optimal leverage=12.756313
+Max DD=-0.429629 with half optimal leverage=3.644661
+Max DD=-0.625894 with historical returns=18.223304
+Growth rate on simulated returns using D=0.5 of optimal leverage on full account=0.004317
+MaxDD on simulated returns using D of optimal leverage on full account=-0.900276
+Growth rate on simulated returns using CPPI=0.004264
+Growth rate on historical returns using D of optimal leverage on full account=0.004053
+MaxDD on historical returns using D of optimal leverage on full account=-0.482626</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\win10\AppData\Local\Temp\ipykernel_4936\158564989.py:85: FutureWarning: Calling float on a single element Series is deprecated and will raise a TypeError in the future. Use float(ser.iloc[0]) instead
+  print('Growth rate on historical returns using D of optimal leverage on full account=%f' % (-minusG(optimalF*D)))
+C:\Users\win10\AppData\Local\Temp\ipykernel_4936\158564989.py:101: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  drawdown=np.min([0, ((1+drawdown)*(1+df.iloc[t,])-1)[0]])</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Growth rate on historical returns CPPI=0.003991</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\win10\AppData\Local\Temp\ipykernel_4936\158564989.py:104: FutureWarning: Calling float on a single element Series is deprecated and will raise a TypeError in the future. Use float(ser.iloc[0]) instead
+  print('Growth rate on historical returns CPPI=%f' % (g_cppi))</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-09-05-Algorithmic-Trading-6_files/figure-html/cell-7-output-5.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>CPPI（Constant Proportion Portfolio Insurance）策略，即恒定比例投资组合保险策略，是一种投资组合管理技术，主要用于风险管理和资产配置。CPPI策略的核心思想是通过动态调整风险资产（如股票、期货等）和安全资产（如债券、现金等）的比例，以保证投资组合在特定时间段内的最低价值。</p>
+<p>CPPI策略的基本原理如下：</p>
+<ol type="1">
+<li><p><strong>确定保本额</strong>：投资者首先确定一个保本额，即在投资期末希望至少能够收回的金额。</p></li>
+<li><p><strong>计算安全垫</strong>：安全垫是指投资组合当前价值与保本额之间的差额。安全垫的大小决定了可以投资于风险资产的最大金额。</p></li>
+<li><p><strong>确定风险乘数</strong>：风险乘数是一个系数，用于确定投资于风险资产的金额。风险乘数的大小取决于投资者的风险承受能力和投资目标。</p></li>
+<li><p><strong>动态调整资产配置</strong>：根据市场情况和投资组合的表现，定期调整风险资产和安全资产的比例。当投资组合价值上升时，可以增加对风险资产的投资；当投资组合价值下降时，减少对风险资产的投资，以保证投资组合的价值不低于保本额。</p></li>
+</ol>
+<p>CPPI策略的优点：</p>
+<ol type="1">
+<li><p><strong>保本性</strong>：通过设定保本额和安全垫，CPPI策略能够在投资期末保证投资者至少能够收回保本额。</p></li>
+<li><p><strong>灵活性</strong>：CPPI策略可以根据市场情况和投资者的风险承受能力动态调整资产配置，以实现最佳的风险收益平衡。</p></li>
+<li><p><strong>简单易行</strong>：CPPI策略的计算方法相对简单，易于理解和实施。</p></li>
+</ol>
+<p>然而，CPPI策略也存在一定的缺点：</p>
+<ol type="1">
+<li><p><strong>市场风险</strong>：尽管CPPI策略能够在一定程度上降低市场风险，但在极端市场情况下，如市场大幅下跌，投资组合的价值仍可能低于保本额。</p></li>
+<li><p><strong>机会成本</strong>：为了保证投资组合的保本性，投资者可能需要放弃部分潜在的高收益机会。</p></li>
+</ol>
+<p>总之，CPPI策略是一种适用于风险厌恶型投资者的投资组合管理技术，通过动态调整资产配置，可以在保证投资组合保本性的同时，追求一定的投资收益。</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/stardust1900\.github\.io\/doushuai\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

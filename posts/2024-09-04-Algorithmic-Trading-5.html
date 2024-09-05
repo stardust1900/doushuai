@@ -408,7 +408,7 @@ Average annualized roll return= -0.1277565022746007</code></pre>
 <h3 class="anchored" data-anchor-id="跨期套利具有均值回归属性吗">跨期套利具有均值回归属性吗</h3>
 <p>跨期套利是构建一个投资组合，由一个期货合约的多头和另一个期货合约的空头所组成，且标的资产相同，但到期月份不一样。基于我们之前所掌握的点差，跨期套利似乎是非常适合均值回归交易的可选项，但两个仓位头寸所跟踪的是同一个标的资产吗？在这里，答案为是的。</p>
 <p>收益率系列（而不是价格系列）几乎总是具有均值回归的性质。我们正在考虑的不是期货的总收益，而是构成总收益的连续收益率，所以相应情况可能有所不同［尽管式（5-7）所表达模型的前提是现货收益率和连续收益率都是常数，不过，我们可以尝试将其应用于连续收益率是变量的情境之下］。我们以原油期货CL价格之日历价差的对数形式，运行期限为12个月的ADF检验模式，并且发现：相关组合确实是平稳的，且概率为99%，半衰期为36日。此外，如果我们应用正常的线性均值回归策略检测2008年1月2日至2012年8月13日的原油期货CL之日历价差的对数值，我们可以得到一个8.3%的年化收益率，且夏普比率为1.3，</p>
-<div id="cell-8" class="cell" data-execution_count="12">
+<div id="cell-8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 5.4: Mean Reversion Trading of Calendar Spreads</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -478,14 +478,14 @@ Average annualized roll return= -0.1277565022746007</code></pre>
 <span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>            startIdx<span class="op">=</span>myStartIdx</span>
 <span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>            endIdx<span class="op">=</span>myEndIdx</span>
 <span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>            startIdx<span class="op">=</span>np.Inf</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>            startIdx<span class="op">=</span>np.inf</span>
 <span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>            </span>
 <span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ((<span class="bu">len</span>(expireIdx) <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&amp;</span> (endIdx <span class="op">&gt;</span> startIdx)):</span>
 <span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>        positions[startIdx[<span class="dv">0</span>]:endIdx[<span class="dv">0</span>], c]<span class="op">=-</span><span class="dv">1</span></span>
 <span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>        positions[startIdx[<span class="dv">0</span>]:endIdx[<span class="dv">0</span>], c<span class="op">+</span>spreadMonth]<span class="op">=</span><span class="dv">1</span></span>
 <span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>positions[zScore.isna().values.flatten(), :]<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>zScore.fillna(<span class="op">-</span>np.Inf, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>zScore.fillna(<span class="op">-</span>np.inf, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>positions[zScore.values.flatten() <span class="op">&gt;</span> <span class="dv">0</span>, :]<span class="op">=-</span>positions[zScore.values.flatten() <span class="op">&gt;</span> <span class="dv">0</span>, :]</span>
 <span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>positions<span class="op">=</span>pd.DataFrame(positions)</span>
@@ -497,7 +497,7 @@ Average annualized roll return= -0.1277565022746007</code></pre>
 <span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'APR=</span><span class="sc">%f</span><span class="st"> Sharpe=</span><span class="sc">%f</span><span class="st">'</span> <span class="op">%</span> (np.prod(<span class="dv">1</span><span class="op">+</span>ret)<span class="op">**</span>(<span class="dv">252</span><span class="op">/</span><span class="bu">len</span>(ret))<span class="op">-</span><span class="dv">1</span>, np.sqrt(<span class="dv">252</span>)<span class="op">*</span>np.mean(ret)<span class="op">/</span>np.std(ret)))</span>
 <span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a><span class="co">#APR=0.024347 Sharpe=1.275860</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(-4.586684184658414, 0.0001366696053855159, 1, 1995, {'1%': -3.4336320721769433, '5%': -2.862989840784964, '10%': -2.56754183359401})
+<pre><code>(np.float64(-4.586684184658414), np.float64(0.0001366696053855159), 1, 1995, {'1%': np.float64(-3.4336320721769433), '5%': np.float64(-2.862989840784964), '10%': np.float64(-2.56754183359401)})
 APR=0.024347 Sharpe=1.275860</code></pre>
 </div>
 <div class="cell-output cell-output-display">
