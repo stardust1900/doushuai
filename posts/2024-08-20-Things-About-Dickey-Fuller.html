@@ -445,6 +445,38 @@ look-up table. The actual p-value is smaller than the p-value returned.
 <p>分析结果：根据计算出的半衰期，分析放射性物质的衰变速率和放射性强度。</p>
 <p>需要注意的是，半衰期检验需要在专业的实验室环境中进行，并采取适当的安全措施，以防止辐射对人体的伤害。此外，半衰期检验的结果可能受到测量误差和其他因素的影响，因此需要进行多次实验并取平均值以提高准确性。</p>
 <p><strong>半衰期检验（Half-Life Test）本身并不是专门用于测试时间序列的回归性和平稳性的方法。半衰期检验主要用于评估放射性物质衰变速率，而不是时间序列分析</strong></p>
+<p>计算半衰期（Half-life）的方法在金融和其他领域中通常用于衡量均值回复（mean reversion）的速度。在你的代码中，半衰期是通过对时间序列数据进行自回归分析（AR模型）得到的。这种方法基于统计学中的自回归模型（Autoregressive Model），特别是AR(1)模型。</p>
+<section id="理论依据" class="level3">
+<h3 class="anchored" data-anchor-id="理论依据">理论依据</h3>
+<section id="ar1-模型" class="level4">
+<h4 class="anchored" data-anchor-id="ar1-模型">AR(1) 模型</h4>
+<p>在一个AR(1)模型中，当前值 $ y_t $ 可以通过前一期的值 $ y_{t-1} $ 和一个随机误差项 $ <em>t $ 来预测： $ y_t = + y</em>{t-1} + _t $</p>
+<p>其中： - $ $ 是截距项； - $ $ 是自回归系数； - $ _t $ 是随机误差项，通常假定服从正态分布 $ N(0, ^2) $。</p>
+</section>
+<section id="均值回复" class="level4">
+<h4 class="anchored" data-anchor-id="均值回复">均值回复</h4>
+<p>如果 $ $ 在 (-1, 1) 区间内，那么该时间序列具有均值回复特性。如果 $ &lt; 1 $，则随着时间的推移，时间序列倾向于返回其长期平均值。如果 $ &gt; 1 $，则时间序列表现出“爆炸”趋势，远离其平均值。</p>
+</section>
+<section id="半衰期计算" class="level4">
+<h4 class="anchored" data-anchor-id="半衰期计算">半衰期计算</h4>
+<p>半衰期是指时间序列回归其长期平均值所需的时间长度的一半。在AR(1)模型中，半衰期可以通过以下公式计算： $ = - $</p>
+<p>在你的代码中，$ $ 是通过线性回归 $ y_t $ 对 $ y_{t-1} $ 得到的，这里的 $ y_t $ 表示 $ y_t $ 与其滞后一期的差分： $ y_t = y_t - y_{t-1} $</p>
+<p>然后构建一个带有常数项的线性回归模型： $ y_t = + y_{t-1} + _t $</p>
+<p>最后，根据回归得到的 $ $ 计算半衰期。</p>
+</section>
+</section>
+<section id="代码解释" class="level3">
+<h3 class="anchored" data-anchor-id="代码解释">代码解释</h3>
+<ol type="1">
+<li><strong>创建滞后变量</strong>：<code>ylag = y.shift()</code> 创建一个滞后一期的时间序列。</li>
+<li><strong>计算差分</strong>：<code>deltay = y - ylag</code> 计算当前值与滞后值的差分。</li>
+<li><strong>移除首行NaN</strong>：<code>deltay = deltay[1:]</code> 移除由于滞后产生的首行NaN值。</li>
+<li><strong>添加常数项</strong>：<code>X = sm.add_constant(ylag[1:])</code> 为滞后变量添加常数项。</li>
+<li><strong>创建并拟合模型</strong>：使用普通最小二乘法（OLS）创建并拟合线性回归模型。</li>
+<li><strong>计算半衰期</strong>：根据回归系数 ( ) 计算半衰期。</li>
+</ol>
+<p>这种方法在实践中广泛应用于算法交易、统计套利策略等场景中，以评估资产价格或策略收益的均值回复特性。</p>
+</section>
 </section>
 <section id="协整关系" class="level2">
 <h2 class="anchored" data-anchor-id="协整关系">协整关系</h2>

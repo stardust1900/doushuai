@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="王一刀">
+<meta name="dcterms.date" content="2024-09-24">
+<meta name="description" content="算法交易的一些常识">
+
+<title>均值回归策略在A股ETF市场获利的可能性 – 兜率宫</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">兜率宫</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://wangxuan.me"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/stardust1900"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://weibo.com/halfg0d"> <i class="bi bi-sina-weibo" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">关于</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">均值回归策略在A股ETF市场获利的可能性</h1>
+                  <div>
+        <div class="description">
+          算法交易的一些常识
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">量化交易</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>王一刀 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 24, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="如何在股票市场获利" class="level3">
+<h3 class="anchored" data-anchor-id="如何在股票市场获利">如何在股票市场获利</h3>
+<p>有人曾经告诉我一个在股票市场赚钱的秘诀，只要掌握这个秘诀，赚钱就像捡钱一样容易。他说：这个秘诀其实很简单，就是在股票价格低的时候买入，在价格高的时候卖出。</p>
+<p>啧啧，不愧是秘诀，明明是句废话，但又挑不出毛病。</p>
+<p>问题是，如何判断价格是低还是高？我知道你想说：价值。低于价值就是低，高于价值就是高。但是，如何估算出它的价值？任何公式任何指标都是参考，你无法准确估算价值，其他的都无从谈起。而价值投资，你说它是艺术也好，说它是玄学也罢，都不是我等凡人能搞明白的。</p>
+<p>小鸡不尿尿–各有各的道。凡人自有凡人的方法，如果公式太复杂让人摸不着头脑，如果指标太多让人无所适从，那就都不用，我们就用简单粗暴的方法：求平均值。当然，也不能随便什么股票拿过来就用，我们挑那种上下波动的股票，不要一路跌，也不要一路涨(我知道你可能青睐这种股票，但是这种股票，你很难选择入场的时机，谁都不敢保证你买之前它一路涨，你一买它就开始一路跌)。用统计学中的术语就是平稳性，我们寻找那种价格在时间序列上是平稳的股票。</p>
+<p>还有一个要关键点是：周期。我们找到价格平稳的股票之后，还要弄清楚，它是多长时间从低点到高点然后又回到高点。有两个原因：1.我们要把周期太长的抛弃，你也不想等5年挣1%吧。2.我们尽量在一个周期内完成一次买卖操作，不要错过周期，它一年波动10次，你就买卖一次，那就有点辜负人家的好意了。</p>
+<p>接下来，我们就需要解决这两个问题：平稳性和周期。</p>
+</section>
+<section id="平稳性测试" class="level3">
+<h3 class="anchored" data-anchor-id="平稳性测试">平稳性测试</h3>
+<p>我打算使用ETF的数据来测试，因为ETF关联的是一篮子股票，和单只股票相比应该更平稳，更符合我们的意图。(至于,自己挑选多只股票,以不同权重组合起来以达到平稳，那是另外一个问题了，以后有机会再议)所有的数据都通过akshare来获取，你可以访问akshare的官方网站获取更多信息。</p>
+<p>使用Dickey-Fuller（迪基-富勒）检验判断股票价格序列的平稳性。至于迪基-富勒检测的原理，你可以自行搜索，也可以看我在这篇<a href="https://wangxuan.me/doushuai/posts/2024-08-20-Things-About-Dickey-Fuller.html">关于迪基-富勒检验</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>整理的一些概念。</p>
+<p>我们先把A股所有ETF查出来，然后逐一检测。检测的时候仅获取2023年1月1日以后的数据，使用的是收盘价。</p>
+<div id="cell-2" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> akshare <span class="im">as</span> ak</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adf_test(hist_data):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    results<span class="op">=</span>adfuller(hist_data, maxlag<span class="op">=</span><span class="va">None</span>, regression<span class="op">=</span><span class="st">'c'</span>, autolag<span class="op">=</span><span class="st">'AIC'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print('ADF Statistic: %f' % results[0])  </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print('p-value: %f' % results[1])  </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print('Critical Values:')  </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for key, value in results[4].items():  </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     print('\t%s: %.3f' % (key, value))  </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> results[<span class="dv">1</span>] <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print("时间序列是非平稳的，p-value &gt; 0.05")</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print("时间序列是平稳的，p-value &lt;= 0.05")</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_row(row):</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(row)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    hist_data <span class="op">=</span> ak.fund_etf_hist_sina(symbol<span class="op">=</span>row[<span class="st">'代码'</span>])</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'date'</span> <span class="kw">not</span> <span class="kw">in</span> hist_data.columns:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'date not in clolumns 代码:</span><span class="sc">%s</span><span class="st"> 名称:</span><span class="sc">%s</span><span class="st"> '</span> <span class="op">%</span> (row[<span class="st">'代码'</span>],row[<span class="st">'名称'</span>]))</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(hist_data)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    hist_data.set_index(<span class="st">'date'</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>hist_data.loc[hist_data.index <span class="op">&gt;=</span> datetime.strptime(<span class="st">'2023-01-01'</span>,<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>).date(), <span class="st">'close'</span>]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(y)</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(hist_data) <span class="op">&lt;</span> <span class="dv">15</span>:</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print('代码:%s 名称:%s ' % (row['代码'],row['名称']))</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(f"Data length: {len(y)}")</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> adf_test(y):</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>         <span class="bu">print</span>(<span class="st">'代码:</span><span class="sc">%s</span><span class="st"> 名称:</span><span class="sc">%s</span><span class="st"> 时间序列adf测试结果是平稳的'</span> <span class="op">%</span> (row[<span class="st">'代码'</span>],row[<span class="st">'名称'</span>]))</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>         <span class="cf">return</span> row[<span class="st">'代码'</span>],row[<span class="st">'名称'</span>]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 获取所有ETF基金信息</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>fund_etf_category_sina_df <span class="op">=</span> ak.fund_etf_category_sina(symbol<span class="op">=</span><span class="st">"ETF基金"</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 对所有基金做DF测试</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> fund_etf_category_sina_df.<span class="bu">apply</span>(process_row,axis<span class="op">=</span><span class="dv">1</span>).dropna()</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>p_results <span class="op">=</span> [r <span class="cf">for</span> r <span class="kw">in</span> results <span class="cf">if</span> r <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>]</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(p_results, columns<span class="op">=</span>[<span class="st">'代码'</span>, <span class="st">'名称'</span>])</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_df)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 将结果保存到csv</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>results_df.to_csv(<span class="st">'datas/eft_fund_stationary_results.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>代码:sz159939 名称:信息技术ETF 时间序列adf测试结果是平稳的
+代码:sz159933 名称:国投金融地产ETF 时间序列adf测试结果是平稳的
+代码:sz159811 名称:5G50ETF 时间序列adf测试结果是平稳的
+代码:sz159607 名称:中概互联网ETF 时间序列adf测试结果是平稳的
+代码:sz159605 名称:中概互联ETF 时间序列adf测试结果是平稳的
+代码:sz159587 名称:粮食50ETF 时间序列adf测试结果是平稳的
+代码:sz159579 名称:深主板50ETF华安 时间序列adf测试结果是平稳的
+代码:sz159570 名称:港股通创新药ETF 时间序列adf测试结果是平稳的
+代码:sz159569 名称:港股红利低波ETF 时间序列adf测试结果是平稳的
+代码:sz159567 名称:港股创新药ETF 时间序列adf测试结果是平稳的
+代码:sz159557 名称:恒生医疗指数ETF 时间序列adf测试结果是平稳的
+代码:sz159552 名称:中证2000增强ETF 时间序列adf测试结果是平稳的
+代码:sz159545 名称:恒生红利低波ETF 时间序列adf测试结果是平稳的
+代码:sz159507 名称:电信ETF 时间序列adf测试结果是平稳的
+代码:sz159331 名称:红利港股ETF 时间序列adf测试结果是平稳的
+代码:sz159330 名称:沪深300ETF基金 时间序列adf测试结果是平稳的
+代码:sz159329 名称:沙特ETF 时间序列adf测试结果是平稳的
+代码:sz159005 名称:汇添富快钱ETF 时间序列adf测试结果是平稳的
+代码:sz159003 名称:招商快线ETF 时间序列adf测试结果是平稳的
+代码:sz159001 名称:货币ETF 时间序列adf测试结果是平稳的
+代码:sh563180 名称:高股息ETF 时间序列adf测试结果是平稳的
+代码:sh520830 名称:沙特ETF 时间序列adf测试结果是平稳的
+代码:sh516110 名称:汽车ETF 时间序列adf测试结果是平稳的
+代码:sh512640 名称:金融地产ETF基金 时间序列adf测试结果是平稳的
+代码:sh512160 名称:MSCI中国A股ETF 时间序列adf测试结果是平稳的
+代码:sh511990 名称:华宝添益ETF 时间序列adf测试结果是平稳的
+代码:sh511980 名称:现金添富ETF 时间序列adf测试结果是平稳的
+代码:sh511970 名称:国寿货币ETF 时间序列adf测试结果是平稳的
+代码:sh511960 名称:嘉实快线ETF 时间序列adf测试结果是平稳的
+代码:sh511950 名称:添利货币ETF 时间序列adf测试结果是平稳的
+代码:sh511930 名称:国联日盈货币ETF 时间序列adf测试结果是平稳的
+代码:sh511920 名称:广发货币ETF 时间序列adf测试结果是平稳的
+代码:sh511910 名称:融通货币ETF 时间序列adf测试结果是平稳的
+代码:sh511900 名称:富国货币ETF 时间序列adf测试结果是平稳的
+代码:sh511860 名称:保证金货币ETF 时间序列adf测试结果是平稳的
+代码:sh511850 名称:财富宝ETF 时间序列adf测试结果是平稳的
+代码:sh511830 名称:华泰货币ETF 时间序列adf测试结果是平稳的
+代码:sh511820 名称:鹏华添利ETF 时间序列adf测试结果是平稳的
+代码:sh511810 名称:理财金货币ETF 时间序列adf测试结果是平稳的
+代码:sh511800 名称:易方达货币ETF 时间序列adf测试结果是平稳的
+代码:sh511770 名称:金鹰增益货币ETF 时间序列adf测试结果是平稳的
+代码:sh511700 名称:场内货币ETF 时间序列adf测试结果是平稳的
+代码:sh511690 名称:交易货币ETF 时间序列adf测试结果是平稳的
+代码:sh511670 名称:华泰天天金ETF 时间序列adf测试结果是平稳的
+代码:sh511660 名称:货币ETF建信添益 时间序列adf测试结果是平稳的
+代码:sh511650 名称:华夏快线ETF 时间序列adf测试结果是平稳的
+代码:sh511620 名称:货币基金ETF 时间序列adf测试结果是平稳的
+代码:sh511600 名称:货币ETF 时间序列adf测试结果是平稳的
+          代码           名称
+0   sz159939      信息技术ETF
+1   sz159933    国投金融地产ETF
+2   sz159811      5G50ETF
+3   sz159607     中概互联网ETF
+4   sz159605      中概互联ETF
+5   sz159587      粮食50ETF
+6   sz159579   深主板50ETF华安
+7   sz159570    港股通创新药ETF
+8   sz159569    港股红利低波ETF
+9   sz159567     港股创新药ETF
+10  sz159557    恒生医疗指数ETF
+11  sz159552  中证2000增强ETF
+12  sz159545    恒生红利低波ETF
+13  sz159507        电信ETF
+14  sz159331      红利港股ETF
+15  sz159330   沪深300ETF基金
+16  sz159329        沙特ETF
+17  sz159005     汇添富快钱ETF
+18  sz159003      招商快线ETF
+19  sz159001        货币ETF
+20  sh563180       高股息ETF
+21  sh520830        沙特ETF
+22  sh516110        汽车ETF
+23  sh512640    金融地产ETF基金
+24  sh512160  MSCI中国A股ETF
+25  sh511990      华宝添益ETF
+26  sh511980      现金添富ETF
+27  sh511970      国寿货币ETF
+28  sh511960      嘉实快线ETF
+29  sh511950      添利货币ETF
+30  sh511930    国联日盈货币ETF
+31  sh511920      广发货币ETF
+32  sh511910      融通货币ETF
+33  sh511900      富国货币ETF
+34  sh511860     保证金货币ETF
+35  sh511850       财富宝ETF
+36  sh511830      华泰货币ETF
+37  sh511820      鹏华添利ETF
+38  sh511810     理财金货币ETF
+39  sh511800     易方达货币ETF
+40  sh511770    金鹰增益货币ETF
+41  sh511700      场内货币ETF
+42  sh511690      交易货币ETF
+43  sh511670     华泰天天金ETF
+44  sh511660    货币ETF建信添益
+45  sh511650      华夏快线ETF
+46  sh511620      货币基金ETF
+47  sh511600        货币ETF</code></pre>
+</div>
+</div>
+</section>
+<section id="半衰期" class="level3">
+<h3 class="anchored" data-anchor-id="半衰期">半衰期</h3>
+<p>下面的代码中，半衰期是通过对时间序列数据进行自回归分析（AR模型）得到的,这篇<a href="https://wangxuan.me/doushuai/posts/2024-08-20-Things-About-Dickey-Fuller.html">关于迪基-富勒检验</a>的文章中也整理了一些原理。至于，为什么，我无法解释。如果你能解释，请给我留言。</p>
+<div id="cell-4" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_halflife(y):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    ylag <span class="op">=</span> y.shift() <span class="co">#创建一个滞后变量</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(ylag)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    deltay <span class="op">=</span> y <span class="op">-</span> ylag <span class="co">#计算收盘价的差分</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(deltay)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    deltay <span class="op">=</span> deltay[<span class="dv">1</span>:] <span class="co">#删除第一个NaN值</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(deltay)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(ylag[1:])</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>sm.add_constant(ylag[<span class="dv">1</span>:]) <span class="co"># 为滞后变量添加常数项</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(X)</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>sm.OLS(deltay, X) <span class="co">#创建一个线性回归模型</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    res<span class="op">=</span>model.fit() <span class="co">#拟合模型</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    halflife<span class="op">=-</span>np.log(<span class="dv">2</span>)<span class="op">/</span>res.params.iloc[<span class="dv">1</span>] <span class="co">#计算半衰期</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'halflife:'</span>,halflife)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> halflife</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>stationary_df <span class="op">=</span> pd.read_csv(<span class="st">'datas/eft_fund_stationary_results.csv'</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 遍历每一行</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> stationary_df.iterrows():</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Row index: </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">, Values: </span><span class="sc">{</span>row[<span class="st">'代码'</span>]<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>row[<span class="st">'名称'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    fund_etf_hist_sina_df <span class="op">=</span> ak.fund_etf_hist_sina(symbol<span class="op">=</span>row[<span class="st">'代码'</span>])</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(fund_etf_hist_sina_df)</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    fund_etf_hist_sina_df.set_index(<span class="st">'date'</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>fund_etf_hist_sina_df.loc[fund_etf_hist_sina_df.index <span class="op">&gt;=</span> datetime.strptime(<span class="st">'2022-01-01'</span>,<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>).date(), <span class="st">'close'</span>]</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    halflife <span class="op">=</span> get_halflife(y)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> halflife <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        stationary_df.loc[index, <span class="st">'半衰期'</span>] <span class="op">=</span> halflife</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        stationary_df.loc[index, <span class="st">'最高价'</span>] <span class="op">=</span> y.<span class="bu">max</span>()</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        stationary_df.loc[index, <span class="st">'最低价'</span>] <span class="op">=</span> y.<span class="bu">min</span>()</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(stationary_df)</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>stationary_df.to_csv(<span class="st">'datas/eft_fund_stationary_halflife.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Row index: 0, Values: sz159939, 信息技术ETF
+halflife: 92.34305228118055
+Row index: 1, Values: sz159933, 国投金融地产ETF
+halflife: 20.68724512575711
+Row index: 2, Values: sz159811, 5G50ETF
+halflife: 26.37190816021413
+Row index: 3, Values: sz159607, 中概互联网ETF
+halflife: 17.28790422641463
+Row index: 4, Values: sz159605, 中概互联ETF
+halflife: 17.06493212981132
+Row index: 5, Values: sz159587, 粮食50ETF
+halflife: 2.949089109871738
+Row index: 6, Values: sz159579, 深主板50ETF华安
+halflife: 2.813338527596978
+Row index: 7, Values: sz159570, 港股通创新药ETF
+halflife: 6.72602477892452
+Row index: 8, Values: sz159569, 港股红利低波ETF
+halflife: 6.982621873502573
+Row index: 9, Values: sz159567, 港股创新药ETF
+halflife: 5.551490912970278
+Row index: 10, Values: sz159557, 恒生医疗指数ETF
+halflife: 3.886180626825971
+Row index: 11, Values: sz159552, 中证2000增强ETF
+halflife: 1.6623555515355546
+Row index: 12, Values: sz159545, 恒生红利低波ETF
+halflife: 9.563267261024693
+Row index: 13, Values: sz159507, 电信ETF
+halflife: 15.354744585135212
+Row index: 14, Values: sz159331, 红利港股ETF
+halflife: 5.127745146257745
+Row index: 15, Values: sz159330, 沪深300ETF基金
+halflife: 6.224023324277483
+Row index: 16, Values: sz159329, 沙特ETF
+halflife: 4.358172512022778
+Row index: 17, Values: sz159005, 汇添富快钱ETF
+halflife: 0.6930003555249722
+Row index: 18, Values: sz159003, 招商快线ETF
+halflife: 1.4086066553569159
+Row index: 19, Values: sz159001, 货币ETF
+halflife: 0.7891527486212535
+Row index: 20, Values: sh563180, 高股息ETF
+halflife: 16.960359750665614
+Row index: 21, Values: sh520830, 沙特ETF
+halflife: 3.7269403800137626
+Row index: 22, Values: sh516110, 汽车ETF
+halflife: 23.956386651978036
+Row index: 23, Values: sh512640, 金融地产ETF基金
+halflife: 21.492512923053198
+Row index: 24, Values: sh512160, MSCI中国A股ETF
+halflife: 106.42494264934585
+Row index: 25, Values: sh511990, 华宝添益ETF
+halflife: 1.0355531761823507
+Row index: 26, Values: sh511980, 现金添富ETF
+halflife: 0.8344262170791367
+Row index: 27, Values: sh511970, 国寿货币ETF
+halflife: 0.729031882259672
+Row index: 28, Values: sh511960, 嘉实快线ETF
+halflife: 2.4253386106330748
+Row index: 29, Values: sh511950, 添利货币ETF
+halflife: 1.1395445691593764
+Row index: 30, Values: sh511930, 国联日盈货币ETF
+halflife: 0.7663723096457301
+Row index: 31, Values: sh511920, 广发货币ETF
+halflife: 0.9131814944393649
+Row index: 32, Values: sh511910, 融通货币ETF
+halflife: 0.7700386811412008
+Row index: 33, Values: sh511900, 富国货币ETF
+halflife: 0.9199089818384839
+Row index: 34, Values: sh511860, 保证金货币ETF
+halflife: 0.7353234140098629
+Row index: 35, Values: sh511850, 财富宝ETF
+halflife: 1.7391021847980375
+Row index: 36, Values: sh511830, 华泰货币ETF
+halflife: 0.7853783252242303
+Row index: 37, Values: sh511820, 鹏华添利ETF
+halflife: 0.6984652914285889
+Row index: 38, Values: sh511810, 理财金货币ETF
+halflife: 1.1692529552911715
+Row index: 39, Values: sh511800, 易方达货币ETF
+halflife: 0.8153931709406015
+Row index: 40, Values: sh511770, 金鹰增益货币ETF
+halflife: 0.7606485418287927
+Row index: 41, Values: sh511700, 场内货币ETF
+halflife: 0.8159305221884142
+Row index: 42, Values: sh511690, 交易货币ETF
+halflife: 0.8158787320359637
+Row index: 43, Values: sh511670, 华泰天天金ETF
+halflife: 1.4621583710852248
+Row index: 44, Values: sh511660, 货币ETF建信添益
+halflife: 0.9027364815815827
+Row index: 45, Values: sh511650, 华夏快线ETF
+halflife: 0.7742258733578317
+Row index: 46, Values: sh511620, 货币基金ETF
+halflife: 0.7385332559142509
+Row index: 47, Values: sh511600, 货币ETF
+halflife: 0.714136626739289</code></pre>
+</div>
+</div>
+<p>我们进一步筛选一下，把半衰期太长(大于30)和太短(小于5)的抛弃。</p>
+<div id="cell-6" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>target_df <span class="op">=</span> pd.read_csv(<span class="st">'datas/eft_fund_stationary_halflife.csv'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="op">=</span> target_df[(target_df[<span class="st">'半衰期'</span>] <span class="op">&gt;</span> <span class="dv">5</span>) <span class="op">&amp;</span> (target_df[<span class="st">'半衰期'</span>] <span class="op">&lt;</span> <span class="dv">30</span>)].copy()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>filtered_df.loc[:, <span class="st">'最大涨幅'</span>] <span class="op">=</span> (filtered_df[<span class="st">'最高价'</span>] <span class="op">-</span> filtered_df[<span class="st">'最低价'</span>]) <span class="op">/</span> filtered_df[<span class="st">'最低价'</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 按最大涨幅降序排序</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>sorted_df <span class="op">=</span> filtered_df.sort_values(by<span class="op">=</span><span class="st">'最大涨幅'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># pd.set_option('display.max_rows', 100)  # 设置最多显示100行</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 打印结果</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sorted_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          代码          名称        半衰期    最高价    最低价      最大涨幅
+3   sz159607    中概互联网ETF  17.287904  0.960  0.545  0.761468
+4   sz159605     中概互联ETF  17.064932  0.957  0.545  0.755963
+2   sz159811     5G50ETF  26.371908  1.281  0.771  0.661479
+22  sh516110       汽车ETF  23.956387  1.312  0.828  0.584541
+13  sz159507       电信ETF  15.354745  1.024  0.736  0.391304
+23  sh512640   金融地产ETF基金  21.492513  2.110  1.564  0.349105
+9   sz159567    港股创新药ETF   5.551491  1.004  0.754  0.331565
+1   sz159933   国投金融地产ETF  20.687245  2.526  1.900  0.329474
+7   sz159570   港股通创新药ETF   6.726025  0.923  0.753  0.225764
+12  sz159545   恒生红利低波ETF   9.563267  1.132  0.977  0.158649
+20  sh563180      高股息ETF  16.960360  1.036  0.933  0.110397
+14  sz159331     红利港股ETF   5.127745  1.011  0.924  0.094156
+8   sz159569   港股红利低波ETF   6.982622  1.016  0.939  0.082002
+15  sz159330  沪深300ETF基金   6.224023  1.002  0.951  0.053628</code></pre>
+</div>
+</div>
+<p>上面对涨幅进行了排序，中概互联网ETF涨幅最大，我们来把数据拉出来验证一下</p>
+<div id="cell-8" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>etf_df <span class="op">=</span> ak.fund_etf_hist_sina(symbol<span class="op">=</span><span class="st">'sz159607'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>etf_df.set_index(<span class="st">'date'</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>close_data<span class="op">=</span>etf_df.loc[etf_df.index <span class="op">&gt;=</span> datetime.strptime(<span class="st">'2023-01-01'</span>,<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>).date(), <span class="st">'close'</span>].to_frame()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># close_data.plot(figsize=(12, 6))</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>close_data[<span class="st">'MA17'</span>] <span class="op">=</span> close_data.rolling(window<span class="op">=</span><span class="dv">17</span>).mean().ffill()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>close_data.plot(y<span class="op">=</span>[<span class="st">'close'</span>, <span class="st">'MA17'</span>], figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-09-24-mean-reversion-in-the-A-share-ETF-market_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>这个曲线看起来还可以，应该能挣到钱吧。回测下试试。</p>
+<div id="cell-10" class="cell" data-execution_count="111">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> backtrader <span class="im">as</span> bt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleMovingAverage(bt.Strategy):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">    主策略程序</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> ((<span class="st">"maperiod"</span>, <span class="dv">17</span>),)  <span class="co"># 全局设定交易策略的参数</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">        初始化函数</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data_close <span class="op">=</span> <span class="va">self</span>.datas[<span class="dv">0</span>].close  <span class="co"># 指定价格序列</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 初始化交易指令、买卖价格和手续费</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.order <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.buy_price <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.buy_comm <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 添加移动均线指标</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sma <span class="op">=</span> bt.indicators.SimpleMovingAverage(</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.datas[<span class="dv">0</span>], period<span class="op">=</span><span class="va">self</span>.params.maperiod</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> log(<span class="va">self</span>, txt, dt<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        dt <span class="op">=</span> dt <span class="kw">or</span> <span class="va">self</span>.datas[<span class="dv">0</span>].datetime.date(<span class="dv">0</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'</span><span class="sc">%s</span><span class="st">, </span><span class="sc">%s</span><span class="st">'</span> <span class="op">%</span> (dt.isoformat(), txt))</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">next</span>(<span class="va">self</span>):</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">        执行逻辑</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.order:  <span class="co"># 检查是否有指令等待执行,</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.data_close[<span class="dv">0</span>] <span class="op">&gt;</span> <span class="va">self</span>.sma[<span class="dv">0</span>]:<span class="co"># 执行卖出条件判断：收盘价格高于日均线</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.position: <span class="co"># 检查是否持仓</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.order <span class="op">=</span> <span class="va">self</span>.sell(size<span class="op">=</span><span class="dv">10000</span>)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.data_close[<span class="dv">0</span>] <span class="op">&lt;</span> <span class="va">self</span>.sma[<span class="dv">0</span>]: <span class="co"># 执行买入条件判断：收盘价格跌破日均线</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.order <span class="op">=</span> <span class="va">self</span>.buy(size<span class="op">=</span><span class="dv">10000</span>)</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> notify_order(<span class="va">self</span>, order):</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> order.status <span class="kw">in</span> [order.Submitted, order.Accepted]:</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> order.status <span class="kw">in</span> [order.Completed]:</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> order.isbuy():</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.log(<span class="st">'BUY EXECUTED, Price: </span><span class="sc">%.2f</span><span class="st">, Cost: </span><span class="sc">%.2f</span><span class="st">, Comm </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>                        (order.executed.price,</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>                        order.executed.value,</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>                        order.executed.comm))</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.buyprice <span class="op">=</span> order.executed.price</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.buycomm <span class="op">=</span> order.executed.comm</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> order.issell():</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.log(<span class="st">'SELL EXECUTED, Price: </span><span class="sc">%.2f</span><span class="st">, Cost: </span><span class="sc">%.2f</span><span class="st">, Comm </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>                         (order.executed.price,</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>                          order.executed.value,</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>                          order.executed.comm))</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.bar_executed <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>)</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> order.status <span class="kw">in</span> [order.Canceled, order.Margin, order.Rejected]:</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.log(<span class="st">'Order Canceled/Margin/Rejected'</span>)</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.order <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_data_byakshare(code,start_date,end_date):</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>    fund_etf_hist_sina_df <span class="op">=</span> ak.fund_etf_hist_sina(symbol<span class="op">=</span>code)</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>    df<span class="op">=</span>fund_etf_hist_sina_df.loc[(fund_etf_hist_sina_df[<span class="st">'date'</span>] <span class="op">&gt;=</span> start_date) <span class="op">&amp;</span> (fund_etf_hist_sina_df[<span class="st">'date'</span>] <span class="op">&lt;=</span> end_date)]</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(df)</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> [<span class="st">'trade_date'</span>, <span class="st">'open'</span>, <span class="st">'high'</span>, <span class="st">'low'</span>, <span class="st">'close'</span>,<span class="st">'volume'</span>]</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># df.loc[:, 'trade_date'] = pd.to_datetime(df['trade_date'])</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    df.set_index(<span class="st">'trade_date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>    df.index <span class="op">=</span> pd.to_datetime(df.index)</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># df.ffill()</span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>cerebro <span class="op">=</span> bt.Cerebro()</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>cerebro.addstrategy(SimpleMovingAverage)</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime(<span class="dv">2024</span>, <span class="dv">3</span>, <span class="dv">1</span>)  <span class="co"># 回测开始时间</span></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>end_date <span class="op">=</span> datetime(<span class="dv">2024</span>, <span class="dv">9</span>, <span class="dv">1</span>)  <span class="co"># 回测结束时间</span></span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>stock_code <span class="op">=</span> <span class="st">"sz159607"</span></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> get_data_byakshare(stock_code,start_date.date(),end_date.date())</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>datafeed <span class="op">=</span> bt.feeds.PandasData(dataname<span class="op">=</span>data,</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>                                fromdate<span class="op">=</span>start_date,</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>                                todate<span class="op">=</span>end_date)</span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>cerebro.adddata(datafeed,name<span class="op">=</span>stock_code)</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>cerebro.broker.setcash(<span class="fl">100000.0</span>)</span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a><span class="co"># cerebro.addsizer(bt.sizers.FixedSize, stake=10)</span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>cerebro.broker.setcommission(commission<span class="op">=</span><span class="fl">0.002</span>)</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'组合初始值: </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span> cerebro.broker.getvalue())</span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>result<span class="op">=</span>cerebro.run()</span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'组合终结值: </span><span class="sc">%.2f</span><span class="st">'</span> <span class="op">%</span> cerebro.broker.getvalue())</span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="co"># cerebro.plot()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>组合初始值: 100000.00
+2024-04-16, BUY EXECUTED, Price: 0.71, Cost: 7150.00, Comm 14.30
+2024-04-17, BUY EXECUTED, Price: 0.71, Cost: 7110.00, Comm 14.22
+2024-04-18, BUY EXECUTED, Price: 0.71, Cost: 7060.00, Comm 14.12
+2024-04-19, BUY EXECUTED, Price: 0.70, Cost: 7010.00, Comm 14.02
+2024-04-22, BUY EXECUTED, Price: 0.71, Cost: 7070.00, Comm 14.14
+2024-04-23, BUY EXECUTED, Price: 0.73, Cost: 7340.00, Comm 14.68
+2024-04-24, SELL EXECUTED, Price: 0.76, Cost: 7123.33, Comm 15.18
+2024-04-25, SELL EXECUTED, Price: 0.77, Cost: 7123.33, Comm 15.40
+2024-04-26, SELL EXECUTED, Price: 0.77, Cost: 7123.33, Comm 15.48
+2024-04-29, SELL EXECUTED, Price: 0.80, Cost: 7123.33, Comm 15.96
+2024-04-30, SELL EXECUTED, Price: 0.80, Cost: 7123.33, Comm 15.90
+2024-05-06, SELL EXECUTED, Price: 0.84, Cost: 7123.33, Comm 16.72
+2024-05-27, BUY EXECUTED, Price: 0.84, Cost: 8400.00, Comm 16.80
+2024-05-28, SELL EXECUTED, Price: 0.85, Cost: 8400.00, Comm 16.98
+2024-05-29, BUY EXECUTED, Price: 0.84, Cost: 8380.00, Comm 16.76
+2024-05-30, BUY EXECUTED, Price: 0.82, Cost: 8220.00, Comm 16.44
+2024-05-31, BUY EXECUTED, Price: 0.83, Cost: 8290.00, Comm 16.58
+2024-06-03, BUY EXECUTED, Price: 0.82, Cost: 8180.00, Comm 16.36
+2024-06-04, BUY EXECUTED, Price: 0.82, Cost: 8190.00, Comm 16.38
+2024-06-05, BUY EXECUTED, Price: 0.83, Cost: 8260.00, Comm 16.52
+2024-06-06, BUY EXECUTED, Price: 0.83, Cost: 8350.00, Comm 16.70
+2024-06-07, BUY EXECUTED, Price: 0.83, Cost: 8320.00, Comm 16.64
+2024-06-11, BUY EXECUTED, Price: 0.81, Cost: 8120.00, Comm 16.24
+2024-06-12, BUY EXECUTED, Price: 0.82, Cost: 8200.00, Comm 16.40
+2024-06-13, BUY EXECUTED, Price: 0.83, Cost: 8270.00, Comm 16.54
+2024-06-14, BUY EXECUTED, Price: 0.82, Cost: 8250.00, Comm 16.50
+2024-06-17, Order Canceled/Margin/Rejected
+2024-06-18, Order Canceled/Margin/Rejected
+2024-06-19, Order Canceled/Margin/Rejected
+2024-06-20, SELL EXECUTED, Price: 0.84, Cost: 8252.50, Comm 16.74
+2024-06-21, SELL EXECUTED, Price: 0.82, Cost: 8252.50, Comm 16.38
+2024-06-24, BUY EXECUTED, Price: 0.80, Cost: 8020.00, Comm 16.04
+2024-06-25, BUY EXECUTED, Price: 0.80, Cost: 8040.00, Comm 16.08
+2024-06-26, Order Canceled/Margin/Rejected
+2024-06-27, Order Canceled/Margin/Rejected
+2024-06-28, Order Canceled/Margin/Rejected
+2024-07-01, Order Canceled/Margin/Rejected
+2024-07-02, Order Canceled/Margin/Rejected
+2024-07-03, Order Canceled/Margin/Rejected
+2024-07-04, Order Canceled/Margin/Rejected
+2024-07-05, Order Canceled/Margin/Rejected
+2024-07-08, Order Canceled/Margin/Rejected
+2024-07-09, Order Canceled/Margin/Rejected
+2024-07-10, Order Canceled/Margin/Rejected
+2024-07-11, Order Canceled/Margin/Rejected
+2024-07-12, SELL EXECUTED, Price: 0.82, Cost: 8215.42, Comm 16.34
+2024-07-15, SELL EXECUTED, Price: 0.82, Cost: 8215.42, Comm 16.44
+2024-07-16, SELL EXECUTED, Price: 0.80, Cost: 8215.42, Comm 16.02
+2024-07-17, SELL EXECUTED, Price: 0.80, Cost: 8215.42, Comm 15.94
+2024-07-18, SELL EXECUTED, Price: 0.79, Cost: 8215.42, Comm 15.74
+2024-07-19, BUY EXECUTED, Price: 0.79, Cost: 7850.00, Comm 15.70
+2024-07-22, BUY EXECUTED, Price: 0.78, Cost: 7780.00, Comm 15.56
+2024-07-23, BUY EXECUTED, Price: 0.80, Cost: 7950.00, Comm 15.90
+2024-07-24, BUY EXECUTED, Price: 0.78, Cost: 7810.00, Comm 15.62
+2024-07-25, BUY EXECUTED, Price: 0.77, Cost: 7680.00, Comm 15.36
+2024-07-26, Order Canceled/Margin/Rejected
+2024-07-29, Order Canceled/Margin/Rejected
+2024-07-30, Order Canceled/Margin/Rejected
+2024-07-31, Order Canceled/Margin/Rejected
+2024-08-01, Order Canceled/Margin/Rejected
+2024-08-02, Order Canceled/Margin/Rejected
+2024-08-05, Order Canceled/Margin/Rejected
+2024-08-06, Order Canceled/Margin/Rejected
+2024-08-07, Order Canceled/Margin/Rejected
+2024-08-08, Order Canceled/Margin/Rejected
+2024-08-09, Order Canceled/Margin/Rejected
+2024-08-12, SELL EXECUTED, Price: 0.77, Cost: 8048.16, Comm 15.40
+2024-08-13, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.50
+2024-08-14, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.58
+2024-08-15, SELL EXECUTED, Price: 0.76, Cost: 8048.16, Comm 15.24
+2024-08-16, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.52
+2024-08-19, SELL EXECUTED, Price: 0.80, Cost: 8048.16, Comm 15.94
+2024-08-20, SELL EXECUTED, Price: 0.80, Cost: 8048.16, Comm 15.98
+2024-08-21, SELL EXECUTED, Price: 0.77, Cost: 8048.16, Comm 15.44
+2024-08-22, SELL EXECUTED, Price: 0.79, Cost: 8048.16, Comm 15.74
+2024-08-23, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.64
+2024-08-26, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.66
+2024-08-27, SELL EXECUTED, Price: 0.75, Cost: 8048.16, Comm 15.00
+2024-08-28, BUY EXECUTED, Price: 0.74, Cost: 7430.00, Comm 14.86
+2024-08-29, BUY EXECUTED, Price: 0.72, Cost: 7220.00, Comm 14.44
+2024-08-30, BUY EXECUTED, Price: 0.74, Cost: 7370.00, Comm 14.74
+组合终结值: 100453.50</code></pre>
+</div>
+</div>
+<p>3月1号到9月1号，这折腾半年挣了453，啧啧。怎么说呢，有点赚头，但确实不多…</p>
+<p>上面的方法大都出自《算法交易》这本书。</p>
+<p>刚看完这书的时候，我意气风发，都准备辞职在家全职炒股了。现在再看，唉，还是算了，安心搬砖吧。</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>https://wangxuan.me/doushuai/posts/2024-08-20-Things-About-Dickey-Fuller.html<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/stardust1900\.github\.io\/doushuai\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
