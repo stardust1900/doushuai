@@ -201,11 +201,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="如何在股票市场获利" class="level3">
 <h3 class="anchored" data-anchor-id="如何在股票市场获利">如何在股票市场获利</h3>
-<p>有人曾经告诉我一个在股票市场赚钱的秘诀，只要掌握这个秘诀，赚钱就像捡钱一样容易。他说：这个秘诀其实很简单，就是在股票价格低的时候买入，在价格高的时候卖出。</p>
+<p>曾经有人告诉我一个在股票市场赚钱的秘诀，只要掌握这个秘诀，赚钱就像捡钱一样容易。他说：这个秘诀其实很简单，就是在股票价格低的时候买入，在价格高的时候卖出。</p>
 <p>啧啧，不愧是秘诀，明明是句废话，但又挑不出毛病。</p>
-<p>问题是，如何判断价格是低还是高？我知道你想说：价值。低于价值就是低，高于价值就是高。但是，如何估算出它的价值？任何公式任何指标都是参考，你无法准确估算价值，其他的都无从谈起。而价值投资，你说它是艺术也好，说它是玄学也罢，都不是我等凡人能搞明白的。</p>
-<p>小鸡不尿尿–各有各的道。凡人自有凡人的方法，如果公式太复杂让人摸不着头脑，如果指标太多让人无所适从，那就都不用，我们就用简单粗暴的方法：求平均值。当然，也不能随便什么股票拿过来就用，我们挑那种上下波动的股票，不要一路跌，也不要一路涨(我知道你可能青睐这种股票，但是这种股票，你很难选择入场的时机，谁都不敢保证你买之前它一路涨，你一买它就开始一路跌)。用统计学中的术语就是平稳性，我们寻找那种价格在时间序列上是平稳的股票。</p>
-<p>还有一个要关键点是：周期。我们找到价格平稳的股票之后，还要弄清楚，它是多长时间从低点到高点然后又回到高点。有两个原因：1.我们要把周期太长的抛弃，你也不想等5年挣1%吧。2.我们尽量在一个周期内完成一次买卖操作，不要错过周期，它一年波动10次，你就买卖一次，那就有点辜负人家的好意了。</p>
+<p>问题是，如何判断价格是低还是高？我知道你想说：价值。低于价值就是低，高于价值就是高。但是，如何估算出它的价值？我知道现在估值方法一大对，公式指标漫天飞，但是任何公式任何指标都是参考都不能直接用。而当你无法准确估算价值时，其他的都无从谈起。至于股神的“价值投资”，你说它是艺术也好，说它是玄学也罢，都不是我等凡人能搞明白的。</p>
+<p>既然是凡人，那就要用凡人的方法。如果公式太复杂让人摸不着头脑，如果指标太多让人无所适从，那就都不用，我们就简单粗暴地求平均值。当然，也不能随便什么股票拿过来就求平均值，我们得挑，挑那种上下波动的股票，不要一路跌，也不要一路涨(我知道你可能青睐这种股票，但是这种股票不适合均值回归)。用统计学中的术语就是平稳，我们目标就是要寻找那种价格在时间序列上表现平稳的股票。</p>
+<p>我们找到价格平稳的股票之后，还要弄清楚，它是多长时间从低点到高点然后又回到高点，就是周期。有两个原因：1.我们要把周期太长的抛弃，你也不想等5年挣1%吧。2.我们尽量在一个周期内完成一次买卖操作，不要错过周期，它一年低点到高点波动10次，你就买卖一次，那就有点辜负人家的好意了。</p>
 <p>接下来，我们就需要解决这两个问题：平稳性和周期。</p>
 </section>
 <section id="平稳性测试" class="level3">
@@ -364,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="半衰期" class="level3">
 <h3 class="anchored" data-anchor-id="半衰期">半衰期</h3>
-<p>下面的代码中，半衰期是通过对时间序列数据进行自回归分析（AR模型）得到的,这篇<a href="https://wangxuan.me/doushuai/posts/2024-08-20-Things-About-Dickey-Fuller.html">关于迪基-富勒检验</a>的文章中也整理了一些原理。至于，为什么，我无法解释。如果你能解释，请给我留言。</p>
+<p>下面的代码中，半衰期是通过对时间序列数据进行自回归分析（AR模型）得到的,这篇<a href="https://wangxuan.me/doushuai/posts/2024-08-20-Things-About-Dickey-Fuller.html">关于迪基-富勒检验</a>的文章中也整理了一些概念。至于，为什么，我无法解释。如果你能解释，请给我留言。</p>
 <div id="cell-4" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -549,7 +549,7 @@ halflife: 0.714136626739289</code></pre>
 </div>
 </div>
 <p>这个曲线看起来还可以，应该能挣到钱吧。回测下试试。</p>
-<div id="cell-10" class="cell" data-execution_count="111">
+<div id="cell-10" class="cell" data-execution_count="115">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> backtrader <span class="im">as</span> bt</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -586,9 +586,9 @@ halflife: 0.714136626739289</code></pre>
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
 <span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.data_close[<span class="dv">0</span>] <span class="op">&gt;</span> <span class="va">self</span>.sma[<span class="dv">0</span>]:<span class="co"># 执行卖出条件判断：收盘价格高于日均线</span></span>
 <span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.position: <span class="co"># 检查是否持仓</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.order <span class="op">=</span> <span class="va">self</span>.sell(size<span class="op">=</span><span class="dv">10000</span>)</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.order <span class="op">=</span> <span class="va">self</span>.sell(size<span class="op">=</span><span class="dv">20000</span>)</span>
 <span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.data_close[<span class="dv">0</span>] <span class="op">&lt;</span> <span class="va">self</span>.sma[<span class="dv">0</span>]: <span class="co"># 执行买入条件判断：收盘价格跌破日均线</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.order <span class="op">=</span> <span class="va">self</span>.buy(size<span class="op">=</span><span class="dv">10000</span>)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.order <span class="op">=</span> <span class="va">self</span>.buy(size<span class="op">=</span><span class="dv">20000</span>)</span>
 <span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> notify_order(<span class="va">self</span>, order):</span>
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> order.status <span class="kw">in</span> [order.Submitted, order.Accepted]:</span>
@@ -647,39 +647,39 @@ halflife: 0.714136626739289</code></pre>
 <span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="co"># cerebro.plot()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>组合初始值: 100000.00
-2024-04-16, BUY EXECUTED, Price: 0.71, Cost: 7150.00, Comm 14.30
-2024-04-17, BUY EXECUTED, Price: 0.71, Cost: 7110.00, Comm 14.22
-2024-04-18, BUY EXECUTED, Price: 0.71, Cost: 7060.00, Comm 14.12
-2024-04-19, BUY EXECUTED, Price: 0.70, Cost: 7010.00, Comm 14.02
-2024-04-22, BUY EXECUTED, Price: 0.71, Cost: 7070.00, Comm 14.14
-2024-04-23, BUY EXECUTED, Price: 0.73, Cost: 7340.00, Comm 14.68
-2024-04-24, SELL EXECUTED, Price: 0.76, Cost: 7123.33, Comm 15.18
-2024-04-25, SELL EXECUTED, Price: 0.77, Cost: 7123.33, Comm 15.40
-2024-04-26, SELL EXECUTED, Price: 0.77, Cost: 7123.33, Comm 15.48
-2024-04-29, SELL EXECUTED, Price: 0.80, Cost: 7123.33, Comm 15.96
-2024-04-30, SELL EXECUTED, Price: 0.80, Cost: 7123.33, Comm 15.90
-2024-05-06, SELL EXECUTED, Price: 0.84, Cost: 7123.33, Comm 16.72
-2024-05-27, BUY EXECUTED, Price: 0.84, Cost: 8400.00, Comm 16.80
-2024-05-28, SELL EXECUTED, Price: 0.85, Cost: 8400.00, Comm 16.98
-2024-05-29, BUY EXECUTED, Price: 0.84, Cost: 8380.00, Comm 16.76
-2024-05-30, BUY EXECUTED, Price: 0.82, Cost: 8220.00, Comm 16.44
-2024-05-31, BUY EXECUTED, Price: 0.83, Cost: 8290.00, Comm 16.58
-2024-06-03, BUY EXECUTED, Price: 0.82, Cost: 8180.00, Comm 16.36
-2024-06-04, BUY EXECUTED, Price: 0.82, Cost: 8190.00, Comm 16.38
-2024-06-05, BUY EXECUTED, Price: 0.83, Cost: 8260.00, Comm 16.52
-2024-06-06, BUY EXECUTED, Price: 0.83, Cost: 8350.00, Comm 16.70
-2024-06-07, BUY EXECUTED, Price: 0.83, Cost: 8320.00, Comm 16.64
-2024-06-11, BUY EXECUTED, Price: 0.81, Cost: 8120.00, Comm 16.24
-2024-06-12, BUY EXECUTED, Price: 0.82, Cost: 8200.00, Comm 16.40
-2024-06-13, BUY EXECUTED, Price: 0.83, Cost: 8270.00, Comm 16.54
-2024-06-14, BUY EXECUTED, Price: 0.82, Cost: 8250.00, Comm 16.50
+2024-04-16, BUY EXECUTED, Price: 0.71, Cost: 14300.00, Comm 28.60
+2024-04-17, BUY EXECUTED, Price: 0.71, Cost: 14220.00, Comm 28.44
+2024-04-18, BUY EXECUTED, Price: 0.71, Cost: 14120.00, Comm 28.24
+2024-04-19, BUY EXECUTED, Price: 0.70, Cost: 14020.00, Comm 28.04
+2024-04-22, BUY EXECUTED, Price: 0.71, Cost: 14140.00, Comm 28.28
+2024-04-23, BUY EXECUTED, Price: 0.73, Cost: 14680.00, Comm 29.36
+2024-04-24, SELL EXECUTED, Price: 0.76, Cost: 14246.67, Comm 30.36
+2024-04-25, SELL EXECUTED, Price: 0.77, Cost: 14246.67, Comm 30.80
+2024-04-26, SELL EXECUTED, Price: 0.77, Cost: 14246.67, Comm 30.96
+2024-04-29, SELL EXECUTED, Price: 0.80, Cost: 14246.67, Comm 31.92
+2024-04-30, SELL EXECUTED, Price: 0.80, Cost: 14246.67, Comm 31.80
+2024-05-06, SELL EXECUTED, Price: 0.84, Cost: 14246.67, Comm 33.44
+2024-05-27, BUY EXECUTED, Price: 0.84, Cost: 16800.00, Comm 33.60
+2024-05-28, SELL EXECUTED, Price: 0.85, Cost: 16800.00, Comm 33.96
+2024-05-29, BUY EXECUTED, Price: 0.84, Cost: 16760.00, Comm 33.52
+2024-05-30, BUY EXECUTED, Price: 0.82, Cost: 16440.00, Comm 32.88
+2024-05-31, BUY EXECUTED, Price: 0.83, Cost: 16580.00, Comm 33.16
+2024-06-03, BUY EXECUTED, Price: 0.82, Cost: 16360.00, Comm 32.72
+2024-06-04, BUY EXECUTED, Price: 0.82, Cost: 16380.00, Comm 32.76
+2024-06-05, BUY EXECUTED, Price: 0.83, Cost: 16520.00, Comm 33.04
+2024-06-06, Order Canceled/Margin/Rejected
+2024-06-07, Order Canceled/Margin/Rejected
+2024-06-11, Order Canceled/Margin/Rejected
+2024-06-12, Order Canceled/Margin/Rejected
+2024-06-13, Order Canceled/Margin/Rejected
+2024-06-14, Order Canceled/Margin/Rejected
 2024-06-17, Order Canceled/Margin/Rejected
 2024-06-18, Order Canceled/Margin/Rejected
 2024-06-19, Order Canceled/Margin/Rejected
-2024-06-20, SELL EXECUTED, Price: 0.84, Cost: 8252.50, Comm 16.74
-2024-06-21, SELL EXECUTED, Price: 0.82, Cost: 8252.50, Comm 16.38
-2024-06-24, BUY EXECUTED, Price: 0.80, Cost: 8020.00, Comm 16.04
-2024-06-25, BUY EXECUTED, Price: 0.80, Cost: 8040.00, Comm 16.08
+2024-06-20, SELL EXECUTED, Price: 0.84, Cost: 16506.67, Comm 33.48
+2024-06-21, SELL EXECUTED, Price: 0.82, Cost: 16506.67, Comm 32.76
+2024-06-24, BUY EXECUTED, Price: 0.80, Cost: 16040.00, Comm 32.08
+2024-06-25, BUY EXECUTED, Price: 0.80, Cost: 16080.00, Comm 32.16
 2024-06-26, Order Canceled/Margin/Rejected
 2024-06-27, Order Canceled/Margin/Rejected
 2024-06-28, Order Canceled/Margin/Rejected
@@ -692,16 +692,16 @@ halflife: 0.714136626739289</code></pre>
 2024-07-09, Order Canceled/Margin/Rejected
 2024-07-10, Order Canceled/Margin/Rejected
 2024-07-11, Order Canceled/Margin/Rejected
-2024-07-12, SELL EXECUTED, Price: 0.82, Cost: 8215.42, Comm 16.34
-2024-07-15, SELL EXECUTED, Price: 0.82, Cost: 8215.42, Comm 16.44
-2024-07-16, SELL EXECUTED, Price: 0.80, Cost: 8215.42, Comm 16.02
-2024-07-17, SELL EXECUTED, Price: 0.80, Cost: 8215.42, Comm 15.94
-2024-07-18, SELL EXECUTED, Price: 0.79, Cost: 8215.42, Comm 15.74
-2024-07-19, BUY EXECUTED, Price: 0.79, Cost: 7850.00, Comm 15.70
-2024-07-22, BUY EXECUTED, Price: 0.78, Cost: 7780.00, Comm 15.56
-2024-07-23, BUY EXECUTED, Price: 0.80, Cost: 7950.00, Comm 15.90
-2024-07-24, BUY EXECUTED, Price: 0.78, Cost: 7810.00, Comm 15.62
-2024-07-25, BUY EXECUTED, Price: 0.77, Cost: 7680.00, Comm 15.36
+2024-07-12, SELL EXECUTED, Price: 0.82, Cost: 16357.78, Comm 32.68
+2024-07-15, SELL EXECUTED, Price: 0.82, Cost: 16357.78, Comm 32.88
+2024-07-16, SELL EXECUTED, Price: 0.80, Cost: 16357.78, Comm 32.04
+2024-07-17, SELL EXECUTED, Price: 0.80, Cost: 16357.78, Comm 31.88
+2024-07-18, SELL EXECUTED, Price: 0.79, Cost: 16357.78, Comm 31.48
+2024-07-19, BUY EXECUTED, Price: 0.79, Cost: 15700.00, Comm 31.40
+2024-07-22, BUY EXECUTED, Price: 0.78, Cost: 15560.00, Comm 31.12
+2024-07-23, BUY EXECUTED, Price: 0.80, Cost: 15900.00, Comm 31.80
+2024-07-24, BUY EXECUTED, Price: 0.78, Cost: 15620.00, Comm 31.24
+2024-07-25, BUY EXECUTED, Price: 0.77, Cost: 15360.00, Comm 30.72
 2024-07-26, Order Canceled/Margin/Rejected
 2024-07-29, Order Canceled/Margin/Rejected
 2024-07-30, Order Canceled/Margin/Rejected
@@ -713,25 +713,19 @@ halflife: 0.714136626739289</code></pre>
 2024-08-07, Order Canceled/Margin/Rejected
 2024-08-08, Order Canceled/Margin/Rejected
 2024-08-09, Order Canceled/Margin/Rejected
-2024-08-12, SELL EXECUTED, Price: 0.77, Cost: 8048.16, Comm 15.40
-2024-08-13, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.50
-2024-08-14, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.58
-2024-08-15, SELL EXECUTED, Price: 0.76, Cost: 8048.16, Comm 15.24
-2024-08-16, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.52
-2024-08-19, SELL EXECUTED, Price: 0.80, Cost: 8048.16, Comm 15.94
-2024-08-20, SELL EXECUTED, Price: 0.80, Cost: 8048.16, Comm 15.98
-2024-08-21, SELL EXECUTED, Price: 0.77, Cost: 8048.16, Comm 15.44
-2024-08-22, SELL EXECUTED, Price: 0.79, Cost: 8048.16, Comm 15.74
-2024-08-23, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.64
-2024-08-26, SELL EXECUTED, Price: 0.78, Cost: 8048.16, Comm 15.66
-2024-08-27, SELL EXECUTED, Price: 0.75, Cost: 8048.16, Comm 15.00
-2024-08-28, BUY EXECUTED, Price: 0.74, Cost: 7430.00, Comm 14.86
-2024-08-29, BUY EXECUTED, Price: 0.72, Cost: 7220.00, Comm 14.44
-2024-08-30, BUY EXECUTED, Price: 0.74, Cost: 7370.00, Comm 14.74
-组合终结值: 100453.50</code></pre>
+2024-08-12, SELL EXECUTED, Price: 0.77, Cost: 15749.63, Comm 30.80
+2024-08-13, SELL EXECUTED, Price: 0.78, Cost: 15749.63, Comm 31.00
+2024-08-14, SELL EXECUTED, Price: 0.78, Cost: 15749.63, Comm 31.16
+2024-08-15, SELL EXECUTED, Price: 0.76, Cost: 15749.63, Comm 30.48
+2024-08-16, SELL EXECUTED, Price: 0.78, Cost: 15749.63, Comm 31.04
+2024-08-19, SELL EXECUTED, Price: 0.80, Cost: 15749.63, Comm 31.88
+2024-08-28, BUY EXECUTED, Price: 0.74, Cost: 14860.00, Comm 29.72
+2024-08-29, BUY EXECUTED, Price: 0.72, Cost: 14440.00, Comm 28.88
+2024-08-30, BUY EXECUTED, Price: 0.74, Cost: 14740.00, Comm 29.48
+组合终结值: 106851.96</code></pre>
 </div>
 </div>
-<p>3月1号到9月1号，这折腾半年挣了453，啧啧。怎么说呢，有点赚头，但确实不多…</p>
+<p>3月1号到9月1号，10W的成本，折腾半年挣了6851，收益率0.68%，啧啧。怎么说呢，有点赚头，但确实不多…</p>
 <p>上面的方法大都出自《算法交易》这本书。</p>
 <p>刚看完这书的时候，我意气风发，都准备辞职在家全职炒股了。现在再看，唉，还是算了，安心搬砖吧。</p>
 
